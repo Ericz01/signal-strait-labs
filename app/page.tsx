@@ -58,7 +58,7 @@ export default function Home() {
         {/* Primary Call To Action */}
         <div className="flex items-center gap-6 w-full">
           <a 
-            href="https://www.linkedin.com/company/signal-strait-labs" 
+            href="https://www.linkedin.com/company/signalstraitlabs" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-lg bg-[#1c59ca] text-sm font-semibold text-white tracking-wide shadow-[0_0_30px_-5px_rgba(28,89,202,0.4)] hover:bg-[#1c59ca]/90 transition-all duration-200"
