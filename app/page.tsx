@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -53,6 +55,26 @@ const organizationJsonLd = {
   },
 } as const;
 
+function BrandLogo({
+  priority = false,
+  className = "h-8 w-auto md:h-10",
+}: {
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <Image
+      src="/logo.png"
+      alt="Signal Strait Labs"
+      width={240}
+      height={72}
+      className={`${className} object-contain object-left`}
+      priority={priority}
+      sizes="(max-width: 768px) 160px, 220px"
+    />
+  );
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen luxury-bg-gradient text-white selection:bg-[#1a59cc]/30">
@@ -66,11 +88,9 @@ export default function Home() {
       {/* HEADER / NAVIGATION */}
       <header className="border-b border-white/5 bg-[#01081b]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <span className="text-xl font-black tracking-wider text-white">
-              SIGNALSTRAIT<span className="text-gold-gradient">LABS</span>
-            </span>
-          </div>
+          <a href="/" className="flex shrink-0 items-center" aria-label="Signal Strait Labs home">
+            <BrandLogo priority />
+          </a>
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-400">
             <a href="#services" className="hover:text-white transition-colors">Services</a>
             <a href="#philosophy" className="hover:text-white transition-colors">Philosophy</a>
@@ -273,7 +293,12 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="py-12 border-t border-white/5 px-6 text-center text-xs text-gray-500 bg-[#01081b]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p>© {new Date().getFullYear()} Signal Strait Labs. All rights reserved. System Live.</p>
+          <div className="flex flex-col items-center gap-3 sm:items-start">
+            <a href="/" className="flex shrink-0 items-center opacity-95 transition-opacity hover:opacity-100" aria-label="Signal Strait Labs home">
+              <BrandLogo className="h-7 w-auto sm:h-8" />
+            </a>
+            <p>© {new Date().getFullYear()} Signal Strait Labs. All rights reserved. System Live.</p>
+          </div>
           <div className="flex space-x-6">
             <a href="https://linkedin.com/company/signal-strait-labs" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
             <a href="https://web.facebook.com/profile.php?id=61589782545004" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Facebook</a>
