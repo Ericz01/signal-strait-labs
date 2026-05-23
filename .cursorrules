@@ -1,0 +1,17 @@
+# Signal Strait Labs Project Rules
+
+## Tech Stack Standards
+- Framework: Next.js 15+ (App Router, strict TypeScript)
+- Styling: Tailwind CSS v4+ utility syntax
+- Infrastructure: Serverless, edge-optimized deployment on Cloudflare Pages
+
+## Core Styling Conventions
+- Theme: Ultra-premium luxury dark design system
+- Primary Background: #01081b (or utility class `.luxury-bg-gradient`)
+- Accent Colors: Pure Digital Blue (`#1a59cc`), Premium Golden (`#C5A059`)
+- Text Gradient: Always utilize the `.text-gold-gradient` utility class for high-impact hero headings.
+
+## Code Constraints
+- Maintain Server Components by default for SEO/GEO discoverability.
+- Only add 'use client' at the very top of files requiring explicit interactive client hooks (e.g., state, event listeners).
+- Never pass interactive event functions directly inside non-client layout structures.

@@ -1,8 +1,67 @@
-import React from 'react';
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://signal-strait-labs.pages.dev/#organization",
+  name: "Signal Strait Labs",
+  alternateName: "SSL",
+  url: "https://signal-strait-labs.pages.dev",
+  foundingDate: "2022",
+  description:
+    "Enterprise digital transformation and growth engineering partner specializing in digital infrastructure, custom web development, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipeline engineering.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Thome",
+    addressLocality: "Nairobi",
+    addressRegion: "Nairobi County",
+    addressCountry: "KE",
+  },
+  telephone: "+254712895903",
+  email: "connect@signalstraitlabs.com",
+  areaServed: [
+    { "@type": "Country", name: "Kenya" },
+    { "@type": "Continent", name: "Africa" },
+  ],
+  sameAs: [
+    "https://linkedin.com/company/signal-strait-labs",
+    "https://web.facebook.com/profile.php?id=61589782545004",
+  ],
+  knowsAbout: [
+    "Digital Infrastructure",
+    "Custom Web Development",
+    "Technical SEO",
+    "Answer Engine Optimization",
+    "Generative Engine Optimization",
+    "Data Architecture",
+    "RevOps Pipeline Engineering",
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Core Capabilities",
+    itemListElement: [
+      "Digital Infrastructure",
+      "Custom Web Dev",
+      "Technical SEO",
+      "Answer Engine Optimization (AEO)",
+      "Generative Engine Optimization (GEO)",
+      "Data Architecture",
+      "RevOps Pipeline Engineering",
+    ].map((name, index) => ({
+      "@type": "Offer",
+      position: index + 1,
+      itemOffered: { "@type": "Service", name },
+    })),
+  },
+} as const;
 
 export default function Home() {
   return (
     <div className="min-h-screen luxury-bg-gradient text-white selection:bg-[#1a59cc]/30">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd),
+        }}
+      />
       
       {/* HEADER / NAVIGATION */}
       <header className="border-b border-white/5 bg-[#01081b]/80 backdrop-blur-md sticky top-0 z-50">
