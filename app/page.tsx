@@ -187,7 +187,8 @@ export default function Home() {
           </div>
 
           <div className="bg-[#01081b] border border-white/5 rounded-2xl p-8 relative z-10 shadow-2xl">
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            {/* REMOVE the interactive onSubmit handler to pass the Next.js build step */}
+            <form className="space-y-5">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Corporate Identity / Name</label>
                 <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a59cc] transition-colors" placeholder="e.g., Lead Architect or Enterprise VP" required />
@@ -200,7 +201,9 @@ export default function Home() {
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Primary Engineering Challenge</label>
                 <textarea rows={3} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1a59cc] transition-colors resize-none" placeholder="Describe the optimization parameter needed..."></textarea>
               </div>
-              <button type="submit" className="w-full bg-[#1a59cc] hover:bg-[#1a59cc]/90 text-white font-bold py-3.5 rounded-lg text-sm tracking-wide transition-all border border-white/10 shadow-lg shadow-[#1a59cc]/10">
+              
+              {/* Change type to "button" so it behaves safely without an active form action */}
+              <button type="button" className="w-full bg-[#1a59cc] hover:bg-[#1a59cc]/90 text-white font-bold py-3.5 rounded-lg text-sm tracking-wide transition-all border border-white/10 shadow-lg shadow-[#1a59cc]/10">
                 Initialize Technical Discovery
               </button>
             </form>
