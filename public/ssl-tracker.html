@@ -463,11 +463,12 @@ async function save() {
   saveTimer = setTimeout(async () => {
     setSyncStatus('saving');
     try {
-      await fetch(BIN_URL, {
+      const res = await fetch(BIN_URL, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
         body: JSON.stringify({ completed, expanded })
       });
+      if (!res.ok) throw new Error(res.status);
       setSyncStatus('saved');
     } catch(e) {
       setSyncStatus('error');
@@ -479,8 +480,9 @@ async function load() {
   setSyncStatus('loading');
   try {
     const res = await fetch(`${BIN_URL}/latest`, {
-      headers: { 'X-Access-Key': API_KEY }
+      headers: { 'X-Master-Key': API_KEY }
     });
+    if (!res.ok) throw new Error(res.status);
     const data = await res.json();
     const record = data.record || {};
     completed = record.completed || {};
