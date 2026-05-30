@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSL Website Dev Tracker — Signal Strait Labs</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #01081b;
+    --bg-card:   #040d24;
+    --bg-row:    #060e28;
+    --bg-done:   #040d24;
+    --blue:      #1a59cc;
+    --blue-dim:  #0e3580;
+    --blue-glow: rgba(26,89,204,0.18);
+    --gold:      #C5A059;
+    --gold-dim:  #9A7432;
+    --gold-glow: rgba(197,160,89,0.15);
+    --white:     #ffffff;
+    --text-1:    #e8ecf4;
+    --text-2:    #8a97b4;
+    --text-3:    #4a5572;
+    --border:    rgba(255,255,255,0.07);
+    --border-hi: rgba(197,160,89,0.25);
+    --green:     #22c55e;
+    --green-bg:  rgba(34,197,94,0.12);
+    --radius:    10px;
+    --radius-lg: 14px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── Header ─── */
+  .site-header {
+    background: linear-gradient(135deg, #01081B 0%, #051336 50%, #1C1A14 85%, #423721 100%);
+    border-bottom: 1px solid var(--border-hi);
+    padding: 28px 32px 24px;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-dot { width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #1a59cc, #C5A059); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.5px; flex-shrink: 0; }
+  .brand-label { display: flex; flex-direction: column; }
+  .brand-name { font-size: 15px; font-weight: 600; color: var(--white); letter-spacing: -0.2px; }
+  .brand-sub { font-size: 11px; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-right { text-align: right; }
+  .progress-big { font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
+  .progress-big span { font-size: 14px; font-weight: 400; color: var(--text-2); }
+  .progress-pct { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+  /* ─── Progress Bar ─── */
+  .progress-bar-wrap { max-width: 900px; margin: 0 auto; padding: 14px 32px 0; }
+  .progress-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+  .progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #1a59cc, #C5A059); transition: width 0.4s ease; }
+
+  /* ─── Body ─── */
+  .body-wrap { max-width: 900px; margin: 0 auto; padding: 24px 32px 60px; }
+
+  /* ─── Filter Bar ─── */
+  .filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
+  .filter-btn {
+    font-size: 12px; padding: 5px 14px; border-radius: 20px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-2);
+    transition: all 0.15s; font-family: inherit;
+  }
+  .filter-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .filter-btn.active { background: rgba(26,89,204,0.2); border-color: var(--blue); color: #7aacff; }
+  .spacer { flex: 1; }
+  .util-btn {
+    font-size: 11px; padding: 5px 12px; border-radius: 6px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08); background: transparent; color: var(--text-3);
+    transition: all 0.15s; font-family: inherit;
+  }
+  .util-btn:hover { border-color: rgba(255,255,255,0.18); color: var(--text-2); }
+
+  /* ─── Phase Card ─── */
+  .phase { margin-bottom: 10px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color 0.2s; }
+  .phase:hover { border-color: rgba(197,160,89,0.2); }
+  .phase.all-done { border-color: rgba(34,197,94,0.2); }
+
+  .phase-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; cursor: pointer; user-select: none;
+    background: linear-gradient(135deg, #040d24 0%, #060e28 100%);
+    transition: background 0.15s;
+  }
+  .phase-header:hover { background: linear-gradient(135deg, #060e28 0%, #07102e 100%); }
+
+  .phase-badge {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    border: 1px solid rgba(26,89,204,0.3); background: rgba(26,89,204,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #7aacff; letter-spacing: -0.5px;
+  }
+  .phase-badge.done { background: var(--green-bg); border-color: rgba(34,197,94,0.3); color: var(--green); }
+
+  .phase-info { flex: 1; min-width: 0; }
+  .phase-title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .phase-title { font-size: 13.5px; font-weight: 600; color: var(--text-1); }
+  .phase-day { font-size: 11px; color: var(--text-3); }
+
+  .phase-progress-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+  .mini-track { flex: 1; height: 2px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+  .mini-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .mini-count { font-size: 11px; color: var(--text-3); flex-shrink: 0; min-width: 32px; text-align: right; }
+
+  .chevron {
+    width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; color: var(--text-2);
+  }
+  .phase-header:hover .chevron { background: rgba(197,160,89,0.1); border-color: rgba(197,160,89,0.3); color: var(--gold); }
+  .chevron svg { transition: transform 0.25s; width: 13px; height: 13px; }
+  .chevron.open svg { transform: rotate(180deg); }
+
+  /* ─── Context Strip ─── */
+  .phase-context {
+    padding: 10px 18px; font-size: 12px; color: var(--text-2);
+    background: rgba(26,89,204,0.05); border-bottom: 1px solid var(--border);
+    border-left: 2px solid var(--blue-dim); line-height: 1.6;
+  }
+
+  /* ─── Task Rows ─── */
+  .task-list { }
+  .task-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 18px; cursor: pointer;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    background: rgba(4,13,36,0.5);
+    transition: background 0.12s;
+  }
+  .task-row:hover { background: rgba(26,89,204,0.06); }
+  .task-row.completed { background: rgba(4,13,36,0.3); }
+
+  /* ─── CHECKBOX ─── */
+  .checkbox {
+    width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 1px;
+    border: 1.5px solid rgba(197,160,89,0.4);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .task-row:hover .checkbox { border-color: var(--gold); }
+  .checkbox.checked {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-color: #22c55e;
+  }
+  .checkbox svg { display: none; width: 11px; height: 11px; }
+  .checkbox.checked svg { display: block; }
+
+  .task-text {
+    flex: 1; font-size: 12.5px; color: var(--text-1); line-height: 1.55;
+    transition: color 0.15s;
+  }
+  .task-row.completed .task-text { color: var(--text-3); text-decoration: line-through; }
+
+  .tag {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+    flex-shrink: 0; margin-top: 2px; letter-spacing: 0.03em; text-transform: uppercase;
+  }
+
+  /* ─── Empty state ─── */
+  .empty-phase { padding: 14px 18px; font-size: 12px; color: var(--text-3); text-align: center; font-style: italic; }
+
+  /* ─── Footer ─── */
+  .tracker-footer { text-align: center; margin-top: 24px; font-size: 11px; color: var(--text-3); }
+  .tracker-footer a { color: var(--gold-dim); text-decoration: none; }
+
+  /* ─── Scrollbar ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(197,160,89,0.4); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-dot">SSL</div>
+      <div class="brand-label">
+        <span class="brand-name">Signal Strait Labs</span>
+        <span class="brand-sub">Website Dev Tracker · 2026</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="progress-big" id="hdr-count">0<span>/137</span></div>
+      <div class="progress-pct" id="hdr-pct">0% complete</div>
+      <div id="sync-status" style="font-size:11px;margin-top:4px;color:#7aacff;text-align:right;letter-spacing:0.02em">↓ Loading…</div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-track"><div class="progress-fill" id="main-bar" style="width:0%"></div></div>
+</div>
+
+<div class="body-wrap">
+  <div class="filter-row">
+    <span class="filter-label">Show:</span>
+    <button class="filter-btn active" onclick="setFilter('all')" id="fb-all">All</button>
+    <button class="filter-btn" onclick="setFilter('pending')" id="fb-pending">Pending</button>
+    <button class="filter-btn" onclick="setFilter('done')" id="fb-done">Done</button>
+    <span class="spacer"></span>
+    <button class="util-btn" onclick="expandAll()">Expand all</button>
+    <button class="util-btn" onclick="collapseAll()">Collapse all</button>
+  </div>
+
+  <div id="phases-list"></div>
+
+  <div class="tracker-footer">
+    Click any task to mark complete · Progress saves in localStorage · <a href="https://signalstraitlabs.com" target="_blank">signalstraitlabs.com</a>
+  </div>
+</div>
+
+<script>
+const TAG_STYLES = {
+  Cleanup: {bg:'rgba(255,255,255,0.06)', color:'#8a97b4'},
+  Config:  {bg:'rgba(26,89,204,0.15)',  color:'#7aacff'},
+  Assets:  {bg:'rgba(197,160,89,0.12)', color:'#C5A059'},
+  Docs:    {bg:'rgba(255,255,255,0.06)', color:'#8a97b4'},
+  Dev:     {bg:'rgba(26,89,204,0.15)',  color:'#7aacff'},
+  Design:  {bg:'rgba(139,92,246,0.15)', color:'#c4b5fd'},
+  Content: {bg:'rgba(20,184,166,0.12)', color:'#5eead4'},
+  SEO:     {bg:'rgba(34,197,94,0.12)',  color:'#86efac'},
+  AEO:     {bg:'rgba(20,184,166,0.12)', color:'#5eead4'},
+  GEO:     {bg:'rgba(239,68,68,0.12)',  color:'#fca5a5'},
+  QA:      {bg:'rgba(239,68,68,0.12)',  color:'#fca5a5'},
+  Perf:    {bg:'rgba(197,160,89,0.12)', color:'#C5A059'},
+  Deploy:  {bg:'rgba(34,197,94,0.12)',  color:'#86efac'},
+  Social:  {bg:'rgba(236,72,153,0.12)', color:'#f9a8d4'},
+};
+
+const PHASES = [
+  { id:'P0', label:'P0', title:'Foundation Cleanup', day:'Day 1 · ~2 hrs',
+    context:'Delete placeholder files, configure brand tokens, set up fonts, icons, and environment variables before writing a single component.',
+    tasks:[
+      {id:'t001',text:'Delete default Next.js placeholder assets from /public (file.svg, globe.svg, next.svg, vercel.svg, window.svg)',tag:'Cleanup'},
+      {id:'t002',text:'Clear all boilerplate content from app/page.tsx — leave a blank functional component shell',tag:'Cleanup'},
+      {id:'t003',text:'Add SSL brand color tokens as CSS custom properties in globals.css (#01081b, #1a59cc, #C5A059, #FFFFFF)',tag:'Config'},
+      {id:'t004',text:'Add both gradient utility classes to globals.css: .luxurious-gold-gradient and .luxury-bg-gradient',tag:'Config'},
+      {id:'t005',text:'Configure Tailwind v4 custom theme — spacing scale, fluid font sizes, and breakpoints in globals.css',tag:'Config'},
+      {id:'t006',text:'Select and integrate a distinctive display font + body font pair using next/font (avoid Inter, Roboto, Arial)',tag:'Config'},
+      {id:'t007',text:'Replace default favicon.ico with an SSL brand-aligned favicon',tag:'Assets'},
+      {id:'t008',text:'Add icon.svg — a modern, crisp SVG icon for browser tabs',tag:'Assets'},
+      {id:'t009',text:'Add apple-touch-icon.png at 180×180px for iOS home screen display',tag:'Assets'},
+      {id:'t010',text:'Create .env.local with placeholder keys (RESEND_API_KEY, etc.) — document all required vars in README.md',tag:'Config'},
+      {id:'t011',text:'Review and update CLAUDE.md / AGENTS.md with full current project context for AI agent sessions',tag:'Docs'},
+    ]
+  },
+  { id:'P1', label:'P1', title:'Global Layout System', day:'Day 1–2 · ~4 hrs',
+    context:'Build the persistent shell — sticky header navigation and multi-column footer — that wraps every page in the application.',
+    tasks:[
+      {id:'t012',text:'Update app/layout.tsx with correct lang="en", charset, and viewport meta tags',tag:'Dev'},
+      {id:'t013',text:'Create components/layout/ folder and establish clean export patterns',tag:'Dev'},
+      {id:'t014',text:'Build Header component: SSL logo (SVG) + wordmark on the left side',tag:'Dev'},
+      {id:'t015',text:'Header: Desktop navigation links — Services, Insights, About, Contact',tag:'Dev'},
+      {id:'t016',text:'Header: Glassmorphism style (backdrop-blur-xl, semi-transparent dark bg, subtle border)',tag:'Design'},
+      {id:'t017',text:'Header: Scroll-aware behavior — shadow or border appears after scrolling past 80px',tag:'Design'},
+      {id:'t018',text:'Header: Mobile hamburger button with accessible aria-label and visible focus state',tag:'Dev'},
+      {id:'t019',text:'Header: Mobile full-screen overlay menu — blur backdrop, animated slide-in open/close',tag:'Dev'},
+      {id:'t020',text:'Build Footer: Column 1 — Brand tagline + LinkedIn and Facebook social icons (live links)',tag:'Dev'},
+      {id:'t021',text:'Footer: Column 2 — Solutions links listing all 6 service page routes',tag:'Dev'},
+      {id:'t022',text:'Footer: Column 3 — Company links (About, Insights, Contact, Careers placeholder)',tag:'Dev'},
+      {id:'t023',text:'Footer: Column 4 — Legal links (Privacy Policy, Terms, Cookie Policy)',tag:'Dev'},
+      {id:'t024',text:'Footer: Bottom bar — copyright notice, "Nairobi, Kenya" location, founding year 2022',tag:'Dev'},
+      {id:'t025',text:'Footer: Placeholder social icon slots for Instagram, X, YouTube, TikTok, Pinterest (grayed out)',tag:'Design'},
+      {id:'t026',text:'Import Header and Footer into app/layout.tsx — verify no hydration warnings in console',tag:'Dev'},
+    ]
+  },
+  { id:'P2', label:'P2', title:'Design System & UI Components', day:'Day 2–3 · ~4 hrs',
+    context:'A reusable component library ensures every page looks like it belongs to the same product. Build these once, use everywhere.',
+    tasks:[
+      {id:'t027',text:'Create components/ui/ folder with a barrel index file for clean named imports',tag:'Dev'},
+      {id:'t028',text:'Build Button component — variants: primary (gold fill), secondary (blue fill), ghost, outline',tag:'Design'},
+      {id:'t029',text:'Build Card component — dark bg, gold border on hover, subtle scale micro-interaction',tag:'Design'},
+      {id:'t030',text:'Build Badge component — small pill for service categories, article tags, and labels',tag:'Design'},
+      {id:'t031',text:'Build SectionHeading component — small overline label + large h2 + supporting subtext pattern',tag:'Design'},
+      {id:'t032',text:'Build AnimateOnScroll wrapper — native CSS scroll-driven reveal (no JS library dependency)',tag:'Design'},
+      {id:'t033',text:'Define global animation keyframes in globals.css: fade-up, slide-in-left, fade-in',tag:'Config'},
+      {id:'t034',text:'Add animation-range and animation-timeline to .animate-on-scroll utility class',tag:'Config'},
+      {id:'t035',text:'Build Divider component — subtle gradient line for visual section breaks',tag:'Design'},
+      {id:'t036',text:'Build IconBox component — icon + title + description unit used inside bento grid cells',tag:'Design'},
+      {id:'t037',text:'Document spacing and typography scale with inline comments in globals.css',tag:'Docs'},
+    ]
+  },
+  { id:'P3', label:'P3', title:'Homepage — Full Redesign', day:'Day 3–4 · ~6 hrs',
+    context:'Build each homepage section as a standalone, independently animated module. Aesthetic direction: Apple polish + Stripe clarity + Palantir systems intelligence.',
+    tasks:[
+      {id:'t038',text:'Hero section: Full-viewport, powerful headline, subheadline, two CTAs (Book a Call + Explore Services)',tag:'Design'},
+      {id:'t039',text:'Hero: Animated dark background — subtle CSS grid pattern or slow-moving gradient mesh',tag:'Design'},
+      {id:'t040',text:'Hero: Small animated scroll-down indicator at the bottom',tag:'Design'},
+      {id:'t041',text:'Hero: Introduce a punchy value statement — replace vague claims with a specific outcome sentence',tag:'Content'},
+      {id:'t042',text:'Services overview: Bento grid — 6 service cards, with a hero card for the primary service occupying 2 columns',tag:'Design'},
+      {id:'t043',text:'Services: Each card shows icon, service title, 1-line description, and an arrow link to /services/[slug]',tag:'Dev'},
+      {id:'t044',text:'"Why SSL" section: 3–4 differentiator pillars with icons (Truth Metrics, Technical Depth, Full-Stack)',tag:'Content'},
+      {id:'t045',text:'Process / Methodology section: numbered steps showing how an SSL engagement works',tag:'Content'},
+      {id:'t046',text:'Social proof section: Client logos row or 2–3 testimonial cards (placeholder-ready if no real clients yet)',tag:'Design'},
+      {id:'t047',text:'Insights teaser section: 3 latest article cards pulled dynamically from /content/insights/',tag:'Dev'},
+      {id:'t048',text:'Bottom CTA banner section: Bold dark-bg block with headline and "Start a Project" button',tag:'Design'},
+      {id:'t049',text:'Apply AnimateOnScroll to all homepage sections — stagger delays within section grids',tag:'Design'},
+      {id:'t050',text:'Mobile audit on homepage — test layout at 375px, 768px, 1280px, 1440px viewports',tag:'QA'},
+    ]
+  },
+  { id:'P4', label:'P4', title:'Multi-Page Architecture', day:'Day 4–6 · ~8 hrs',
+    context:'Expand from a single landing page to a full routed application. Scaffold every page shell before adding content.',
+    tasks:[
+      {id:'t051',text:'Create app/services/page.tsx — services overview listing page with all 6 service cards',tag:'Dev'},
+      {id:'t052',text:'Create app/services/[slug]/page.tsx — dynamic service detail page template',tag:'Dev'},
+      {id:'t053',text:'Add generateStaticParams() with all 6 slugs: technical-infrastructure, seo-aeo-geo, data-systems, revops, performance-marketing, corporate-pr',tag:'Dev'},
+      {id:'t054',text:'Write structured content for each of 6 service pages using: Problem → SSL Approach → Outcomes format',tag:'Content'},
+      {id:'t055',text:'Add FAQ section to each service page with minimum 3 Q&A pairs per service',tag:'Content'},
+      {id:'t056',text:'Services: Add "Related Services" CTA row at the bottom of each service detail page',tag:'Design'},
+      {id:'t057',text:'Create app/about/page.tsx — company story, mission, and founding context (Nairobi, 2022)',tag:'Dev'},
+      {id:'t058',text:'About: Team section — placeholder cards with role titles even if no photos yet',tag:'Design'},
+      {id:'t059',text:'About: Location section with static map image or Mapbox embed (Thome, Nairobi)',tag:'Dev'},
+      {id:'t060',text:'Create app/insights/page.tsx — insights/blog listing with article card grid',tag:'Dev'},
+      {id:'t061',text:'Create app/insights/[slug]/page.tsx — full article template with rich long-form typography',tag:'Dev'},
+      {id:'t062',text:'Create /content/insights/ folder and set up MDX or JSON-based article data structure',tag:'Dev'},
+      {id:'t063',text:'Write 3 seed insight articles: (1) AEO/GEO guide, (2) Digital transformation in Africa, (3) RevOps for scaling businesses',tag:'Content'},
+      {id:'t064',text:'Create app/contact/page.tsx with form + company contact details',tag:'Dev'},
+      {id:'t065',text:'Contact form fields: name, email, company, service interest (select), message, budget range',tag:'Design'},
+      {id:'t066',text:'Contact page: Display phone (+254712895903), email, LinkedIn link, and Nairobi address',tag:'Content'},
+      {id:'t067',text:'Create app/privacy-policy/page.tsx with GDPR and POPIA-aligned policy text',tag:'Content'},
+      {id:'t068',text:'Create app/terms-of-service/page.tsx',tag:'Content'},
+      {id:'t069',text:'Create app/not-found.tsx — branded 404 page with navigation back to home',tag:'Dev'},
+      {id:'t070',text:'Create app/loading.tsx — skeleton screens for page transitions on slower connections',tag:'Dev'},
+    ]
+  },
+  { id:'P5', label:'P5', title:'Functionality & Integrations', day:'Day 6–7 · ~5 hrs',
+    context:'Wire up the backend API routes, email delivery, analytics, and interactive tools that turn traffic into leads.',
+    tasks:[
+      {id:'t071',text:'Create app/api/leads/route.ts — secure POST endpoint to receive and process form submissions',tag:'Dev'},
+      {id:'t072',text:'Add server-side input validation and sanitization before any processing in the leads route',tag:'Dev'},
+      {id:'t073',text:'Add basic rate limiting to /api/leads to prevent spam (e.g., Upstash Redis or simple in-memory limiter)',tag:'Dev'},
+      {id:'t074',text:'Integrate Resend (@resend/node) for transactional email delivery from the API route',tag:'Dev'},
+      {id:'t075',text:'Build HTML confirmation email template sent to the user after successful form submission',tag:'Design'},
+      {id:'t076',text:'Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead',tag:'Dev'},
+      {id:'t077',text:'Add success/error toast notification UI on the contact form (no page reload)',tag:'Design'},
+      {id:'t078',text:'Integrate Cloudflare Web Analytics — add lightweight script to app/layout.tsx',tag:'Config'},
+      {id:'t079',text:'Build interactive ROI / Growth Estimator widget — user inputs metrics, widget shows projected gains',tag:'Dev'},
+      {id:'t080',text:'"Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page',tag:'Dev'},
+      {id:'t081',text:'Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic',tag:'Dev'},
+    ]
+  },
+  { id:'P6', label:'P6', title:'SEO · AEO · GEO Engineering', day:'Day 7–8 · ~5 hrs',
+    context:'Optimize for Google (SEO), voice and AI answer boxes (AEO), and generative AI citation engines like Perplexity and ChatGPT (GEO).',
+    tasks:[
+      {id:'t082',text:'Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL)',tag:'SEO'},
+      {id:'t083',text:'Add generateMetadata() to every page — unique title under 60 chars and description under 155 chars',tag:'SEO'},
+      {id:'t084',text:'Add canonical URL declarations to all pages to prevent duplicate content issues',tag:'SEO'},
+      {id:'t085',text:'Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange)',tag:'SEO'},
+      {id:'t086',text:'Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles)',tag:'SEO'},
+      {id:'t087',text:'Create WebPage JSON-LD for the homepage',tag:'SEO'},
+      {id:'t088',text:'Create FAQPage JSON-LD schema for each service page — pulling from the FAQ sections already written',tag:'AEO'},
+      {id:'t089',text:'Create Article JSON-LD for each insights post (author, datePublished, dateModified, wordCount)',tag:'SEO'},
+      {id:'t090',text:'Create LocalBusiness JSON-LD schema for Google Maps / local search visibility',tag:'SEO'},
+      {id:'t091',text:'Rewrite all service page h2/h3 headings in question-first format ("What is X?" → answer pattern)',tag:'AEO'},
+      {id:'t092',text:'Add anchor IDs to all major content sections for direct-link citations (#what-is-revops, etc.)',tag:'AEO'},
+      {id:'t093',text:'Create public/llms.txt — structured markdown file with company overview, services, and contact for LLM crawlers',tag:'GEO'},
+      {id:'t094',text:'llms.txt: Include entity disambiguation section (SSL = Signal Strait Labs, not SSL the protocol)',tag:'GEO'},
+      {id:'t095',text:'Create app/sitemap.ts — dynamic generator that covers all static + dynamic routes and insight slugs',tag:'SEO'},
+      {id:'t096',text:'Create public/robots.txt — allow major search bots, selectively manage aggressive AI crawlers',tag:'SEO'},
+      {id:'t097',text:'Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url)',tag:'SEO'},
+      {id:'t098',text:'Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image)',tag:'SEO'},
+      {id:'t099',text:'Create app/opengraph-image.tsx — dynamic branded OG image generation for social sharing',tag:'Design'},
+      {id:'t100',text:'Audit that every page has at least one internal link to another page (crawlability requirement)',tag:'SEO'},
+    ]
+  },
+  { id:'P7', label:'P7', title:'Assets, Media & Content', day:'Day 8–9 · ~4 hrs',
+    context:'Real imagery and polished copy are what separate a developer scaffold from a brand clients trust.',
+    tasks:[
+      {id:'t101',text:'Source or commission hero imagery — abstract/tech/data aesthetic, avoid generic stock photography',tag:'Assets'},
+      {id:'t102',text:'Create or source SVG icons for all 6 service categories (consistent style and weight)',tag:'Assets'},
+      {id:'t103',text:'Run all images through WebP compression pipeline — target under 100KB per image',tag:'Assets'},
+      {id:'t104',text:'Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority',tag:'Dev'},
+      {id:'t105',text:'Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview',tag:'Assets'},
+      {id:'t106',text:'Run all SVG files through SVGO optimizer to strip unnecessary metadata and path bloat',tag:'Assets'},
+      {id:'t107',text:'Final copywriting pass across all pages — tone: authoritative, direct, precise (not salesy or vague)',tag:'Content'},
+      {id:'t108',text:'Add descriptive alt text to every image across all pages (both accessibility and SEO requirement)',tag:'QA'},
+    ]
+  },
+  { id:'P8', label:'P8', title:'Performance & Code Quality', day:'Day 9 · ~3 hrs',
+    context:'African mobile networks demand exceptional Core Web Vitals discipline. Optimize before going live, not after.',
+    tasks:[
+      {id:'t109',text:'Run npx tsc --noEmit — resolve all TypeScript errors before any build',tag:'Dev'},
+      {id:'t110',text:'Run ESLint — fix all warnings, especially accessibility-related lint rules',tag:'Dev'},
+      {id:'t111',text:'Run npm run build locally — resolve all compilation errors and warnings before deploying',tag:'Dev'},
+      {id:'t112',text:'Analyze JS bundle size with @next/bundle-analyzer — identify and remove unnecessary imports',tag:'Perf'},
+      {id:'t113',text:'Run Lighthouse audit (mobile simulation) — targets: Performance 90+, Accessibility 95+, SEO 100',tag:'QA'},
+      {id:'t114',text:'LCP < 2.5s on mobile — optimize hero image, preload critical fonts, defer non-critical scripts',tag:'Perf'},
+      {id:'t115',text:'CLS < 0.1 — add explicit width/height to all images, reserve space for async-loaded fonts',tag:'Perf'},
+      {id:'t116',text:'INP < 200ms — audit and fix any heavy event handlers on interactive elements',tag:'Perf'},
+      {id:'t117',text:'Test all pages on iOS Safari + Android Chrome at 375px viewport width',tag:'QA'},
+      {id:'t118',text:'Test all forms end-to-end: submission, email delivery, toast notifications, and error states',tag:'QA'},
+      {id:'t119',text:'Cross-browser test: Chrome, Firefox, Safari, Edge — all at desktop and mobile widths',tag:'QA'},
+      {id:'t120',text:'Full keyboard navigation test — every interactive element reachable and operable without a mouse',tag:'QA'},
+      {id:'t121',text:'Color contrast audit — all body text meets WCAG AA minimum 4.5:1 ratio',tag:'QA'},
+    ]
+  },
+  { id:'P9', label:'P9', title:'Launch & Distribution', day:'Day 10 · ~3 hrs',
+    context:'Go live, get indexed, establish domain authority, and fill out the missing digital presence slots from the brand brief.',
+    tasks:[
+      {id:'t122',text:'Connect custom domain signalstraitlabs.com to Cloudflare Pages in the dashboard',tag:'Deploy'},
+      {id:'t123',text:'Configure DNS A/CNAME records and verify full propagation (may take up to 48 hrs)',tag:'Deploy'},
+      {id:'t124',text:'Confirm HTTPS certificate is active and set to auto-renew',tag:'Deploy'},
+      {id:'t125',text:'Configure Cloudflare security headers: X-Frame-Options, X-Content-Type-Options, HSTS, CSP',tag:'Deploy'},
+      {id:'t126',text:'Add all production environment variables (RESEND_API_KEY, etc.) to Cloudflare Pages dashboard',tag:'Deploy'},
+      {id:'t127',text:'Set deployment branch rules: main → production, dev/staging → preview URLs',tag:'Deploy'},
+      {id:'t128',text:'Final content QA — proofread every single page for typos, broken links, and missing images',tag:'QA'},
+      {id:'t129',text:'Final design QA — visual check at 1440px desktop and 375px mobile for every page',tag:'QA'},
+      {id:'t130',text:'Submit sitemap to Google Search Console (signalstraitlabs.com/sitemap.xml)',tag:'SEO'},
+      {id:'t131',text:'Submit sitemap to Bing Webmaster Tools',tag:'SEO'},
+      {id:'t132',text:'Set up and fully complete Google Business Profile (currently missing from brand brief)',tag:'SEO'},
+      {id:'t133',text:'Update LinkedIn company page description, website link, and all service tags',tag:'Social'},
+      {id:'t134',text:'Create Instagram business account and link to signalstraitlabs.com',tag:'Social'},
+      {id:'t135',text:'Create X/Twitter account and link to website',tag:'Social'},
+      {id:'t136',text:'Reserve YouTube, TikTok, and Pinterest handles even if no content is ready yet',tag:'Social'},
+      {id:'t137',text:'Submit SSL to Clutch.co, G2, and Crunchbase for B2B directory visibility and backlink authority',tag:'Social'},
+    ]
+  },
+];
+
+const BIN_ID  = '6a1a93d021f9ee59d29cff9d';
+const API_KEY = '$2a$10$2Ul.rdihxlI./c2POrriMOy3q4lq5hyMeQRYqPm0jXeUr.5sMKJvS';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+let completed = {};
+let expanded = { P0: true };
+let filter = 'all';
+let saveTimer = null;
+
+function setSyncStatus(state) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const states = {
+    saving:  { text: '↑ Saving…',   color: '#C5A059' },
+    saved:   { text: '✓ Synced',     color: '#22c55e' },
+    loading: { text: '↓ Loading…',  color: '#7aacff' },
+    error:   { text: '✗ Sync error', color: '#f87171' },
+  };
+  const s = states[state] || states.saved;
+  el.textContent = s.text;
+  el.style.color = s.color;
+}
+
+async function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    setSyncStatus('saving');
+    try {
+      await fetch(BIN_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
+        body: JSON.stringify({ completed, expanded })
+      });
+      setSyncStatus('saved');
+    } catch(e) {
+      setSyncStatus('error');
+    }
+  }, 600);
+}
+
+async function load() {
+  setSyncStatus('loading');
+  try {
+    const res = await fetch(`${BIN_URL}/latest`, {
+      headers: { 'X-Access-Key': API_KEY }
+    });
+    const data = await res.json();
+    const record = data.record || {};
+    completed = record.completed || {};
+    expanded  = record.expanded  || { P0: true };
+    setSyncStatus('saved');
+  } catch(e) {
+    setSyncStatus('error');
+  }
+}
+
+function allTasks() { return PHASES.flatMap(p => p.tasks); }
+
+function updateHeader() {
+  const all = allTasks();
+  const done = all.filter(t => completed[t.id]).length;
+  const total = all.length;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('hdr-count').innerHTML = `${done}<span>/${total}</span>`;
+  document.getElementById('hdr-pct').textContent = `${pct}% complete`;
+  document.getElementById('main-bar').style.width = pct + '%';
+  const filterCounts = { all: total, pending: total - done, done };
+  ['all','pending','done'].forEach(f => {
+    const btn = document.getElementById('fb-' + f);
+    const labels = {all:`All (${filterCounts.all})`, pending:`Pending (${filterCounts.pending})`, done:`Done (${filterCounts.done})`};
+    btn.textContent = labels[f];
+    btn.classList.toggle('active', filter === f);
+  });
+}
+
+function renderPhases() {
+  const container = document.getElementById('phases-list');
+  container.innerHTML = '';
+  PHASES.forEach(phase => {
+    const pDone = phase.tasks.filter(t => completed[t.id]).length;
+    const allDone = pDone === phase.tasks.length;
+    const pPct = Math.round(pDone / phase.tasks.length * 100);
+    const isExp = !!expanded[phase.id];
+
+    const visible = phase.tasks.filter(t => {
+      if (filter === 'done') return completed[t.id];
+      if (filter === 'pending') return !completed[t.id];
+      return true;
+    });
+    if (visible.length === 0 && filter !== 'all') return;
+
+    const phaseEl = document.createElement('div');
+    phaseEl.className = 'phase' + (allDone ? ' all-done' : '');
+    phaseEl.id = 'phase-' + phase.id;
+
+    const fillColor = allDone ? '#22c55e' : pPct > 0 ? '#1a59cc' : 'rgba(255,255,255,0.1)';
+
+    phaseEl.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${phase.id}')">
+        <div class="phase-badge${allDone ? ' done' : ''}">
+          ${allDone
+            ? `<svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7 5.5,11 12,3"/></svg>`
+            : phase.label
+          }
+        </div>
+        <div class="phase-info">
+          <div class="phase-title-row">
+            <span class="phase-title">${phase.label}: ${phase.title}</span>
+            <span class="phase-day">${phase.day}</span>
+          </div>
+          <div class="phase-progress-row">
+            <div class="mini-track"><div class="mini-fill" style="width:${pPct}%;background:${fillColor}"></div></div>
+            <span class="mini-count">${pDone}/${phase.tasks.length}</span>
+          </div>
+        </div>
+        <div class="chevron${isExp ? ' open' : ''}">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2,4.5 7,9.5 12,4.5"/>
+          </svg>
+        </div>
+      </div>
+    `;
+
+    if (isExp) {
+      const ctx = document.createElement('div');
+      ctx.className = 'phase-context';
+      ctx.textContent = phase.context;
+      phaseEl.appendChild(ctx);
+
+      const list = document.createElement('div');
+      list.className = 'task-list';
+
+      if (visible.length === 0) {
+        list.innerHTML = `<div class="empty-phase">No tasks match this filter in this phase.</div>`;
+      } else {
+        visible.forEach(task => {
+          const isDone = !!completed[task.id];
+          const ts = TAG_STYLES[task.tag] || {bg:'rgba(255,255,255,0.06)',color:'#8a97b4'};
+          const row = document.createElement('div');
+          row.className = 'task-row' + (isDone ? ' completed' : '');
+          row.setAttribute('data-id', task.id);
+          row.setAttribute('role', 'checkbox');
+          row.setAttribute('aria-checked', isDone ? 'true' : 'false');
+          row.setAttribute('tabindex', '0');
+          row.innerHTML = `
+            <div class="checkbox${isDone ? ' checked' : ''}">
+              <svg viewBox="0 0 11 11" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1.5,6 4,9 9.5,2"/>
+              </svg>
+            </div>
+            <span class="task-text">${task.text}</span>
+            <span class="tag" style="background:${ts.bg};color:${ts.color}">${task.tag}</span>
+          `;
+          row.addEventListener('click', () => toggleTask(task.id));
+          row.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleTask(task.id); } });
+          list.appendChild(row);
+        });
+      }
+      phaseEl.appendChild(list);
+    }
+
+    container.appendChild(phaseEl);
+  });
+
+  updateHeader();
+}
+
+window.toggleTask = function(id) {
+  completed[id] = !completed[id];
+  save();
+  renderPhases();
+};
+window.togglePhase = function(id) {
+  expanded[id] = !expanded[id];
+  save();
+  renderPhases();
+};
+window.setFilter = function(f) {
+  filter = f;
+  renderPhases();
+};
+window.expandAll = function() {
+  PHASES.forEach(p => expanded[p.id] = true);
+  save();
+  renderPhases();
+};
+window.collapseAll = function() {
+  PHASES.forEach(p => expanded[p.id] = false);
+  save();
+  renderPhases();
+};
+
+load().then(() => renderPhases());
+</script>
+</body>
+</html>
