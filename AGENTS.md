@@ -8,7 +8,7 @@
 
 **Signal Strait Labs (SSL)** is a premium digital marketing and software development agency platform built for **high performance** and **clean aesthetics**.
 
-The site represents an enterprise growth-engineering lab focused on digital transformation, AEO/GEO, RevOps, and custom infrastructure — with a luxury dark UI, strong typography, and static-first Next.js architecture. Every change should preserve brand polish, accessibility, and production build stability.
+The site represents an enterprise growth-engineering lab focused on digital transformation, AEO/GEO, RevOps, and custom infrastructure — with a **premium light-mode agency aesthetic** (Apple / Stripe inspired), strong typography, and static-first Next.js architecture. Every change should preserve brand polish, accessibility, and production build stability.
 
 **HQ:** Thome, Nairobi, Kenya  
 **Production URL:** `https://signal-strait-labs.pages.dev`
@@ -86,21 +86,38 @@ const plusJakartaSans = Plus_Jakarta_Sans({ variable: "--font-plus-jakarta", sub
 
 All tokens are registered in the `@theme` block of **`app/globals.css`**.
 
+### Light-mode canvas architecture
+
+The design system uses a **luminous, crisp light canvas** as the default surface — not a dark theme.
+
+| Layer | Token / Class | Role |
+| --- | --- | --- |
+| **Page canvas** | `--color-ssl-light-bg` (`#fbfbfd`) | Default `body` background — Apple-style clean light gray |
+| **Primary ink** | `--color-ssl-bg` (`#01081b`) | Default `body` text — deep **Abyss Blue** for headings and prose |
+| **Ambient wash** | `.luxury-bg-gradient` | Radial blue/gold tint over `#fbfbfd` for hero and full-page sections |
+| **Card depth** | `.glass-card-light` | Frosted glass panels — blur, subtle border, inset highlight |
+| **Nav / footer bar** | `.glass-nav-light` | Translucent sticky header and footer with backdrop blur |
+
+Apply `.glass-card-light` to service cards, forms, and elevated UI surfaces. Use `.glass-nav-light` with `border-slate-200/60` on header and footer. Pair with `text-ssl-bg` for headings and `text-slate-600` / `text-slate-700` for body copy.
+
 ### Brand colors
 
 | Token | Hex | Tailwind usage |
 | --- | --- | --- |
-| `--color-ssl-bg` | `#01081b` | `bg-ssl-bg` — deep navy page background |
+| `--color-ssl-light-bg` | `#fbfbfd` | `bg-ssl-light-bg` — primary light canvas background |
+| `--color-ssl-bg` | `#01081b` | `text-ssl-bg`, `bg-ssl-bg` — Abyss Blue ink / deep accent surfaces |
 | `--color-ssl-blue` | `#1a59cc` | `bg-ssl-blue`, `text-ssl-blue` — primary CTA / accent |
 | `--color-ssl-gold` | `#C5A059` | `bg-ssl-gold`, `text-ssl-gold` — luxury accent |
-| `--color-ssl-white` | `#ffffff` | `text-ssl-white` |
+| `--color-ssl-white` | `#ffffff` | `text-ssl-white`, card fills inside glass layers |
 
 ### Custom gradients & text effects
 
 | Class / Utility | Type | Purpose |
 | --- | --- | --- |
 | `luxurious-gold-gradient` | `@utility` | Metallic gold background gradient for badges/cards |
-| `luxury-bg-gradient` | `@utility` | Full-page ambient background (navy → gold undertone) |
+| `.luxury-bg-gradient` | CSS class | Light-canvas ambient radial gradient (blue → gold → transparent over `#fbfbfd`) |
+| `.glass-card-light` | CSS class | Light glassmorphism — frosted white panel with blur and soft shadow |
+| `.glass-nav-light` | CSS class | Translucent nav/footer bar — white glass with backdrop blur |
 | `.text-gold-gradient` | CSS class | Gold clipped text for emphasis spans |
 
 ### Fluid typography scales
@@ -162,14 +179,15 @@ Local secrets live in **`.env.local`** (git-ignored via `.env*` in `.gitignore`)
 ### Layout & UX conventions
 
 - **Scannable layouts** — clear section hierarchy (`header`, `section`, `footer`), semantic HTML, generous whitespace.
-- **Dark luxury aesthetic** — deep `#01081b` backgrounds, gold/blue accents, subtle borders (`border-white/5`).
+- **Premium light-mode aesthetic** — luminous `#fbfbfd` canvas (`.luxury-bg-gradient` or `bg-ssl-light-bg`), Abyss Blue (`text-ssl-bg`) for headings/nav, `text-slate-600`/`text-slate-700` for body copy, `.glass-card-light` for cards/forms, `.glass-nav-light` + `border-slate-200/60` for header/footer.
+- **Do not** use dark-mode leftovers: `className="dark"`, `text-white`, `bg-[#01081b]`, `border-white/5`, or opaque dark overlays on sections.
 - **Responsive by default** — mobile-first Tailwind breakpoints; logo heights `h-8` / `md:h-10`.
 - **SEO/AEO/GEO** — preserve `metadata` export in `layout.tsx` and JSON-LD in `page.tsx` when editing marketing pages.
 
 ### Styling rules
 
 - Extend the design system in **`app/globals.css`** — not ad-hoc inline styles or new config files.
-- Reuse existing tokens (`ssl-bg`, `ssl-blue`, `ssl-gold`) and utilities before introducing one-off hex values.
+- Reuse existing tokens (`ssl-light-bg`, `ssl-bg`, `ssl-blue`, `ssl-gold`) and utilities (`.luxury-bg-gradient`, `.glass-card-light`, `.glass-nav-light`) before introducing one-off hex values.
 - Match existing naming: `@utility` for reusable backgrounds, `.text-*` for text effects.
 
 ### What to avoid

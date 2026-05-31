@@ -88,8 +88,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${sora.variable} ${plusJakartaSans.variable} antialiased`}>
+    <html lang="en">
+      <body className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}>
         {children}
       </body>
     </html>

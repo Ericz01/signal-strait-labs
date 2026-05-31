@@ -2,6 +2,7 @@
 
 @theme {
   --color-ssl-bg: #01081b;
+  --color-ssl-light-bg: #fbfbfd;
   --color-ssl-blue: #1a59cc;
   --color-ssl-gold: #C5A059;
   --color-ssl-white: #ffffff;
@@ -25,8 +26,8 @@
 
 @layer base {
   body {
-    background-color: var(--color-ssl-bg);
-    color: #ffffff;
+    background-color: var(--color-ssl-light-bg);
+    color: var(--color-ssl-bg);
     font-family: var(--font-body);
   }
 
@@ -44,13 +45,41 @@
   background: linear-gradient(135deg, #9A7432 0%, #C5A059 25%, #F1DCA7 50%, #C5A059 75%, #9A7432 100%);
 }
 
-@utility luxury-bg-gradient {
-  background: linear-gradient(135deg, #01081B 0%, #051336 50%, #1C1A14 85%, #423721 100%);
+/* Premium light-canvas ambient page background */
+.luxury-bg-gradient {
+  background:
+    radial-gradient(
+      100% 100% at 50% 0%,
+      rgba(26, 89, 204, 0.04) 0%,
+      rgba(197, 160, 89, 0.02) 50%,
+      rgba(251, 251, 253, 0) 100%
+    ),
+    #fbfbfd;
+}
+
+/* High-end light glassmorphism for card layouts */
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(1, 8, 27, 0.06);
+  box-shadow:
+    0 4px 30px rgba(1, 8, 27, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Translucent sticky nav / footer bar */
+.glass-nav-light {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* Gold text clip utility */
 .text-gold-gradient {
   background: linear-gradient(135deg, #F1DCA7 0%, #C5A059 50%, #9A7432 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
 }
