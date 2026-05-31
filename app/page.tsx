@@ -57,7 +57,7 @@ const organizationJsonLd = {
 
 function BrandLogo({
   priority = false,
-  className = "h-8 w-auto md:h-10",
+  className = "h-10 w-auto md:h-12",
 }: {
   priority?: boolean;
   className?: string;
@@ -70,7 +70,7 @@ function BrandLogo({
       height={72}
       className={`${className} object-contain object-left`}
       priority={priority}
-      sizes="(max-width: 768px) 160px, 220px"
+      sizes="(max-width: 768px) 200px, 260px"
     />
   );
 }
@@ -89,22 +89,18 @@ function ServiceCard({
   const isBlue = accent === "blue";
 
   return (
-    <div
-      className={`glass-card-light rounded-2xl p-8 transition-all group hover:shadow-lg ${
-        isBlue ? "hover:border-ssl-blue/30" : "hover:border-ssl-gold/30"
-      }`}
-    >
+    <div className="glass-card-dark rounded-2xl p-8">
       <div
         className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl border font-bold transition-all ${
           isBlue
-            ? "border-ssl-blue/20 bg-ssl-blue/10 text-ssl-blue group-hover:bg-ssl-blue group-hover:text-white"
-            : "border-ssl-gold/20 bg-ssl-gold/10 text-ssl-gold group-hover:luxurious-gold-gradient group-hover:text-ssl-bg"
+            ? "border-ssl-blue/30 bg-ssl-blue/15 text-ssl-blue group-hover:bg-ssl-blue"
+            : "border-ssl-gold/30 bg-ssl-gold/15 text-ssl-gold"
         }`}
       >
         {index}
       </div>
-      <h3 className="mb-3 text-xl font-bold text-ssl-bg">{title}</h3>
-      <p className="text-sm leading-relaxed text-slate-600">{description}</p>
+      <h3 className="mb-3 text-xl font-bold text-white">{title}</h3>
+      <p className="text-sm leading-relaxed text-slate-300">{description}</p>
     </div>
   );
 }
@@ -120,7 +116,7 @@ export default function Home() {
       />
 
       {/* HEADER / NAVIGATION */}
-      <header className="glass-nav-light sticky top-0 z-50 border-b border-slate-200/60">
+      <header className="glass-nav-dark sticky top-0 z-50 border-b border-ssl-gold/20">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
           <a
             href="/"
@@ -129,21 +125,30 @@ export default function Home() {
           >
             <BrandLogo priority />
           </a>
-          <nav className="hidden items-center space-x-8 text-sm font-medium text-slate-600 md:flex">
-            <a href="#services" className="transition-colors hover:text-ssl-bg">
+          <nav className="hidden items-center space-x-8 text-sm font-medium text-slate-300 md:flex">
+            <a
+              href="#services"
+              className="transition-colors hover:text-ssl-gold"
+            >
               Services
             </a>
-            <a href="#philosophy" className="transition-colors hover:text-ssl-bg">
+            <a
+              href="#philosophy"
+              className="transition-colors hover:text-ssl-gold"
+            >
               Philosophy
             </a>
-            <a href="#contact" className="transition-colors hover:text-ssl-bg">
+            <a
+              href="#contact"
+              className="transition-colors hover:text-ssl-gold"
+            >
               Connect
             </a>
           </nav>
           <div>
             <a
               href="#contact"
-              className="rounded-lg border border-ssl-blue/20 bg-ssl-blue px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-ssl-blue/20 transition-all hover:bg-ssl-blue/90"
+              className="rounded-lg border border-ssl-gold/25 bg-ssl-blue px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-ssl-blue/25 transition-all hover:border-ssl-gold/40 hover:bg-ssl-blue/90"
             >
               Get an ABM Attack Plan
             </a>
@@ -151,19 +156,20 @@ export default function Home() {
         </div>
       </header>
 
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden px-6 pb-24 pt-32">
+      {/* HERO SECTION — light canvas */}
+      <section className="relative px-6 pb-20 pt-20">
         <div className="relative z-10 mx-auto max-w-5xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-ssl-gold/30 bg-ssl-gold/5 px-3 py-1">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-ssl-gold" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-ssl-gold">
-              Digital Transformation & Growth Engineering
+          <div className="glass-card-dark mb-8 inline-flex items-center gap-3 rounded-2xl px-5 py-3 md:px-6 md:py-4">
+            <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-ssl-gold" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-white md:text-sm">
+              Digital Transformation &{" "}
+              <span className="text-ssl-gold">Growth Engineering</span>
             </span>
           </div>
 
           <h1 className="mb-8 text-5xl font-extrabold leading-[1.1] tracking-tight text-ssl-bg md:text-7xl">
             Force a Clear Market Signal Through <br />
-            <span className="text-gold-gradient">Digital Chaos.</span>
+            <span className="text-gold-contrast">Digital Chaos.</span>
           </h1>
 
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-xl">
@@ -192,39 +198,38 @@ export default function Home() {
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ssl-blue/5 blur-[120px]" />
       </section>
 
-      {/* THE TRUTH METRICS STRIP */}
-      <section
-        className="border-y border-slate-200/60 px-6 py-12"
-        id="philosophy"
-      >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 text-center md:grid-cols-3">
-          <div className="p-4">
-            <div className="mb-1 text-sm uppercase tracking-widest text-slate-500">
-              We Replace
+      {/* THE TRUTH METRICS STRIP — dark anchor banner */}
+      <section className="px-6 py-12" id="philosophy">
+        <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
+          <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+            <div className="p-4">
+              <div className="mb-1 text-sm uppercase tracking-widest text-slate-400">
+                We Replace
+              </div>
+              <div className="text-xl font-bold text-slate-400 line-through decoration-red-400/70">
+                Vague Clicks & Impressions
+              </div>
             </div>
-            <div className="text-xl font-bold text-slate-500 line-through decoration-red-400/60">
-              Vague Clicks & Impressions
+            <div className="hidden items-center justify-center p-4 md:flex">
+              <div className="h-8 w-px bg-ssl-gold/25" />
             </div>
-          </div>
-          <div className="hidden items-center justify-center p-4 md:flex">
-            <div className="h-8 w-px bg-slate-200" />
-          </div>
-          <div className="p-4">
-            <div className="mb-1 text-sm font-bold uppercase tracking-widest text-ssl-gold">
-              With Truth Metrics
-            </div>
-            <div className="text-2xl font-black tracking-tight text-ssl-bg">
-              Pipeline Value • Conversion Velocity • Revenue
+            <div className="p-4">
+              <div className="mb-1 text-sm font-bold uppercase tracking-widest text-ssl-gold">
+                With Truth Metrics
+              </div>
+              <div className="text-2xl font-black tracking-tight text-white">
+                Pipeline Value • Conversion Velocity • Revenue
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CORE SERVICES MATRIX */}
-      <section className="mx-auto max-w-7xl px-6 py-24" id="services">
+      {/* CORE SERVICES MATRIX — dark anchor cards on light canvas */}
+      <section className="mx-auto max-w-7xl px-6 py-20" id="services">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-ssl-bg md:text-5xl">
-            Our Core <span className="text-gold-gradient">Capabilities</span>
+            Our Core <span className="text-gold-contrast">Capabilities</span>
           </h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             Engineered software systems and data strategies built to optimize
@@ -232,7 +237,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 pb-6 pt-2 md:grid-cols-2 lg:grid-cols-3">
           <ServiceCard
             index="01"
             accent="blue"
@@ -273,12 +278,12 @@ export default function Home() {
       </section>
 
       {/* CALL TO ACTION / LEAD CAPTURE FORM */}
-      <section className="border-t border-slate-200/60 px-6 py-24" id="contact">
-        <div className="mx-auto grid max-w-4xl grid-cols-1 items-center gap-12 md:grid-cols-2">
+      <section className="border-t border-slate-200/60 px-6 py-20" id="contact">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-12 pb-4 pt-2 md:grid-cols-2">
           <div>
             <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
               Ready to Establish <br />
-              <span className="text-gold-gradient">Market Command?</span>
+              <span className="text-gold-contrast">Market Command?</span>
             </h2>
             <p className="mb-6 text-sm leading-relaxed text-slate-600">
               Contact our engineering lab directly to analyze your current tech
@@ -301,44 +306,48 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="glass-card-light relative z-10 rounded-2xl p-8 shadow-lg">
+          <div className="glass-card-dark relative z-10 rounded-2xl p-8">
+            <h3 className="mb-6 text-lg font-bold text-white">
+              Initialize{" "}
+              <span className="text-brand-gradient">Technical Discovery</span>
+            </h3>
             <form className="space-y-5">
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
                   Corporate Identity / Name
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-ssl-bg transition-colors placeholder:text-slate-400 focus:border-ssl-blue focus:outline-none"
+                  className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
                   placeholder="e.g., Lead Architect or Enterprise VP"
                   required
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
                   Secure Email Endpoint
                 </label>
                 <input
                   type="email"
-                  className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-ssl-bg transition-colors placeholder:text-slate-400 focus:border-ssl-blue focus:outline-none"
+                  className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
                   placeholder="name@company.com"
                   required
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
                   Primary Engineering Challenge
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full resize-none rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-ssl-bg transition-colors placeholder:text-slate-400 focus:border-ssl-blue focus:outline-none"
+                  className="glass-input-dark w-full resize-none rounded-lg px-4 py-3 text-sm"
                   placeholder="Describe the optimization parameter needed..."
                 />
               </div>
 
               <button
                 type="button"
-                className="w-full rounded-lg border border-ssl-blue/20 bg-ssl-blue py-3.5 text-sm font-bold tracking-wide text-white shadow-md shadow-ssl-blue/10 transition-all hover:bg-ssl-blue/90"
+                className="w-full rounded-lg border border-ssl-gold/30 bg-ssl-blue py-3.5 text-sm font-bold tracking-wide text-white shadow-lg shadow-ssl-blue/20 transition-all hover:border-ssl-gold/50 hover:bg-ssl-blue/90"
               >
                 Initialize Technical Discovery
               </button>
@@ -347,8 +356,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="glass-nav-light border-t border-slate-200/60 px-6 py-12 text-center text-xs text-slate-500">
+      {/* FOOTER — deep Abyss Blue anchor */}
+      <footer className="footer-dark border-t border-ssl-gold/20 px-6 py-12 text-center text-xs text-slate-400">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex flex-col items-center gap-3 sm:items-start">
             <a
@@ -356,11 +365,12 @@ export default function Home() {
               className="flex shrink-0 items-center"
               aria-label="Signal Strait Labs home"
             >
-              <BrandLogo className="h-7 w-auto sm:h-8" />
+              <BrandLogo className="h-10 w-auto sm:h-11" />
             </a>
             <p>
               © {new Date().getFullYear()} Signal Strait Labs. All rights
-              reserved. System Live.
+              reserved.{" "}
+              <span className="text-ssl-gold">System Live.</span>
             </p>
           </div>
           <div className="flex space-x-6">
@@ -368,7 +378,7 @@ export default function Home() {
               href="https://linkedin.com/company/signal-strait-labs"
               target="_blank"
               rel="noreferrer"
-              className="text-slate-600 transition-colors hover:text-ssl-bg"
+              className="text-slate-300 transition-colors hover:text-ssl-gold"
             >
               LinkedIn
             </a>
@@ -376,7 +386,7 @@ export default function Home() {
               href="https://web.facebook.com/profile.php?id=61589782545004"
               target="_blank"
               rel="noreferrer"
-              className="text-slate-600 transition-colors hover:text-ssl-bg"
+              className="text-slate-300 transition-colors hover:text-ssl-gold"
             >
               Facebook
             </a>
