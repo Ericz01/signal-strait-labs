@@ -1,33 +1,51 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ssl-bg: #01081b;
+  --color-ssl-blue: #1a59cc;
+  --color-ssl-gold: #C5A059;
+  --color-ssl-white: #ffffff;
+
+  /* Apple-inspired Breakpoints */
+  --breakpoint-3xl: 120rem;
+
+  /* Expanded Spacing Units */
+  --spacing-100: 25rem;
+  --spacing-128: 32rem;
+
+  /* Fluid Typography Tokens */
+  --text-fluid-h1: clamp(2.5rem, 6vw, 4.5rem);
+  --text-fluid-h2: clamp(1.75rem, 4vw, 3rem);
+  --text-fluid-body: clamp(1rem, 1.5vw, 1.125rem);
+
+  /* Premium Font Pairing */
+  --font-display: var(--font-sora), sans-serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
+}
+
 @layer base {
   body {
-    background-color: #01081b;
+    background-color: var(--color-ssl-bg);
     color: #ffffff;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
   }
 }
 
-/* Custom Luxury Gradients mapped for utility use */
-.luxurious-gold-gradient {
-  background: linear-gradient(
-    135deg, 
-    #9A7432 0%,   /* Deep shadow gold */
-    #C5A059 25%,  /* Midtone luxury gold */
-    #F1DCA7 50%,  /* Bright highlight */
-    #C5A059 75%,  /* Midtone luxury gold */
-    #9A7432 100%  /* Deep shadow gold */
-  );
+@utility luxurious-gold-gradient {
+  background: linear-gradient(135deg, #9A7432 0%, #C5A059 25%, #F1DCA7 50%, #C5A059 75%, #9A7432 100%);
 }
 
-.luxury-bg-gradient {
-  background: linear-gradient(
-    135deg, 
-    #01081B 0%,    /* Original dark background */
-    #051336 50%,   /* Rich transition navy */
-    #1C1A14 85%,   /* Warm dark gold shadow */
-    #423721 100%   /* Deep ambient gold glow */
-  );
+@utility luxury-bg-gradient {
+  background: linear-gradient(135deg, #01081B 0%, #051336 50%, #1C1A14 85%, #423721 100%);
 }
 
 /* Gold text clip utility */
