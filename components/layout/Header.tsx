@@ -9,10 +9,15 @@ type NavLink = {
   readonly label: string;
 };
 
+
+
+
+
 const NAV_LINKS: readonly NavLink[] = [
   { href: "#services", label: "Services" },
-  { href: "#philosophy", label: "Philosophy" },
-  { href: "#connect", label: "Connect" },
+  { href: "#insights", label: "Insights" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
 ] as const;
 
 const SCROLL_COMPRESS_THRESHOLD = 20;
