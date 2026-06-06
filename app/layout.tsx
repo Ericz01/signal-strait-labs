@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
+import { Footer, Header } from "@/components/layout";
 import "./globals.css";
 
 const sora = Sora({
@@ -90,7 +91,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}>
-        {children}
+        <div className="min-h-screen luxury-bg-gradient text-ssl-bg selection:bg-ssl-blue/20">
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

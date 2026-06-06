@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -55,26 +53,6 @@ const organizationJsonLd = {
   },
 } as const;
 
-function BrandLogo({
-  priority = false,
-  className = "h-10 w-auto md:h-12",
-}: {
-  priority?: boolean;
-  className?: string;
-}) {
-  return (
-    <Image
-      src="/logo.png"
-      alt="Signal Strait Labs"
-      width={240}
-      height={72}
-      className={`${className} object-contain object-left`}
-      priority={priority}
-      sizes="(max-width: 768px) 200px, 260px"
-    />
-  );
-}
-
 function ServiceCard({
   index,
   title,
@@ -107,54 +85,13 @@ function ServiceCard({
 
 export default function Home() {
   return (
-    <div className="min-h-screen luxury-bg-gradient text-ssl-bg selection:bg-ssl-blue/20">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(organizationJsonLd),
         }}
       />
-
-      {/* HEADER / NAVIGATION */}
-      <header className="glass-nav-dark sticky top-0 z-50 border-b border-ssl-gold/20">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-          <a
-            href="/"
-            className="flex shrink-0 items-center"
-            aria-label="Signal Strait Labs home"
-          >
-            <BrandLogo priority />
-          </a>
-          <nav className="hidden items-center space-x-8 text-sm font-medium text-slate-300 md:flex">
-            <a
-              href="#services"
-              className="transition-colors hover:text-ssl-gold"
-            >
-              Services
-            </a>
-            <a
-              href="#philosophy"
-              className="transition-colors hover:text-ssl-gold"
-            >
-              Philosophy
-            </a>
-            <a
-              href="#contact"
-              className="transition-colors hover:text-ssl-gold"
-            >
-              Connect
-            </a>
-          </nav>
-          <div>
-            <a
-              href="#contact"
-              className="rounded-lg border border-ssl-gold/25 bg-ssl-blue px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-ssl-blue/25 transition-all hover:border-ssl-gold/40 hover:bg-ssl-blue/90"
-            >
-              Get an ABM Attack Plan
-            </a>
-          </div>
-        </div>
-      </header>
 
       {/* HERO SECTION — light canvas */}
       <section className="relative px-6 pb-20 pt-20">
@@ -187,7 +124,7 @@ export default function Home() {
               Engineer Your Growth
             </a>
             <a
-              href="#services"
+              href="#capabilities"
               className="w-full rounded-xl border border-slate-200 bg-white/80 px-8 py-4 text-center font-bold text-ssl-bg transition-all hover:bg-white sm:w-auto"
             >
               Explore Core Capabilities
@@ -199,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* THE TRUTH METRICS STRIP — dark anchor banner */}
-      <section className="px-6 py-12" id="philosophy">
+      <section className="px-6 py-12" id="metrics">
         <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="p-4">
@@ -226,7 +163,7 @@ export default function Home() {
       </section>
 
       {/* CORE SERVICES MATRIX — dark anchor cards on light canvas */}
-      <section className="mx-auto max-w-7xl px-6 py-20" id="services">
+      <section className="mx-auto max-w-7xl px-6 py-20" id="capabilities">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-ssl-bg md:text-5xl">
             Our Core <span className="text-gold-contrast">Capabilities</span>
@@ -280,7 +217,7 @@ export default function Home() {
       {/* CALL TO ACTION / LEAD CAPTURE FORM */}
       <section className="border-t border-slate-200/60 px-6 py-20" id="contact">
         <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-12 pb-4 pt-2 md:grid-cols-2">
-          <div>
+          <div id="about">
             <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
               Ready to Establish <br />
               <span className="text-gold-contrast">Market Command?</span>
@@ -355,44 +292,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER — deep Abyss Blue anchor */}
-      <footer className="footer-dark border-t border-ssl-gold/20 px-6 py-12 text-center text-xs text-slate-400">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="flex flex-col items-center gap-3 sm:items-start">
-            <a
-              href="/"
-              className="flex shrink-0 items-center"
-              aria-label="Signal Strait Labs home"
-            >
-              <BrandLogo className="h-10 w-auto sm:h-11" />
-            </a>
-            <p>
-              © {new Date().getFullYear()} Signal Strait Labs. All rights
-              reserved.{" "}
-              <span className="text-ssl-gold">System Live.</span>
-            </p>
-          </div>
-          <div className="flex space-x-6">
-            <a
-              href="https://linkedin.com/company/signal-strait-labs"
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-300 transition-colors hover:text-ssl-gold"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://web.facebook.com/profile.php?id=61589782545004"
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-300 transition-colors hover:text-ssl-gold"
-            >
-              Facebook
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
