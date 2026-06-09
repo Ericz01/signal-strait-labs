@@ -89,11 +89,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}>
-        <div className="min-h-screen luxury-bg-gradient text-ssl-bg selection:bg-ssl-blue/20">
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}
+      >
+        <div className="flex min-h-screen flex-col luxury-bg-gradient selection:bg-ssl-blue/20">
           <Header />
-          {children}
+          <main className="flex-grow">{children}</main>
           <Footer />
         </div>
       </body>
