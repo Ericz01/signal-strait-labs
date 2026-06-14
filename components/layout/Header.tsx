@@ -91,7 +91,7 @@ export function Header() {
                 alt="Signal Strait Labs"
                 width={28}
                 height={28}
-                className="object-contain transition-all duration-700 ease-out group-hover:rotate-[15deg] group-hover:scale-110"
+                className="w-auto object-contain transition-all duration-700 ease-out group-hover:rotate-[15deg] group-hover:scale-110"
                 priority
               />
             </div>
