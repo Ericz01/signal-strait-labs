@@ -1,3 +1,5 @@
+import Hero from '@/components/Hero';
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -93,47 +95,7 @@ export default function Home() {
         }}
       />
 
-      {/* HERO SECTION — light canvas */}
-      <section className="relative px-6 pb-20 pt-20">
-        <div className="relative z-10 mx-auto max-w-5xl text-center">
-          <div className="glass-card-dark mb-8 inline-flex items-center gap-3 rounded-2xl px-5 py-3 md:px-6 md:py-4">
-            <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-ssl-gold" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-white md:text-sm">
-              Digital Transformation &{" "}
-              <span className="text-ssl-gold">Growth Engineering</span>
-            </span>
-          </div>
-
-          <h1 className="mb-8 text-5xl font-extrabold leading-[1.1] tracking-tight text-ssl-bg md:text-7xl">
-            Force a Clear Market Signal Through <br />
-            <span className="text-gold-contrast">Digital Chaos.</span>
-          </h1>
-
-          <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-slate-600 md:text-xl">
-            We partner with fast-scaling African and global organizations to treat
-            corporate growth as an interconnected, mathematical system. No vague
-            vanity metrics. Just raw pipeline value, conversion velocity, and
-            revenue.
-          </p>
-
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
-              href="#contact"
-              className="w-full rounded-xl border border-ssl-blue/20 bg-ssl-blue px-8 py-4 text-center font-bold text-white shadow-lg shadow-ssl-blue/20 transition-all hover:bg-ssl-blue/90 sm:w-auto"
-            >
-              Engineer Your Growth
-            </a>
-            <a
-              href="#capabilities"
-              className="w-full rounded-xl border border-slate-200 bg-white/80 px-8 py-4 text-center font-bold text-ssl-bg transition-all hover:bg-white sm:w-auto"
-            >
-              Explore Core Capabilities
-            </a>
-          </div>
-        </div>
-
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ssl-blue/5 blur-[120px]" />
-      </section>
+      <Hero />
 
       {/* THE TRUTH METRICS STRIP — dark anchor banner */}
       <section className="px-6 py-12" id="metrics">
