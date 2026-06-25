@@ -92,6 +92,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}
+        suppressHydrationWarning={true}
       >
         <div className="flex min-h-screen flex-col luxury-bg-gradient selection:bg-ssl-blue/20">
           <Header />
