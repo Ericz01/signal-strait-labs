@@ -172,6 +172,27 @@
     flex-shrink: 0; margin-top: 2px; letter-spacing: 0.03em; text-transform: uppercase;
   }
 
+  /* ─── Track badges (MVP vs Post-MVP) ─── */
+  .track-tag {
+    font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0;
+  }
+  .track-tag.mvp    { background: rgba(197,160,89,0.16); color: var(--gold); border: 1px solid rgba(197,160,89,0.3); }
+  .track-tag.growth { background: rgba(139,92,246,0.14); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.28); }
+
+  .phase.growth { border-color: rgba(139,92,246,0.18); }
+  .phase.growth:hover { border-color: rgba(139,92,246,0.35); }
+  .phase.growth .phase-header { background: linear-gradient(135deg, #0a0a1f 0%, #0e0c26 100%); }
+  .phase.growth .phase-header:hover { background: linear-gradient(135deg, #0e0c26 0%, #120f30 100%); }
+  .phase.growth .phase-badge { border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.1); color: #c4b5fd; }
+  .phase.growth .phase-context { background: rgba(139,92,246,0.05); border-left-color: #6d28d9; }
+
+  .mvp-divider {
+    display: flex; align-items: center; gap: 12px; margin: 22px 0 12px; color: var(--text-3);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+  }
+  .mvp-divider::before, .mvp-divider::after { content: ''; flex: 1; height: 1px; background: rgba(139,92,246,0.25); }
+
   /* ─── Empty state ─── */
   .empty-phase { padding: 14px 18px; font-size: 12px; color: var(--text-3); text-align: center; font-style: italic; }
 
@@ -198,7 +219,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="progress-big" id="hdr-count">0<span>/137</span></div>
+      <div class="progress-big" id="hdr-count">0<span>/138</span></div>
       <div class="progress-pct" id="hdr-pct">0% complete</div>
       <div id="sync-status" style="font-size:11px;margin-top:4px;color:#7aacff;text-align:right;letter-spacing:0.02em">↓ Loading…</div>
     </div>
@@ -223,7 +244,7 @@
   <div id="phases-list"></div>
 
   <div class="tracker-footer">
-    Click any task to mark complete · Progress saves in localStorage · <a href="https://signalstraitlabs.com" target="_blank">signalstraitlabs.com</a>
+    Click any task to mark complete · Progress syncs to the cloud · <a href="https://signalstraitlabs.com" target="_blank">signalstraitlabs.com</a>
   </div>
 </div>
 
@@ -246,7 +267,7 @@ const TAG_STYLES = {
 };
 
 const PHASES = [
-  { id:'P0', label:'P0', title:'Foundation Cleanup', day:'Day 1 · ~2 hrs',
+  { id:'P0', label:'P0', title:'Foundation Cleanup', day:'Day 1 · ~2 hrs', track:'mvp',
     context:'Delete placeholder files, configure brand tokens, set up fonts, icons, and environment variables before writing a single component.',
     tasks:[
       {id:'t001',text:'Delete default Next.js placeholder assets from /public (file.svg, globe.svg, next.svg, vercel.svg, window.svg)',tag:'Cleanup'},
@@ -262,7 +283,7 @@ const PHASES = [
       {id:'t011',text:'Review and update CLAUDE.md / AGENTS.md with full current project context for AI agent sessions',tag:'Docs'},
     ]
   },
-  { id:'P1', label:'P1', title:'Global Layout System', day:'Day 1–2 · ~4 hrs',
+  { id:'P1', label:'P1', title:'Global Layout System', day:'Day 1–2 · ~4 hrs', track:'mvp',
     context:'Build the persistent shell — sticky header navigation and multi-column footer — that wraps every page in the application.',
     tasks:[
       {id:'t012',text:'Update app/layout.tsx with correct lang="en", charset, and viewport meta tags',tag:'Dev'},
@@ -282,7 +303,7 @@ const PHASES = [
       {id:'t026',text:'Import Header and Footer into app/layout.tsx — verify no hydration warnings in console',tag:'Dev'},
     ]
   },
-  { id:'P2', label:'P2', title:'Design System & UI Components', day:'Day 2–3 · ~4 hrs',
+  { id:'P2', label:'P2', title:'Design System & UI Components', day:'Day 2–3 · ~4 hrs', track:'mvp',
     context:'A reusable component library ensures every page looks like it belongs to the same product. Build these once, use everywhere.',
     tasks:[
       {id:'t027',text:'Create components/ui/ folder with a barrel index file for clean named imports',tag:'Dev'},
@@ -298,8 +319,8 @@ const PHASES = [
       {id:'t037',text:'Document spacing and typography scale with inline comments in globals.css',tag:'Docs'},
     ]
   },
-  { id:'P3', label:'P3', title:'Homepage — Full Redesign', day:'Day 3–4 · ~6 hrs',
-    context:'Build each homepage section as a standalone, independently animated module. Aesthetic direction: Apple polish + Stripe clarity + Palantir systems intelligence.',
+  { id:'P3', label:'P3', title:'Homepage — Full Redesign', day:'Day 3–4 · ~5 hrs', track:'mvp',
+    context:'Build each homepage section as a standalone, independently animated module. Aesthetic direction: Apple polish + Stripe clarity + Palantir systems intelligence. (Insights teaser moved to the Post-MVP blog phase below — it has nothing to pull from until that system exists.)',
     tasks:[
       {id:'t038',text:'Hero section: Full-viewport, powerful headline, subheadline, two CTAs (Book a Call + Explore Services)',tag:'Design'},
       {id:'t039',text:'Hero: Animated dark background — subtle CSS grid pattern or slow-moving gradient mesh',tag:'Design'},
@@ -310,14 +331,13 @@ const PHASES = [
       {id:'t044',text:'"Why SSL" section: 3–4 differentiator pillars with icons (Truth Metrics, Technical Depth, Full-Stack)',tag:'Content'},
       {id:'t045',text:'Process / Methodology section: numbered steps showing how an SSL engagement works',tag:'Content'},
       {id:'t046',text:'Social proof section: Client logos row or 2–3 testimonial cards (placeholder-ready if no real clients yet)',tag:'Design'},
-      {id:'t047',text:'Insights teaser section: 3 latest article cards pulled dynamically from /content/insights/',tag:'Dev'},
       {id:'t048',text:'Bottom CTA banner section: Bold dark-bg block with headline and "Start a Project" button',tag:'Design'},
       {id:'t049',text:'Apply AnimateOnScroll to all homepage sections — stagger delays within section grids',tag:'Design'},
       {id:'t050',text:'Mobile audit on homepage — test layout at 375px, 768px, 1280px, 1440px viewports',tag:'QA'},
     ]
   },
-  { id:'P4', label:'P4', title:'Multi-Page Architecture', day:'Day 4–6 · ~8 hrs',
-    context:'Expand from a single landing page to a full routed application. Scaffold every page shell before adding content.',
+  { id:'P4', label:'P4', title:'MVP Core Pages', day:'Day 4–5 · ~6 hrs', track:'mvp',
+    context:'Ship only the pages required to look like a real company and convert a visitor into a lead: services, about, contact, and required legal/utility pages. The blog/insights system is deliberately deferred — it doesn\u2019t block a working, professional site and is slower to do well.',
     tasks:[
       {id:'t051',text:'Create app/services/page.tsx — services overview listing page with all 6 service cards',tag:'Dev'},
       {id:'t052',text:'Create app/services/[slug]/page.tsx — dynamic service detail page template',tag:'Dev'},
@@ -328,10 +348,6 @@ const PHASES = [
       {id:'t057',text:'Create app/about/page.tsx — company story, mission, and founding context (Nairobi, 2022)',tag:'Dev'},
       {id:'t058',text:'About: Team section — placeholder cards with role titles even if no photos yet',tag:'Design'},
       {id:'t059',text:'About: Location section with static map image or Mapbox embed (Thome, Nairobi)',tag:'Dev'},
-      {id:'t060',text:'Create app/insights/page.tsx — insights/blog listing with article card grid',tag:'Dev'},
-      {id:'t061',text:'Create app/insights/[slug]/page.tsx — full article template with rich long-form typography',tag:'Dev'},
-      {id:'t062',text:'Create /content/insights/ folder and set up MDX or JSON-based article data structure',tag:'Dev'},
-      {id:'t063',text:'Write 3 seed insight articles: (1) AEO/GEO guide, (2) Digital transformation in Africa, (3) RevOps for scaling businesses',tag:'Content'},
       {id:'t064',text:'Create app/contact/page.tsx with form + company contact details',tag:'Dev'},
       {id:'t065',text:'Contact form fields: name, email, company, service interest (select), message, budget range',tag:'Design'},
       {id:'t066',text:'Contact page: Display phone (+254712895903), email, LinkedIn link, and Nairobi address',tag:'Content'},
@@ -341,8 +357,8 @@ const PHASES = [
       {id:'t070',text:'Create app/loading.tsx — skeleton screens for page transitions on slower connections',tag:'Dev'},
     ]
   },
-  { id:'P5', label:'P5', title:'Functionality & Integrations', day:'Day 6–7 · ~5 hrs',
-    context:'Wire up the backend API routes, email delivery, analytics, and interactive tools that turn traffic into leads.',
+  { id:'P5', label:'P5', title:'MVP Functionality & Integrations', day:'Day 5–6 · ~4 hrs', track:'mvp',
+    context:'Wire up only what\u2019s needed to safely capture and act on a lead: a validated, rate-limited API route, transactional email, basic analytics, a booking CTA, and cookie consent. The ROI/Growth Estimator widget is a strong differentiator but not required to launch — it moves to the growth backlog.',
     tasks:[
       {id:'t071',text:'Create app/api/leads/route.ts — secure POST endpoint to receive and process form submissions',tag:'Dev'},
       {id:'t072',text:'Add server-side input validation and sanitization before any processing in the leads route',tag:'Dev'},
@@ -352,13 +368,12 @@ const PHASES = [
       {id:'t076',text:'Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead',tag:'Dev'},
       {id:'t077',text:'Add success/error toast notification UI on the contact form (no page reload)',tag:'Design'},
       {id:'t078',text:'Integrate Cloudflare Web Analytics — add lightweight script to app/layout.tsx',tag:'Config'},
-      {id:'t079',text:'Build interactive ROI / Growth Estimator widget — user inputs metrics, widget shows projected gains',tag:'Dev'},
       {id:'t080',text:'"Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page',tag:'Dev'},
       {id:'t081',text:'Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic',tag:'Dev'},
     ]
   },
-  { id:'P6', label:'P6', title:'SEO · AEO · GEO Engineering', day:'Day 7–8 · ~5 hrs',
-    context:'Optimize for Google (SEO), voice and AI answer boxes (AEO), and generative AI citation engines like Perplexity and ChatGPT (GEO).',
+  { id:'P6', label:'P6', title:'MVP SEO · AEO · GEO Essentials', day:'Day 6–7 · ~4 hrs', track:'mvp',
+    context:'Cover the slice of SEO/AEO/GEO work that delivers most of the value fastest: correct metadata, canonical URLs, core structured data, sitemap/robots, social previews, and an llms.txt file for generative engines. Advanced schema, heading rewrites, and dynamic OG images move to the growth backlog so they don\u2019t delay launch.',
     tasks:[
       {id:'t082',text:'Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL)',tag:'SEO'},
       {id:'t083',text:'Add generateMetadata() to every page — unique title under 60 chars and description under 155 chars',tag:'SEO'},
@@ -367,35 +382,29 @@ const PHASES = [
       {id:'t086',text:'Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles)',tag:'SEO'},
       {id:'t087',text:'Create WebPage JSON-LD for the homepage',tag:'SEO'},
       {id:'t088',text:'Create FAQPage JSON-LD schema for each service page — pulling from the FAQ sections already written',tag:'AEO'},
-      {id:'t089',text:'Create Article JSON-LD for each insights post (author, datePublished, dateModified, wordCount)',tag:'SEO'},
-      {id:'t090',text:'Create LocalBusiness JSON-LD schema for Google Maps / local search visibility',tag:'SEO'},
-      {id:'t091',text:'Rewrite all service page h2/h3 headings in question-first format ("What is X?" → answer pattern)',tag:'AEO'},
-      {id:'t092',text:'Add anchor IDs to all major content sections for direct-link citations (#what-is-revops, etc.)',tag:'AEO'},
       {id:'t093',text:'Create public/llms.txt — structured markdown file with company overview, services, and contact for LLM crawlers',tag:'GEO'},
       {id:'t094',text:'llms.txt: Include entity disambiguation section (SSL = Signal Strait Labs, not SSL the protocol)',tag:'GEO'},
-      {id:'t095',text:'Create app/sitemap.ts — dynamic generator that covers all static + dynamic routes and insight slugs',tag:'SEO'},
+      {id:'t095',text:'Create app/sitemap.ts — dynamic generator that covers all static + dynamic routes',tag:'SEO'},
       {id:'t096',text:'Create public/robots.txt — allow major search bots, selectively manage aggressive AI crawlers',tag:'SEO'},
       {id:'t097',text:'Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url)',tag:'SEO'},
       {id:'t098',text:'Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image)',tag:'SEO'},
-      {id:'t099',text:'Create app/opengraph-image.tsx — dynamic branded OG image generation for social sharing',tag:'Design'},
       {id:'t100',text:'Audit that every page has at least one internal link to another page (crawlability requirement)',tag:'SEO'},
     ]
   },
-  { id:'P7', label:'P7', title:'Assets, Media & Content', day:'Day 8–9 · ~4 hrs',
-    context:'Real imagery and polished copy are what separate a developer scaffold from a brand clients trust.',
+  { id:'P7', label:'P7', title:'MVP Assets & Content', day:'Day 7 · ~3 hrs', track:'mvp',
+    context:'Real imagery, properly compressed and sized, plus a final copywriting pass on every page that actually exists at MVP. One static branded social card covers OG image needs for launch — a dynamic per-page generator is a post-launch upgrade. SVGO cleanup is a batch job that can happen any time without blocking launch.',
     tasks:[
       {id:'t101',text:'Source or commission hero imagery — abstract/tech/data aesthetic, avoid generic stock photography',tag:'Assets'},
       {id:'t102',text:'Create or source SVG icons for all 6 service categories (consistent style and weight)',tag:'Assets'},
       {id:'t103',text:'Run all images through WebP compression pipeline — target under 100KB per image',tag:'Assets'},
       {id:'t104',text:'Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority',tag:'Dev'},
       {id:'t105',text:'Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview',tag:'Assets'},
-      {id:'t106',text:'Run all SVG files through SVGO optimizer to strip unnecessary metadata and path bloat',tag:'Assets'},
-      {id:'t107',text:'Final copywriting pass across all pages — tone: authoritative, direct, precise (not salesy or vague)',tag:'Content'},
+      {id:'t107',text:'Final copywriting pass across all MVP pages — tone: authoritative, direct, precise (not salesy or vague)',tag:'Content'},
       {id:'t108',text:'Add descriptive alt text to every image across all pages (both accessibility and SEO requirement)',tag:'QA'},
     ]
   },
-  { id:'P8', label:'P8', title:'Performance & Code Quality', day:'Day 9 · ~3 hrs',
-    context:'African mobile networks demand exceptional Core Web Vitals discipline. Optimize before going live, not after.',
+  { id:'P8', label:'P8', title:'Performance, QA & Accessibility', day:'Day 8 · ~3 hrs', track:'mvp',
+    context:'African mobile networks demand exceptional Core Web Vitals discipline. This gate applies whether you\u2019re shipping an MVP or a v2 — never skip it before real users arrive.',
     tasks:[
       {id:'t109',text:'Run npx tsc --noEmit — resolve all TypeScript errors before any build',tag:'Dev'},
       {id:'t110',text:'Run ESLint — fix all warnings, especially accessibility-related lint rules',tag:'Dev'},
@@ -412,20 +421,59 @@ const PHASES = [
       {id:'t121',text:'Color contrast audit — all body text meets WCAG AA minimum 4.5:1 ratio',tag:'QA'},
     ]
   },
-  { id:'P9', label:'P9', title:'Launch & Distribution', day:'Day 10 · ~3 hrs',
-    context:'Go live, get indexed, establish domain authority, and fill out the missing digital presence slots from the brand brief.',
+  { id:'P9', label:'P9', title:'MVP Launch', day:'Day 9 · ~3 hrs', track:'mvp',
+    context:'Since Cloudflare Pages hosting is already live, this phase is mostly verification: confirm DNS/HTTPS/security headers are correct, run final content and design QA, then submit to Search Console, Bing, and Google Business Profile. Social account setup and directory backlink submissions are valuable but non-blocking — they move to the growth backlog below.',
     tasks:[
-      {id:'t122',text:'Connect custom domain signalstraitlabs.com to Cloudflare Pages in the dashboard',tag:'Deploy'},
-      {id:'t123',text:'Configure DNS A/CNAME records and verify full propagation (may take up to 48 hrs)',tag:'Deploy'},
+      {id:'t122',text:'Verify custom domain signalstraitlabs.com is correctly connected to Cloudflare Pages in the dashboard',tag:'Deploy'},
+      {id:'t123',text:'Confirm DNS A/CNAME records are set and fully propagated',tag:'Deploy'},
       {id:'t124',text:'Confirm HTTPS certificate is active and set to auto-renew',tag:'Deploy'},
       {id:'t125',text:'Configure Cloudflare security headers: X-Frame-Options, X-Content-Type-Options, HSTS, CSP',tag:'Deploy'},
       {id:'t126',text:'Add all production environment variables (RESEND_API_KEY, etc.) to Cloudflare Pages dashboard',tag:'Deploy'},
       {id:'t127',text:'Set deployment branch rules: main → production, dev/staging → preview URLs',tag:'Deploy'},
-      {id:'t128',text:'Final content QA — proofread every single page for typos, broken links, and missing images',tag:'QA'},
+      {id:'t128',text:'Final content QA — proofread every single MVP page for typos, broken links, and missing images',tag:'QA'},
       {id:'t129',text:'Final design QA — visual check at 1440px desktop and 375px mobile for every page',tag:'QA'},
       {id:'t130',text:'Submit sitemap to Google Search Console (signalstraitlabs.com/sitemap.xml)',tag:'SEO'},
       {id:'t131',text:'Submit sitemap to Bing Webmaster Tools',tag:'SEO'},
       {id:'t132',text:'Set up and fully complete Google Business Profile (currently missing from brand brief)',tag:'SEO'},
+      {id:'t138',text:'MVP Milestone: confirm all core pages, lead capture, essential SEO, and Core Web Vitals are live — mark ready for soft launch',tag:'QA'},
+    ]
+  },
+  { id:'P10', label:'G1', title:'Blog & Insights System', day:'Post-MVP · ~5 hrs', track:'growth',
+    dividerBefore: '🚀  MVP ends above this line — everything below is Post-MVP growth backlog',
+    context:'A content/blog system is a compounding SEO and GEO asset, but it\u2019s slower to produce well and isn\u2019t required for the site to look premium or convert leads on day one. Build it once the MVP is live.',
+    tasks:[
+      {id:'t047',text:'Insights teaser section on homepage: 3 latest article cards pulled dynamically from /content/insights/',tag:'Dev'},
+      {id:'t060',text:'Create app/insights/page.tsx — insights/blog listing with article card grid',tag:'Dev'},
+      {id:'t061',text:'Create app/insights/[slug]/page.tsx — full article template with rich long-form typography',tag:'Dev'},
+      {id:'t062',text:'Create /content/insights/ folder and set up MDX or JSON-based article data structure',tag:'Dev'},
+      {id:'t063',text:'Write 3 seed insight articles: (1) AEO/GEO guide, (2) Digital transformation in Africa, (3) RevOps for scaling businesses',tag:'Content'},
+    ]
+  },
+  { id:'P11', label:'G2', title:'Advanced SEO · AEO · GEO Layer', day:'Post-MVP · ~4 hrs', track:'growth',
+    context:'Deepen structured-data and answer-engine positioning once the MVP has real traffic and content to optimize against.',
+    tasks:[
+      {id:'t089',text:'Create Article JSON-LD for each insights post (author, datePublished, dateModified, wordCount)',tag:'SEO'},
+      {id:'t090',text:'Create LocalBusiness JSON-LD schema for Google Maps / local search visibility',tag:'SEO'},
+      {id:'t091',text:'Rewrite all service page h2/h3 headings in question-first format ("What is X?" → answer pattern)',tag:'AEO'},
+      {id:'t092',text:'Add anchor IDs to all major content sections for direct-link citations (#what-is-revops, etc.)',tag:'AEO'},
+      {id:'t099',text:'Create app/opengraph-image.tsx — dynamic branded OG image generation for social sharing',tag:'Design'},
+    ]
+  },
+  { id:'P12', label:'G3', title:'Advanced Functionality & Conversion Tools', day:'Post-MVP · ~2 hrs', track:'growth',
+    context:'Interactive tools are strong differentiators worth building — just not on the critical path to a functioning, lead-capturing MVP.',
+    tasks:[
+      {id:'t079',text:'Build interactive ROI / Growth Estimator widget — user inputs metrics, widget shows projected gains',tag:'Dev'},
+    ]
+  },
+  { id:'P13', label:'G4', title:'Content & Asset Polish — Round 2', day:'Post-MVP · ~1 hr', track:'growth',
+    context:'Batch cleanup work that improves quality without being urgent enough to hold up launch.',
+    tasks:[
+      {id:'t106',text:'Run all SVG files through SVGO optimizer to strip unnecessary metadata and path bloat',tag:'Assets'},
+    ]
+  },
+  { id:'P14', label:'G5', title:'Social Presence & Directory Distribution', day:'Post-MVP · Ongoing', track:'growth',
+    context:'Off-site presence and backlink authority are valuable for long-term SEO and brand consistency, but they don\u2019t affect whether the website itself is done.',
+    tasks:[
       {id:'t133',text:'Update LinkedIn company page description, website link, and all service tags',tag:'Social'},
       {id:'t134',text:'Create Instagram business account and link to signalstraitlabs.com',tag:'Social'},
       {id:'t135',text:'Create X/Twitter account and link to website',tag:'Social'},
@@ -528,11 +576,20 @@ function renderPhases() {
     });
     if (visible.length === 0 && filter !== 'all') return;
 
+    const isGrowth = phase.track === 'growth';
+
+    if (phase.dividerBefore) {
+      const div = document.createElement('div');
+      div.className = 'mvp-divider';
+      div.textContent = phase.dividerBefore;
+      container.appendChild(div);
+    }
+
     const phaseEl = document.createElement('div');
-    phaseEl.className = 'phase' + (allDone ? ' all-done' : '');
+    phaseEl.className = 'phase' + (allDone ? ' all-done' : '') + (isGrowth ? ' growth' : '');
     phaseEl.id = 'phase-' + phase.id;
 
-    const fillColor = allDone ? '#22c55e' : pPct > 0 ? '#1a59cc' : 'rgba(255,255,255,0.1)';
+    const fillColor = allDone ? '#22c55e' : pPct > 0 ? (isGrowth ? '#8b5cf6' : '#1a59cc') : 'rgba(255,255,255,0.1)';
 
     phaseEl.innerHTML = `
       <div class="phase-header" onclick="togglePhase('${phase.id}')">
@@ -545,6 +602,7 @@ function renderPhases() {
         <div class="phase-info">
           <div class="phase-title-row">
             <span class="phase-title">${phase.label}: ${phase.title}</span>
+            <span class="track-tag ${isGrowth ? 'growth' : 'mvp'}">${isGrowth ? 'Post-MVP' : 'MVP'}</span>
             <span class="phase-day">${phase.day}</span>
           </div>
           <div class="phase-progress-row">
