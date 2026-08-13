@@ -1,7 +1,9 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>((
   { className, ...props },
@@ -10,8 +12,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>((
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-slate-800 bg-zinc-950 transition-all duration-300 ease-out",
-      "hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 hover:scale-[1.015] hover:-translate-y-0.5",
+      "rounded-xl border border-ssl-gold/15 bg-ssl-bg transition-all duration-300 ease-out",
+      "hover:border-ssl-gold/40 hover:shadow-lg hover:shadow-ssl-gold/5 hover:scale-[1.015] hover:-translate-y-0.5 overflow-hidden",
       className
     )}
     {...props}
@@ -19,7 +21,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>((
 ));
 Card.displayName = "Card";
 
-interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
 
 const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>((
   { className, ...props },
@@ -33,7 +37,9 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>((
 ));
 CardHeader.displayName = "CardHeader";
 
-interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  children?: React.ReactNode;
+}
 
 const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>((
   { className, ...props },
@@ -41,13 +47,15 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>((
 ) => (
   <h3
     ref={ref}
-    className={cn("text-2xl font-semibold leading-none tracking-tight text-slate-100", className)}
+    className={cn("text-2xl font-semibold leading-none tracking-tight text-white", className)}
     {...props}
   />
 ));
 CardTitle.displayName = "CardTitle";
 
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  children?: React.ReactNode;
+}
 
 const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>((
   { className, ...props },
@@ -61,7 +69,9 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionPr
 ));
 CardDescription.displayName = "CardDescription";
 
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
 
 const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>((
   { className, ...props },
@@ -75,7 +85,9 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>((
 ));
 CardContent.displayName = "CardContent";
 
-interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+}
 
 const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>((
   { className, ...props },

@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import Services from '@/components/Services';
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -55,36 +56,6 @@ const organizationJsonLd = {
   },
 } as const;
 
-function ServiceCard({
-  index,
-  title,
-  description,
-  accent,
-}: {
-  index: string;
-  title: string;
-  description: string;
-  accent: "blue" | "gold";
-}) {
-  const isBlue = accent === "blue";
-
-  return (
-    <div className="glass-card-dark rounded-2xl p-8">
-      <div
-        className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl border font-bold transition-all ${
-          isBlue
-            ? "border-ssl-blue/30 bg-ssl-blue/15 text-ssl-blue group-hover:bg-ssl-blue"
-            : "border-ssl-gold/30 bg-ssl-gold/15 text-ssl-gold"
-        }`}
-      >
-        {index}
-      </div>
-      <h3 className="mb-3 text-xl font-bold text-white">{title}</h3>
-      <p className="text-sm leading-relaxed text-slate-300">{description}</p>
-    </div>
-  );
-}
-
 export default function Home() {
   return (
     <>
@@ -98,14 +69,14 @@ export default function Home() {
       <Hero />
 
       {/* THE TRUTH METRICS STRIP — dark anchor banner */}
-      <section className="px-6 py-12" id="metrics">
+      <section className="bg-ssl-light-bg px-6 py-12" id="metrics">
         <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="p-4">
-              <div className="mb-1 text-sm uppercase tracking-widest text-slate-400">
+              <div className="mb-1 text-sm uppercase tracking-widest text-slate-300">
                 We Replace
               </div>
-              <div className="text-xl font-bold text-slate-400 line-through decoration-red-400/70">
+              <div className="text-xl font-bold text-slate-300 line-through decoration-red-400/70">
                 Vague Clicks & Impressions
               </div>
             </div>
@@ -123,68 +94,17 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CORE SERVICES MATRIX — dark anchor cards on light canvas */}
-      <section className="mx-auto max-w-7xl px-6 py-20" id="capabilities">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-ssl-bg md:text-5xl">
-            Our Core <span className="text-gold-contrast">Capabilities</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-slate-600">
-            Engineered software systems and data strategies built to optimize
-            customer acquisition and operational efficiency.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 pb-6 pt-2 md:grid-cols-2 lg:grid-cols-3">
-          <ServiceCard
-            index="01"
-            accent="blue"
-            title="Technical Infrastructure & Web Dev"
-            description="Architecting lightning-fast, serverless, and edge-native corporate applications (Next.js, Tailwind, Jamstack) optimized for zero latency on African mobile networks. Integrations with Paystack, Flutterwave, and custom CRMs."
-          />
-          <ServiceCard
-            index="02"
-            accent="gold"
-            title="Algorithmic Search (SEO/AEO/GEO)"
-            description="Structural and semantic code optimization targeted beyond traditional engines. We position your enterprise for explicit direct citations inside modern generative AI search models like Perplexity, Gemini, and ChatGPT."
-          />
-          <ServiceCard
-            index="03"
-            accent="blue"
-            title="Data Systems & Automation"
-            description="We design robust data architectures, custom robust API frameworks, and advanced low-code/no-code automated pipelines that link siloed internal software tools, completely eliminating manual data overhead."
-          />
-          <ServiceCard
-            index="04"
-            accent="gold"
-            title="Revenue Operations (RevOps)"
-            description="Custom CRM architecture pipelines (HubSpot, Zoho, Salesforce), deep multi-touch attribution dashboards, and algorithmic lead-scoring setups engineered to clear structural friction points inside your sales funnel."
-          />
-          <ServiceCard
-            index="05"
-            accent="blue"
-            title="Performance Marketing & ABM"
-            description="Full-funnel demand operations, data-intelligent programmatic media acquisitions, and hyper-focused B2B Account-Based Marketing (ABM) attack sequences designed to win high-value accounts."
-          />
-          <ServiceCard
-            index="06"
-            accent="gold"
-            title="Corporate PR & Brand Authority"
-            description="Strategic, high-level media alignments, crisis framework deployments, and highly structured technical brand architectures engineered to command long-term institutional authority."
-          />
-        </div>
-      </section>
+      <Services />
 
       {/* CALL TO ACTION / LEAD CAPTURE FORM */}
-      <section className="border-t border-slate-200/60 px-6 py-20" id="contact">
+      <section className="bg-ssl-light-bg border-t border-slate-200/60 px-6 py-20" id="contact">
         <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-12 pb-4 pt-2 md:grid-cols-2">
           <div id="about">
             <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
               Ready to Establish <br />
               <span className="text-gold-contrast">Market Command?</span>
             </h2>
-            <p className="mb-6 text-sm leading-relaxed text-slate-600">
+            <p className="mb-6 text-sm leading-relaxed text-slate-700">
               Contact our engineering lab directly to analyze your current tech
               stack bottlenecks or request a targeted market attack
               infrastructure plan.
@@ -212,7 +132,7 @@ export default function Home() {
             </h3>
             <form className="space-y-5">
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Corporate Identity / Name
                 </label>
                 <input
@@ -223,7 +143,7 @@ export default function Home() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Secure Email Endpoint
                 </label>
                 <input
@@ -234,7 +154,7 @@ export default function Home() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Primary Engineering Challenge
                 </label>
                 <textarea

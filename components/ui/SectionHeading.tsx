@@ -8,10 +8,11 @@ interface SectionHeadingProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description?: string;
   align?: 'left' | 'center' | 'right';
+  variant?: 'light' | 'dark';
 }
 
 const SectionHeading = React.forwardRef<HTMLDivElement, SectionHeadingProps>(
-  ({ overline, title, description, align = 'left', className, ...props }, ref) => {
+  ({ overline, title, description, align = 'left', variant = 'dark', className, ...props }, ref) => {
     const alignmentClasses = {
       left: 'text-left items-start',
       center: 'text-center items-center',
@@ -33,13 +34,17 @@ const SectionHeading = React.forwardRef<HTMLDivElement, SectionHeadingProps>(
             {overline}
           </p>
         )}
-        <h2 className="text-3xl font-bold tracking-tight text-slate-100 sm:text-4xl">
+        <h2 className={cn(
+          "text-3xl font-bold tracking-tight sm:text-4xl",
+          variant === 'dark' ? 'text-white' : 'text-ssl-bg'
+        )}>
           {title}
         </h2>
         {description && (
           <p
             className={cn(
-              'text-base text-slate-400',
+              "text-base",
+              variant === 'dark' ? 'text-slate-300' : 'text-slate-600',
               align === 'center' && 'max-w-2xl mx-auto'
             )}
           >

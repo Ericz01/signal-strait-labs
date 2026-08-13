@@ -98,16 +98,9 @@
 }
 
 /* Premium light-canvas ambient page background */
-.luxury-bg-gradient {
-  background:
-    radial-gradient(
-      100% 100% at 50% 0%,
-      rgba(26, 89, 204, 0.04) 0%,
-      rgba(197, 160, 89, 0.02) 50%,
-      rgba(251, 251, 253, 0) 100%
-    ),
-    #fbfbfd;
-}
+  .luxury-bg-gradient {
+    background: linear-gradient(135deg, #01081b 0%, #051336 50%, #1c1a14 85%, #423721 100%);
+  }
 
 /* High-end light glassmorphism for card layouts */
 .glass-card-light {
