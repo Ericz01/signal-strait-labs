@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import WhySSL from '@/components/WhySSL';
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -95,6 +96,7 @@ export default function Home() {
         </div>
       </section>
       <Services />
+      <WhySSL />
 
       {/* CALL TO ACTION / LEAD CAPTURE FORM */}
       <section className="bg-ssl-light-bg border-t border-slate-200/60 px-6 py-20" id="contact">
