@@ -1,5 +1,7 @@
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
+import Process from '@/components/Process';
+import Testimonials from '@/components/Testimonials';
 import WhySSL from '@/components/WhySSL';
 
 const organizationJsonLd = {
@@ -96,6 +98,8 @@ export default function Home() {
         </div>
       </section>
       <Services />
+      <Process />
+      <Testimonials />
       <WhySSL />
 
       {/* CALL TO ACTION / LEAD CAPTURE FORM */}
