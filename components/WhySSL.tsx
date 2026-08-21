@@ -7,7 +7,7 @@ import { differentiators } from '@/lib/differentiators-data';
 
 export default function WhySSL() {
   return (
-    <section className="mx-auto max-w-full px-6 py-20 bg-ssl-light-bg" id="why-ssl">
+    <section className="mx-auto max-w-full px-4 sm:px-6 py-12 md:py-20 bg-ssl-light-bg" id="why-ssl">
       <AnimateOnScroll variant="slide-up">
         <SectionHeading
           overline="WHY PARTNER WITH SSL"

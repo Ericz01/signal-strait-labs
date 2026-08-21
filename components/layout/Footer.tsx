@@ -37,7 +37,7 @@ export function Footer() {
 
               {/* Facebook - Live Link */}
               <a
-                href="https://web.facebook.com/profile.php?id=61589782545004"
+                href="https://www.facebook.com/signalstraitlabs/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Signal Strait Labs Facebook Page"
@@ -78,7 +78,7 @@ export function Footer() {
 
               {/* YouTube - Placeholder */}
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@signalstraitlabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Signal Strait Labs YouTube Channel"

@@ -33,12 +33,16 @@ export default function Hero() {
               Digital Chaos.
             </span>
           </h1>
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.2s' }}>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto sm:text-xl leading-relaxed mt-6">
             We partner with fast-scaling African and global organizations to treat
             corporate growth as an interconnected, mathematical system. No vague
             vanity metrics. Just raw pipeline value, conversion velocity, and
             revenue.
           </p>
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.4s' }}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
             <Button variant="primary" size="lg">
               Book a Call

@@ -5,7 +5,7 @@ import { processSteps } from '@/lib/process-data';
 
 export default function Process() {
   return (
-    <section className="bg-ssl-light-bg px-6 py-20" id="process">
+    <section className="bg-ssl-light-bg px-4 sm:px-6 py-12 md:py-20" id="process">
       <div className="mx-auto max-w-7xl">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
@@ -14,11 +14,11 @@ export default function Process() {
             title="The SSL Engagement System"
             description="Our structured, data-first methodology designed to transform technical infrastructure into a high-performance growth engine."
             variant="light"
-            className="mb-16"
+            className="mb-12 md:mb-16"
           />
         </AnimateOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {processSteps.map((step, index) => (
             <AnimateOnScroll
               key={step.number}

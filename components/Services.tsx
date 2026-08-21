@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 
 export default function Services() {
   return (
-<section className="mx-auto max-w-full px-6 py-20 bg-ssl-light-bg" id="capabilities">
+<section className="mx-auto max-w-full px-4 sm:px-6 py-12 md:py-20 bg-ssl-light-bg" id="capabilities">
       <AnimateOnScroll variant="slide-up">
         <SectionHeading
           align="center"
