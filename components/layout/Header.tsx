@@ -5,22 +5,16 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 type NavLink = {
-  readonly href: `#${string}`;
+  readonly href: string;
   readonly label: string;
 };
 
-
-
-
-
 const NAV_LINKS: readonly NavLink[] = [
-  { href: "#services", label: "Services" },
-  { href: "#insights", label: "Insights" },
-  { href: "#about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/insights", label: "Insights" },
+  { href: "/about", label: "About" },
   { href: "#contact", label: "Contact" },
 ] as const;
-
-const SCROLL_COMPRESS_THRESHOLD = 80;
 
 function NavAnchor({
   href,
@@ -29,17 +23,31 @@ function NavAnchor({
 }: NavLink & {
   onNavigate?: () => void;
 }) {
-  return (
-    <a
-      href={href}
-      onClick={onNavigate}
-      className="group relative py-2 text-sm font-medium tracking-wide text-slate-300 transition-colors duration-300 hover:text-white"
-    >
+  const isInternal = !href.startsWith("#");
+  const className = "group relative py-2 text-sm font-medium tracking-wide text-slate-300 transition-colors duration-300 hover:text-white";
+  const content = (
+    <>
       <span className="relative z-10">{label}</span>
       <span className="absolute bottom-0 left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-transparent via-ssl-gold/80 to-transparent transition-all duration-500 group-hover:w-full" />
+    </>
+  );
+
+  if (isInternal) {
+    return (
+      <Link href={href} onClick={onNavigate} className={className}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} onClick={onNavigate} className={className}>
+      {content}
     </a>
   );
 }
+
+const SCROLL_COMPRESS_THRESHOLD = 80;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);

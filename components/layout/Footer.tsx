@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { services } from "@/lib/services-data";
 
 export function Footer() {
   return (
@@ -111,42 +112,15 @@ export function Footer() {
               Solutions
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Technical Infrastructure & Web Dev
-              </Link>
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Algorithmic Search (SEO/AEO/GEO)
-              </Link>
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Data Systems & Automation
-              </Link>
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Revenue Operations (RevOps)
-              </Link>
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Performance Marketing & ABM
-              </Link>
-              <Link
-                href="#services"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
-                Corporate PR & Brand Authority
-              </Link>
+              {services.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={service.href}
+                  className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+                >
+                  {service.title}
+                </Link>
+              ))}
             </nav>
           </div>
                     {/* Column 3: Company */}
@@ -156,32 +130,28 @@ export function Footer() {
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
               <Link
-                href="#about"
+                href="/about"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 About
               </Link>
-              <Link
-                href="#insights"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
+              <span className="text-sm text-slate-500">
                 Insights
-              </Link>
+              </span>
               <Link
                 href="#contact"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Contact
               </Link>
-              <Link
-                href="#"
-                className="group flex items-center gap-2 text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              <span
+                className="group flex items-center gap-2 text-sm text-slate-500"
               >
                 Careers
                 <span className="rounded-full border border-ssl-gold/20 bg-ssl-gold/10 px-2 py-0.5 text-[10px] font-bold text-ssl-gold">
                   Hiring
                 </span>
-              </Link>
+              </span>
             </nav>
           </div>
                     {/* Column 4: Legal */}
@@ -190,24 +160,15 @@ export function Footer() {
               Legal
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
-              <Link
-                href="#"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
+              <span className="text-sm text-slate-500">
                 Privacy Policy
-              </Link>
-              <Link
-                href="#"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
+              </span>
+              <span className="text-sm text-slate-500">
                 Terms of Service
-              </Link>
-              <Link
-                href="#"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-              >
+              </span>
+              <span className="text-sm text-slate-500">
                 Cookie Policy
-              </Link>
+              </span>
             </nav>
           </div>
 
