@@ -4,7 +4,7 @@ import Process from '@/components/Process';
 import Testimonials from '@/components/Testimonials';
 import WhySSL from '@/components/WhySSL';
 import CTABanner from '@/components/CTABanner';
-import ContactSection from '@/components/ContactSection';
+import { ContactSection } from '@/components/ContactSection';
 
 const organizationJsonLd = {
   "@context": "https://schema.org",

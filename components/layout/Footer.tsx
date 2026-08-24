@@ -139,7 +139,7 @@ export function Footer() {
                 Insights
               </span>
               <Link
-                href="#contact"
+                href="/contact"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Contact

@@ -181,6 +181,12 @@
   box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
 }
 
+.glass-input-dark option {
+  background: #01081b; /* Abyss Blue */
+  color: #ffffff;
+  padding: 10px;
+}
+
 /* Smoked bronze / dark metallic gold — high contrast on light canvas */
 .text-gold-contrast {
   background: linear-gradient(135deg, #0f172a 0%, #8a6f3e 50%, #c5a059 100%);
