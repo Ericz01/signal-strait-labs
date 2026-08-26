@@ -160,9 +160,12 @@ export function Footer() {
               Legal
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
-              <span className="text-sm text-slate-500">
+              <Link
+                href="/privacy-policy"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
                 Privacy Policy
-              </span>
+              </Link>
               <span className="text-sm text-slate-500">
                 Terms of Service
               </span>

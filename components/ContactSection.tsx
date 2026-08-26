@@ -35,20 +35,41 @@ export function ContactSection() {
             <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
               Get in Touch
             </h2>
-            <p className="mb-6 text-sm leading-relaxed text-slate-700">
-              Our team is ready to discuss your requirements. Send us a message and we'll be in touch shortly.
+            <p className="mb-8 text-sm leading-relaxed text-slate-700">
+              Our team is ready to discuss your requirements. Send us a message and we&apos;ll be in touch shortly.
             </p>
-            <div className="space-y-4 text-sm text-slate-700">
-              <p>
-                <strong className="text-ssl-bg">HQ:</strong> Thome, Nairobi - Kenya
-              </p>
-              <p>
-                <strong className="text-ssl-bg">Email:</strong>{" "}
-                connect@signalstraitlabs.com
-              </p>
-              <p>
-                <strong className="text-ssl-bg">Secure Line:</strong> +254 712 895 903
-              </p>
+            
+            <div className="space-y-6 text-sm text-slate-700">
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-ssl-bg w-20">Address:</span>
+                <span>Thome, Nairobi - Kenya</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-ssl-bg w-20">Phone:</span>
+                <a href="tel:+254712895903" className="hover:text-ssl-blue transition-colors">
+                  +254 712 895 903
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-ssl-bg w-20">Email:</span>
+                <a href="mailto:connect@signalstraitlabs.com" className="hover:text-ssl-blue transition-colors">
+                  connect@signalstraitlabs.com
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-bold text-ssl-bg w-20">Social:</span>
+                <a
+                  href="https://linkedin.com/company/signal-strait-labs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-ssl-blue transition-colors"
+                >
+                  LinkedIn
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </AnimateOnScroll>
