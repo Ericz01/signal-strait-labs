@@ -166,9 +166,12 @@ export function Footer() {
               >
                 Privacy Policy
               </Link>
-              <span className="text-sm text-slate-500">
+              <Link
+                href="/terms-of-service"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
                 Terms of Service
-              </span>
+              </Link>
               <span className="text-sm text-slate-500">
                 Cookie Policy
               </span>
