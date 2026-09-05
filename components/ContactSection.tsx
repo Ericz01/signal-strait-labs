@@ -8,6 +8,48 @@ import { services } from '@/lib/services-data';
 export function ContactSection() {
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+    website: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          serviceInterest: service,
+          budgetRange: budget,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to submit form');
+      }
+
+      setStatus('success');
+      setFormData({ name: '', email: '', company: '', message: '', website: '' });
+      setService('');
+      setBudget('');
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Something went wrong');
+    }
+  };
 
   const budgetOptions = [
     'Under $2,000',
@@ -76,8 +118,23 @@ export function ContactSection() {
 
         <AnimateOnScroll variant="scale" style={{ animationDelay: '0.2s' }}>
           <div className="glass-card-dark relative z-10 rounded-2xl p-8">
-            <h3 className="mb-6 text-lg font-bold text-white">Send Us a Message</h3>
-            <form className="space-y-5">
+            <h3 className="mb-6 text-lg font-bold text-white">
+              {status === 'success' ? 'Message Sent!' : 'Send Us a Message'}
+            </h3>
+            
+            {status === 'success' ? (
+              <p className="text-slate-300 text-sm">Thanks for reaching out! We&apos;ll be in touch shortly.</p>
+            ) : (
+              <form className="space-y-5" onSubmit={handleSubmit}>
+                <input 
+                  type="text" 
+                  name="website" 
+                  className="hidden" 
+                  tabIndex={-1} 
+                  autoComplete="off" 
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                />
               <div>
                 <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Name
@@ -87,6 +144,8 @@ export function ContactSection() {
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
                   placeholder="Your name"
                   required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
               <div>
@@ -98,6 +157,8 @@ export function ContactSection() {
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
                   placeholder="name@company.com"
                   required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
               <div>
@@ -108,6 +169,8 @@ export function ContactSection() {
                   type="text"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
                   placeholder="Your company name"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
               </div>
               <div>
@@ -131,16 +194,22 @@ export function ContactSection() {
                   className="glass-input-dark w-full resize-none rounded-lg px-4 py-3 text-sm"
                   placeholder="Tell us what you need"
                   required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full rounded-lg border border-ssl-gold/30 bg-ssl-blue py-3.5 text-sm font-bold tracking-wide text-white shadow-lg shadow-ssl-blue/20 transition-all hover:border-ssl-gold/50 hover:bg-ssl-blue/90"
-              >
-                Send Message
-              </button>
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="w-full rounded-lg border border-ssl-gold/30 bg-ssl-blue py-3.5 text-sm font-bold tracking-wide text-white shadow-lg shadow-ssl-blue/20 transition-all hover:border-ssl-gold/50 hover:bg-ssl-blue/90 disabled:opacity-50"
+                >
+                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                </button>
+                {errorMessage && <p className="text-red-400 text-xs mt-2">{errorMessage}</p>}
             </form>
+            )}
+
           </div>
         </AnimateOnScroll>
       </div>
