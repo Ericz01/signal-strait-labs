@@ -41,7 +41,15 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const body = await req.json();
+    let body;
+    try {
+      body = await req.json();
+    } catch (_e) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid JSON request' },
+        { status: 400 }
+      );
+    }
     const { name: rawName, email: rawEmail, company: rawCompany, serviceInterest: rawService, budgetRange: rawBudget, message: rawMessage, website } = body;
 
     // 1. Basic Honeypot Check

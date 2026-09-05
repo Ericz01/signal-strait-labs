@@ -34,7 +34,7 @@ export function ContactSection() {
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(data.message || 'Failed to submit form');
