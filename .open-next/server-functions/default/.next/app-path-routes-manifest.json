@@ -1,0 +1,15 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/api/leads/route": "/api/leads",
+  "/apple-icon.png/route": "/apple-icon.png",
+  "/contact/page": "/contact",
+  "/favicon.ico/route": "/favicon.ico",
+  "/icon.svg/route": "/icon.svg",
+  "/page": "/",
+  "/privacy-policy/page": "/privacy-policy",
+  "/services/[slug]/page": "/services/[slug]",
+  "/services/page": "/services",
+  "/terms-of-service/page": "/terms-of-service"
+}

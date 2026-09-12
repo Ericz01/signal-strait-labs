@@ -123,7 +123,16 @@ export function ContactSection() {
             </h3>
             
             {status === 'success' ? (
-              <p className="text-slate-300 text-sm">Thanks for reaching out! We&apos;ll be in touch shortly.</p>
+              <div className="space-y-4">
+                <p className="text-slate-300 text-sm">Thanks for reaching out! We&apos;ll be in touch shortly.</p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="text-sm font-semibold text-ssl-gold hover:text-white transition-colors"
+                >
+                  &larr; Send another message
+                </button>
+              </div>
             ) : (
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <input 

@@ -1,0 +1,12 @@
+name = "signal-strait-labs"
+main = ".open-next/worker.js"
+compatibility_date = "2026-09-05"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "NEXT_CACHE"
+id = "8c8e7c90a0c8418783430c21a2a3569d"
