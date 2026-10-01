@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     // 0. Rate Limiting Check
     if (ratelimit) {
       const ip = req.headers.get('CF-Connecting-IP') || req.headers.get('x-forwarded-for') || '127.0.0.1';
+      console.log('DEBUG: Rate limiting with IP:', ip);
       const { success } = await ratelimit.limit(ip);
 
       if (!success) {

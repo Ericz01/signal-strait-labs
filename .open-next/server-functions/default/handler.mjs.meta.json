@@ -4889,7 +4889,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js": {
-      "bytes": 20242,
+      "bytes": 20472,
       "imports": [],
       "format": "cjs"
     },
@@ -8714,7 +8714,7 @@
           "bytesInOutput": 265
         },
         ".open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js": {
-          "bytesInOutput": 20488
+          "bytesInOutput": 20722
         },
         ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_createLucideIcon_mjs_046kvv3._.js": {
           "bytesInOutput": 1001
@@ -8975,7 +8975,7 @@
           "bytesInOutput": 67114
         }
       },
-      "bytes": 3748909
+      "bytes": 3749143
     }
   }
 }

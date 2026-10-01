@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RailSite Engagement Tracker — Signal Strait Labs</title>
+<style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #01081b;
+    --bg-card:   #040d24;
+    --bg-row:    #060e28;
+    --bg-done:   #040d24;
+    --blue:      #1a59cc;
+    --blue-dim:  #0e3580;
+    --blue-glow: rgba(26,89,204,0.18);
+    --gold:      #C5A059;
+    --gold-dim:  #9A7432;
+    --gold-glow: rgba(197,160,89,0.15);
+    --white:     #ffffff;
+    --text-1:    #e8ecf4;
+    --text-2:    #8a97b4;
+    --text-3:    #4a5572;
+    --border:    rgba(255,255,255,0.07);
+    --border-hi: rgba(197,160,89,0.25);
+    --green:     #22c55e;
+    --green-bg:  rgba(34,197,94,0.12);
+    --radius:    10px;
+    --radius-lg: 14px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── Header ─── */
+  .site-header {
+    background: linear-gradient(135deg, #01081B 0%, #051336 50%, #1C1A14 85%, #423721 100%);
+    border-bottom: 1px solid var(--border-hi);
+    padding: 28px 32px 24px;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-dot { width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, #1a59cc, #C5A059); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.5px; flex-shrink: 0; }
+  .brand-label { display: flex; flex-direction: column; }
+  .brand-name { font-size: 15px; font-weight: 600; color: var(--white); letter-spacing: -0.2px; }
+  .brand-sub { font-size: 11px; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
+  .header-right { text-align: right; }
+  .progress-big { font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
+  .progress-big span { font-size: 14px; font-weight: 400; color: var(--text-2); }
+  .progress-pct { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+  /* ─── Progress Bar ─── */
+  .progress-bar-wrap { max-width: 900px; margin: 0 auto; padding: 14px 32px 0; }
+  .progress-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+  .progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #1a59cc, #C5A059); transition: width 0.4s ease; }
+
+  /* ─── Body ─── */
+  .body-wrap { max-width: 900px; margin: 0 auto; padding: 24px 32px 60px; }
+
+  /* ─── Filter Bar ─── */
+  .filter-row { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
+  .filter-btn {
+    font-size: 12px; padding: 5px 14px; border-radius: 20px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-2);
+    transition: all 0.15s; font-family: inherit;
+  }
+  .filter-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .filter-btn.active { background: rgba(26,89,204,0.2); border-color: var(--blue); color: #7aacff; }
+  .spacer { flex: 1; }
+  .util-btn {
+    font-size: 11px; padding: 5px 12px; border-radius: 6px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.08); background: transparent; color: var(--text-3);
+    transition: all 0.15s; font-family: inherit;
+  }
+  .util-btn:hover { border-color: rgba(255,255,255,0.18); color: var(--text-2); }
+
+  /* ─── Phase Card ─── */
+  .phase { margin-bottom: 10px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color 0.2s; }
+  .phase:hover { border-color: rgba(197,160,89,0.2); }
+  .phase.all-done { border-color: rgba(34,197,94,0.2); }
+
+  .phase-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; cursor: pointer; user-select: none;
+    background: linear-gradient(135deg, #040d24 0%, #060e28 100%);
+    transition: background 0.15s;
+  }
+  .phase-header:hover { background: linear-gradient(135deg, #060e28 0%, #07102e 100%); }
+
+  .phase-badge {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    border: 1px solid rgba(26,89,204,0.3); background: rgba(26,89,204,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #7aacff; letter-spacing: -0.5px;
+  }
+  .phase-badge.done { background: var(--green-bg); border-color: rgba(34,197,94,0.3); color: var(--green); }
+
+  .phase-info { flex: 1; min-width: 0; }
+  .phase-title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .phase-title { font-size: 13.5px; font-weight: 600; color: var(--text-1); }
+  .phase-day { font-size: 11px; color: var(--text-3); }
+
+  .phase-progress-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+  .mini-track { flex: 1; height: 2px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+  .mini-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .mini-count { font-size: 11px; color: var(--text-3); flex-shrink: 0; min-width: 32px; text-align: right; }
+
+  .chevron {
+    width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; color: var(--text-2);
+  }
+  .phase-header:hover .chevron { background: rgba(197,160,89,0.1); border-color: rgba(197,160,89,0.3); color: var(--gold); }
+  .chevron svg { transition: transform 0.25s; width: 13px; height: 13px; }
+  .chevron.open svg { transform: rotate(180deg); }
+
+  /* ─── Context Strip ─── */
+  .phase-context {
+    padding: 10px 18px; font-size: 12px; color: var(--text-2);
+    background: rgba(26,89,204,0.05); border-bottom: 1px solid var(--border);
+    border-left: 2px solid var(--blue-dim); line-height: 1.6;
+  }
+
+  /* ─── Task Rows ─── */
+  .task-list { }
+  .task-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 18px; cursor: pointer;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    background: rgba(4,13,36,0.5);
+    transition: background 0.12s;
+  }
+  .task-row:hover { background: rgba(26,89,204,0.06); }
+  .task-row.completed { background: rgba(4,13,36,0.3); }
+
+  /* ─── CHECKBOX ─── */
+  .checkbox {
+    width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 1px;
+    border: 1.5px solid rgba(197,160,89,0.4);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .task-row:hover .checkbox { border-color: var(--gold); }
+  .checkbox.checked {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-color: #22c55e;
+  }
+  .checkbox svg { display: none; width: 11px; height: 11px; }
+  .checkbox.checked svg { display: block; }
+
+  .task-text {
+    flex: 1; font-size: 12.5px; color: var(--text-1); line-height: 1.55;
+    transition: color 0.15s;
+  }
+  .task-row.completed .task-text { color: var(--text-3); text-decoration: line-through; }
+
+  .tag {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+    flex-shrink: 0; margin-top: 2px; letter-spacing: 0.03em; text-transform: uppercase;
+  }
+
+  /* ─── Track badges (MVP vs Post-MVP) ─── */
+  .track-tag {
+    font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0;
+  }
+  .track-tag.mvp    { background: rgba(197,160,89,0.16); color: var(--gold); border: 1px solid rgba(197,160,89,0.3); }
+  .track-tag.growth { background: rgba(139,92,246,0.14); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.28); }
+
+  .phase.growth { border-color: rgba(139,92,246,0.18); }
+  .phase.growth:hover { border-color: rgba(139,92,246,0.35); }
+  .phase.growth .phase-header { background: linear-gradient(135deg, #0a0a1f 0%, #0e0c26 100%); }
+  .phase.growth .phase-header:hover { background: linear-gradient(135deg, #0e0c26 0%, #120f30 100%); }
+  .phase.growth .phase-badge { border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.1); color: #c4b5fd; }
+  .phase.growth .phase-context { background: rgba(139,92,246,0.05); border-left-color: #6d28d9; }
+
+  .mvp-divider {
+    display: flex; align-items: center; gap: 12px; margin: 22px 0 12px; color: var(--text-3);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+  }
+  .mvp-divider::before, .mvp-divider::after { content: ''; flex: 1; height: 1px; background: rgba(139,92,246,0.25); }
+
+  /* ─── Empty state ─── */
+  .empty-phase { padding: 14px 18px; font-size: 12px; color: var(--text-3); text-align: center; font-style: italic; }
+
+  /* ─── Footer ─── */
+  .tracker-footer { text-align: center; margin-top: 24px; font-size: 11px; color: var(--text-3); }
+  .tracker-footer a { color: var(--gold-dim); text-decoration: none; }
+
+  /* ─── Scrollbar ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(197,160,89,0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(197,160,89,0.4); }
+</style>
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-dot">SSL</div>
+      <div class="brand-label">
+        <span class="brand-name">Signal Strait Labs</span>
+        <span class="brand-sub">RailSite Engagement Tracker · 2026</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="progress-big" id="hdr-count">0<span>/154</span></div>
+      <div class="progress-pct" id="hdr-pct">0% complete</div>
+      <div id="sync-status" style="font-size:11px;margin-top:4px;color:#7aacff;text-align:right;letter-spacing:0.02em">↓ Loading…</div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-track"><div class="progress-fill" id="main-bar" style="width:0%"></div></div>
+</div>
+
+<div class="body-wrap">
+  <div class="filter-row">
+    <span class="filter-label">Show:</span>
+    <button class="filter-btn active" onclick="setFilter('all')" id="fb-all">All</button>
+    <button class="filter-btn" onclick="setFilter('pending')" id="fb-pending">Pending</button>
+    <button class="filter-btn" onclick="setFilter('done')" id="fb-done">Done</button>
+    <span class="spacer"></span>
+    <button class="util-btn" onclick="expandAll()">Expand all</button>
+    <button class="util-btn" onclick="collapseAll()">Collapse all</button>
+  </div>
+
+  <div id="phases-list"></div>
+
+  <div class="tracker-footer">
+    Click any task to mark complete · Progress syncs to the cloud · RailSite Building and Civil Contractors engagement · <a href="https://signalstraitlabs.com" target="_blank">signalstraitlabs.com</a>
+  </div>
+</div>
+
+<script>
+const TAG_STYLES = {
+  Cleanup: {bg:'rgba(255,255,255,0.06)', color:'#8a97b4'},
+  Config:  {bg:'rgba(26,89,204,0.15)',  color:'#7aacff'},
+  Assets:  {bg:'rgba(197,160,89,0.12)', color:'#C5A059'},
+  Docs:    {bg:'rgba(255,255,255,0.06)', color:'#8a97b4'},
+  Dev:     {bg:'rgba(26,89,204,0.15)',  color:'#7aacff'},
+  Design:  {bg:'rgba(139,92,246,0.15)', color:'#c4b5fd'},
+  Content: {bg:'rgba(20,184,166,0.12)', color:'#5eead4'},
+  SEO:     {bg:'rgba(34,197,94,0.12)',  color:'#86efac'},
+  AEO:     {bg:'rgba(20,184,166,0.12)', color:'#5eead4'},
+  GEO:     {bg:'rgba(239,68,68,0.12)',  color:'#fca5a5'},
+  QA:      {bg:'rgba(239,68,68,0.12)',  color:'#fca5a5'},
+  Perf:    {bg:'rgba(197,160,89,0.12)', color:'#C5A059'},
+  Deploy:  {bg:'rgba(34,197,94,0.12)',  color:'#86efac'},
+  Social:  {bg:'rgba(236,72,153,0.12)', color:'#f9a8d4'},
+};
+
+const PHASES = [
+  {
+    "id": "R0",
+    "label": "R0",
+    "title": "Discovery & Access Setup",
+    "day": "Week 1",
+    "track": "mvp",
+    "context": "Confirm the contract, the deposit, and every piece of access needed before a single workflow gets built. Nothing downstream should start until this phase is fully checked off.",
+    "tasks": [
+      {
+        "id": "t001",
+        "text": "Confirm signed contract and 50% deposit received before work begins",
+        "tag": "Docs"
+      },
+      {
+        "id": "t002",
+        "text": "Hold kickoff call to confirm final platform list (Facebook, Instagram, LinkedIn) and content cadence",
+        "tag": "Docs"
+      },
+      {
+        "id": "t003",
+        "text": "Confirm RailSite has added Signal Strait Labs as a Partner on their Meta Business Portfolio with admin access to the Facebook Page and Instagram account",
+        "tag": "Config"
+      },
+      {
+        "id": "t004",
+        "text": "Confirm RailSite has added Signal Strait Labs as a Page Admin on their LinkedIn Company Page",
+        "tag": "Config"
+      },
+      {
+        "id": "t005",
+        "text": "Set up a shared Google Drive folder for RailSite to drop project photos, updates and milestones",
+        "tag": "Config"
+      },
+      {
+        "id": "t006",
+        "text": "Confirm a single named contact at RailSite for approvals and brand questions",
+        "tag": "Docs"
+      },
+      {
+        "id": "t007",
+        "text": "Log all access, credentials and contact details in a private internal access record",
+        "tag": "Docs"
+      },
+      {
+        "id": "t008",
+        "text": "Walk the client through the access checklist and confirm nothing is outstanding",
+        "tag": "Docs"
+      },
+      {
+        "id": "t009",
+        "text": "Lock the final scope and timeline with written client sign-off before build begins",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R1",
+    "label": "R1",
+    "title": "Infrastructure & Server Setup",
+    "day": "Week 1-2",
+    "track": "mvp",
+    "context": "Stand up the automation engine on free-tier infrastructure, secured properly, before any workflow logic is built on top of it.",
+    "tasks": [
+      {
+        "id": "t010",
+        "text": "Provision a free-tier VPS (Oracle Cloud Always Free or equivalent) to host n8n",
+        "tag": "Config"
+      },
+      {
+        "id": "t011",
+        "text": "Install Docker and deploy the n8n container on the server",
+        "tag": "Config"
+      },
+      {
+        "id": "t012",
+        "text": "Configure firewall rules, restricting open ports to only what n8n and SSH require",
+        "tag": "Config"
+      },
+      {
+        "id": "t013",
+        "text": "Set up a subdomain (e.g. automate.signalstraitlabs.com) pointing to the server",
+        "tag": "Config"
+      },
+      {
+        "id": "t014",
+        "text": "Install a free HTTPS certificate (Let's Encrypt) with auto-renewal for the subdomain",
+        "tag": "Config"
+      },
+      {
+        "id": "t015",
+        "text": "Set a strong admin password and enable basic auth on the n8n dashboard",
+        "tag": "Config"
+      },
+      {
+        "id": "t016",
+        "text": "Configure scheduled workflow backups (JSON export) to a separate storage location",
+        "tag": "Config"
+      },
+      {
+        "id": "t017",
+        "text": "Set up free uptime monitoring (e.g. UptimeRobot) to alert if the server goes down",
+        "tag": "Config"
+      }
+    ]
+  },
+  {
+    "id": "R2",
+    "label": "R2",
+    "title": "Facebook & Instagram Integration",
+    "day": "Week 2",
+    "track": "mvp",
+    "context": "Meta Business verification is already in place, so this is the fastest platform to wire up end to end with full automation.",
+    "tasks": [
+      {
+        "id": "t018",
+        "text": "Create a Meta Developer App under Signal Strait Labs' Business Portfolio",
+        "tag": "Dev"
+      },
+      {
+        "id": "t019",
+        "text": "Request and configure permissions needed for Page and Instagram publishing",
+        "tag": "Dev"
+      },
+      {
+        "id": "t020",
+        "text": "Generate and securely store long-lived access tokens for the Facebook Page and Instagram account",
+        "tag": "Config"
+      },
+      {
+        "id": "t021",
+        "text": "Build the n8n node that publishes a Facebook Page post via the Graph API",
+        "tag": "Dev"
+      },
+      {
+        "id": "t022",
+        "text": "Build the n8n node that publishes an Instagram feed post via the Graph API",
+        "tag": "Dev"
+      },
+      {
+        "id": "t023",
+        "text": "Confirm image and caption formatting requirements for both platforms",
+        "tag": "QA"
+      },
+      {
+        "id": "t024",
+        "text": "Publish one test post to each platform and confirm it appears correctly",
+        "tag": "QA"
+      },
+      {
+        "id": "t025",
+        "text": "Set up token-expiry monitoring so a lapsed token is caught before it breaks publishing",
+        "tag": "Config"
+      },
+      {
+        "id": "t026",
+        "text": "Document the Meta integration setup for the handover package",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R3",
+    "label": "R3",
+    "title": "LinkedIn Integration",
+    "day": "Week 2",
+    "track": "mvp",
+    "context": "LinkedIn restricts automated publishing for outside tools regardless of budget, so this phase builds the draft-and-notify pattern instead of full automation.",
+    "tasks": [
+      {
+        "id": "t027",
+        "text": "Confirm LinkedIn Company Page admin access is active for Signal Strait Labs",
+        "tag": "Config"
+      },
+      {
+        "id": "t028",
+        "text": "Build the LinkedIn draft-generation step (caption, tone, hashtags) in n8n",
+        "tag": "Dev"
+      },
+      {
+        "id": "t029",
+        "text": "Build the notification step that alerts the designated poster when a draft is ready",
+        "tag": "Dev"
+      },
+      {
+        "id": "t030",
+        "text": "Write a short instruction sheet for the thirty-second manual publish step",
+        "tag": "Docs"
+      },
+      {
+        "id": "t031",
+        "text": "Test the full draft-to-notify-to-publish flow end to end",
+        "tag": "QA"
+      },
+      {
+        "id": "t032",
+        "text": "Confirm LinkedIn post formatting (character limits, hashtag conventions)",
+        "tag": "QA"
+      },
+      {
+        "id": "t033",
+        "text": "Document the LinkedIn automation limitation clearly in the handover package",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R4",
+    "label": "R4",
+    "title": "Content Intake & AI Drafting",
+    "day": "Week 2-3",
+    "track": "mvp",
+    "context": "This is the agentic core of the system: turning raw material RailSite supplies into platform-ready drafts without a human writing each post.",
+    "tasks": [
+      {
+        "id": "t034",
+        "text": "Build the n8n trigger that watches the shared Drive folder for new content",
+        "tag": "Dev"
+      },
+      {
+        "id": "t035",
+        "text": "Build a classification step to identify what the new item is (photo update, milestone, testimonial)",
+        "tag": "Dev"
+      },
+      {
+        "id": "t036",
+        "text": "Write and test the AI drafting prompt for Facebook tone and length",
+        "tag": "Dev"
+      },
+      {
+        "id": "t037",
+        "text": "Write and test the AI drafting prompt for Instagram tone and length",
+        "tag": "Dev"
+      },
+      {
+        "id": "t038",
+        "text": "Write and test the AI drafting prompt for LinkedIn tone and length",
+        "tag": "Dev"
+      },
+      {
+        "id": "t039",
+        "text": "Build automatic hashtag generation per platform",
+        "tag": "Dev"
+      },
+      {
+        "id": "t040",
+        "text": "Build an image-handling step that resizes and crops to each platform's requirements",
+        "tag": "Dev"
+      },
+      {
+        "id": "t041",
+        "text": "Add safeguards to the prompt against unverified claims (certifications, safety claims) about RailSite's work",
+        "tag": "Content"
+      },
+      {
+        "id": "t042",
+        "text": "Test the drafting workflow against five sample content pieces for quality and tone accuracy",
+        "tag": "QA"
+      },
+      {
+        "id": "t043",
+        "text": "Tune prompts based on test results before moving to the approval queue build",
+        "tag": "Dev"
+      }
+    ]
+  },
+  {
+    "id": "R5",
+    "label": "R5",
+    "title": "Approval Queue & Auto-Publish Safety Net",
+    "day": "Week 3",
+    "track": "mvp",
+    "context": "The piece that lets this run with minimal human touch: a lightweight review step that never becomes a bottleneck, because unattended drafts still go out on schedule.",
+    "tasks": [
+      {
+        "id": "t044",
+        "text": "Build the approval queue in Google Sheets or Airtable with a status column per draft",
+        "tag": "Dev"
+      },
+      {
+        "id": "t045",
+        "text": "Build the daily digest notification (WhatsApp or email) summarizing drafts awaiting review",
+        "tag": "Dev"
+      },
+      {
+        "id": "t046",
+        "text": "Build the auto-publish timeout logic so unreviewed drafts publish after the agreed window",
+        "tag": "Dev"
+      },
+      {
+        "id": "t047",
+        "text": "Build a manual override so a reviewer can edit, reject or hold a draft before it publishes",
+        "tag": "Dev"
+      },
+      {
+        "id": "t048",
+        "text": "Test the full approval flow: approve, edit, reject and let-it-time-out scenarios",
+        "tag": "QA"
+      },
+      {
+        "id": "t049",
+        "text": "Set the default review window and confirm it with the client",
+        "tag": "Docs"
+      },
+      {
+        "id": "t050",
+        "text": "Document how to use the approval queue for the handover package",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R6",
+    "label": "R6",
+    "title": "Publishing Workflows",
+    "day": "Week 3",
+    "track": "mvp",
+    "context": "Connect the approval queue's decisions to the live publishing nodes, with error handling so a failure gets caught instead of silently dropped.",
+    "tasks": [
+      {
+        "id": "t051",
+        "text": "Wire an approved status to trigger the Facebook and Instagram publish nodes",
+        "tag": "Dev"
+      },
+      {
+        "id": "t052",
+        "text": "Wire an approved status to trigger the LinkedIn draft notification",
+        "tag": "Dev"
+      },
+      {
+        "id": "t053",
+        "text": "Build error handling and automatic retry for failed publish attempts",
+        "tag": "Dev"
+      },
+      {
+        "id": "t054",
+        "text": "Build a failure alert (WhatsApp or email) if a post fails to publish after retries",
+        "tag": "Dev"
+      },
+      {
+        "id": "t055",
+        "text": "Log every published post (platform, time, content reference) to a tracking sheet",
+        "tag": "Dev"
+      },
+      {
+        "id": "t056",
+        "text": "Test publishing under failure conditions: revoked token, oversized image, network timeout",
+        "tag": "QA"
+      },
+      {
+        "id": "t057",
+        "text": "Confirm daily posting cadence holds across a full week of test runs",
+        "tag": "QA"
+      }
+    ]
+  },
+  {
+    "id": "R7",
+    "label": "R7",
+    "title": "Reporting Dashboard",
+    "day": "Week 3",
+    "track": "mvp",
+    "context": "A dashboard RailSite can check any time, built once on free tools, so reporting never becomes a recurring manual task.",
+    "tasks": [
+      {
+        "id": "t058",
+        "text": "Connect Looker Studio to Meta's native Insights data for Facebook and Instagram",
+        "tag": "Dev"
+      },
+      {
+        "id": "t059",
+        "text": "Build a LinkedIn performance tracking sheet from available export data",
+        "tag": "Dev"
+      },
+      {
+        "id": "t060",
+        "text": "Build dashboard views for reach, engagement, follower trend and posting consistency",
+        "tag": "Dev"
+      },
+      {
+        "id": "t061",
+        "text": "Set the dashboard to auto-refresh on a schedule",
+        "tag": "Config"
+      },
+      {
+        "id": "t062",
+        "text": "Build a shareable, view-only link to the dashboard for the client",
+        "tag": "Config"
+      },
+      {
+        "id": "t063",
+        "text": "Test that all dashboard metrics match the native platform numbers",
+        "tag": "QA"
+      },
+      {
+        "id": "t064",
+        "text": "Add a short glossary explaining each metric in plain language",
+        "tag": "Content"
+      },
+      {
+        "id": "t065",
+        "text": "Document how to read and use the dashboard for the handover package",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R8",
+    "label": "R8",
+    "title": "Testing & QA",
+    "day": "Week 3-4",
+    "track": "mvp",
+    "context": "Nothing goes live until the whole pipeline has survived a full week of parallel testing, including the failure cases, not just the happy path.",
+    "tasks": [
+      {
+        "id": "t066",
+        "text": "Run a full end-to-end test: new content in, drafted, approved, published, logged, reported",
+        "tag": "QA"
+      },
+      {
+        "id": "t067",
+        "text": "Run the same end-to-end test letting a draft time out to auto-publish",
+        "tag": "QA"
+      },
+      {
+        "id": "t068",
+        "text": "Load-test the workflow with multiple content pieces submitted at once",
+        "tag": "QA"
+      },
+      {
+        "id": "t069",
+        "text": "Security review: confirm all tokens and credentials are stored securely, not in plain text",
+        "tag": "QA"
+      },
+      {
+        "id": "t070",
+        "text": "Confirm RailSite retains full ownership and revocation ability over every connected account",
+        "tag": "QA"
+      },
+      {
+        "id": "t071",
+        "text": "Verify the system keeps running without requiring any personal Signal Strait Labs credentials",
+        "tag": "QA"
+      },
+      {
+        "id": "t072",
+        "text": "Run a full week of parallel testing before declaring the system production-ready",
+        "tag": "QA"
+      },
+      {
+        "id": "t073",
+        "text": "Fix any issues surfaced during the testing week before go-live",
+        "tag": "Dev"
+      },
+      {
+        "id": "t074",
+        "text": "Get written client sign-off that the system is ready to go live",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R9",
+    "label": "R9",
+    "title": "Handover & Training",
+    "day": "Week 4",
+    "track": "mvp",
+    "context": "The client should be able to run this without Signal Strait Labs in the room. This phase makes sure that is actually true, not just documented.",
+    "tasks": [
+      {
+        "id": "t075",
+        "text": "Prepare full handover documentation covering every workflow, credential and account",
+        "tag": "Docs"
+      },
+      {
+        "id": "t076",
+        "text": "Record a short screen-capture walkthrough of the approval queue and dashboard",
+        "tag": "Docs"
+      },
+      {
+        "id": "t077",
+        "text": "Hold a live training session with RailSite's designated contact",
+        "tag": "Docs"
+      },
+      {
+        "id": "t078",
+        "text": "Confirm the designated contact can approve, edit and reject a draft unassisted",
+        "tag": "QA"
+      },
+      {
+        "id": "t079",
+        "text": "Hand over all workflow configuration files and documentation",
+        "tag": "Docs"
+      },
+      {
+        "id": "t080",
+        "text": "Open the thirty-day post-launch support window and confirm its end date with the client",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "R10",
+    "label": "R10",
+    "title": "Launch",
+    "day": "Week 4",
+    "track": "mvp",
+    "context": "Go live, watch it closely for the first week, then confirm the core build is formally complete.",
+    "tasks": [
+      {
+        "id": "t081",
+        "text": "Flip the system to live mode and confirm the first real post publishes correctly",
+        "tag": "Deploy"
+      },
+      {
+        "id": "t082",
+        "text": "Monitor daily for the first full week of live operation",
+        "tag": "QA"
+      },
+      {
+        "id": "t083",
+        "text": "Check in with the client at the end of week one for feedback",
+        "tag": "Docs"
+      },
+      {
+        "id": "t084",
+        "text": "Confirm invoicing for the remaining 50% of the build fee on go-live",
+        "tag": "Docs"
+      },
+      {
+        "id": "t085",
+        "text": "Mark the core build as complete and launched",
+        "tag": "Deploy"
+      }
+    ]
+  },
+  {
+    "id": "A1",
+    "label": "A1",
+    "title": "TikTok Integration",
+    "day": "Add-on \u00b7 On request",
+    "track": "growth",
+    "dividerBefore": "\ud83d\ude80  Core build complete above this line \u2014 platform add-ons below",
+    "context": "TikTok's posting API is restricted for third-party tools regardless of budget, so this follows the same draft-and-notify pattern used for LinkedIn.",
+    "tasks": [
+      {
+        "id": "t086",
+        "text": "Set up or confirm RailSite's TikTok Business account",
+        "tag": "Social"
+      },
+      {
+        "id": "t087",
+        "text": "Confirm TikTok add-on pricing is approved and invoiced before starting",
+        "tag": "Docs"
+      },
+      {
+        "id": "t088",
+        "text": "Adapt the AI drafting prompt for TikTok's short-form, hook-first caption style",
+        "tag": "Content"
+      },
+      {
+        "id": "t089",
+        "text": "Build the draft-and-notify workflow for TikTok, mirroring the LinkedIn pattern",
+        "tag": "Dev"
+      },
+      {
+        "id": "t090",
+        "text": "Document TikTok's posting API restrictions and the manual step this requires",
+        "tag": "Docs"
+      },
+      {
+        "id": "t091",
+        "text": "Test the TikTok draft-to-publish flow end to end",
+        "tag": "QA"
+      },
+      {
+        "id": "t092",
+        "text": "Add available TikTok metrics to the reporting dashboard",
+        "tag": "Dev"
+      }
+    ]
+  },
+  {
+    "id": "A2",
+    "label": "A2",
+    "title": "X (Twitter) Integration",
+    "day": "Add-on \u00b7 On request",
+    "track": "growth",
+    "context": "X's free API tier has real rate limits worth designing around from the start rather than discovering mid-month.",
+    "tasks": [
+      {
+        "id": "t093",
+        "text": "Set up or confirm RailSite's X Business account and developer API access tier",
+        "tag": "Social"
+      },
+      {
+        "id": "t094",
+        "text": "Confirm X add-on pricing is approved and invoiced before starting",
+        "tag": "Docs"
+      },
+      {
+        "id": "t095",
+        "text": "Adapt the AI drafting prompt for X's character limit and thread format",
+        "tag": "Content"
+      },
+      {
+        "id": "t096",
+        "text": "Build the publish workflow within the chosen API tier's rate limits",
+        "tag": "Dev"
+      },
+      {
+        "id": "t097",
+        "text": "Test the X posting workflow end to end",
+        "tag": "QA"
+      },
+      {
+        "id": "t098",
+        "text": "Add X metrics to the reporting dashboard",
+        "tag": "Dev"
+      }
+    ]
+  },
+  {
+    "id": "A3",
+    "label": "A3",
+    "title": "Future Platform Slot",
+    "day": "Add-on \u00b7 As requested",
+    "track": "growth",
+    "context": "A placeholder phase for whatever platform comes up next, so a new request has a clear home instead of getting bolted onto an existing phase.",
+    "tasks": [
+      {
+        "id": "t099",
+        "text": "Scope any further platform request (YouTube, Pinterest, etc.) as it arises",
+        "tag": "Docs"
+      },
+      {
+        "id": "t100",
+        "text": "Quote and confirm pricing for any further platform before building it",
+        "tag": "Docs"
+      },
+      {
+        "id": "t101",
+        "text": "Reserve brand handles on any platform RailSite may want later, even before automation is built",
+        "tag": "Social"
+      }
+    ]
+  },
+  {
+    "id": "S1",
+    "label": "S1",
+    "title": "SEO \u00b7 AEO \u00b7 GEO Discovery & Scoping",
+    "day": "Expansion \u00b7 Phase 1",
+    "track": "growth",
+    "dividerBefore": "\ud83d\udcc8  SEO \u00b7 AEO \u00b7 GEO expansion \u2014 new, client-approved scope addition",
+    "context": "The client named SEO, AEO and GEO with no specifics, so this phase turns that into a concrete, priced, signed-off scope before any work starts.",
+    "tasks": [
+      {
+        "id": "t102",
+        "text": "Hold a scoping call with RailSite to translate SEO, AEO and GEO into concrete deliverables",
+        "tag": "Docs"
+      },
+      {
+        "id": "t103",
+        "text": "Audit RailSite's current website structure, content and technical health as a baseline",
+        "tag": "SEO"
+      },
+      {
+        "id": "t104",
+        "text": "Identify priority keywords RailSite should rank for (service lines, locations, project types)",
+        "tag": "SEO"
+      },
+      {
+        "id": "t105",
+        "text": "Identify the real questions prospective clients ask before hiring a contractor in Kenya",
+        "tag": "AEO"
+      },
+      {
+        "id": "t106",
+        "text": "Draft the specific SEO/AEO/GEO deliverables document for client sign-off",
+        "tag": "Docs"
+      },
+      {
+        "id": "t107",
+        "text": "Confirm the pricing addendum for the expanded scope and get written approval before starting",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "S2",
+    "label": "S2",
+    "title": "Technical SEO Foundation",
+    "day": "Expansion \u00b7 Phase 1",
+    "track": "growth",
+    "context": "The unglamorous fixes that everything else depends on: metadata, crawlability, sitemap and site speed on railsitebld.com.",
+    "tasks": [
+      {
+        "id": "t108",
+        "text": "Run a full technical audit of railsitebld.com (speed, mobile usability, crawl errors)",
+        "tag": "SEO"
+      },
+      {
+        "id": "t109",
+        "text": "Fix or flag broken links, missing titles and missing meta descriptions across the site",
+        "tag": "SEO"
+      },
+      {
+        "id": "t110",
+        "text": "Add unique, keyword-aligned title tags and meta descriptions to every page",
+        "tag": "SEO"
+      },
+      {
+        "id": "t111",
+        "text": "Add canonical URL tags to prevent duplicate content issues",
+        "tag": "SEO"
+      },
+      {
+        "id": "t112",
+        "text": "Create or update the XML sitemap and submit it to Google Search Console",
+        "tag": "SEO"
+      },
+      {
+        "id": "t113",
+        "text": "Create or update robots.txt to guide crawlers correctly",
+        "tag": "SEO"
+      },
+      {
+        "id": "t114",
+        "text": "Set up Google Search Console and Bing Webmaster Tools if not already active",
+        "tag": "SEO"
+      },
+      {
+        "id": "t115",
+        "text": "Run a Core Web Vitals check and flag performance issues for fixing",
+        "tag": "Perf"
+      },
+      {
+        "id": "t116",
+        "text": "Confirm the site is fully mobile-responsive across common screen sizes",
+        "tag": "QA"
+      }
+    ]
+  },
+  {
+    "id": "S3",
+    "label": "S3",
+    "title": "On-Page & Local SEO",
+    "day": "Expansion \u00b7 Phase 2",
+    "track": "growth",
+    "context": "Make sure RailSite shows up for Nairobi and Ruiru searches specifically, not just generically for construction terms.",
+    "tasks": [
+      {
+        "id": "t117",
+        "text": "Map target keywords to the right pages (homepage, services, projects)",
+        "tag": "SEO"
+      },
+      {
+        "id": "t118",
+        "text": "Rewrite or add page content around priority keywords without keyword-stuffing",
+        "tag": "Content"
+      },
+      {
+        "id": "t119",
+        "text": "Set up and fully complete a Google Business Profile for RailSite (Nairobi/Ruiru)",
+        "tag": "SEO"
+      },
+      {
+        "id": "t120",
+        "text": "Ensure name, address and phone details are consistent across the website and all directories",
+        "tag": "SEO"
+      },
+      {
+        "id": "t121",
+        "text": "Add Organization and LocalBusiness structured data to the website",
+        "tag": "SEO"
+      },
+      {
+        "id": "t122",
+        "text": "Add Service structured data to each service and project page",
+        "tag": "SEO"
+      },
+      {
+        "id": "t123",
+        "text": "Build or improve individual case-study pages for completed RailSite projects",
+        "tag": "Content"
+      },
+      {
+        "id": "t124",
+        "text": "Add internal links between related service and project pages",
+        "tag": "SEO"
+      },
+      {
+        "id": "t125",
+        "text": "Add descriptive alt text to all images across the site",
+        "tag": "QA"
+      }
+    ]
+  },
+  {
+    "id": "S4",
+    "label": "S4",
+    "title": "AEO \u2014 Answer Engine Optimization",
+    "day": "Expansion \u00b7 Phase 2",
+    "track": "growth",
+    "context": "Structure the site so it directly answers the questions people type into search, not just ranks for keywords.",
+    "tasks": [
+      {
+        "id": "t126",
+        "text": "Identify the top questions prospective clients ask before hiring a contractor in Kenya",
+        "tag": "AEO"
+      },
+      {
+        "id": "t127",
+        "text": "Write concise, direct-answer FAQ sections on key pages addressing those questions",
+        "tag": "Content"
+      },
+      {
+        "id": "t128",
+        "text": "Rewrite key headings into a question-first format that mirrors how people actually search",
+        "tag": "AEO"
+      },
+      {
+        "id": "t129",
+        "text": "Add FAQ structured data to pages carrying FAQ content",
+        "tag": "AEO"
+      },
+      {
+        "id": "t130",
+        "text": "Add anchor IDs to major sections so specific answers can be directly linked and cited",
+        "tag": "AEO"
+      },
+      {
+        "id": "t131",
+        "text": "Structure answers in short, extractable paragraphs near the top of relevant sections",
+        "tag": "AEO"
+      },
+      {
+        "id": "t132",
+        "text": "Test how key questions about RailSite now surface in standard Google search",
+        "tag": "QA"
+      }
+    ]
+  },
+  {
+    "id": "S5",
+    "label": "S5",
+    "title": "GEO \u2014 Generative Engine Optimization",
+    "day": "Expansion \u00b7 Phase 2",
+    "track": "growth",
+    "context": "Make RailSite legible to AI answer engines specifically, the newest and least understood of the three letters in this scope.",
+    "tasks": [
+      {
+        "id": "t133",
+        "text": "Create an llms.txt file describing RailSite's services, history and contact details for AI crawlers",
+        "tag": "GEO"
+      },
+      {
+        "id": "t134",
+        "text": "Include an entity disambiguation section clarifying exactly who RailSite is and what they do",
+        "tag": "GEO"
+      },
+      {
+        "id": "t135",
+        "text": "Ensure robots.txt allows reputable AI crawlers access to the site's content",
+        "tag": "GEO"
+      },
+      {
+        "id": "t136",
+        "text": "Structure key pages so facts (founding year, services, locations) are stated plainly and unambiguously",
+        "tag": "GEO"
+      },
+      {
+        "id": "t137",
+        "text": "Test how RailSite is described when asked about directly in ChatGPT, Perplexity and Gemini",
+        "tag": "QA"
+      },
+      {
+        "id": "t138",
+        "text": "Note gaps or inaccuracies in AI answer engine responses and adjust site content to correct them",
+        "tag": "GEO"
+      },
+      {
+        "id": "t139",
+        "text": "Re-test after adjustments and log the before-and-after result",
+        "tag": "QA"
+      }
+    ]
+  },
+  {
+    "id": "S6",
+    "label": "S6",
+    "title": "Content & Backlink Build-out",
+    "day": "Expansion \u00b7 Phase 3 (ongoing)",
+    "track": "growth",
+    "context": "The compounding, slower-moving work: content and off-site authority that keeps paying off well after this phase formally ends.",
+    "tasks": [
+      {
+        "id": "t140",
+        "text": "Plan a content calendar of articles targeting Kenya construction and civil engineering search terms",
+        "tag": "Content"
+      },
+      {
+        "id": "t141",
+        "text": "Write and publish the first batch of SEO-focused articles or project write-ups",
+        "tag": "Content"
+      },
+      {
+        "id": "t142",
+        "text": "Submit RailSite to relevant Kenyan business directories for citation and backlink value",
+        "tag": "SEO"
+      },
+      {
+        "id": "t143",
+        "text": "Submit RailSite to construction and engineering industry directories where applicable",
+        "tag": "SEO"
+      },
+      {
+        "id": "t144",
+        "text": "Identify and reach out to a short list of guest-posting or partnership opportunities for backlinks",
+        "tag": "SEO"
+      },
+      {
+        "id": "t145",
+        "text": "Track all new backlinks and citations in a simple tracking sheet",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "S7",
+    "label": "S7",
+    "title": "SEO \u00b7 AEO \u00b7 GEO Reporting",
+    "day": "Expansion \u00b7 Phase 3",
+    "track": "growth",
+    "context": "Extend the existing dashboard rather than build a second one, so the client has one place to check everything.",
+    "tasks": [
+      {
+        "id": "t146",
+        "text": "Set up free rank tracking for priority keywords via Google Search Console",
+        "tag": "SEO"
+      },
+      {
+        "id": "t147",
+        "text": "Add an SEO/AEO/GEO section to the existing reporting dashboard",
+        "tag": "Dev"
+      },
+      {
+        "id": "t148",
+        "text": "Build a simple monthly tracking method for AI answer engine visibility",
+        "tag": "GEO"
+      },
+      {
+        "id": "t149",
+        "text": "Document the reporting setup and how to read it for the client",
+        "tag": "Docs"
+      },
+      {
+        "id": "t150",
+        "text": "Share the first baseline report with the client before any optimization work shows results",
+        "tag": "Docs"
+      }
+    ]
+  },
+  {
+    "id": "S8",
+    "label": "S8",
+    "title": "Review & Iteration",
+    "day": "Expansion \u00b7 Ongoing",
+    "track": "growth",
+    "context": "SEO/AEO/GEO work is judged over months, not days. Fixed checkpoints keep the engagement honest about what's actually moving.",
+    "tasks": [
+      {
+        "id": "t151",
+        "text": "Hold a 30-day review checkpoint comparing results against the baseline report",
+        "tag": "Docs"
+      },
+      {
+        "id": "t152",
+        "text": "Hold a 60-day review checkpoint and adjust keyword or content focus if needed",
+        "tag": "Docs"
+      },
+      {
+        "id": "t153",
+        "text": "Hold a 90-day review checkpoint and present overall SEO/AEO/GEO progress to the client",
+        "tag": "Docs"
+      },
+      {
+        "id": "t154",
+        "text": "Confirm with the client whether the expanded scope continues, adjusts or concludes after 90 days",
+        "tag": "Docs"
+      }
+    ]
+  }
+];
+
+// Replace these with your own JSONBin bin (jsonbin.io) so this tracker's
+// progress is stored separately from the SSL website tracker's bin.
+const BIN_ID  = '6abeb18eac6210605a0a1f4a';
+const API_KEY = '$2a$10$d3cpC4xzQLaRAeBgwsU60em6Pn0OBU22ey9NznH6H78TppkDRVQ5C';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+let completed = {};
+let expanded = { R0: true };
+let filter = 'all';
+let saveTimer = null;
+
+function setSyncStatus(state) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const states = {
+    saving:  { text: '↑ Saving…',   color: '#C5A059' },
+    saved:   { text: '✓ Synced',     color: '#22c55e' },
+    loading: { text: '↓ Loading…',  color: '#7aacff' },
+    error:   { text: '✗ Sync error — using local view only', color: '#f87171' },
+  };
+  const s = states[state] || states.saved;
+  el.textContent = s.text;
+  el.style.color = s.color;
+}
+
+async function save() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    setSyncStatus('saving');
+    try {
+      const res = await fetch(BIN_URL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+        body: JSON.stringify({ completed, expanded })
+      });
+      if (!res.ok) throw new Error(res.status);
+      setSyncStatus('saved');
+    } catch(e) {
+      setSyncStatus('error');
+    }
+  }, 600);
+}
+
+async function load() {
+  setSyncStatus('loading');
+  try {
+    const res = await fetch(`${BIN_URL}/latest`, {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    const record = data.record || {};
+    completed = record.completed || {};
+    expanded  = record.expanded  || { R0: true };
+    setSyncStatus('saved');
+  } catch(e) {
+    setSyncStatus('error');
+  }
+}
+
+function allTasks() { return PHASES.flatMap(p => p.tasks); }
+
+function updateHeader() {
+  const all = allTasks();
+  const done = all.filter(t => completed[t.id]).length;
+  const total = all.length;
+  const pct = Math.round(done / total * 100);
+  document.getElementById('hdr-count').innerHTML = `${done}<span>/${total}</span>`;
+  document.getElementById('hdr-pct').textContent = `${pct}% complete`;
+  document.getElementById('main-bar').style.width = pct + '%';
+  const filterCounts = { all: total, pending: total - done, done };
+  ['all','pending','done'].forEach(f => {
+    const btn = document.getElementById('fb-' + f);
+    const labels = {all:`All (${filterCounts.all})`, pending:`Pending (${filterCounts.pending})`, done:`Done (${filterCounts.done})`};
+    btn.textContent = labels[f];
+    btn.classList.toggle('active', filter === f);
+  });
+}
+
+function renderPhases() {
+  const container = document.getElementById('phases-list');
+  container.innerHTML = '';
+  PHASES.forEach(phase => {
+    const pDone = phase.tasks.filter(t => completed[t.id]).length;
+    const allDone = pDone === phase.tasks.length;
+    const pPct = Math.round(pDone / phase.tasks.length * 100);
+    const isExp = !!expanded[phase.id];
+
+    const visible = phase.tasks.filter(t => {
+      if (filter === 'done') return completed[t.id];
+      if (filter === 'pending') return !completed[t.id];
+      return true;
+    });
+    if (visible.length === 0 && filter !== 'all') return;
+
+    const isGrowth = phase.track === 'growth';
+
+    if (phase.dividerBefore) {
+      const div = document.createElement('div');
+      div.className = 'mvp-divider';
+      div.textContent = phase.dividerBefore;
+      container.appendChild(div);
+    }
+
+    const phaseEl = document.createElement('div');
+    phaseEl.className = 'phase' + (allDone ? ' all-done' : '') + (isGrowth ? ' growth' : '');
+    phaseEl.id = 'phase-' + phase.id;
+
+    const fillColor = allDone ? '#22c55e' : pPct > 0 ? (isGrowth ? '#8b5cf6' : '#1a59cc') : 'rgba(255,255,255,0.1)';
+
+    phaseEl.innerHTML = `
+      <div class="phase-header" onclick="togglePhase('${phase.id}')">
+        <div class="phase-badge${allDone ? ' done' : ''}">
+          ${allDone
+            ? `<svg viewBox="0 0 14 14" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,7 5.5,11 12,3"/></svg>`
+            : phase.label
+          }
+        </div>
+        <div class="phase-info">
+          <div class="phase-title-row">
+            <span class="phase-title">${phase.label}: ${phase.title}</span>
+            <span class="track-tag ${isGrowth ? 'growth' : 'mvp'}">${isGrowth ? 'Expansion' : 'Core Build'}</span>
+            <span class="phase-day">${phase.day}</span>
+          </div>
+          <div class="phase-progress-row">
+            <div class="mini-track"><div class="mini-fill" style="width:${pPct}%;background:${fillColor}"></div></div>
+            <span class="mini-count">${pDone}/${phase.tasks.length}</span>
+          </div>
+        </div>
+        <div class="chevron${isExp ? ' open' : ''}">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="2,4.5 7,9.5 12,4.5"/>
+          </svg>
+        </div>
+      </div>
+    `;
+
+    if (isExp) {
+      const ctx = document.createElement('div');
+      ctx.className = 'phase-context';
+      ctx.textContent = phase.context;
+      phaseEl.appendChild(ctx);
+
+      const list = document.createElement('div');
+      list.className = 'task-list';
+
+      if (visible.length === 0) {
+        list.innerHTML = `<div class="empty-phase">No tasks match this filter in this phase.</div>`;
+      } else {
+        visible.forEach(task => {
+          const isDone = !!completed[task.id];
+          const ts = TAG_STYLES[task.tag] || {bg:'rgba(255,255,255,0.06)',color:'#8a97b4'};
+          const row = document.createElement('div');
+          row.className = 'task-row' + (isDone ? ' completed' : '');
+          row.setAttribute('data-id', task.id);
+          row.setAttribute('role', 'checkbox');
+          row.setAttribute('aria-checked', isDone ? 'true' : 'false');
+          row.setAttribute('tabindex', '0');
+          row.innerHTML = `
+            <div class="checkbox${isDone ? ' checked' : ''}">
+              <svg viewBox="0 0 11 11" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1.5,6 4,9 9.5,2"/>
+              </svg>
+            </div>
+            <span class="task-text">${task.text}</span>
+            <span class="tag" style="background:${ts.bg};color:${ts.color}">${task.tag}</span>
+          `;
+          row.addEventListener('click', () => toggleTask(task.id));
+          row.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleTask(task.id); } });
+          list.appendChild(row);
+        });
+      }
+      phaseEl.appendChild(list);
+    }
+
+    container.appendChild(phaseEl);
+  });
+
+  updateHeader();
+}
+
+window.toggleTask = function(id) {
+  completed[id] = !completed[id];
+  save();
+  renderPhases();
+};
+window.togglePhase = function(id) {
+  expanded[id] = !expanded[id];
+  save();
+  renderPhases();
+};
+window.setFilter = function(f) {
+  filter = f;
+  renderPhases();
+};
+window.expandAll = function() {
+  PHASES.forEach(p => expanded[p.id] = true);
+  save();
+  renderPhases();
+};
+window.collapseAll = function() {
+  PHASES.forEach(p => expanded[p.id] = false);
+  save();
+  renderPhases();
+};
+
+load().then(() => renderPhases());
+</script>
+</body>
+</html>
