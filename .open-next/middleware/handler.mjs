@@ -16,7 +16,7 @@ Object.defineProperty = function(o, p, a) {
 
   
   
-  globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.4";globalThis.nextVersion = "16.3.4";
+  globalThis.openNextDebug = false;globalThis.openNextVersion = "4.1.7";globalThis.nextVersion = "16.3.8";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -831,12 +831,13 @@ async function awaitAllDetachedPromise() {
 function provideNextAfterProvider() {
   const NEXT_REQUEST_CONTEXT_SYMBOL = Symbol.for("@next/request-context");
   const VERCEL_REQUEST_CONTEXT_SYMBOL = Symbol.for("@vercel/request-context");
-  const store = globalThis.__openNextAls.getStore();
-  const waitUntil = store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise));
   const nextAfterContext = {
-    get: () => ({
-      waitUntil
-    })
+    get: () => {
+      const store = globalThis.__openNextAls.getStore();
+      return {
+        waitUntil: store?.waitUntil ?? ((promise) => store?.pendingPromiseRunner.add(promise))
+      };
+    }
   };
   globalThis[NEXT_REQUEST_CONTEXT_SYMBOL] = nextAfterContext;
   if (process.env.EMULATE_VERCEL_REQUEST_CONTEXT) {
@@ -930,11 +931,12 @@ var NEXT_DIR = path.join(__dirname, ".next");
 var OPEN_NEXT_DIR = path.join(__dirname, ".open-next");
 debug({ NEXT_DIR, OPEN_NEXT_DIR });
 var NextConfig = { "env": {}, "webpack": null, "typescript": { "ignoreBuildErrors": false }, "typedRoutes": false, "distDir": ".next", "cleanDistDir": true, "assetPrefix": "", "cacheMaxMemorySize": 52428800, "configOrigin": "next.config.ts", "useFileSystemPublicRoutes": true, "generateEtags": true, "pageExtensions": ["tsx", "ts", "jsx", "js"], "instrumentationClientInject": [], "poweredByHeader": true, "compress": true, "images": { "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840], "imageSizes": [32, 48, 64, 96, 128, 256, 384], "path": "/_next/image", "loader": "default", "loaderFile": "", "domains": [], "disableStaticImages": false, "minimumCacheTTL": 14400, "formats": ["image/webp"], "maximumRedirects": 3, "maximumResponseBody": 5e7, "dangerouslyAllowLocalIP": false, "dangerouslyAllowSVG": false, "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;", "contentDispositionType": "attachment", "localPatterns": [{ "pathname": "**", "search": "" }], "remotePatterns": [], "qualities": [75], "unoptimized": true, "customCacheHandler": false }, "devIndicators": { "position": "bottom-left" }, "onDemandEntries": { "maxInactiveAge": 6e4, "pagesBufferLength": 5 }, "basePath": "", "sassOptions": {}, "trailingSlash": false, "i18n": null, "productionBrowserSourceMaps": false, "excludeDefaultMomentLocales": true, "reactProductionProfiling": false, "reactStrictMode": null, "reactMaxHeadersLength": 6e3, "httpAgentOptions": { "keepAlive": true }, "logging": { "serverFunctions": true, "browserToTerminal": "warn" }, "compiler": {}, "expireTime": 31536e3, "staticPageGenerationTimeout": 60, "output": "standalone", "modularizeImports": { "@mui/icons-material": { "transform": "@mui/icons-material/{{member}}" }, "lodash": { "transform": "lodash/{{member}}" } }, "outputFileTracingRoot": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs", "enablePrerenderSourceMaps": true, "cacheComponents": false, "cacheLife": { "default": { "stale": 300, "revalidate": 900, "expire": 4294967294 }, "seconds": { "stale": 30, "revalidate": 1, "expire": 60 }, "minutes": { "stale": 300, "revalidate": 60, "expire": 3600 }, "hours": { "stale": 300, "revalidate": 3600, "expire": 86400 }, "days": { "stale": 300, "revalidate": 86400, "expire": 604800 }, "weeks": { "stale": 300, "revalidate": 604800, "expire": 2592e3 }, "max": { "stale": 300, "revalidate": 2592e3, "expire": 31536e3 } }, "cacheHandlers": {}, "experimental": { "appNewScrollHandler": true, "coldCacheBadge": false, "devValidationWorker": true, "useSkewCookie": false, "cssChunking": true, "multiZoneDraftMode": false, "appNavFailHandling": false, "prerenderEarlyExit": true, "serverMinification": true, "linkNoTouchStart": false, "caseSensitiveRoutes": false, "cachedNavigations": false, "dynamicOnHover": false, "useOffline": false, "varyParams": true, "optimisticRouting": true, "instrumentationClientRouterTransitionEvents": false, "prefetchInlining": { "maxSize": 2048, "maxBundleSize": 10240 }, "preloadEntriesOnStart": true, "clientRouterFilter": true, "clientRouterFilterRedirects": false, "fetchCacheKeyPrefix": "", "proxyPrefetch": "flexible", "optimisticClientCache": true, "manualClientBasePath": false, "cpus": 3, "memoryBasedWorkersCount": false, "imgOptConcurrency": null, "imgOptOperationCache": null, "imgOptTimeoutInSeconds": 7, "imgOptMaxInputPixels": 268402689, "imgOptSequentialRead": null, "isrFlushToDisk": true, "workerThreads": false, "optimizeCss": false, "nextScriptWorkers": false, "scrollRestoration": false, "externalDir": false, "devMemoryThresholdRestart": true, "disableOptimizedLoading": false, "gzipSize": true, "craCompat": false, "esmExternals": true, "fullySpecified": false, "swcTraceProfiling": false, "forceSwcTransforms": false, "requestInsights": false, "largePageDataBytes": 128e3, "typedEnv": false, "parallelServerCompiles": false, "parallelServerBuildTraces": false, "ppr": false, "authInterrupts": false, "webpackMemoryOptimizations": false, "optimizeServerReact": true, "strictRouteTypes": false, "useTypeScriptCli": true, "removeUncaughtErrorAndRejectionListeners": false, "validateRSCRequestHeaders": true, "staleTimes": { "dynamic": 0, "static": 300 }, "reactDebugChannel": true, "serverComponentsHmrCache": true, "serverComponentsHmrCancellation": false, "staticGenerationMaxConcurrency": 8, "staticGenerationMinPagesPerWorker": 25, "transitionIndicator": false, "gestureTransition": false, "inlineCss": false, "useCache": false, "globalNotFound": false, "browserDebugInfoInTerminal": "warn", "lockDistDir": true, "proxyClientMaxBodySize": 10485760, "hideLogsAfterAbort": false, "mcpServer": true, "turbopackFileSystemCacheForDev": true, "turbopackFileSystemCacheForBuild": true, "turbopackInferModuleSideEffects": true, "turbopackPluginRuntimeStrategy": "childProcesses", "turbopackMemoryEvictionMode": "auto", "optimizePackageImports": ["lucide-react", "date-fns", "lodash-es", "ramda", "antd", "react-bootstrap", "ahooks", "@ant-design/icons", "@headlessui/react", "@headlessui-float/react", "@heroicons/react/20/solid", "@heroicons/react/24/solid", "@heroicons/react/24/outline", "@visx/visx", "@tremor/react", "rxjs", "@mui/material", "@mui/icons-material", "recharts", "react-use", "effect", "@effect/schema", "@effect/platform", "@effect/platform-node", "@effect/platform-browser", "@effect/platform-bun", "@effect/sql", "@effect/sql-mssql", "@effect/sql-mysql2", "@effect/sql-pg", "@effect/sql-sqlite-node", "@effect/sql-sqlite-bun", "@effect/sql-sqlite-wasm", "@effect/sql-sqlite-react-native", "@effect/rpc", "@effect/rpc-http", "@effect/typeclass", "@effect/experimental", "@effect/opentelemetry", "@material-ui/core", "@material-ui/icons", "@tabler/icons-react", "mui-core", "react-icons/ai", "react-icons/bi", "react-icons/bs", "react-icons/cg", "react-icons/ci", "react-icons/di", "react-icons/fa", "react-icons/fa6", "react-icons/fc", "react-icons/fi", "react-icons/gi", "react-icons/go", "react-icons/gr", "react-icons/hi", "react-icons/hi2", "react-icons/im", "react-icons/io", "react-icons/io5", "react-icons/lia", "react-icons/lib", "react-icons/lu", "react-icons/md", "react-icons/pi", "react-icons/ri", "react-icons/rx", "react-icons/si", "react-icons/sl", "react-icons/tb", "react-icons/tfi", "react-icons/ti", "react-icons/vsc", "react-icons/wi"], "useCacheTimeout": 54, "instantInsights": { "validationLevel": "warning" }, "trustHostHeader": false, "isExperimentalCompile": false }, "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight", "bundlePagesRouterDependencies": false, "configFileName": "next.config.ts", "repoRoot": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs", "turbopack": { "root": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs" }, "distDirRoot": ".next" };
-var BuildId = "2oJYFskr8FUnspOTxvUbD";
+var BuildId = "PV8d4-pW7rBzGQ39UOZUN";
 var RoutesManifest = { "basePath": "", "rewrites": { "beforeFiles": [], "afterFiles": [], "fallback": [] }, "redirects": [{ "source": "/:path+/", "destination": "/:path+", "internal": true, "priority": true, "statusCode": 308, "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$" }], "routes": { "static": [{ "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" }, { "page": "/_global-error", "regex": "^/_global\\-error(?:/)?$", "routeKeys": {}, "namedRegex": "^/_global\\-error(?:/)?$" }, { "page": "/_not-found", "regex": "^/_not\\-found(?:/)?$", "routeKeys": {}, "namedRegex": "^/_not\\-found(?:/)?$" }, { "page": "/about", "regex": "^/about(?:/)?$", "routeKeys": {}, "namedRegex": "^/about(?:/)?$" }, { "page": "/api/leads", "regex": "^/api/leads(?:/)?$", "routeKeys": {}, "namedRegex": "^/api/leads(?:/)?$" }, { "page": "/apple-icon.png", "regex": "^/apple\\-icon\\.png(?:/)?$", "routeKeys": {}, "namedRegex": "^/apple\\-icon\\.png(?:/)?$" }, { "page": "/contact", "regex": "^/contact(?:/)?$", "routeKeys": {}, "namedRegex": "^/contact(?:/)?$" }, { "page": "/favicon.ico", "regex": "^/favicon\\.ico(?:/)?$", "routeKeys": {}, "namedRegex": "^/favicon\\.ico(?:/)?$" }, { "page": "/icon.svg", "regex": "^/icon\\.svg(?:/)?$", "routeKeys": {}, "namedRegex": "^/icon\\.svg(?:/)?$" }, { "page": "/privacy-policy", "regex": "^/privacy\\-policy(?:/)?$", "routeKeys": {}, "namedRegex": "^/privacy\\-policy(?:/)?$" }, { "page": "/services", "regex": "^/services(?:/)?$", "routeKeys": {}, "namedRegex": "^/services(?:/)?$" }, { "page": "/terms-of-service", "regex": "^/terms\\-of\\-service(?:/)?$", "routeKeys": {}, "namedRegex": "^/terms\\-of\\-service(?:/)?$" }], "dynamic": [{ "page": "/services/[slug]", "regex": "^/services/([^/]+?)(?:/)?$", "routeKeys": { "nxtPslug": "nxtPslug" }, "namedRegex": "^/services/(?<nxtPslug>[^/]+?)(?:/)?$" }], "data": { "static": [], "dynamic": [] } }, "locales": [] };
 var ConfigHeaders = [];
-var PrerenderManifest = { "version": 4, "routes": { "/": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 125521, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 9184, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 42102, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/about": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 54867, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/about", "dataRoute": "/about.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/apple-icon.png": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/png", "x-next-cache-tags": "_N_T_/layout,_N_T_/apple-icon.png/layout,_N_T_/apple-icon.png/route,_N_T_/apple-icon.png" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/apple-icon.png", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/contact": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 45466, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/contact", "dataRoute": "/contact.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/favicon.ico": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/x-icon", "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/favicon.ico", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/icon.svg": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/svg+xml", "x-next-cache-tags": "_N_T_/layout,_N_T_/icon.svg/layout,_N_T_/icon.svg/route,_N_T_/icon.svg" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/icon.svg", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy-policy": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 51057, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy-policy", "dataRoute": "/privacy-policy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 80358, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services", "dataRoute": "/services.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/algorithmic-search": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 56449, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/algorithmic-search.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/corporate-pr-brand-authority": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 56112, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/corporate-pr-brand-authority.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/data-systems-automation": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55848, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/data-systems-automation.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/marketing-sales-capacity-building": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 56134, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/marketing-sales-capacity-building.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/performance-marketing-abm": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55958, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/performance-marketing-abm.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/revenue-operations-revops": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55950, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/revenue-operations-revops.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/technical-infrastructure-web-dev": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 57198, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/technical-infrastructure-web-dev.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms-of-service": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 50438, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms-of-service", "dataRoute": "/terms-of-service.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/services/[slug]": { "routeType": "page", "response": "empty", "compute": "blocking", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/services/([^/]+?)(?:/)?$", "dataRoute": "/services/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/services/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "6214076d402d1a1c623f53e6713a287d", "previewModeSigningKey": "4a6917f2363b5073bb30792ca71fe2990cf26e5cf5fc72848b62ba76c4a6afc9", "previewModeEncryptionKey": "4208b501f4e2f57c03b06ebad8c88184ea4b36fcd9a3cc3453f36418450ce5f3" } };
+var PrerenderManifest = { "version": 4, "routes": { "/": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 124931, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/", "dataRoute": "/index.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_global-error": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 9184, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_global-error", "dataRoute": "/_global-error.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/_not-found": { "initialStatus": 404, "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 41512, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/_not-found", "dataRoute": "/_not-found.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/about": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 54277, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/about", "dataRoute": "/about.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/apple-icon.png": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/png", "x-next-cache-tags": "_N_T_/layout,_N_T_/apple-icon.png/layout,_N_T_/apple-icon.png/route,_N_T_/apple-icon.png" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/apple-icon.png", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/contact": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 44876, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/contact", "dataRoute": "/contact.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/favicon.ico": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/x-icon", "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/favicon.ico", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/icon.svg": { "initialHeaders": { "cache-control": "public, max-age=0, must-revalidate", "content-type": "image/svg+xml", "x-next-cache-tags": "_N_T_/layout,_N_T_/icon.svg/layout,_N_T_/icon.svg/route,_N_T_/icon.svg" }, "routeType": "route", "response": "complete", "compute": "static", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/icon.svg", "dataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/privacy-policy": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 50448, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/privacy-policy", "dataRoute": "/privacy-policy.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 79768, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services", "dataRoute": "/services.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/algorithmic-search": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55859, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/algorithmic-search.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/corporate-pr-brand-authority": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55522, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/corporate-pr-brand-authority.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/data-systems-automation": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55258, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/data-systems-automation.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/marketing-sales-capacity-building": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55544, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/marketing-sales-capacity-building.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/performance-marketing-abm": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55368, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/performance-marketing-abm.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/revenue-operations-revops": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 55360, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/revenue-operations-revops.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/services/technical-infrastructure-web-dev": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 56608, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/services/[slug]", "dataRoute": "/services/technical-infrastructure-web-dev.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] }, "/terms-of-service": { "routeType": "page", "response": "complete", "compute": "static", "htmlSize": 49842, "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "initialRevalidateSeconds": false, "srcRoute": "/terms-of-service", "dataRoute": "/terms-of-service.rsc", "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "dynamicRoutes": { "/services/[slug]": { "routeType": "page", "response": "empty", "compute": "blocking", "experimentalBypassFor": [{ "type": "header", "key": "next-action" }, { "type": "header", "key": "content-type", "value": "multipart/form-data;.*" }], "routeRegex": "^/services/([^/]+?)(?:/)?$", "dataRoute": "/services/[slug].rsc", "fallback": null, "fallbackRootParams": [], "fallbackRouteParams": [], "dataRouteRegex": "^/services/([^/]+?)\\.rsc$", "prefetchDataRoute": null, "allowHeader": ["host", "x-matched-path", "x-prerender-revalidate", "x-prerender-revalidate-if-generated", "x-next-revalidated-tags", "x-next-revalidate-tag-token"] } }, "notFoundRoutes": [], "preview": { "previewModeId": "0bb81d4ac54dc3bf8441c3f43410bade", "previewModeSigningKey": "285a966417545ffcbece19254d61dbb77429db90ec01c40310fe6a50e67a650b", "previewModeEncryptionKey": "72dad31ab6d144f78e171f552898f17bc48c4c425fa662a3ec632b21f1fbb048" } };
 var MiddlewareManifest = { "version": 3, "middleware": {}, "sortedMiddleware": [], "functions": {} };
+var AppPathsManifest = { "/_global-error/page": "app/_global-error/page.js", "/_not-found/page": "app/_not-found/page.js", "/about/page": "app/about/page.js", "/api/leads/route": "app/api/leads/route.js", "/apple-icon.png/route": "app/apple-icon.png/route.js", "/contact/page": "app/contact/page.js", "/favicon.ico/route": "app/favicon.ico/route.js", "/icon.svg/route": "app/icon.svg/route.js", "/page": "app/page.js", "/privacy-policy/page": "app/privacy-policy/page.js", "/services/[slug]/page": "app/services/[slug]/page.js", "/services/page": "app/services/page.js", "/terms-of-service/page": "app/terms-of-service/page.js" };
 var AppPathRoutesManifest = { "/_global-error/page": "/_global-error", "/_not-found/page": "/_not-found", "/about/page": "/about", "/api/leads/route": "/api/leads", "/apple-icon.png/route": "/apple-icon.png", "/contact/page": "/contact", "/favicon.ico/route": "/favicon.ico", "/icon.svg/route": "/icon.svg", "/page": "/", "/privacy-policy/page": "/privacy-policy", "/services/[slug]/page": "/services/[slug]", "/services/page": "/services", "/terms-of-service/page": "/terms-of-service" };
 var FunctionsConfigManifest = { "version": 1, "functions": {} };
 var PagesManifest = { "/404": "pages/404.html", "/500": "pages/500.html" };
@@ -1370,7 +1372,7 @@ function normalizeLocationHeader(location, baseUrl, encodeQuery = false) {
 init_logger();
 
 // node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
-import { createHash } from "node:crypto";
+import { createHash as createHash2 } from "node:crypto";
 init_stream();
 
 // node_modules/@opennextjs/aws/dist/utils/cache.js
@@ -1461,15 +1463,170 @@ function getTagsFromValue(value) {
   }
 }
 
+// node_modules/@opennextjs/aws/dist/utils/routeCacheKey.js
+import { createHash } from "node:crypto";
+var ROUTE_CACHE_DIRECTORY = "route-cache";
+var DYNAMIC_ROUTE_REGEX = /\/\[[^/]+?\](?=\/|$)/;
+function useRouteCacheKeys(nextVersion) {
+  return compareSemver(nextVersion, ">=", "15.5.27") && compareSemver(nextVersion, "<", "16.0.0") || compareSemver(nextVersion, ">=", "16.3.8");
+}
+function normalizePagePath(page) {
+  if (/^\/index(\/|$)/.test(page) && !DYNAMIC_ROUTE_REGEX.test(page)) {
+    return `/index${page}`;
+  }
+  if (page === "/") {
+    return "/index";
+  }
+  return page.startsWith("/") ? page : `/${page}`;
+}
+function normalizeAppPath(entry) {
+  const pathname = entry.split("/").reduce((acc, segment, index, segments) => {
+    if (!segment)
+      return acc;
+    if (segment.startsWith("(") && segment.endsWith(")"))
+      return acc;
+    if (segment.startsWith("@"))
+      return acc;
+    if ((segment === "page" || segment === "route") && index === segments.length - 1) {
+      return acc;
+    }
+    return `${acc}/${segment}`;
+  }, "");
+  return pathname === "" ? "/" : pathname;
+}
+function compareAppPaths(a, b) {
+  const aHasSlot = a.includes("/@");
+  const bHasSlot = b.includes("/@");
+  if (aHasSlot && !bHasSlot)
+    return -1;
+  if (!aHasSlot && bHasSlot)
+    return 1;
+  return a.localeCompare(b);
+}
+function selectAppPageEntry(route, appPaths) {
+  let entry;
+  for (const appPath of appPaths) {
+    if (normalizeAppPath(appPath).replace(/%5F/g, "_") !== route)
+      continue;
+    if (entry === void 0 || compareAppPaths(entry, appPath) < 0) {
+      entry = appPath;
+    }
+  }
+  return entry;
+}
+function getRouteCacheOwner(sourceRoute, { appPaths, pagesManifest }) {
+  const appEntry = selectAppPageEntry(sourceRoute, appPaths);
+  if (appEntry) {
+    return {
+      kind: appEntry.endsWith("/route") ? "APP_ROUTE" : "APP_PAGE",
+      sourceRoute: appEntry
+    };
+  }
+  if (Object.hasOwn(pagesManifest, sourceRoute)) {
+    return { kind: "PAGES", sourceRoute };
+  }
+  return void 0;
+}
+function normalizeLocalePath(pathname, locales) {
+  const segment = pathname.split("/", 2)[1]?.toLowerCase();
+  const locale = locales?.find((l) => l.toLowerCase() === segment);
+  if (!locale) {
+    return pathname;
+  }
+  return pathname.slice(locale.length + 1) || "/";
+}
+function getDynamicRouteCachePathname(pathname, locales) {
+  if (normalizeLocalePath(pathname, locales) !== "/index") {
+    return pathname;
+  }
+  return pathname.slice(0, -"/index".length) || "/";
+}
+function getPrerenderRouteCacheKey(pathname, manifests) {
+  const { routes, dynamicRoutes } = manifests.prerenderManifest;
+  const prerender = Object.hasOwn(routes, pathname) ? routes[pathname] : void 0;
+  const fallback = !prerender && Object.hasOwn(dynamicRoutes, pathname) ? dynamicRoutes[pathname] : void 0;
+  if (!prerender && !fallback) {
+    return void 0;
+  }
+  const sourceRoute = prerender ? prerender.srcRoute : fallback?.fallbackSourceRoute ?? pathname;
+  let owner;
+  if (sourceRoute) {
+    owner = getRouteCacheOwner(sourceRoute, manifests);
+  } else {
+    owner = getRouteCacheOwner(pathname, manifests);
+    if (!owner && manifests.locales?.length) {
+      const pagesOwner = getRouteCacheOwner(normalizeLocalePath(pathname, manifests.locales), manifests);
+      owner = pagesOwner?.kind === "PAGES" ? pagesOwner : void 0;
+    }
+  }
+  return owner ? getRouteCacheKey(pathname, owner) : void 0;
+}
+function getRouteCacheKey(pathname, owner) {
+  const source = createHash("sha256").update(owner.sourceRoute).digest("hex");
+  return `/${ROUTE_CACHE_DIRECTORY}/${owner.kind}/${source}/$${normalizePagePath(pathname)}`;
+}
+
 // node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 init_logger();
+
+// node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
+var optionalLocalePrefixRegex = `^/(?:${RoutesManifest.locales.map((locale) => `${locale}/?`).join("|")})?`;
+var optionalBasepathPrefixRegex = RoutesManifest.basePath ? `^${RoutesManifest.basePath}/?` : "^/";
+var optionalPrefix = optionalLocalePrefixRegex.replace("^/", optionalBasepathPrefixRegex);
+function routeMatcher(routeDefinitions) {
+  const regexp = routeDefinitions.map((route) => ({
+    page: route.page,
+    regexp: new RegExp(route.regex.replace("^/", optionalPrefix))
+  }));
+  const appPathsSet = /* @__PURE__ */ new Set();
+  const routePathsSet = /* @__PURE__ */ new Set();
+  for (const [k, v] of Object.entries(AppPathRoutesManifest)) {
+    if (k.endsWith("page")) {
+      appPathsSet.add(v);
+    } else if (k.endsWith("route")) {
+      routePathsSet.add(v);
+    }
+  }
+  return function matchRoute(path3) {
+    const foundRoutes = regexp.filter((route) => route.regexp.test(path3));
+    return foundRoutes.map((foundRoute) => {
+      let routeType = "page";
+      if (appPathsSet.has(foundRoute.page)) {
+        routeType = "app";
+      } else if (routePathsSet.has(foundRoute.page)) {
+        routeType = "route";
+      }
+      return {
+        route: foundRoute.page,
+        type: routeType
+      };
+    });
+  };
+}
+var staticRouteMatcher = routeMatcher([
+  ...RoutesManifest.routes.static,
+  ...getStaticAPIRoutes()
+]);
+var dynamicRouteMatcher = routeMatcher(RoutesManifest.routes.dynamic);
+function getStaticAPIRoutes() {
+  const createRouteDefinition = (route) => ({
+    page: route,
+    regex: `^${route}(?:/)?$`
+  });
+  const dynamicRoutePages = new Set(RoutesManifest.routes.dynamic.map(({ page }) => page));
+  const pagesStaticAPIRoutes = Object.keys(PagesManifest).filter((route) => route.startsWith("/api/") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
+  const appPathsStaticAPIRoutes = Object.values(AppPathRoutesManifest).filter((route) => (route.startsWith("/api/") || route === "/api") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
+  return [...pagesStaticAPIRoutes, ...appPathsStaticAPIRoutes];
+}
+
+// node_modules/@opennextjs/aws/dist/core/routing/cacheInterceptor.js
 var CACHE_ONE_YEAR = 60 * 60 * 24 * 365;
 var CACHE_ONE_MONTH = 60 * 60 * 24 * 30;
 var VARY_HEADER = "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch, Next-Url";
 var NEXT_SEGMENT_PREFETCH_HEADER = "next-router-segment-prefetch";
 var NEXT_PRERENDER_HEADER = "x-nextjs-prerender";
 var NEXT_POSTPONED_HEADER = "x-nextjs-postponed";
-async function computeCacheControl(path3, body, host, revalidate, lastModified, isStaleFromTagCache = false) {
+async function computeCacheControl(path3, body, host, revalidate, lastModified, isStaleFromTagCache = false, revalidationPath = path3, revalidationKey = path3) {
   let finalRevalidate = CACHE_ONE_YEAR;
   const existingRoute = Object.entries(PrerenderManifest?.routes ?? {}).find((p) => p[0] === path3)?.[1];
   if (revalidate === void 0 && existingRoute) {
@@ -1478,8 +1635,8 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
     finalRevalidate = revalidate === false ? CACHE_ONE_YEAR : revalidate;
   }
   const age = Math.round((Date.now() - (lastModified ?? 0)) / 1e3);
-  const hash = (str) => createHash("md5").update(str).digest("hex");
-  const etag = hash(body);
+  const hash = (str) => createHash2("md5").update(str).digest("hex");
+  const etag = `"${hash(body)}"`;
   if (revalidate === 0) {
     return {
       [CACHE_CONTROL_HEADER]: NO_STORE_CACHE_CONTROL,
@@ -1501,7 +1658,7 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
       isStaleFromTagCache
     });
     if (isStale2) {
-      let url = NextConfig.trailingSlash ? `${path3}/` : path3;
+      let url = NextConfig.trailingSlash && revalidationPath !== "/" ? `${revalidationPath}/` : revalidationPath;
       if (NextConfig.basePath) {
         url = `${NextConfig.basePath}${url}`;
       }
@@ -1512,8 +1669,8 @@ async function computeCacheControl(path3, body, host, revalidate, lastModified, 
           eTag: etag,
           lastModified: lastModified ?? Date.now()
         },
-        MessageDeduplicationId: hash(`${path3}-${lastModified}-${etag}`),
-        MessageGroupId: generateMessageGroupId(path3)
+        MessageDeduplicationId: hash(`${revalidationKey}-${lastModified}-${etag}`),
+        MessageGroupId: generateMessageGroupId(revalidationKey)
       });
     }
     return {
@@ -1532,23 +1689,25 @@ function getBodyForAppRouter(event, cachedValue) {
   if (cachedValue.type !== "app") {
     throw new Error("getBodyForAppRouter called with non-app cache value");
   }
-  const segmentHeader = `${event.headers[NEXT_SEGMENT_PREFETCH_HEADER]}`;
-  const isSegmentResponse = Boolean(segmentHeader) && segmentHeader in (cachedValue.segmentData || {}) && !NextConfig.experimental?.prefetchInlining;
-  if (isSegmentResponse) {
-    return {
-      body: cachedValue.segmentData[segmentHeader],
-      additionalHeaders: {
-        [NEXT_PRERENDER_HEADER]: "1",
-        [NEXT_POSTPONED_HEADER]: "2"
-      }
-    };
+  const segmentHeader = event.headers[NEXT_SEGMENT_PREFETCH_HEADER];
+  if (typeof segmentHeader === "string" && cachedValue.segmentData) {
+    if (Object.hasOwn(cachedValue.segmentData, segmentHeader)) {
+      return {
+        body: cachedValue.segmentData[segmentHeader],
+        additionalHeaders: {
+          [NEXT_PRERENDER_HEADER]: "1",
+          [NEXT_POSTPONED_HEADER]: "2"
+        }
+      };
+    }
+    return void 0;
   }
   if (cachedValue.rsc === void 0) {
     return void 0;
   }
   return { body: cachedValue.rsc, additionalHeaders: {} };
 }
-async function generateResult(event, localizedPath, cachedValue, lastModified, isStaleFromTagCache = false) {
+async function generateResult(event, localizedPath, cachedValue, lastModified, isStaleFromTagCache = false, cacheKey = localizedPath, revalidationPath = localizedPath) {
   debug("Returning result from experimental cache");
   let body;
   let type = "application/octet-stream";
@@ -1575,7 +1734,7 @@ async function generateResult(event, localizedPath, cachedValue, lastModified, i
     debug("Missing body in the cache entry, falling back to the server");
     return void 0;
   }
-  const cacheControl = await computeCacheControl(localizedPath, body, event.headers.host, cachedValue.revalidate, lastModified, isStaleFromTagCache);
+  const cacheControl = await computeCacheControl(localizedPath, body, event.headers.host, cachedValue.revalidate, lastModified, isStaleFromTagCache, revalidationPath, cacheKey);
   const statusCode = computeStatusCode(event.rewriteStatusCode, cachedValue.meta?.status);
   const headers = {
     ...cacheControl,
@@ -1605,8 +1764,52 @@ function escapePathDelimiters(segment, escapeEncoded) {
 function decodePathParams(pathname) {
   return pathname.split("/").map((segment) => escapePathDelimiters(decodeURIComponent(segment), true)).join("/");
 }
-async function cacheInterceptor(event) {
+var routeCacheManifests;
+function getRouteCacheManifests() {
+  routeCacheManifests ??= {
+    prerenderManifest: {
+      routes: PrerenderManifest?.routes ?? {},
+      dynamicRoutes: PrerenderManifest?.dynamicRoutes ?? {}
+    },
+    appPaths: Object.keys(AppPathsManifest ?? {}),
+    pagesManifest: PagesManifest ?? {},
+    locales: NextConfig.i18n?.locales
+  };
+  return routeCacheManifests;
+}
+function getCacheKey(event, localizedPath, resolvedRoutes) {
+  if (!useRouteCacheKeys(globalThis.nextVersion)) {
+    const isISR = Object.keys(PrerenderManifest?.routes ?? {}).includes(localizedPath) || Object.values(PrerenderManifest?.dynamicRoutes ?? {}).some((dr) => new RegExp(dr.routeRegex).test(localizedPath));
+    if (!isISR)
+      return void 0;
+    return localizedPath === "/" ? "/index" : localizedPath;
+  }
+  const manifests = getRouteCacheManifests();
+  if (Object.hasOwn(manifests.prerenderManifest.routes, localizedPath)) {
+    const manifestKey = getPrerenderRouteCacheKey(localizedPath, manifests);
+    const selectedRoute = resolvedRoutes?.[0];
+    if (resolvedRoutes && !selectedRoute)
+      return void 0;
+    if (!selectedRoute)
+      return manifestKey;
+    const selectedOwner = getRouteCacheOwner(selectedRoute.route, manifests);
+    if (!selectedOwner)
+      return void 0;
+    const selectedKey = getRouteCacheKey(localizedPath, selectedOwner);
+    return selectedKey === manifestKey ? manifestKey : void 0;
+  }
+  const dynamicRoute = resolvedRoutes ? resolvedRoutes[0] : dynamicRouteMatcher(event.rawPath)[0];
+  const dynamicPrerender = dynamicRoute ? manifests.prerenderManifest.dynamicRoutes[dynamicRoute.route] : void 0;
+  if (!dynamicRoute || !dynamicPrerender || dynamicPrerender.fallback !== null) {
+    return void 0;
+  }
+  const owner = getRouteCacheOwner(dynamicRoute.route, manifests);
+  return owner ? getRouteCacheKey(getDynamicRouteCachePathname(localizedPath, manifests.locales), owner) : void 0;
+}
+async function cacheInterceptor(event, resolvedRoutes) {
   if (Boolean(event.headers["next-action"]) || Boolean(event.headers[PRERENDER_REVALIDATE_HEADER]))
+    return event;
+  if (event.method !== "GET" && event.method !== "HEAD")
     return event;
   const cookies = event.headers.cookie || "";
   const hasPreviewData = cookies.includes("__prerender_bypass") || cookies.includes("__next_preview_data");
@@ -1614,21 +1817,20 @@ async function cacheInterceptor(event) {
     debug("Preview mode detected, passing through to handler");
     return event;
   }
-  let localizedPath = localizePath(event);
-  if (NextConfig.basePath) {
-    localizedPath = localizedPath.replace(NextConfig.basePath, "");
-  }
+  const basePath = NextConfig.basePath;
+  const pathWithoutBasePath = !basePath ? event.rawPath : event.rawPath === basePath ? "/" : event.rawPath.startsWith(`${basePath}/`) ? event.rawPath.slice(basePath.length) : event.rawPath;
+  let localizedPath = localizePath({ ...event, rawPath: pathWithoutBasePath });
   localizedPath = localizedPath.replace(/\/$/, "");
+  const revalidationPath = localizedPath || "/";
   try {
     localizedPath = decodePathParams(localizedPath) || "/";
   } catch {
     return event;
   }
-  const cacheKey = localizedPath === "/" ? "/index" : localizedPath;
   debug("Checking cache for", localizedPath, PrerenderManifest);
-  const isISR = Object.keys(PrerenderManifest?.routes ?? {}).includes(localizedPath) || Object.values(PrerenderManifest?.dynamicRoutes ?? {}).some((dr) => new RegExp(dr.routeRegex).test(localizedPath));
-  debug("isISR", isISR);
-  if (isISR) {
+  const cacheKey = getCacheKey(event, localizedPath, resolvedRoutes);
+  debug("cacheKey", cacheKey);
+  if (cacheKey) {
     try {
       const cachedData = await globalThis.incrementalCache.get(cacheKey);
       debug("cached data in interceptor", cachedData);
@@ -1647,11 +1849,11 @@ async function cacheInterceptor(event) {
       switch (cachedData?.value?.type) {
         case "app":
         case "page": {
-          const result = await generateResult(event, localizedPath, cachedData.value, cachedData.lastModified, _isStale);
+          const result = await generateResult(event, localizedPath, cachedData.value, cachedData.lastModified, _isStale, cacheKey, revalidationPath);
           return result ?? event;
         }
         case "redirect": {
-          const cacheControl = await computeCacheControl(localizedPath, "", host, cachedData.value.revalidate, cachedData.lastModified, _isStale);
+          const cacheControl = await computeCacheControl(localizedPath, "", host, cachedData.value.revalidate, cachedData.lastModified, _isStale, revalidationPath, cacheKey);
           return {
             type: "core",
             statusCode: cachedData.value.meta?.status ?? 307,
@@ -1664,7 +1866,7 @@ async function cacheInterceptor(event) {
           };
         }
         case "route": {
-          const cacheControl = await computeCacheControl(localizedPath, cachedData.value.body, host, cachedData.value.revalidate, cachedData.lastModified, _isStale);
+          const cacheControl = await computeCacheControl(localizedPath, cachedData.value.body, host, cachedData.value.revalidate, cachedData.lastModified, _isStale, revalidationPath, cacheKey);
           const isBinary = isBinaryContentType(String(cachedData.value.meta?.headers?.["content-type"]));
           const statusCode = computeStatusCode(event.rewriteStatusCode, cachedData.value.meta?.status);
           const headers = {
@@ -2078,58 +2280,6 @@ function normalizeRepeatedSlashes(url) {
 // node_modules/@opennextjs/aws/dist/core/routing/matcher.js
 init_stream();
 init_logger();
-
-// node_modules/@opennextjs/aws/dist/core/routing/routeMatcher.js
-var optionalLocalePrefixRegex = `^/(?:${RoutesManifest.locales.map((locale) => `${locale}/?`).join("|")})?`;
-var optionalBasepathPrefixRegex = RoutesManifest.basePath ? `^${RoutesManifest.basePath}/?` : "^/";
-var optionalPrefix = optionalLocalePrefixRegex.replace("^/", optionalBasepathPrefixRegex);
-function routeMatcher(routeDefinitions) {
-  const regexp = routeDefinitions.map((route) => ({
-    page: route.page,
-    regexp: new RegExp(route.regex.replace("^/", optionalPrefix))
-  }));
-  const appPathsSet = /* @__PURE__ */ new Set();
-  const routePathsSet = /* @__PURE__ */ new Set();
-  for (const [k, v] of Object.entries(AppPathRoutesManifest)) {
-    if (k.endsWith("page")) {
-      appPathsSet.add(v);
-    } else if (k.endsWith("route")) {
-      routePathsSet.add(v);
-    }
-  }
-  return function matchRoute(path3) {
-    const foundRoutes = regexp.filter((route) => route.regexp.test(path3));
-    return foundRoutes.map((foundRoute) => {
-      let routeType = "page";
-      if (appPathsSet.has(foundRoute.page)) {
-        routeType = "app";
-      } else if (routePathsSet.has(foundRoute.page)) {
-        routeType = "route";
-      }
-      return {
-        route: foundRoute.page,
-        type: routeType
-      };
-    });
-  };
-}
-var staticRouteMatcher = routeMatcher([
-  ...RoutesManifest.routes.static,
-  ...getStaticAPIRoutes()
-]);
-var dynamicRouteMatcher = routeMatcher(RoutesManifest.routes.dynamic);
-function getStaticAPIRoutes() {
-  const createRouteDefinition = (route) => ({
-    page: route,
-    regex: `^${route}(?:/)?$`
-  });
-  const dynamicRoutePages = new Set(RoutesManifest.routes.dynamic.map(({ page }) => page));
-  const pagesStaticAPIRoutes = Object.keys(PagesManifest).filter((route) => route.startsWith("/api/") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
-  const appPathsStaticAPIRoutes = Object.values(AppPathRoutesManifest).filter((route) => (route.startsWith("/api/") || route === "/api") && !dynamicRoutePages.has(route)).map(createRouteDefinition);
-  return [...pagesStaticAPIRoutes, ...appPathsStaticAPIRoutes];
-}
-
-// node_modules/@opennextjs/aws/dist/core/routing/matcher.js
 var routeHasMatcher = (headers, cookies, query) => (redirect) => {
   switch (redirect.type) {
     case "header":
@@ -2227,7 +2377,7 @@ function handleRewrites(event, rewrites) {
     const pathToUse = rewrite.locale === false ? rawPath : localizedRawPath;
     debug("urlParts", { pathname, protocol, hostname, queryString });
     const toDestinationPath = compile(escapeRegex(pathname, { isPath: true }));
-    const toDestinationHost = compile(escapeRegex(hostname));
+    const toDestinationHost = compile(escapeRegex(hostname).replace(/:(\d+)$/, "\\:$1"));
     const toDestinationQuery = compile(escapeRegex(queryString));
     const params = {
       // params for the source
@@ -2422,6 +2572,7 @@ function handleFallbackFalse(internalEvent, prerenderManifest) {
 }
 
 // node_modules/@opennextjs/aws/dist/core/routing/middleware.js
+init_util();
 init_stream();
 init_utils();
 var middlewareManifest = MiddlewareManifest;
@@ -2497,7 +2648,7 @@ async function handleMiddleware(internalEvent, initialSearch, middlewareLoader =
       }
     }
   });
-  const setCookies = responseHeaders.getSetCookie();
+  const setCookies = responseHeaders.getSetCookie().flatMap((maybeCompoundCookie) => parseSetCookieHeader(maybeCompoundCookie));
   if (setCookies.length > 0) {
     resHeaders["set-cookie"] = setCookies;
   }
@@ -2664,6 +2815,10 @@ async function routingHandler(event, { assetResolver }) {
     }
     const isNextImageRoute = eventOrResult.rawPath.startsWith("/_next/image");
     const isRouteFoundBeforeAllRewrites = isStaticRoute || isDynamicRoute || isExternalRewrite;
+    const resolvedRoutes = [
+      ...staticRouteMatcher(eventOrResult.rawPath),
+      ...dynamicRouteMatcher(eventOrResult.rawPath)
+    ];
     if (!(isRouteFoundBeforeAllRewrites || isNextImageRoute || // We need to check again once all rewrites have been applied
     staticRouteMatcher(eventOrResult.rawPath).length > 0 || dynamicRouteMatcher(eventOrResult.rawPath).length > 0)) {
       eventOrResult = {
@@ -2676,19 +2831,15 @@ async function routingHandler(event, { assetResolver }) {
         }
       };
     }
-    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !isInternalResult(eventOrResult)) {
+    if (globalThis.openNextConfig.dangerous?.enableCacheInterception && !isExternalRewrite && !isInternalResult(eventOrResult)) {
       debug("Cache interception enabled");
-      eventOrResult = await cacheInterceptor(eventOrResult);
+      eventOrResult = await cacheInterceptor(eventOrResult, resolvedRoutes);
       if (isInternalResult(eventOrResult)) {
         applyMiddlewareHeaders(eventOrResult, headers);
         return eventOrResult;
       }
     }
     applyMiddlewareHeaders(eventOrResult, headers);
-    const resolvedRoutes = [
-      ...foundStaticRoute,
-      ...foundDynamicRoute
-    ];
     debug("resolvedRoutes", resolvedRoutes);
     return {
       internalEvent: eventOrResult,

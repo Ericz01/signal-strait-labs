@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { services } from "@/lib/services-data";
 
 export function Footer() {
   return (
@@ -112,15 +111,42 @@ export function Footer() {
               Solutions
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
-              {services.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={service.href}
-                  className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
-                >
-                  {service.title}
-                </Link>
-              ))}
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Technical Infrastructure & Web Dev
+              </Link>
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Algorithmic Search (SEO/AEO/GEO)
+              </Link>
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Data Systems & Automation
+              </Link>
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Revenue Operations (RevOps)
+              </Link>
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Performance Marketing & ABM
+              </Link>
+              <Link
+                href="#services"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Corporate PR & Brand Authority
+              </Link>
             </nav>
           </div>
                     {/* Column 3: Company */}
@@ -130,28 +156,32 @@ export function Footer() {
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
               <Link
-                href="/about"
+                href="#about"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 About
               </Link>
-              <span className="text-sm text-slate-500">
-                Insights
-              </span>
               <Link
-                href="/contact"
+                href="#insights"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
+                Insights
+              </Link>
+              <Link
+                href="#contact"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Contact
               </Link>
-              <span
-                className="group flex items-center gap-2 text-sm text-slate-500"
+              <Link
+                href="#"
+                className="group flex items-center gap-2 text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Careers
                 <span className="rounded-full border border-ssl-gold/20 bg-ssl-gold/10 px-2 py-0.5 text-[10px] font-bold text-ssl-gold">
                   Hiring
                 </span>
-              </span>
+              </Link>
             </nav>
           </div>
                     {/* Column 4: Legal */}
@@ -161,20 +191,23 @@ export function Footer() {
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
               <Link
-                href="/privacy-policy"
+                href="#"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/terms-of-service"
+                href="#"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Terms of Service
               </Link>
-              <span className="text-sm text-slate-500">
+              <Link
+                href="#"
+                className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
+              >
                 Cookie Policy
-              </span>
+              </Link>
             </nav>
           </div>
 

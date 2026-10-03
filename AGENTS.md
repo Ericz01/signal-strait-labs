@@ -25,7 +25,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 | Layer | Version / Pattern |
 | --- | --- |
-| **Framework** | Next.js **16.2.6** — **App Router** (`app/` directory) |
+| **Framework** | Next.js **16.3.x** — **App Router** (`app/` directory) |
 | **UI** | React **19.2.x** |
 | **Language** | TypeScript **5.x** (`strict: true`) |
 | **Styling** | Tailwind CSS **v4** via `@import "tailwindcss"` in `app/globals.css` |
@@ -42,11 +42,20 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ```
 app/
-  layout.tsx    # Root layout, fonts, metadata export
-  page.tsx      # Home page (Server Component)
-  globals.css   # Tailwind v4 theme + brand utilities
+  layout.tsx            # Root layout, fonts, metadata export
+  page.tsx              # Home page (Server Component, JSON-LD)
+  globals.css           # Tailwind v4 theme + brand utilities
+  services/[slug]/      # Statically generated from lib/services-data.ts
+  api/leads/route.ts    # Contact-form endpoint (only dynamic route)
+components/
+  layout/               # Header, Footer, BrandLogo
+  ui/                   # cva-based primitives (Button, Card, Badge, ...)
+  *.tsx                 # Home-page sections
+lib/
+  *-data.ts             # Typed content arrays that drive pages and sections
+  utils.ts              # cn() = clsx + tailwind-merge
 public/
-  logo.png      # Full logotype asset
+  logo.png              # Full logotype asset
 ```
 
 ---
@@ -214,4 +223,4 @@ Local secrets live in **`.env.local`** (git-ignored via `.env*` in `.gitignore`)
 
 ---
 
-*Last synced with: `package.json`, `app/globals.css`, `app/layout.tsx`.*
+*Last synced with: `package.json`, `app/globals.css`, `app/layout.tsx`, `wrangler.toml`.*

@@ -1,17 +1,65 @@
 # Signal Strait Labs Project Rules
 
-## Tech Stack Standards
-- Framework: Next.js 15+ (App Router, strict TypeScript)
-- Styling: Tailwind CSS v4+ utility syntax
-- Infrastructure: Serverless, edge-optimized deployment on Cloudflare Pages
+> Full reference: AGENTS.md. This file summarizes the rules that matter most when generating code.
 
-## Core Styling Conventions
-- Theme: Ultra-premium luxury dark design system
-- Primary Background: #01081b (or utility class `.luxury-bg-gradient`)
-- Accent Colors: Pure Digital Blue (`#1a59cc`), Premium Golden (`#C5A059`)
-- Text Gradient: Always utilize the `.text-gold-gradient` utility class for high-impact hero headings.
+## Tech Stack Standards
+- Framework: Next.js 16.3.x (App Router, `app/` directory), React 19.2, TypeScript 5 (`strict: true`)
+- This Next.js version has breaking changes vs. older training data. Read `node_modules/next/dist/docs/` before using unfamiliar APIs. Example: route `params` is a Promise (`const { slug } = await params`).
+- Styling: Tailwind CSS v4, configured CSS-first in `app/globals.css` (`@theme`, `@layer base`, `@utility`). There is NO `tailwind.config.js`. Do not create one.
+- Infrastructure: deployed to Cloudflare as a Worker via OpenNext (`@opennextjs/cloudflare`, `wrangler.toml`, `open-next.config.ts`). `next.config.ts` sets `images.unoptimized: true`.
+- Imports: use the `@/*` alias (maps to project root).
+
+## Project Structure
+- `app/` — routes: `/`, `/about`, `/services`, `/services/[slug]` (static via `generateStaticParams`), `/contact`, `/privacy-policy`, `/terms-of-service`, plus `not-found.tsx` and `loading.tsx`.
+- `app/api/leads/route.ts` — the only server endpoint (contact-form submissions).
+- `components/` — home-page sections (Hero, Services, WhySSL, Process, Testimonials, CTABanner, ContactSection, FAQAccordion).
+- `components/layout/` — Header, Footer, BrandLogo.
+- `components/ui/` — shadcn-style primitives: `cva` variants + `cn()` + Radix `Slot`.
+- `lib/*-data.ts` — typed content arrays (services, process, differentiators, testimonials). Edit copy here, not in components.
+- `lib/utils.ts` — `cn()` (clsx + tailwind-merge).
+
+## Typography
+- Fonts are loaded with `next/font/google` in `app/layout.tsx`.
+- Display / headings (`h1`–`h6`): Sora → `--font-sora` → theme token `--font-display` (`font-display`).
+- Body / UI: Plus Jakarta Sans → `--font-plus-jakarta` → theme token `--font-body` (`font-body`).
+- Fluid sizes: `--text-fluid-h1` `clamp(2.5rem, 6vw, 4.5rem)`, `--text-fluid-h2` `clamp(1.75rem, 4vw, 3rem)`, `--text-fluid-body` `clamp(1rem, 1.5vw, 1.125rem)`.
+- Do not use Inter, Roboto, Arial, Geist or system-ui as brand fonts.
+
+## Color Tokens (`@theme` in app/globals.css)
+- `ssl-light-bg` `#fbfbfd` — light canvas; `body` background and the section background on content pages.
+- `ssl-bg` `#01081b` — "Abyss Blue": ink on light surfaces and the base of dark anchor blocks.
+- `ssl-blue` `#1a59cc` — accent / secondary CTA.
+- `ssl-gold` `#C5A059` — luxury accent, borders, primary CTA fill.
+- `ssl-white` `#ffffff`.
+- Prefer these tokens (`bg-ssl-gold`, `text-ssl-bg`, `border-ssl-gold/20`) over raw hex values.
+
+## Design System: Dual-Tone (NOT a full dark theme)
+- Light editorial canvas (`bg-ssl-light-bg`) punctuated by dark Abyss Blue anchor blocks. Keep the contrast. Don't flatten everything to light or to dark.
+- Light zones: headings `text-ssl-bg`, body `text-slate-600` / `text-slate-700`, cards `.glass-card-light` or `bg-white` + `border-slate-100`.
+- Dark zones: headings `text-white`, body `text-slate-300` / `text-slate-400`, accents `text-ssl-gold`.
+- Dark surfaces in use: Hero (`bg-slate-950` + `.grid-pattern-dark` + `animate-background-drift`), Header (dark glass, gold accents), Footer (`bg-[#01081b]`), metrics banner and CTA banner (`.glass-card-dark .glass-card-dark-static`).
+
+## Utility Classes (app/globals.css)
+- `.luxury-bg-gradient` — DARK gradient (`#01081b` → `#051336` → `#1c1a14` → `#423721`). Applied to the root wrapper in `app/layout.tsx`, so it shows wherever a page doesn't paint its own background (e.g. the 404 page, which uses white text). Its CSS comment calls it a "light-canvas" background, but that is wrong.
+- `.glass-card-light` — frosted white panel (70% white, 16px blur, faint ink border).
+- `.glass-card-dark` — Abyss Blue gradient card with gold border, shadow, and hover lift. Add `.glass-card-dark-static` to disable the lift on large banners.
+- `.glass-nav-dark` — dark translucent glass for nav bars (no hover transform).
+- `.glass-nav-light` — light translucent bar (legacy / optional).
+- `.footer-dark` — `#01081b` → `#06153b` vertical gradient.
+- `.glass-input-dark` — form fields for dark containers (gold focus ring).
+- `.text-gold-gradient` — gold clipped text, for DARK surfaces.
+- `.text-gold-contrast` — ink → bronze → gold clipped text, for LIGHT surfaces.
+- `.text-brand-gradient` — white → gold → blue clipped text, for dark surfaces.
+- `@utility luxurious-gold-gradient` — metallic gold background.
+- `@utility grid-pattern-dark` — faint white 32px grid for dark backgrounds.
+- `@utility animate-on-scroll` — scroll-driven animation timeline (paired with `components/ui/AnimateOnScroll`).
+- Animations: `animate-fade-up`, `animate-slide-in-left`, `animate-fade-in`, `animate-background-drift`, `animate-shimmer`.
+- Add new reusable styles to `app/globals.css`, not as inline styles or a JS config.
 
 ## Code Constraints
-- Maintain Server Components by default for SEO/GEO discoverability.
-- Only add 'use client' at the very top of files requiring explicit interactive client hooks (e.g., state, event listeners).
-- Never pass interactive event functions directly inside non-client layout structures.
+- Server Components by default for SEO/AEO/GEO discoverability.
+- Only add 'use client' at the top of files that need interactivity (state, effects, event listeners, browser APIs), e.g. `ContactSection.tsx`.
+- Never pass event handlers from Server Components into non-client layout structures.
+- Preserve the `metadata` export in `app/layout.tsx` and the JSON-LD block in `app/page.tsx`.
+- In Worker route handlers, read secrets per request via `getCloudflareContext().env` (fallback `process.env`). Never read them at module scope.
+- Verify with `npm run lint`, `npx tsc --noEmit`, and `npm run build` (`npm run build:worker` for the Cloudflare bundle). There is no test suite.
