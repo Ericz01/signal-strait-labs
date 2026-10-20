@@ -106,7 +106,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs",
+    "outputFileTracingRoot": "/home/eric/projects/signal-strait-labs",
     "enablePrerenderSourceMaps": true,
     "cacheComponents": false,
     "cacheLife": {
@@ -321,13 +321,13 @@
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
-    "repoRoot": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs",
+    "repoRoot": "/home/eric/projects/signal-strait-labs",
     "turbopack": {
-      "root": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs"
+      "root": "/home/eric/projects/signal-strait-labs"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs",
+  "appDir": "/home/eric/projects/signal-strait-labs",
   "relativeAppDir": "",
   "files": [
     ".next/package.json",

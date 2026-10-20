@@ -3890,7 +3890,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/server/load-manifest.external.js": {
-      "bytes": 73223,
+      "bytes": 73088,
       "imports": [
         {
           "path": "path",
@@ -3915,7 +3915,7 @@
         {
           "path": ".open-next/server-functions/default/.next/server/app/api/leads/route_client-reference-manifest.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/api/leads/route_client-reference-manifest.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/api/leads/route_client-reference-manifest.js"
         }
       ],
       "format": "cjs"
@@ -4235,7 +4235,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/compiled/next-server/app-page-turbo.runtime.prod.js": {
-      "bytes": 701580,
+      "bytes": 701499,
       "imports": [
         {
           "path": "url",
@@ -4395,17 +4395,17 @@
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
         }
       ],
       "format": "cjs"
@@ -4777,7 +4777,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/compiled/next-server/app-route-turbo.runtime.prod.js": {
-      "bytes": 190577,
+      "bytes": 190496,
       "imports": [
         {
           "path": "url",
@@ -4872,17 +4872,17 @@
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/node_modules/next/dist/server/app-render/after-task-async-storage.external.js",
@@ -5111,7 +5111,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js": {
-      "bytes": 46990,
+      "bytes": 45451,
       "imports": [
         {
           "path": "worker_threads",
@@ -5141,287 +5141,287 @@
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_013mswt._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_013mswt._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_013mswt._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_0wemi40._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_0wemi40._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_0wemi40._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js"
         },
         {
           "path": "<runtime>",
@@ -5432,7 +5432,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js": {
-      "bytes": 47000,
+      "bytes": 45461,
       "imports": [
         {
           "path": "worker_threads",
@@ -5462,287 +5462,287 @@
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__06r9g1n._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__08m35fp._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0gz0l81._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1dquqb1._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1t7mziw._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[turbopack]_runtime.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0ajmr5w._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0zaut9-._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__not-found_page_actions_0pt47yr.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_loading_tsx_0a1flg9._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/app_not-found_tsx_1gi3i27._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_1nkgb45._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_0nkkbfv._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_1c5ky4f._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_0p8s4lh._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_1bi5-b2._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_unauthorized_0l_sp0x.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0hg5gib._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mvhb4c._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app__global-error_page_actions_0zi5s8-.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_0q-w892.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0mh9m61._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1qd4c1z._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_about_page_actions_0xvgj07.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ui_SectionHeading_tsx_1jwo6oa._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[externals]__12s2uxr._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__0l3yhx4._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[root-of-the-server]__11gf5t1._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/[turbopack]_runtime.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_api_leads_route_actions_10t572w.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_013mswt._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_013mswt._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_013mswt._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_apple-icon_png_route_actions_0jcl8au.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0iqm5ud._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1of-stw._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_contact_page_actions_0kuoobr.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/components_ContactSection_tsx_0uo1t6a._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/node_modules_lucide-react_dist_esm_08zge1r._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_1mxn_lb._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_favicon_ico_route_actions_0g2jjls.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_0wemi40._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_0wemi40._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_0wemi40._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/_next-internal_server_app_icon_svg_route_actions_1r2h_ub.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0dsh7ke._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1h4r5un._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ykk92q._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_page_actions_0hhsz1j.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0urqny5._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_privacy-policy_page_actions_0zb6o_b.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__1mzmzyz._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_069q7cv._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_1ckhk5t._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_[slug]_page_actions_1hnzk5f.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__0sys9ly._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0aof0re._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_0j1p440._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_services_page_actions_18c-f7f.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/[root-of-the-server]__150617q._.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/chunks/ssr/_next-internal_server_app_terms-of-service_page_actions_15ed_k9.js"
         },
         {
           "path": "<runtime>",
@@ -5896,7 +5896,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/server/require.js": {
-      "bytes": 7375,
+      "bytes": 7024,
       "imports": [
         {
           "path": "path",
@@ -5946,67 +5946,67 @@
         {
           "path": ".open-next/server-functions/default/.next/server/app/terms-of-service/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/terms-of-service/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/terms-of-service/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/apple-icon.png/route.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/apple-icon.png/route.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/apple-icon.png/route.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/services/[slug]/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/services/[slug]/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/services/[slug]/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/privacy-policy/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/privacy-policy/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/privacy-policy/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/_global-error/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/_global-error/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/_global-error/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/favicon.ico/route.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/favicon.ico/route.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/favicon.ico/route.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/_not-found/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/_not-found/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/_not-found/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/api/leads/route.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/api/leads/route.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/api/leads/route.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/icon.svg/route.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/icon.svg/route.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/icon.svg/route.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/services/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/services/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/services/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/contact/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/contact/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/contact/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/about/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/about/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/about/page.js"
         },
         {
           "path": ".open-next/server-functions/default/.next/server/app/page.js",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/.next/server/app/page.js"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/.next/server/app/page.js"
         }
       ],
       "format": "cjs"
@@ -6554,7 +6554,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/compiled/next-server/pages-turbo.runtime.prod.js": {
-      "bytes": 131328,
+      "bytes": 131247,
       "imports": [
         {
           "path": "url",
@@ -6659,17 +6659,17 @@
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/node_modules/react/jsx-runtime.js",
@@ -6921,7 +6921,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/node_modules/next/dist/server/next-server.js": {
-      "bytes": 50309,
+      "bytes": 50228,
       "imports": [
         {
           "path": ".open-next/server-functions/default/node_modules/next/dist/server/node-environment.js",
@@ -7231,17 +7231,17 @@
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/composable-cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/composable-cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/cache.cjs",
           "kind": "require-call",
-          "original": "/mnt/c/Users/Eric/Desktop/SignalStraitLabs/Dev/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
+          "original": "/home/eric/projects/signal-strait-labs/.open-next/server-functions/default/cache.cjs"
         },
         {
           "path": ".open-next/server-functions/default/node_modules/next/dist/experimental/testmode/server.js",
@@ -7257,7 +7257,7 @@
       "format": "esm"
     },
     ".open-next/server-functions/default/index.mjs": {
-      "bytes": 95649,
+      "bytes": 95568,
       "imports": [
         {
           "path": "node:module",
@@ -8707,7 +8707,7 @@
           "bytesInOutput": 442
         },
         ".open-next/server-functions/default/node_modules/next/dist/server/load-manifest.external.js": {
-          "bytesInOutput": 55833
+          "bytesInOutput": 55725
         },
         ".open-next/cloudflare-templates/shims/throw.js": {
           "bytesInOutput": 215
@@ -9148,10 +9148,10 @@
           "bytesInOutput": 633
         },
         ".open-next/server-functions/default/index.mjs": {
-          "bytesInOutput": 67177
+          "bytesInOutput": 67096
         }
       },
-      "bytes": 3830941
+      "bytes": 3830752
     }
   }
 }

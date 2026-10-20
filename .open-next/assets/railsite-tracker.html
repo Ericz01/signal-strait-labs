@@ -331,11 +331,11 @@ const PHASES = [
     "title": "Infrastructure & Server Setup",
     "day": "Week 1-2",
     "track": "mvp",
-    "context": "Stand up the automation engine on free-tier infrastructure, secured properly, before any workflow logic is built on top of it.",
+    "context": "Stand up the automation engine on premium infrastructure, secured properly, before any workflow logic is built on top of it.",
     "tasks": [
       {
         "id": "t010",
-        "text": "Provision a free-tier VPS (Oracle Cloud Always Free or equivalent) to host n8n",
+        "text": "Provision of a VPS (Oracle Cloud) to host n8n",
         "tag": "Config"
       },
       {
@@ -355,7 +355,7 @@ const PHASES = [
       },
       {
         "id": "t014",
-        "text": "Install a free HTTPS certificate (Let's Encrypt) with auto-renewal for the subdomain",
+        "text": "Install an HTTPS certificate (Let's Encrypt) with auto-renewal for the subdomain",
         "tag": "Config"
       },
       {
@@ -370,7 +370,7 @@ const PHASES = [
       },
       {
         "id": "t017",
-        "text": "Set up free uptime monitoring (e.g. UptimeRobot) to alert if the server goes down",
+        "text": "Set up uptime monitoring (e.g. UptimeRobot) to alert if the server goes down",
         "tag": "Config"
       }
     ]
@@ -631,7 +631,7 @@ const PHASES = [
     "title": "Reporting Dashboard",
     "day": "Week 3",
     "track": "mvp",
-    "context": "A dashboard RailSite can check any time, built once on free tools, so reporting never becomes a recurring manual task.",
+    "context": "A dashboard RailSite can check any time, built once on premium tools, so reporting never becomes a recurring manual task.",
     "tasks": [
       {
         "id": "t058",
@@ -1207,7 +1207,7 @@ const PHASES = [
     "tasks": [
       {
         "id": "t146",
-        "text": "Set up free rank tracking for priority keywords via Google Search Console",
+        "text": "Set up rank tracking for priority keywords via Google Search Console",
         "tag": "SEO"
       },
       {
@@ -1275,9 +1275,17 @@ let expanded = { R0: true };
 let filter = 'all';
 let saveTimer = null;
 
+const VIEW_ONLY = new URLSearchParams(location.search).get('view') === 'client';
+if (VIEW_ONLY) {
+  const s = document.createElement('style');
+  s.textContent = '.task-row{cursor:default!important}';
+  document.head.appendChild(s);
+}
+
 function setSyncStatus(state) {
   const el = document.getElementById('sync-status');
   if (!el) return;
+  if (VIEW_ONLY) { el.textContent = 'View only'; el.style.color = '#7aacff'; return; }
   const states = {
     saving:  { text: '↑ Saving…',   color: '#C5A059' },
     saved:   { text: '✓ Synced',     color: '#22c55e' },
@@ -1290,6 +1298,7 @@ function setSyncStatus(state) {
 }
 
 async function save() {
+  if (VIEW_ONLY) return;
   clearTimeout(saveTimer);
   saveTimer = setTimeout(async () => {
     setSyncStatus('saving');
@@ -1446,6 +1455,7 @@ function renderPhases() {
 }
 
 window.toggleTask = function(id) {
+  if (VIEW_ONLY) return;
   completed[id] = !completed[id];
   save();
   renderPhases();
