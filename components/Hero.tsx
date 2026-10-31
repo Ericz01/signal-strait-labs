@@ -11,14 +11,14 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Layer 1: Slow Drifting Animated Mesh Gradient */}
         <div 
-          className="absolute inset-0 animate-background-drift opacity-60"
+          className="absolute inset-y-0 left-0 w-[200%] animate-background-drift opacity-60 will-change-transform motion-reduce:animate-none"
           style={{
             backgroundImage: `
               radial-gradient(at 15% 20%, rgba(245, 158, 11, 0.04) 0px, transparent 50%),
               radial-gradient(at 80% 40%, rgba(6, 182, 212, 0.03) 0px, transparent 50%),
               radial-gradient(at 40% 80%, rgba(99, 102, 241, 0.03) 0px, transparent 50%)
             `,
-            backgroundSize: '200% 200%',
+            backgroundSize: '100% 100%',
           }}
         />
         {/* Layer 2: Faint Geometric Grid Overlay */}

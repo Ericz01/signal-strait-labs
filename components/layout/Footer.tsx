@@ -215,7 +215,7 @@ export function Footer() {
 
         {/* Bottom Bar Utility Line */}
         <div className="mt-12 border-t border-white/[0.06] pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-slate-500/80 sm:flex-row">
+          <div className="flex flex-col items-center justify-between gap-4 text-xs text-slate-400 sm:flex-row">
             <p>© 2022–2026 Signal Strait Labs. All rights reserved.</p>
             <div className="flex items-center gap-2">
               <svg

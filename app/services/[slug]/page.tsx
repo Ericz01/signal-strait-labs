@@ -91,8 +91,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </AnimateOnScroll>
 
         <AnimateOnScroll variant="slide-up" className="mt-20 text-center">
-          <Button asChild size="lg" className="bg-ssl-blue hover:bg-ssl-blue/90">
-            <Link href="/#contact">Start a Project</Link>
+          <Button asChild size="lg" className="bg-ssl-blue text-white hover:bg-ssl-blue/90">
+            <Link href="/contact">Start a Project</Link>
           </Button>
         </AnimateOnScroll>
       </div>

@@ -28,7 +28,7 @@ export default function Process() {
               }}
             >
               <div className="relative flex flex-col items-start h-full p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-4xl font-black text-ssl-blue/20 mb-4 font-display">
+                <div aria-hidden="true" className="text-4xl font-black text-ssl-blue/70 mb-4 font-display">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold text-ssl-bg mb-3 font-display">

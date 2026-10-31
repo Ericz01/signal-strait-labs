@@ -20,7 +20,7 @@ export function CookieConsent() {
           We only use what the site needs to work. If you accept, we also load embedded content like Google Maps,
           which may set its own cookies.{' '}
           <Link href="/privacy-policy#cookies" className="font-semibold text-ssl-gold underline-offset-4 hover:underline">
-            Read more
+            Read our cookie policy
           </Link>
         </p>
         <div className="flex shrink-0 gap-3">

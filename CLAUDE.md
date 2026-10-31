@@ -20,8 +20,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Content model
 
 - Page content lives in typed arrays in `lib/*-data.ts` (services, process, differentiators, testimonials). Edit content there, not in components. `app/services/[slug]/page.tsx` uses `generateStaticParams` over `services`, so adding a service entry creates its detail page automatically.
-- Routes beyond AGENTS.md's tree: `about/`, `contact/`, `services/` (index page), `privacy-policy/`, `terms-of-service/`, plus `loading.tsx` and `not-found.tsx`.
+- Routes beyond AGENTS.md's tree: `about/`, `contact/`, `services/` (index page), `privacy-policy/`, `terms-of-service/`, plus `not-found.tsx`. There is deliberately no root `loading.tsx`: it made every static page stream, putting a skeleton in `<main>` and the real content in a hidden block, which pushed mobile LCP to about 3s.
 - Route `params` are a `Promise` in this Next version (`const { slug } = await params`).
+- Small gold text on light surfaces must use `text-ssl-gold-deep` (`#8a6a2b`); `ssl-gold` and `amber-500` fail contrast on the light canvas.
 - UI primitives in `components/ui/` follow the shadcn pattern: `cva` variants + `cn()` from `@/lib/utils` + Radix `Slot` for `asChild`.
 
 ### Lead capture (`app/api/leads/route.ts`)

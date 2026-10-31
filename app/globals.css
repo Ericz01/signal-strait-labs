@@ -5,6 +5,8 @@
   --color-ssl-light-bg: #fbfbfd;
   --color-ssl-blue: #1a59cc;
   --color-ssl-gold: #C5A059;
+  /* Deep gold for small gold text on light surfaces (4.8:1 on #fbfbfd, WCAG AA). */
+  --color-ssl-gold-deep: #8a6a2b;
   --color-ssl-white: #ffffff;
 
   /* Apple-inspired Breakpoints */
@@ -60,12 +62,14 @@
     }
   }
 
+  /* Transform-based so it runs on the compositor (no repaint every frame).
+     Used on a layer twice the width of its container. */
   @keyframes background-drift {
     0%, 100% {
-      background-position: 0% 50%;
+      transform: translate3d(0, 0, 0);
     }
     50% {
-      background-position: 100% 50%;
+      transform: translate3d(-50%, 0, 0);
     }
   }
   @keyframes shimmer {

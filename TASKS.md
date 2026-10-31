@@ -111,8 +111,11 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t112** Analyze JS bundle size with @next/bundle-analyzer: identify and remove unnecessary imports.
   - Done when: a bundle report has been reviewed and unneeded imports are removed.
   - Result: `@next/bundle-analyzer` is webpack-only; this project uses Turbopack (use `npx next experimental-analyze` for the interactive view). Reviewed the client chunks directly. The contact form imported all of `lib/services-data.ts`, which shipped every service's copy and FAQs to the browser; it now receives title/slug options as a prop. Client JS went from 217KB to 203KB gzipped. The remaining large chunks are React and the Next.js runtime. `validator` and the Upstash clients are server-only.
-- [ ] **t113** Run Lighthouse audit (mobile simulation): targets Performance 90+, Accessibility 95+, SEO 100.
+- [x] **t113** Run Lighthouse audit (mobile simulation): targets Performance 90+, Accessibility 95+, SEO 100.
   - Done when: a mobile Lighthouse run on the main pages scores Performance 90+, Accessibility 95+ and SEO 100.
+  - Result (local production server, Lighthouse 13.6 mobile): Performance 95 to 99, Accessibility 100, Best Practices 100, SEO 100 on home, about, contact, services, a service page, privacy and terms. Started at home Performance 66, Accessibility 90 to 92, SEO 92.
+  - Fixes: removed `app/loading.tsx` (home LCP 3.2s to 1.0s); hero drift animation now uses transform instead of repainting background-position (home blocking time 1570ms to about 200ms); mobile menu is `inert` when closed; light-surface overlines use a new `ssl-gold-deep` token; step numbers, footer small print and the service page "Start a Project" button now pass contrast; About team headings h4 to h3; cookie banner link text is descriptive.
+  - Note: re-run on the live site after deploy. Cloudflare's edge and network will change the numbers.
 - [ ] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.
   - Done when: mobile Lighthouse reports LCP under 2.5s on the homepage.
 - [ ] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
@@ -149,6 +152,7 @@ Note: the tracker says Cloudflare Pages, but the site now runs as a Cloudflare W
   - Done when: the production branch deploys to production and other branches deploy to preview URLs.
 - [ ] **t128** Final content QA: proofread every single MVP page for typos, broken links, and missing images.
   - Done when: every MVP page has been proofread and has no typos, broken links or missing images.
+  - Known issue for t129: `components/ui/AnimateOnScroll.tsx` spreads `{...props}` after its own `style`, so any caller passing `style={{ animationDelay }}` loses the whole scroll animation. Most staggered sections therefore don't animate at all. Fixing it changes how pages look, so check visually.
   - Known issues: the privacy policy still has a `[X months/years ...]` placeholder for data retention. About page team cards say "Pending bio".
 - [ ] **t129** Final design QA: visual check at 1440px desktop and 375px mobile for every page.
   - Done when: every page has been checked at 1440px and 375px with no visual issues.

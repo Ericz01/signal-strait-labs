@@ -173,6 +173,7 @@ export function Header() {
                   : "translate-x-full opacity-0 pointer-events-none"
               }`}
               aria-hidden={!mobileOpen}
+              inert={!mobileOpen}
             >
               <nav className="flex flex-1 flex-col justify-center p-8 sm:p-12">
                 <div className="flex flex-col space-y-2">

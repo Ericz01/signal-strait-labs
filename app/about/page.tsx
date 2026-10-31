@@ -89,7 +89,7 @@ export default function AboutPage() {
                   <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-ssl-bg text-2xl font-bold text-ssl-gold">
                     {member.role.charAt(0)}
                   </div>
-                  <h4 className="text-lg font-bold text-ssl-bg">{member.role}</h4>
+                  <h3 className="text-lg font-bold text-ssl-bg">{member.role}</h3>
                   <p className="text-sm text-slate-500 mt-1 italic">Pending bio</p>
                 </div>
               </AnimateOnScroll>
