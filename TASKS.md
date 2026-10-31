@@ -64,7 +64,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: `llms.txt` has a section stating SSL means Signal Strait Labs, not the SSL protocol.
 - [x] **t095** Create app/sitemap.ts: dynamic generator that covers all static + dynamic routes.
   - Done when: `/sitemap.xml` lists every static page and every service detail page.
-- [ ] **t096** Create public/robots.txt: allow major search bots, selectively manage aggressive AI crawlers.
+- [x] **t096** Create public/robots.txt: allow major search bots, selectively manage aggressive AI crawlers.
   - Done when: `/robots.txt` allows major search bots, sets rules for AI crawlers, and links to the sitemap.
 - [ ] **t097** Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url).
   - Done when: every page outputs all five OpenGraph tags.
