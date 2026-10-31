@@ -1,8 +1,10 @@
-export const metadata = {
+import { pageMetadata } from '@/lib/metadata';
+
+export const metadata = pageMetadata({
   title: 'Terms of Service',
   description: 'Terms of service for Signal Strait Labs. Learn about the rules governing our services and website usage.',
-  alternates: { canonical: '/terms-of-service' },
-};
+  path: '/terms-of-service',
+});
 
 export default function TermsOfServicePage() {
   const date = new Date().toLocaleDateString('en-US', {

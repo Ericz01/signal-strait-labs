@@ -7,6 +7,7 @@ import { FAQAccordion } from '@/components/FAQAccordion';
 import Link from 'next/link';
 import { JsonLd } from '@/components/JsonLd';
 import { serviceFaqJsonLd } from '@/lib/structured-data';
+import { pageMetadata } from '@/lib/metadata';
 
 export async function generateStaticParams() {
   return services.map((service) => ({
@@ -18,11 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return { title: 'Service Not Found' };
-  return {
+  return pageMetadata({
     title: service.title,
     description: service.metaDescription,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -1,10 +1,11 @@
 import { CookieSettingsButton } from '@/components/CookieConsent';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy',
   description: 'Privacy policy for Signal Strait Labs. Learn about how we handle your data.',
-  alternates: { canonical: '/privacy-policy' },
-};
+  path: '/privacy-policy',
+});
 
 export default function PrivacyPolicyPage() {
   const date = new Date().toLocaleDateString('en-US', {

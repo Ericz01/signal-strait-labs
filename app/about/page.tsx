@@ -1,12 +1,13 @@
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { ConsentMap } from '@/components/ConsentMap';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'About Us',
   description: 'Learn about Signal Strait Labs, founded in Nairobi in 2022. We are a growth engineering partner for high-performance digital infrastructure and strategy.',
-  alternates: { canonical: '/about' },
-};
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (

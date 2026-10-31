@@ -66,7 +66,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: `/sitemap.xml` lists every static page and every service detail page.
 - [x] **t096** Create public/robots.txt: allow major search bots, selectively manage aggressive AI crawlers.
   - Done when: `/robots.txt` allows major search bots, sets rules for AI crawlers, and links to the sitemap.
-- [ ] **t097** Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url).
+- [x] **t097** Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url).
   - Done when: every page outputs all five OpenGraph tags.
 - [ ] **t098** Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image).
   - Done when: every page outputs all four Twitter Card tags.

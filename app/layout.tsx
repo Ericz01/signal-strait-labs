@@ -4,6 +4,7 @@ import { Footer, Header } from "@/components/layout";
 import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site-config";
+import { baseOpenGraph } from "@/lib/metadata";
 import "./globals.css";
 
 const sora = Sora({
@@ -52,15 +53,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title:
-      "Signal Strait Labs (SSL) | Enterprise Digital Transformation & AEO/GEO — Africa",
-    description:
-      "Nairobi-based growth engineering lab: digital infrastructure, custom web dev, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipelines for enterprises scaling across Africa.",
-    url: siteUrl,
-    siteName: "Signal Strait Labs",
-    locale: "en_KE",
+    ...baseOpenGraph,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: "/",
     alternateLocale: ["en_US", "en_GB"],
-    type: "website",
     countryName: "Kenya",
   },
   twitter: {

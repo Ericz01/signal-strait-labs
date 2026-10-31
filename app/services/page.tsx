@@ -6,12 +6,13 @@ import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Our Services',
   description: 'Our services: technical infrastructure and web development, AI search (SEO/AEO/GEO), data systems, RevOps, performance marketing, PR and team training.',
-  alternates: { canonical: '/services' },
-};
+  path: '/services',
+});
 
 export default function ServicesPage() {
   return (
