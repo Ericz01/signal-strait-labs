@@ -137,9 +137,16 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
     - The brand fonts were never applied. `next/font` variables were on `<body>`, but Tailwind's `--font-display`/`--font-body` live on `:root`, so they were undefined and every page used the system font. Moved the variables to `<html>`. Headings are now Sora and body text Plus Jakarta Sans. This is a visible change; check you like it.
     - The hero "Explore Services" button was dark grey on the dark hero for anyone not using OS dark mode. Removed the `dark:` variants from `components/ui/Button.tsx` (the site has no dark mode) and gave that button light text.
   - Eric: check in Safari on a Mac or iPhone.
-- [ ] **t120** Full keyboard navigation test: every interactive element reachable and operable without a mouse.
+- [x] **t120** Full keyboard navigation test: every interactive element reachable and operable without a mouse.
   - Done when: every link, button, menu and form field can be reached and used by keyboard with a visible focus state.
-  - Known issue (found in t088): service detail pages render their own `<main>` inside the layout's `<main>`. Change the inner one to a `<div>` or `<article>`.
+  - Result: tabbed through 7 pages in headless Chrome, checking every focus stop shows a visible change. Fixed:
+    - Service cards had a `<button>` inside the card `<a>` (invalid, two tab stops per card). "Learn More" is now a styled span.
+    - The service and budget dropdowns were custom buttons with no ARIA or arrow-key support. Replaced with native `<select>` (same look when closed; the open list is the browser's own). Removed `components/ui/CustomSelect.tsx`.
+    - Form labels were not linked to their fields. Added `htmlFor`/`id`, `name` and `autoComplete`.
+    - FAQ accordion now has `aria-expanded`/`aria-controls`; closed answers are `inert`.
+    - Escape closes the mobile menu and returns focus to the menu button.
+    - Button focus ring was dark-on-dark; now blue with a white offset. Dark form fields get a solid gold border on focus.
+    - Inner `<main>` on About, Services, service pages, Privacy and Terms changed to `<div>`. `/contact` now has an `<h1>`.
 - [ ] **t121** Color contrast audit: all body text meets WCAG AA minimum 4.5:1 ratio.
   - Done when: all body text on light and dark surfaces measures at least 4.5:1.
 

@@ -1,15 +1,23 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useId, useState } from 'react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
-import { CustomSelect } from '@/components/ui/CustomSelect';
 import { Toast, type ToastVariant } from '@/components/ui/Toast';
 
 export type ServiceOption = { title: string; slug: string };
 
 // `services` is passed in by the (server) page so the full services data,
 // with all its page copy and FAQs, is not shipped to the browser.
-export function ContactSection({ services }: { services: ServiceOption[] }) {
+export function ContactSection({
+  services,
+  headingLevel = 'h2',
+}: {
+  services: ServiceOption[];
+  /** Use 'h1' on the /contact page, where this is the main heading. */
+  headingLevel?: 'h1' | 'h2';
+}) {
+  const Heading = headingLevel;
+  const fid = useId();
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
   const [formData, setFormData] = useState({
@@ -93,9 +101,9 @@ export function ContactSection({ services }: { services: ServiceOption[] }) {
       <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-12 pb-4 pt-2 md:grid-cols-2">
         <AnimateOnScroll variant="slide-up">
           <div id="about">
-            <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
+            <Heading className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
               Get in Touch
-            </h2>
+            </Heading>
             <p className="mb-8 text-sm leading-relaxed text-slate-700">
               Our team is ready to discuss your requirements. Send us a message and we&apos;ll be in touch shortly.
             </p>
@@ -164,12 +172,15 @@ export function ContactSection({ services }: { services: ServiceOption[] }) {
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                 />
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-name`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Name
                 </label>
                 <input
                   type="text"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-name`}
+                  name="name"
+                  autoComplete="name"
                   placeholder="Your name"
                   required
                   value={formData.name}
@@ -177,12 +188,15 @@ export function ContactSection({ services }: { services: ServiceOption[] }) {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-email`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Email
                 </label>
                 <input
                   type="email"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-email`}
+                  name="email"
+                  autoComplete="email"
                   placeholder="name@company.com"
                   required
                   value={formData.email}
@@ -190,36 +204,71 @@ export function ContactSection({ services }: { services: ServiceOption[] }) {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-company`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Company
                 </label>
                 <input
                   type="text"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-company`}
+                  name="company"
+                  autoComplete="organization"
                   placeholder="Your company name"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-service`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Which service are you interested in?
                 </label>
-                <CustomSelect options={serviceOptions} value={service} onChange={setService} placeholder="General inquiry" />
+                <div className="relative">
+                  <select
+                    id={`${fid}-service`}
+                    name="serviceInterest"
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    className="glass-input-dark w-full appearance-none rounded-lg px-4 py-3 pr-10 text-sm"
+                  >
+                    {serviceOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  <svg aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </div>
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-budget`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Budget range
                 </label>
-                <CustomSelect options={budgetSelectOptions} value={budget} onChange={setBudget} placeholder="Select a range" />
+                <div className="relative">
+                  <select
+                    id={`${fid}-budget`}
+                    name="budgetRange"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    className="glass-input-dark w-full appearance-none rounded-lg px-4 py-3 pr-10 text-sm"
+                  >
+                    {budgetSelectOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  <svg aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </div>
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-message`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Message
                 </label>
                 <textarea
                   rows={3}
                   className="glass-input-dark w-full resize-none rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-message`}
+                  name="message"
                   placeholder="Tell us what you need"
                   required
                   value={formData.message}

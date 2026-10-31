@@ -60,8 +60,11 @@ export default function Services() {
                       '[&>div]:!bg-ssl-gold/15 [&>div]:!border-ssl-gold/30 [&>div]:!text-ssl-gold [&>div]:group-hover:!bg-ssl-gold [&>div]:group-hover:!text-white'
                   )}
                 />
-                <Button variant="outline" size="sm" className="mt-auto h-10 px-4 py-2 text-ssl-gold border-ssl-gold/40 hover:bg-ssl-gold/10 hover:text-ssl-gold">
-                  Learn More <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                {/* Styled like a button but rendered as a span: the whole card is already the link. */}
+                <Button asChild variant="outline" size="sm" className="mt-auto h-10 px-4 py-2 text-ssl-gold border-ssl-gold/40 hover:bg-ssl-gold/10 hover:text-ssl-gold">
+                  <span>
+                    Learn More <ArrowRightIcon aria-hidden="true" className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
                 </Button>
               </Link>
             </Card>

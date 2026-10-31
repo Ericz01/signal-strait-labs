@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type NavLink = {
   readonly href: string;
@@ -52,6 +52,7 @@ const SCROLL_COMPRESS_THRESHOLD = 80;
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +73,19 @@ export function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [mobileOpen]);
+
+  // Escape closes the mobile menu and puts focus back on the menu button.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
@@ -136,6 +150,7 @@ export function Header() {
             {/* Mobile Menu Toggle */}
                         <button
               type="button"
+              ref={menuButtonRef}
               onClick={toggleMobile}
               className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white transition-all hover:border-ssl-gold/40 hover:bg-ssl-gold/5 focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:ring-offset-2 focus-visible:ring-offset-[#01081b] focus-visible:outline-none md:hidden"
               aria-expanded={mobileOpen}

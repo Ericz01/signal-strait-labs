@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 
 export default function AboutPage() {
   return (
-    <main className="bg-ssl-light-bg py-24 sm:py-32">
+    <div className="bg-ssl-light-bg py-24 sm:py-32">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
@@ -132,6 +132,6 @@ export default function AboutPage() {
         </div>
 
       </div>
-    </main>
+    </div>
   );
 }

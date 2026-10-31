@@ -38,7 +38,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const Icon = service.icon;
 
   return (
-    <main className="bg-ssl-light-bg min-h-screen py-20">
+    <div className="bg-ssl-light-bg min-h-screen py-20">
       <JsonLd data={serviceFaqJsonLd(service)} />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
@@ -96,6 +96,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </Button>
         </AnimateOnScroll>
       </div>
-    </main>
+    </div>
   );
 }

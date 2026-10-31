@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 
 export default function ServicesPage() {
   return (
-    <main className="bg-ssl-light-bg min-h-screen py-20">
+    <div className="bg-ssl-light-bg min-h-screen py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
@@ -48,8 +48,11 @@ export default function ServicesPage() {
                     className="flex-grow mb-6 [&>div]:bg-ssl-blue/5 [&>div]:text-ssl-blue [&>div]:border-ssl-blue/20"
                   />
                   <div className="mt-auto pt-4">
-                    <Button variant="outline" size="sm" className="w-full text-ssl-gold border-ssl-gold/40 hover:bg-ssl-gold/10 hover:text-ssl-gold">
-                      Learn More <ArrowRightIcon className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    {/* Styled like a button but rendered as a span: the whole card is already the link. */}
+                    <Button asChild variant="outline" size="sm" className="w-full text-ssl-gold border-ssl-gold/40 hover:bg-ssl-gold/10 hover:text-ssl-gold">
+                      <span>
+                        Learn More <ArrowRightIcon aria-hidden="true" className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </Button>
                   </div>
                 </Link>
@@ -58,6 +61,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <div>
-      <ContactSection services={getServiceOptions()} />
+      <ContactSection services={getServiceOptions()} headingLevel="h1" />
       <p className="bg-ssl-light-bg px-6 pb-20 text-center text-sm text-slate-600">
         Want to know more first? See{' '}
         <Link href="/services" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">

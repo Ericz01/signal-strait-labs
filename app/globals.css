@@ -189,10 +189,12 @@
   color: rgba(203, 213, 225, 0.55);
 }
 
+/* Solid gold border + glow so the focused field is clear to keyboard users
+   (gold on Abyss Blue is about 8:1). */
 .glass-input-dark:focus {
-  border-color: rgba(197, 160, 89, 0.55);
+  border-color: #C5A059;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.35);
 }
 
 .glass-input-dark option {

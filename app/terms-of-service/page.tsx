@@ -15,7 +15,7 @@ export default function TermsOfServicePage() {
   });
 
   return (
-    <main className="bg-ssl-light-bg py-24 sm:py-32">
+    <div className="bg-ssl-light-bg py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <h1 className="text-fluid-h1 font-display font-bold text-ssl-bg mb-8">
           Terms of Service
@@ -111,6 +111,6 @@ export default function TermsOfServicePage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
