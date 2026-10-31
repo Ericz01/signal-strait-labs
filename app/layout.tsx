@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer, Header } from "@/components/layout";
+import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import "./globals.css";
 
 const sora = Sora({
@@ -99,6 +100,7 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
         </div>
+        <CloudflareAnalytics />
       </body>
     </html>
   );

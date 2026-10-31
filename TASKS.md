@@ -27,8 +27,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: each valid lead triggers a notification email to connect@signalstraitlabs.com containing all form fields.
 - [x] **t077** Add success/error toast notification UI on the contact form (no page reload).
   - Done when: submitting the form shows a success or error toast without reloading the page, on both `/` and `/contact`.
-- [ ] **t078** Integrate Cloudflare Web Analytics: add lightweight script to app/layout.tsx. **[needs Eric]**
+- [x] **t078** Integrate Cloudflare Web Analytics: add lightweight script to app/layout.tsx. **[needs Eric]**
   - Done when: the Cloudflare Web Analytics script loads on every page using the site token from the dashboard.
+  - Result: code done (`components/CloudflareAnalytics.tsx`). Eric: create a Web Analytics site in Cloudflare for signalstraitlabs.com and set `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` in the build environment. Or, once the domain is proxied by Cloudflare, turn on automatic setup instead and leave the variable unset.
 - [ ] **t080** "Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page. **[needs Eric]**
   - Done when: a "Book a Discovery Call" button links to a working scheduling page.
 - [ ] **t081** Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic.
