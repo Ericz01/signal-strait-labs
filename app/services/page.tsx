@@ -8,8 +8,8 @@ import { ArrowRightIcon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export const metadata = {
-  title: 'Our Services | Signal Strait Labs',
-  description: 'Explore our core capabilities: from technical infrastructure and custom web development to algorithmic search, data systems, RevOps, and capacity building.',
+  title: 'Our Services',
+  description: 'Our services: technical infrastructure and web development, AI search (SEO/AEO/GEO), data systems, RevOps, performance marketing, PR and team training.',
   alternates: { canonical: '/services' },
 };
 

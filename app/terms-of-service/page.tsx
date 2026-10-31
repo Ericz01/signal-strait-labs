@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Terms of Service | Signal Strait Labs',
+  title: 'Terms of Service',
   description: 'Terms of service for Signal Strait Labs. Learn about the rules governing our services and website usage.',
   alternates: { canonical: '/terms-of-service' },
 };

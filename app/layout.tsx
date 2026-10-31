@@ -20,12 +20,11 @@ const siteUrl = "https://signalstraitlabs.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Signal Strait Labs (SSL) | Enterprise Digital Transformation, Growth Engineering & AEO/GEO — Africa",
+    default: "Signal Strait Labs | Growth Engineering & AEO/GEO in Africa",
     template: "%s | Signal Strait Labs",
   },
   description:
-    "Signal Strait Labs (SSL) engineers enterprise digital transformation and growth systems for African and global organizations—custom web infrastructure, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipeline engineering from Nairobi, Kenya.",
+    "Signal Strait Labs is a Nairobi growth engineering lab building web infrastructure, technical SEO, AEO/GEO, data systems and RevOps for growing companies.",
   keywords: [
     "enterprise digital transformation",
     "growth engineering",

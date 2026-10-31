@@ -42,8 +42,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t082** Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL).
   - Done when: `app/layout.tsx` exports metadata with a title template, a base description and `metadataBase`.
   - Result: already in place (metadataBase set to signalstraitlabs.com in fix3). No code change.
-- [ ] **t083** Add generateMetadata() to every page: unique title under 60 chars and description under 155 chars.
+- [x] **t083** Add generateMetadata() to every page: unique title under 60 chars and description under 155 chars.
   - Done when: every page has its own title under 60 characters and description under 155 characters.
+  - Result: removed the doubled "| Signal Strait Labs" from page titles, shortened the home title and description, gave the 404 page its own metadata, and added a short `metaDescription` to each service in `lib/services-data.ts` (on-page service copy is unchanged). Static pages use `export const metadata`, which does the same job as `generateMetadata()`.
 - [ ] **t084** Add canonical URL declarations to all pages to prevent duplicate content issues.
   - Done when: every page's HTML has a `<link rel="canonical">` pointing to its own URL.
 - [ ] **t085** Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange).

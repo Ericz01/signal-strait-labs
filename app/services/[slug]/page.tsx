@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const service = services.find((s) => s.slug === slug);
   if (!service) return { title: 'Service Not Found' };
   return {
-    title: `${service.title} | Signal Strait Labs`,
-    description: service.description,
+    title: service.title,
+    description: service.metaDescription,
     alternates: { canonical: `/services/${service.slug}` },
   };
 }
