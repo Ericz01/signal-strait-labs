@@ -1,5 +1,6 @@
 import { CookieSettingsButton } from '@/components/CookieConsent';
 import { pageMetadata } from '@/lib/metadata';
+import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'Privacy Policy',
@@ -37,7 +38,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">2. Information We Collect</h2>
             <p>
-              When you use our contact form, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don&apos;t fill in every field, that&apos;s fine, only name, email, and message are required.
+              When you use our <Link href="/contact" className="font-semibold text-ssl-blue hover:underline">contact form</Link>, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don&apos;t fill in every field, that&apos;s fine, only name, email, and message are required.
             </p>
             <p>
               We also use privacy-focused analytics (Cloudflare Web Analytics) to understand how visitors use our site. This does not use cookies or track you individually across other websites.

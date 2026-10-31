@@ -2,6 +2,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { ConsentMap } from '@/components/ConsentMap';
 import { pageMetadata } from '@/lib/metadata';
+import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'About Us',
@@ -39,6 +40,11 @@ export default function AboutPage() {
               <h3 className="mb-4 text-xl font-bold text-white">Our Mission</h3>
               <p className="text-slate-300 leading-relaxed">
                 To transform organizational growth through clean, performant digital infrastructure. We exist to eliminate the friction between your technical stack and your revenue goals. We don&apos;t just build sites; we build institutional authority, automated data pipelines, and optimized search footprints that drive measurable business value.
+              </p>
+              <p className="mt-4">
+                <Link href="/services" className="font-semibold text-ssl-gold underline-offset-4 hover:underline">
+                  See what we do
+                </Link>
               </p>
             </div>
           </AnimateOnScroll>

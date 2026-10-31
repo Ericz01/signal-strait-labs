@@ -71,8 +71,10 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t098** Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image).
   - Done when: every page outputs all four Twitter Card tags.
   - Result: removed `twitter:creator` (`@signalstraitlabs`) because the X account does not exist yet. Add `site` and `creator` to `baseTwitter` in `lib/metadata.ts` after t135.
-- [ ] **t100** Audit that every page has at least one internal link to another page (crawlability requirement).
+- [x] **t100** Audit that every page has at least one internal link to another page (crawlability requirement).
   - Done when: every page has at least one internal link in its main content, not only in the header and footer.
+  - Result: added content links on About, Contact, Privacy and Terms. Also changed the Contact page's inner `<main>` to a `<div>`.
+  - Found: because of the root `app/loading.tsx`, every page is streamed. The static HTML has the loading skeleton inside `<main>` and the real content in a hidden block after the footer, moved in by JavaScript. Crawlers that don't run JavaScript (most AI crawlers) still get the text, but out of place. Consider removing `app/loading.tsx` (all pages are static, so it rarely shows); see t114.
 
 ## P7: MVP Assets & Content
 
@@ -139,6 +141,7 @@ Note: the tracker says Cloudflare Pages, but the site now runs as a Cloudflare W
   - Done when: the production branch deploys to production and other branches deploy to preview URLs.
 - [ ] **t128** Final content QA: proofread every single MVP page for typos, broken links, and missing images.
   - Done when: every MVP page has been proofread and has no typos, broken links or missing images.
+  - Known issues: the privacy policy still has a `[X months/years ...]` placeholder for data retention. About page team cards say "Pending bio".
 - [ ] **t129** Final design QA: visual check at 1440px desktop and 375px mobile for every page.
   - Done when: every page has been checked at 1440px and 375px with no visual issues.
 - [ ] **t130** Submit sitemap to Google Search Console (signalstraitlabs.com/sitemap.xml). **[needs Eric]**

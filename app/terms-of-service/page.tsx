@@ -1,4 +1,5 @@
 import { pageMetadata } from '@/lib/metadata';
+import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'Terms of Service',
@@ -50,7 +51,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">4. Contact Form and Inquiries</h2>
             <p>
-              Submitting the contact form does not create a business relationship or obligation on either side. It simply lets us know you&apos;re interested so we can follow up.
+              Submitting the <Link href="/contact" className="font-semibold text-ssl-blue hover:underline">contact form</Link> does not create a business relationship or obligation on either side. It simply lets us know you&apos;re interested so we can follow up.
             </p>
           </section>
 

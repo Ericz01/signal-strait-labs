@@ -1,5 +1,6 @@
 import { ContactSection } from '@/components/ContactSection';
 import { pageMetadata } from '@/lib/metadata';
+import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'Contact',
@@ -9,8 +10,19 @@ export const metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <main className="pt-24">
+    <div className="pt-24">
       <ContactSection />
-    </main>
+      <p className="bg-ssl-light-bg px-6 pb-20 text-center text-sm text-slate-600">
+        Want to know more first? See{' '}
+        <Link href="/services" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">
+          our services
+        </Link>{' '}
+        or read{' '}
+        <Link href="/about" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">
+          about us
+        </Link>
+        .
+      </p>
+    </div>
   );
 }
