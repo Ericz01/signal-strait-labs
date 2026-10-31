@@ -30,8 +30,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t078** Integrate Cloudflare Web Analytics: add lightweight script to app/layout.tsx. **[needs Eric]**
   - Done when: the Cloudflare Web Analytics script loads on every page using the site token from the dashboard.
   - Result: code done (`components/CloudflareAnalytics.tsx`). Eric: create a Web Analytics site in Cloudflare for signalstraitlabs.com and set `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` in the build environment. Or, once the domain is proxied by Cloudflare, turn on automatic setup instead and leave the variable unset.
-- [ ] **t080** "Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page. **[needs Eric]**
+- [x] **t080** "Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page. **[needs Eric]**
   - Done when: a "Book a Discovery Call" button links to a working scheduling page.
+  - Result: code done. The hero button is now "Book a Discovery Call" (`components/BookCallButton.tsx`) and "Explore Services" now links to /services (both were dead buttons). Eric: create a Cal.com or Calendly event and set `NEXT_PUBLIC_BOOKING_URL` in the build environment. Until then the button goes to /contact.
 - [ ] **t081** Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic.
   - Done when: a banner appears on first visit, remembers accept or decline, and non-essential scripts only load after accept.
 

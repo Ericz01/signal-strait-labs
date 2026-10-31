@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
+import Link from 'next/link';
+import { BookCallButton } from '@/components/BookCallButton';
 
 export default function Hero() {
   return (
@@ -44,11 +46,9 @@ export default function Hero() {
         </AnimateOnScroll>
         <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.4s' }}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <Button variant="primary" size="lg">
-              Book a Call
-            </Button>
-            <Button variant="outline" size="lg">
-              Explore Services
+            <BookCallButton />
+            <Button asChild variant="outline" size="lg">
+              <Link href="/services">Explore Services</Link>
             </Button>
           </div>
         </AnimateOnScroll>

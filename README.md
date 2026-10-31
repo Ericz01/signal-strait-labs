@@ -94,6 +94,7 @@ Local secrets go in `.env.local`, which is git-ignored via `.env*` and must neve
 | `UPSTASH_REDIS_REST_TOKEN` | `app/api/leads/route.ts` rate limiter | Optional locally (see above) |
 | `RESEND_API_KEY` | `lib/email.ts` (lead emails via Resend) | Optional locally. If missing, no email is sent and the route logs a warning. Sends from `noreply@signalstraitlabs.com`, so that domain must be verified in Resend. |
 | `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` | `components/CloudflareAnalytics.tsx` | Public Cloudflare Web Analytics site token. Inlined at build time, so set it in the build environment. If missing, no analytics script is added. |
+| `NEXT_PUBLIC_BOOKING_URL` | `lib/site-config.ts` (Book a Discovery Call button) | Public Cal.com or Calendly link, inlined at build time. If missing, the button goes to `/contact`. |
 | `NEXT_PUBLIC_APP_URL` | — | Not currently referenced; the canonical URL is hard-coded in `app/layout.tsx` |
 
 ```bash
