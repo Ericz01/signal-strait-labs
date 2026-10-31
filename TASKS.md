@@ -116,8 +116,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Result (local production server, Lighthouse 13.6 mobile): Performance 95 to 99, Accessibility 100, Best Practices 100, SEO 100 on home, about, contact, services, a service page, privacy and terms. Started at home Performance 66, Accessibility 90 to 92, SEO 92.
   - Fixes: removed `app/loading.tsx` (home LCP 3.2s to 1.0s); hero drift animation now uses transform instead of repainting background-position (home blocking time 1570ms to about 200ms); mobile menu is `inert` when closed; light-surface overlines use a new `ssl-gold-deep` token; step numbers, footer small print and the service page "Start a Project" button now pass contrast; About team headings h4 to h3; cookie banner link text is descriptive.
   - Note: re-run on the live site after deploy. Cloudflare's edge and network will change the numbers.
-- [ ] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.
+- [x] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.
   - Done when: mobile Lighthouse reports LCP under 2.5s on the homepage.
+  - Result: home LCP 1.0s (was 3.2s), done in t113 by removing `app/loading.tsx`. Fonts are preloaded by `next/font`. The only third-party script (Cloudflare analytics) loads `afterInteractive`. There is no hero image yet; when one is added (t101), give it `preload`.
 - [ ] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
   - Done when: Lighthouse reports CLS under 0.1 on every main page.
 - [ ] **t116** INP < 200ms: audit and fix any heavy event handlers on interactive elements.
