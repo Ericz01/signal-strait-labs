@@ -6,11 +6,12 @@ import WhySSL from '@/components/WhySSL';
 import CTABanner from '@/components/CTABanner';
 import { ContactSection } from '@/components/ContactSection';
 import { JsonLd } from '@/components/JsonLd';
-import { professionalServiceJsonLd } from '@/lib/structured-data';
+import { organizationJsonLd, professionalServiceJsonLd } from '@/lib/structured-data';
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={organizationJsonLd} />
       <JsonLd data={professionalServiceJsonLd} />
 
       <Hero />

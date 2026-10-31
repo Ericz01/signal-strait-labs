@@ -50,8 +50,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t085** Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange).
   - Done when: valid ProfessionalService JSON-LD with all listed fields is in the page output.
   - Result: moved to `lib/structured-data.ts`, rendered by `components/JsonLd.tsx`. Added logo, serviceType and priceRange (`$$`), and the offer list now matches the 7 real services. Eric: confirm the Facebook URL. The old JSON-LD used `facebook.com/profile.php?id=61589782545004`, the footer uses `facebook.com/signalstraitlabs/`; I used the footer one.
-- [ ] **t086** Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles).
+- [x] **t086** Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles).
   - Done when: valid Organization JSON-LD with founding date, Nairobi HQ, contact details and social profiles is in the page output.
+  - Result: added on the home page. Social profiles list only LinkedIn and Facebook; add the others to `socialProfiles` in `lib/structured-data.ts` once those accounts exist.
 - [ ] **t087** Create WebPage JSON-LD for the homepage.
   - Done when: the homepage outputs valid WebPage JSON-LD.
 - [ ] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.

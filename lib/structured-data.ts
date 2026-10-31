@@ -3,6 +3,14 @@ import { services } from '@/lib/services-data';
 import { CONTACT_EMAIL, CONTACT_PHONE, SITE_NAME, SITE_URL } from '@/lib/site-config';
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+
+// Live social profiles only. Add Instagram, X, YouTube and TikTok once the
+// accounts exist (see TASKS.md, G5).
+const socialProfiles = [
+  'https://www.linkedin.com/company/signal-strait-labs',
+  'https://www.facebook.com/signalstraitlabs/',
+];
 
 const address = {
   '@type': 'PostalAddress',
@@ -66,8 +74,33 @@ export const professionalServiceJsonLd = {
     'Data Architecture',
     'Revenue Operations',
   ],
-  sameAs: [
-    'https://www.linkedin.com/company/signal-strait-labs',
-    'https://www.facebook.com/signalstraitlabs/',
+  parentOrganization: { '@id': ORGANIZATION_ID },
+  sameAs: socialProfiles,
+};
+
+export const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': ORGANIZATION_ID,
+  name: SITE_NAME,
+  alternateName: 'SSL',
+  url: SITE_URL,
+  logo,
+  foundingDate: '2022',
+  foundingLocation: { '@type': 'Place', name: 'Nairobi, Kenya' },
+  address,
+  location: { '@type': 'Place', name: 'Thome, Nairobi, Kenya', address },
+  email: CONTACT_EMAIL,
+  telephone: CONTACT_PHONE,
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: CONTACT_EMAIL,
+      telephone: CONTACT_PHONE,
+      areaServed: ['KE', 'Africa'],
+      availableLanguage: ['English'],
+    },
   ],
+  sameAs: socialProfiles,
 };
