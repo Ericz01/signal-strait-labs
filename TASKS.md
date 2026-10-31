@@ -9,8 +9,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 
 - [x] **fix1** The rate limiter on `/api/leads` still lets through more than 5 requests in 10 minutes. Check that the Upstash client is created inside the POST handler and that secrets are read through the OpenNext Cloudflare context (`getCloudflareContext().env`), not `process.env` at module scope.
   - Done when: no Upstash client or secret is read at module scope, secrets come from `getCloudflareContext().env` (with `process.env` only as a `next dev` fallback), and the code path clearly returns 429 on the 6th request in 10 minutes from one IP.
-- [ ] **fix2** Check that no temporary diagnostic logging is left in `app/api/leads/route.ts`.
+- [x] **fix2** Check that no temporary diagnostic logging is left in `app/api/leads/route.ts`.
   - Done when: the route has no leftover debug `console.log` calls, and only intended warnings and errors remain.
+  - Result: nothing left to remove. The `DEBUG: Rate limiting with IP` log was already removed in `b1edd0e`. The remaining `console.log('Received Lead Submission: ...')` is the intended placeholder until email delivery (t074). It logs name, email and company, so remove it or cut it down in t074.
 - [ ] **fix3** Set the site's base URL and canonical to `https://signalstraitlabs.com`.
   - Done when: `metadataBase`, canonical URLs, JSON-LD URLs and any sitemap or robots references all use `https://signalstraitlabs.com`.
 
