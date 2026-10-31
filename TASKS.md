@@ -57,8 +57,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: the homepage outputs valid WebPage JSON-LD.
 - [x] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.
   - Done when: each service page outputs FAQPage JSON-LD built from its FAQ data in `lib/services-data.ts`.
-- [ ] **t093** Create public/llms.txt: structured markdown file with company overview, services, and contact for LLM crawlers.
+- [x] **t093** Create public/llms.txt: structured markdown file with company overview, services, and contact for LLM crawlers.
   - Done when: `/llms.txt` is served and lists the company overview, all services and contact details.
+  - Note: this is a static file. If a service is added or renamed in `lib/services-data.ts`, update `public/llms.txt` too.
 - [ ] **t094** llms.txt: Include entity disambiguation section (SSL = Signal Strait Labs, not SSL the protocol).
   - Done when: `llms.txt` has a section stating SSL means Signal Strait Labs, not the SSL protocol.
 - [ ] **t095** Create app/sitemap.ts: dynamic generator that covers all static + dynamic routes.
