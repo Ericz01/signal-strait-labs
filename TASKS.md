@@ -122,8 +122,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
   - Done when: Lighthouse reports CLS under 0.1 on every main page.
   - Result: CLS 0 on all seven pages tested in t113. Images have explicit width and height; fonts use `next/font` (size-adjusted fallbacks).
-- [ ] **t116** INP < 200ms: audit and fix any heavy event handlers on interactive elements.
+- [x] **t116** INP < 200ms: audit and fix any heavy event handlers on interactive elements.
   - Done when: no interaction (menu, form, banner) takes over 200ms in a performance trace.
+  - Result: measured with Event Timing in headless Chrome at 4x CPU slowdown: cookie Accept 56ms, mobile menu 136ms, FAQ accordion 168ms (closest to the limit), service dropdown 88ms, typing in the form 96ms. No code change. Check real-user INP in Cloudflare Web Analytics after launch.
 - [ ] **t117** Test all pages on iOS Safari + Android Chrome at 375px viewport width.
   - Done when: every page has been checked on both browsers at 375px with no layout breaks.
 - [ ] **t118** Test all forms end-to-end: submission, email delivery, toast notifications, and error states. **[needs Eric]**
