@@ -5,6 +5,7 @@ import Testimonials from '@/components/Testimonials';
 import WhySSL from '@/components/WhySSL';
 import CTABanner from '@/components/CTABanner';
 import { ContactSection } from '@/components/ContactSection';
+import { getServiceOptions } from '@/lib/services-data';
 import { JsonLd } from '@/components/JsonLd';
 import { homeWebPageJsonLd, organizationJsonLd, professionalServiceJsonLd } from '@/lib/structured-data';
 
@@ -48,7 +49,7 @@ export default function Home() {
       <Process />
       <Testimonials />
       <CTABanner />
-      <ContactSection />
+      <ContactSection services={getServiceOptions()} />
     </>
   );
 }

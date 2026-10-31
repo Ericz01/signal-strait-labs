@@ -20,6 +20,11 @@ export interface Service {
   featured?: 'primary' | 'secondary';
 }
 
+// Title and slug only, for the contact form's service dropdown.
+export function getServiceOptions() {
+  return services.map(({ title, slug }) => ({ title, slug }));
+}
+
 export const services: Service[] = [
   {
     slug: 'technical-infrastructure-web-dev',

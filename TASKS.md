@@ -108,8 +108,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: `npm run lint` reports zero errors and zero warnings.
 - [x] **t111** Run npm run build locally: resolve all compilation errors and warnings before deploying.
   - Done when: `npm run build` and `npm run build:worker` finish with no errors or warnings.
-- [ ] **t112** Analyze JS bundle size with @next/bundle-analyzer: identify and remove unnecessary imports.
+- [x] **t112** Analyze JS bundle size with @next/bundle-analyzer: identify and remove unnecessary imports.
   - Done when: a bundle report has been reviewed and unneeded imports are removed.
+  - Result: `@next/bundle-analyzer` is webpack-only; this project uses Turbopack (use `npx next experimental-analyze` for the interactive view). Reviewed the client chunks directly. The contact form imported all of `lib/services-data.ts`, which shipped every service's copy and FAQs to the browser; it now receives title/slug options as a prop. Client JS went from 217KB to 203KB gzipped. The remaining large chunks are React and the Next.js runtime. `validator` and the Upstash clients are server-only.
 - [ ] **t113** Run Lighthouse audit (mobile simulation): targets Performance 90+, Accessibility 95+, SEO 100.
   - Done when: a mobile Lighthouse run on the main pages scores Performance 90+, Accessibility 95+ and SEO 100.
 - [ ] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.

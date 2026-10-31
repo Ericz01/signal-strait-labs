@@ -1,4 +1,5 @@
 import { ContactSection } from '@/components/ContactSection';
+import { getServiceOptions } from '@/lib/services-data';
 import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 
@@ -11,7 +12,7 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <div className="pt-24">
-      <ContactSection />
+      <ContactSection services={getServiceOptions()} />
       <p className="bg-ssl-light-bg px-6 pb-20 text-center text-sm text-slate-600">
         Want to know more first? See{' '}
         <Link href="/services" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">

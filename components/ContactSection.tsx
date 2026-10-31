@@ -4,9 +4,12 @@ import React, { useCallback, useState } from 'react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { CustomSelect } from '@/components/ui/CustomSelect';
 import { Toast, type ToastVariant } from '@/components/ui/Toast';
-import { services } from '@/lib/services-data';
 
-export function ContactSection() {
+export type ServiceOption = { title: string; slug: string };
+
+// `services` is passed in by the (server) page so the full services data,
+// with all its page copy and FAQs, is not shipped to the browser.
+export function ContactSection({ services }: { services: ServiceOption[] }) {
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
   const [formData, setFormData] = useState({
