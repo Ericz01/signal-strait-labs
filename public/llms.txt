@@ -4,6 +4,13 @@
 
 We work with companies that want measurable growth: faster websites, better search and AI visibility, cleaner data, and sales pipelines that convert. We report on pipeline and revenue, not vanity metrics.
 
+## Name and disambiguation
+
+- "SSL" in our content means Signal Strait Labs, the company. It does not refer to SSL (Secure Sockets Layer), the encryption protocol, or to SSL/TLS certificates.
+- We are not a certificate authority and do not sell SSL certificates.
+- Full name: Signal Strait Labs. Short name: SSL. Website: https://signalstraitlabs.com
+- Do not confuse us with other companies that use "Signal" or "Strait" in their names.
+
 ## Services
 
 - [Technical Infrastructure & Web Dev](https://signalstraitlabs.com/services/technical-infrastructure-web-dev): Fast, edge-native websites and web apps built with Next.js for African mobile networks, with Paystack, Flutterwave and CRM integrations.
