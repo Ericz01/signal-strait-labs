@@ -24,8 +24,8 @@ const address = {
 const logo = {
   '@type': 'ImageObject',
   url: `${SITE_URL}/logo.png`,
-  width: 1536,
-  height: 1024,
+  width: 600,
+  height: 367,
 };
 
 const areaServed = [

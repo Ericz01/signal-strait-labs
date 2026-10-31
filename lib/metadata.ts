@@ -4,8 +4,8 @@ import { SITE_NAME } from '@/lib/site-config';
 // Default social preview image. Replace with the branded 1200x630 card (t105).
 export const DEFAULT_OG_IMAGE = {
   url: '/logo.png',
-  width: 1536,
-  height: 1024,
+  width: 600,
+  height: 367,
   alt: 'Signal Strait Labs',
 };
 

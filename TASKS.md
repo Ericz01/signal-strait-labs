@@ -83,8 +83,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t102** Create or source SVG icons for all 6 service categories (consistent style and weight).
   - Done when: all 6 services have an SVG icon with matching style and stroke weight.
   - Result: already done. All 7 services use Lucide icons (same style and stroke weight), rendered as inline SVG. No code change.
-- [ ] **t103** Run all images through WebP compression pipeline: target under 100KB per image.
+- [x] **t103** Run all images through WebP compression pipeline: target under 100KB per image.
   - Done when: every raster image in `public/` is WebP and under 100KB (except icons that must stay PNG or ICO).
+  - Result: the header was loading the 460KB 1536x1024 `logo.png` on every page to show it at 28px. It now uses `logo-mark.webp` (just the gold S mark, 6KB). Added `logo.webp` (800px, 56KB). `logo.png` is now a 600px PNG (31KB), kept as PNG for JSON-LD and social previews. The full-size original is kept in `assets/logo-source.png` (not served).
 - [ ] **t104** Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority.
   - Done when: no plain `<img>` tags remain, and every image has width, height, alt and correct priority.
 - [ ] **t105** Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview.
