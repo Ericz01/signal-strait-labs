@@ -17,6 +17,8 @@ export function ContactSection({
   headingLevel?: 'h1' | 'h2';
 }) {
   const Heading = headingLevel;
+  // Form title sits one level below the section heading.
+  const FormHeading = headingLevel === 'h1' ? 'h2' : 'h3';
   const fid = useId();
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
@@ -145,9 +147,9 @@ export function ContactSection({
 
         <AnimateOnScroll variant="scale" style={{ animationDelay: '0.2s' }}>
           <div className="glass-card-dark relative z-10 rounded-2xl p-8">
-            <h3 className="mb-6 text-lg font-bold text-white">
+            <FormHeading className="mb-6 text-lg font-bold text-white">
               {status === 'success' ? 'Message Sent!' : 'Send Us a Message'}
-            </h3>
+            </FormHeading>
             
             {status === 'success' ? (
               <div className="space-y-4">

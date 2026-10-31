@@ -147,8 +147,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
     - Escape closes the mobile menu and returns focus to the menu button.
     - Button focus ring was dark-on-dark; now blue with a white offset. Dark form fields get a solid gold border on focus.
     - Inner `<main>` on About, Services, service pages, Privacy and Terms changed to `<div>`. `/contact` now has an `<h1>`.
-- [ ] **t121** Color contrast audit: all body text meets WCAG AA minimum 4.5:1 ratio.
+- [x] **t121** Color contrast audit: all body text meets WCAG AA minimum 4.5:1 ratio.
   - Done when: all body text on light and dark surfaces measures at least 4.5:1.
+  - Result: Lighthouse/axe contrast check passes on all 13 pages (home, about, contact, services, all 7 service pages, privacy, terms); accessibility 100 on each. Contrast fixes were made in t113 (deep-gold token, footer, step numbers, buttons) and t119 (hero outline button). Also fixed a heading-order slip on /contact.
 
 ## P9: MVP Launch
 
