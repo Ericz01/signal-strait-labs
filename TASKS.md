@@ -23,7 +23,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Eric: verify signalstraitlabs.com in Resend (it sends from noreply@signalstraitlabs.com), then add `RESEND_API_KEY` as a Worker secret. Until then no email is sent and the route logs a warning. Not tested against the real API yet; see t118.
 - [x] **t075** Build HTML confirmation email template sent to the user after successful form submission.
   - Done when: a confirmation email template exists and is sent to the submitter's address after a valid submission.
-- [ ] **t076** Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead.
+- [x] **t076** Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead.
   - Done when: each valid lead triggers a notification email to connect@signalstraitlabs.com containing all form fields.
 - [ ] **t077** Add success/error toast notification UI on the contact form (no page reload).
   - Done when: submitting the form shows a success or error toast without reloading the page, on both `/` and `/contact`.

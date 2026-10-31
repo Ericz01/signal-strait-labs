@@ -4,7 +4,7 @@ import { Redis } from '@upstash/redis/cloudflare';
 import { Ratelimit } from '@upstash/ratelimit';
 import { getServerEnv } from '@/lib/server-env';
 import { sendEmail, LEADS_INBOX } from '@/lib/email';
-import { leadConfirmationEmail, VISITOR_REPLY_TO } from '@/lib/email-templates';
+import { leadConfirmationEmail, leadNotificationEmail, VISITOR_REPLY_TO } from '@/lib/email-templates';
 
 // ---------------------------------------------------------------------------
 // Rate limiter setup
@@ -128,20 +128,13 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Deliver the lead by email (Resend)
+    const notification = leadNotificationEmail({ name, email, company, serviceInterest, budgetRange, message });
     const result = await sendEmail({
       to: LEADS_INBOX,
       replyTo: email,
-      subject: `New lead: ${name}${company ? ` (${company})` : ''}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Company: ${company || '-'}`,
-        `Service interest: ${serviceInterest || '-'}`,
-        `Budget range: ${budgetRange || '-'}`,
-        '',
-        'Message:',
-        message,
-      ].join('\n'),
+      subject: notification.subject,
+      text: notification.text,
+      html: notification.html,
     });
 
     if (result.status === 'not-configured') {
