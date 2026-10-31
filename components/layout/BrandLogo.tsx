@@ -14,7 +14,7 @@ export function BrandLogo({
       width={240}
       height={147}
       className={`${className} object-contain object-left`}
-      priority={priority}
+      loading={priority ? 'eager' : 'lazy'}
       sizes="(max-width: 768px) 200px, 260px"
     />
   );

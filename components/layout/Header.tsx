@@ -100,7 +100,7 @@ export function Header() {
                 width={20}
                 height={28}
                 className="w-auto object-contain transition-all duration-700 ease-out group-hover:rotate-[15deg] group-hover:scale-110"
-                priority
+                loading="eager"
               />
             </div>
             <div className="flex flex-col">
