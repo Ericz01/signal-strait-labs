@@ -102,7 +102,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 
 ## P8: Performance, QA & Accessibility
 
-- [ ] **t109** Run npx tsc --noEmit: resolve all TypeScript errors before any build.
+- [x] **t109** Run npx tsc --noEmit: resolve all TypeScript errors before any build.
   - Done when: `npx tsc --noEmit` exits with no errors.
 - [ ] **t110** Run ESLint: fix all warnings, especially accessibility-related lint rules.
   - Done when: `npm run lint` reports zero errors and zero warnings.
