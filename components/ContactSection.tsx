@@ -2,6 +2,7 @@
 
 import React, { useCallback, useId, useState } from 'react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
+import { GlassOrbs } from '@/components/GlassOrbs';
 import { Toast, type ToastVariant } from '@/components/ui/Toast';
 
 export type ServiceOption = { title: string; slug: string };
@@ -10,15 +11,15 @@ export type ServiceOption = { title: string; slug: string };
 // with all its page copy and FAQs, is not shipped to the browser.
 export function ContactSection({
   services,
-  headingLevel = 'h2',
+  compact = false,
 }: {
   services: ServiceOption[];
-  /** Use 'h1' on the /contact page, where this is the main heading. */
-  headingLevel?: 'h1' | 'h2';
+  /** On /contact the page hero already has the title and intro, so skip them here. */
+  compact?: boolean;
 }) {
-  const Heading = headingLevel;
-  // Form title sits one level below the section heading.
-  const FormHeading = headingLevel === 'h1' ? 'h2' : 'h3';
+  // On /contact the hero has the <h1>, so this section's headings are h2s.
+  // On the home page "Get in Touch" is the h2 and the form title an h3.
+  const FormHeading = compact ? 'h2' : 'h3';
   const fid = useId();
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
@@ -99,16 +100,21 @@ export function ContactSection({
   ];
 
   return (
-    <section className="mesh-light px-4 py-20 sm:px-6 md:py-28" id="contact">
+    <section className="mesh-light relative isolate px-4 py-20 sm:px-6 md:py-28" id="contact">
+      <GlassOrbs />
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2 lg:gap-12">
-        <AnimateOnScroll variant="slide-up">
-          <div id="about">
-            <Heading className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
-              Get in Touch
-            </Heading>
-            <p className="mb-8 text-sm leading-relaxed text-slate-700">
-              Tell us what you are working on and we will get back to you shortly.
-            </p>
+        <div>
+          <div>
+            {compact ? (
+              <h2 className="mb-5 text-xl font-bold text-ssl-bg">Contact details</h2>
+            ) : (
+              <>
+                <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">Get in Touch</h2>
+                <p className="mb-8 text-sm leading-relaxed text-slate-700">
+                  Tell us what you are working on and we will get back to you shortly.
+                </p>
+              </>
+            )}
             
             <div className="glass-card-light glass-edge space-y-5 rounded-2xl p-7 text-sm text-slate-700">
               <div className="flex items-start gap-3">
@@ -143,9 +149,9 @@ export function ContactSection({
               </div>
             </div>
           </div>
-        </AnimateOnScroll>
+        </div>
 
-        <AnimateOnScroll variant="scale" style={{ animationDelay: '0.2s' }}>
+        <AnimateOnScroll asChild variant="scale">
           <div className="glass-card-dark relative z-10 rounded-3xl p-8 md:p-9">
             <FormHeading className="mb-6 text-lg font-bold text-white">
               {status === 'success' ? 'Message Sent!' : 'Send Us a Message'}

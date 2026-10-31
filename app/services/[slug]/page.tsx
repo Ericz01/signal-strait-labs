@@ -1,13 +1,15 @@
 import { notFound } from 'next/navigation';
 import { services } from '@/lib/services-data';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { FAQAccordion } from '@/components/FAQAccordion';
-import Link from 'next/link';
 import { JsonLd } from '@/components/JsonLd';
 import { serviceFaqJsonLd } from '@/lib/structured-data';
 import { pageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/PageHero';
+import { GlassOrbs } from '@/components/GlassOrbs';
+import { ServiceCard } from '@/components/ServiceCard';
+import CTABanner from '@/components/CTABanner';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export async function generateStaticParams() {
   return services.map((service) => ({
@@ -36,66 +38,74 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const relatedServices = services.filter((s) => s.slug !== slug).slice(0, 3);
   const Icon = service.icon;
+  const sections = [
+    { label: 'The Problem', content: service.problem },
+    { label: 'Our Approach', content: service.approach },
+    { label: 'The Outcome', content: service.outcomes },
+  ];
 
   return (
-    <div className="mesh-light min-h-screen py-20 md:py-28">
+    <>
       <JsonLd data={serviceFaqJsonLd(service)} />
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
-        <AnimateOnScroll variant="slide-up">
-          <div className="mb-12 flex flex-col items-center text-center">
-            <div className="glass-card-light glass-edge mb-6 flex h-16 w-16 items-center justify-center rounded-2xl text-ssl-blue">
+      <PageHero
+        title={service.title}
+        description={service.description}
+        breadcrumbs={[{ label: 'Services', href: '/services' }, { label: service.title }]}
+        image={service.image}
+        badge={
+          <div className="glass-chip mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl text-ssl-gold">
+            <span aria-hidden="true" className="flex">
               <Icon className="h-8 w-8" />
-            </div>
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-ssl-bg md:text-5xl">{service.title}</h1>
-            <p className="text-lg text-slate-600">{service.description}</p>
+            </span>
           </div>
-        </AnimateOnScroll>
+        }
+      />
 
-        <div className="space-y-16">
-          {[
-            { label: 'The Problem', content: service.problem },
-            { label: 'Our Approach', content: service.approach },
-            { label: 'The Outcome', content: service.outcomes },
-          ].map((section, idx) => (
-            <AnimateOnScroll key={section.label} variant="slide-up" style={{ animationDelay: `${idx * 0.1}s` }}>
-              <section>
-                <h2 className="mb-4 text-2xl font-bold text-ssl-bg">{section.label}</h2>
-                <div className="glass-card-light glass-edge rounded-2xl p-8">
-                  <p className="text-slate-600 leading-relaxed">{section.content}</p>
-                </div>
+      <div className="mesh-light relative isolate px-4 pb-24 sm:px-6">
+        <GlassOrbs />
+        <div className="relative z-10 mx-auto -mt-16 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3">
+          {sections.map((section, idx) => (
+            <AnimateOnScroll key={section.label} asChild variant="slide-up">
+              <section className="glass-card-light glass-edge rounded-2xl p-7 md:p-8">
+                <span
+                  aria-hidden="true"
+                  className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-ssl-blue to-[#0d3a8c] font-display text-sm font-bold text-white shadow-lg shadow-ssl-blue/25"
+                >
+                  0{idx + 1}
+                </span>
+                <h2 className="mb-3 text-xl font-bold text-ssl-bg">{section.label}</h2>
+                <p className="leading-relaxed text-slate-700">{section.content}</p>
               </section>
             </AnimateOnScroll>
           ))}
-
-          <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.3s' }}>
-            <section>
-              <h2 className="mb-8 text-2xl font-bold text-ssl-bg text-center">Common Questions</h2>
-              <FAQAccordion items={service.faqs} />
-            </section>
-          </AnimateOnScroll>
         </div>
 
-        <AnimateOnScroll variant="slide-up" className="mt-20">
-          <section>
-            <h2 className="mb-8 text-center text-2xl font-bold text-ssl-bg">Related Services</h2>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {relatedServices.map((related) => (
-                <Link key={related.slug} href={`/services/${related.slug}`}>
-                  <Card tone="dark" interactive className="flex h-full flex-col p-6">
-                    <h3 className="font-semibold text-white">{related.title}</h3>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </AnimateOnScroll>
+        <section className="mx-auto mt-24 max-w-3xl">
+          <AnimateOnScroll variant="slide-up">
+            <SectionHeading
+              align="center"
+              overline="FAQ"
+              title="Common Questions"
+              variant="light"
+              className="mb-10"
+            />
+          </AnimateOnScroll>
+          <FAQAccordion items={service.faqs} />
+        </section>
 
-        <AnimateOnScroll variant="slide-up" className="mt-20 text-center">
-          <Button asChild size="lg" className="bg-ssl-blue text-white hover:bg-ssl-blue/90">
-            <Link href="/contact">Start a Project</Link>
-          </Button>
-        </AnimateOnScroll>
+        <section className="mx-auto mt-24 max-w-6xl">
+          <AnimateOnScroll variant="slide-up">
+            <SectionHeading align="center" overline="KEEP EXPLORING" title="Related Services" variant="light" className="mb-10" />
+          </AnimateOnScroll>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {relatedServices.map((related) => (
+              <ServiceCard key={related.slug} service={related} />
+            ))}
+          </div>
+        </section>
       </div>
-    </div>
+
+      <CTABanner href="/contact" />
+    </>
   );
 }

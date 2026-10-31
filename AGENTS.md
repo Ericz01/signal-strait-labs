@@ -130,6 +130,11 @@ The design system pairs a **luminous light canvas** with **premium dark anchor b
 | `.reveal .reveal-<variant>` | Scroll reveal via `AnimateOnScroll`; only runs with scroll-driven animation support and no reduced-motion preference. |
 
 - Use `<Card tone="light|dark" interactive>` and `<IconBox tone="light|dark">` instead of overriding their colours.
+- **Never wrap a glass card in an animated element.** An ancestor with an opacity animation becomes a "backdrop root" and the card's blur stops seeing the page behind it. Use `<AnimateOnScroll asChild>` so the reveal sits on the glass element itself. Reveal keyframes use the `translate`/`scale` properties so hover `transform` effects still work.
+- In CSS, always write `-webkit-backdrop-filter` **before** `backdrop-filter`. The minifier keeps only the last of the pair, and Chrome/Firefox ignore the `-webkit-` one.
+- Light sections that hold glass cards need `relative isolate` and `<GlassOrbs />` behind them, or the blur has nothing to show.
+- Inner pages start with `<PageHero>` (dark photo band, breadcrumb, `<h1>`), followed by a `mesh-light` body that overlaps it with `-mt-16`. Long text uses `.panel-light` (no live blur).
+- Service cards: `components/ServiceCard.tsx` (used on home, /services and related services).
 - Photos: use `components/ResponsivePhoto.tsx` (art-directed `<picture>`, small file for phones, media-matched preloads when `priority`). `next/image` can't build a srcset because `images.unoptimized` is on. Sources and credits are in `assets/photos/`.
 - Keep live `backdrop-filter` to a few large surfaces per screen (header, panels, cards); it is expensive to paint on phones.
 

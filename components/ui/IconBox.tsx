@@ -25,7 +25,7 @@ const IconBox = React.forwardRef<HTMLDivElement, IconBoxProps>(
           className={cn(
             "p-2.5 rounded-xl flex items-center justify-center border transition-colors duration-300",
             tone === "light" &&
-              "bg-gradient-to-br from-ssl-blue/10 to-ssl-gold/10 border-white text-ssl-blue shadow-sm group-hover:from-ssl-blue group-hover:to-ssl-blue group-hover:text-white",
+              "border-white/40 bg-gradient-to-br from-ssl-blue to-[#0d3a8c] text-white shadow-lg shadow-ssl-blue/25 group-hover:from-ssl-gold group-hover:to-[#9A7432] group-hover:shadow-ssl-gold/30",
             tone === "dark" && variant === "default" && "bg-white/[0.06] border-white/10 text-slate-200 group-hover:text-ssl-gold",
             tone === "dark" && variant === "gold" && "bg-ssl-gold/10 border-ssl-gold/25 text-ssl-gold",
             tone === "dark" && variant === "subtle" && "bg-white/[0.04] border-white/5 text-slate-400 group-hover:text-slate-200"
@@ -33,8 +33,15 @@ const IconBox = React.forwardRef<HTMLDivElement, IconBoxProps>(
         >
           <span aria-hidden="true" className="flex"><Icon className="h-6 w-6" /></span>
         </div>
-        <h3 className={cn("text-lg font-semibold tracking-tight", tone === "light" ? "text-ssl-bg" : "text-white")}>{title}</h3>
-        <p className={cn("text-sm leading-relaxed", tone === "light" ? "text-slate-600" : "text-slate-300")}>{description}</p>
+        <h3
+          className={cn(
+            "text-lg font-bold tracking-tight transition-colors duration-300",
+            tone === "light" ? "text-ssl-bg group-hover:text-ssl-blue" : "text-white"
+          )}
+        >
+          {title}
+        </h3>
+        <p className={cn("text-[0.95rem] leading-relaxed", tone === "light" ? "text-slate-700" : "text-slate-300")}>{description}</p>
       </div>
     );
   }

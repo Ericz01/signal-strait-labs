@@ -160,14 +160,15 @@
   /* Light frosted glass, for cards on .mesh-light. */
   .glass-card-light {
     position: relative;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55));
-    backdrop-filter: blur(18px) saturate(170%);
-    -webkit-backdrop-filter: blur(18px) saturate(170%);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.46));
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      0 1px 2px rgba(1, 8, 27, 0.04),
-      0 12px 32px -14px rgba(1, 8, 27, 0.18);
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(1, 8, 27, 0.06),
+      0 2px 4px rgba(1, 8, 27, 0.04),
+      0 18px 40px -18px rgba(1, 8, 27, 0.28);
   }
 
   /* Dark frosted glass: anchor cards, banners, the contact form. */
@@ -175,8 +176,8 @@
     position: relative;
     z-index: 1;
     background: linear-gradient(150deg, rgba(14, 30, 72, 0.9), rgba(1, 8, 27, 0.95));
-    backdrop-filter: blur(22px) saturate(160%);
     -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.09),
@@ -195,19 +196,35 @@
     pointer-events: none;
   }
 
+  /* Near-opaque light panel for long text (legal pages). Same edge and shadow
+     as light glass, but no live blur: blurring a very tall panel is costly on
+     phones, and long text reads better on a solid surface. */
+  .panel-light {
+    position: relative;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(1, 8, 27, 0.06),
+      0 18px 40px -18px rgba(1, 8, 27, 0.28);
+  }
+
   /* Optional hover lift for interactive glass cards. */
   .glass-hover {
     transition:
       transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.35s ease;
   }
   .glass-hover:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    background-color: rgba(255, 255, 255, 0.35);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      0 2px 4px rgba(1, 8, 27, 0.05),
-      0 28px 48px -20px rgba(1, 8, 27, 0.28),
-      0 0 0 1px rgba(197, 160, 89, 0.25);
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(197, 160, 89, 0.45),
+      0 4px 8px rgba(1, 8, 27, 0.05),
+      0 32px 56px -22px rgba(1, 8, 27, 0.35),
+      0 0 48px -12px rgba(26, 89, 204, 0.25);
   }
   .glass-card-dark.glass-hover:hover {
     box-shadow:
@@ -234,8 +251,8 @@
   /* Translucent sticky nav / footer bar */
   .glass-nav-light {
     background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
 }
 
@@ -246,17 +263,21 @@ html[data-consent] .cookie-banner {
 
 /* Scroll reveal. Only runs where scroll-driven animations are supported, and
    never with reduced motion, so content is always visible otherwise. */
+/* Uses the individual `translate`/`scale` properties so hover `transform`
+   effects still work while the animation is in effect. Put the reveal on the
+   glass element itself (AnimateOnScroll asChild): an animated-opacity wrapper
+   becomes a "backdrop root" and stops backdrop-filter seeing the page behind. */
 @keyframes reveal-slide-up {
-  from { opacity: 0; transform: translateY(32px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; translate: 0 32px; }
+  to { opacity: 1; translate: 0 0; }
 }
 @keyframes reveal-fade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 @keyframes reveal-scale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; scale: 0.95; }
+  to { opacity: 1; scale: 1; }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -275,8 +296,8 @@ html[data-consent] .cookie-banner {
 /* Sticky header — dark glass without hover lift */
 .glass-nav-dark {
   background: linear-gradient(135deg, rgba(1, 8, 27, 0.78) 0%, rgba(6, 21, 59, 0.7) 100%);
-  backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
 }
 

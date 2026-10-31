@@ -1,5 +1,7 @@
 import { AtomIcon, CpuIcon, DollarSignIcon, GemIcon, BarChartIcon, MegaphoneIcon, UsersIcon } from 'lucide-react';
 
+import type { HeroImage } from '@/components/PageHero';
+
 export interface FAQ {
   question: string;
   answer: string;
@@ -18,6 +20,8 @@ export interface Service {
   icon: React.ComponentType<{ className?: string }>;
   href: string;
   featured?: 'primary' | 'secondary';
+  /** Header photo for the service page (see components/ResponsivePhoto). */
+  image: HeroImage;
 }
 
 // Title and slug only, for the contact form's service dropdown.
@@ -40,6 +44,7 @@ export const services: Service[] = [
       { question: "Do you build on our existing site or start from scratch?", answer: "Either works. We'll review what you have first and recommend whichever gives you a better result without wasting your budget." }
     ],
     icon: CpuIcon,
+    image: { base: '/images/service-web', smallWidth: 720, largeWidth: 1920 },
     href: '/services/technical-infrastructure-web-dev',
     featured: 'primary',
   },
@@ -57,6 +62,7 @@ export const services: Service[] = [
       { question: "Do you write the content too, or just handle the technical side?", answer: "Both. We handle the technical structure and can also write or restructure content so it's built to rank and get cited." }
     ],
     icon: AtomIcon,
+    image: { base: '/images/service-search', smallWidth: 720, largeWidth: 1920 },
     href: '/services/algorithmic-search',
   },
   {
@@ -73,6 +79,7 @@ export const services: Service[] = [
       { question: "How much manual work can actually be automated?", answer: "It depends on your setup. In most businesses a lot of repetitive data entry can be removed within the first month." }
     ],
     icon: BarChartIcon,
+    image: { base: '/images/service-data', smallWidth: 720, largeWidth: 1920 },
     href: '/services/data-systems-automation',
   },
   {
@@ -89,6 +96,7 @@ export const services: Service[] = [
       { question: "Can you work with our existing sales team, or do we need to change how they work?", answer: "We build around your team's actual process. Some habits may need to change, but the goal is to make their job easier, not harder." }
     ],
     icon: DollarSignIcon,
+    image: { base: '/images/service-revops', smallWidth: 720, largeWidth: 1920 },
     href: '/services/revenue-operations-revops',
   },
   {
@@ -105,6 +113,7 @@ export const services: Service[] = [
       { question: "How do you measure success?", answer: "By pipeline value and revenue, not clicks or impressions. We'll track and report on the numbers that actually affect your business." }
     ],
     icon: MegaphoneIcon,
+    image: { base: '/images/service-performance', smallWidth: 720, largeWidth: 1920 },
     href: '/services/performance-marketing-abm',
   },
   {
@@ -121,6 +130,7 @@ export const services: Service[] = [
       { question: "How is this different from just posting on social media?", answer: "Social media is one channel. PR builds your reputation across media coverage, industry recognition, and public communication as a whole." }
     ],
     icon: GemIcon,
+    image: { base: '/images/service-pr', smallWidth: 720, largeWidth: 1920 },
     href: '/services/corporate-pr-brand-authority',
   },
   {
@@ -137,6 +147,7 @@ export const services: Service[] = [
       { question: "Is this instead of hiring an agency, or alongside one?", answer: "It can be either. Some clients use this to eventually stop needing an agency. Others keep working with us for bigger projects while their team handles the day to day." }
     ],
     icon: UsersIcon,
+    image: { base: '/images/service-training', smallWidth: 720, largeWidth: 1920 },
     href: '/services/marketing-sales-capacity-building',
     featured: 'secondary',
   },

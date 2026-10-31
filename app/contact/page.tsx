@@ -1,6 +1,7 @@
 import { ContactSection } from '@/components/ContactSection';
 import { getServiceOptions } from '@/lib/services-data';
 import { pageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/PageHero';
 import Link from 'next/link';
 
 export const metadata = pageMetadata({
@@ -12,8 +13,14 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <div>
-      <ContactSection services={getServiceOptions()} headingLevel="h1" />
-      <p className="bg-ssl-light-bg px-6 pb-20 text-center text-sm text-slate-600">
+      <PageHero
+        title="Contact Us"
+        description="Tell us what you are working on and we will get back to you shortly."
+        breadcrumbs={[{ label: 'Contact' }]}
+        image={{ base: '/images/hero-nairobi-night', smallWidth: 720, largeWidth: 1920 }}
+      />
+      <ContactSection services={getServiceOptions()} compact />
+      <p className="mesh-light px-6 pb-20 text-center text-sm text-slate-700">
         Want to know more first? See{' '}
         <Link href="/services" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">
           our services

@@ -1,9 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
-// Only used on the home page, where #contact is the form section below.
-export default function CTABanner() {
+// On the home page the default '#contact' scrolls to the form below; other
+// pages pass href="/contact".
+export default function CTABanner({ href = '#contact' }: { href?: string }) {
   return (
     <section className="mesh-light px-4 py-16 sm:px-6 md:py-24">
       <AnimateOnScroll variant="scale">
@@ -24,7 +26,7 @@ export default function CTABanner() {
               Tell us what you want to improve and we will suggest where to start.
             </p>
             <Button asChild variant="primary" size="lg" className="px-10 text-base shadow-lg shadow-ssl-gold/25">
-              <a href="#contact">Start a Project</a>
+              <Link href={href}>Start a Project</Link>
             </Button>
           </div>
         </div>

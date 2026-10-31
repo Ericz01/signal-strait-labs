@@ -33,7 +33,7 @@ export default function WhySSL() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
           {differentiators.map((differentiator) => (
-            <AnimateOnScroll key={differentiator.title} variant="slide-up">
+            <AnimateOnScroll key={differentiator.title} asChild variant="slide-up">
               <Card tone="dark" className="group h-full p-7">
                 <IconBox
                   icon={differentiator.icon}
