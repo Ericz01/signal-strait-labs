@@ -80,8 +80,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 
 - [ ] **t101** Source or commission hero imagery: abstract/tech/data aesthetic, avoid generic stock photography. **[needs Eric]**
   - Done when: approved hero imagery is in `public/` and used in the hero.
-- [ ] **t102** Create or source SVG icons for all 6 service categories (consistent style and weight).
+- [x] **t102** Create or source SVG icons for all 6 service categories (consistent style and weight).
   - Done when: all 6 services have an SVG icon with matching style and stroke weight.
+  - Result: already done. All 7 services use Lucide icons (same style and stroke weight), rendered as inline SVG. No code change.
 - [ ] **t103** Run all images through WebP compression pipeline: target under 100KB per image.
   - Done when: every raster image in `public/` is WebP and under 100KB (except icons that must stay PNG or ICO).
 - [ ] **t104** Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority.
