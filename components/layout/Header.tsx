@@ -96,7 +96,7 @@ export function Header() {
             <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] shadow-inner transition-all duration-500 group-hover:border-ssl-gold/40 group-hover:bg-ssl-gold/5 group-hover:shadow-ssl-gold/10">
               <Image
                 src="/logo-mark.webp"
-                alt="Signal Strait Labs"
+                alt=""
                 width={20}
                 height={28}
                 className="w-auto object-contain transition-all duration-700 ease-out group-hover:rotate-[15deg] group-hover:scale-110"
