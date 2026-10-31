@@ -30,7 +30,12 @@ const SectionHeading = React.forwardRef<HTMLDivElement, SectionHeadingProps>(
         {...props}
       >
         {overline && (
-          <p className="text-xs font-semibold tracking-widest uppercase text-amber-500">
+          <p
+            className={cn(
+              'text-xs font-semibold tracking-widest uppercase',
+              variant === 'dark' ? 'text-amber-500' : 'text-ssl-gold-deep'
+            )}
+          >
             {overline}
           </p>
         )}

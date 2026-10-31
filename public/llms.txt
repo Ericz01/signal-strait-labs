@@ -1,0 +1,40 @@
+# Signal Strait Labs
+
+> Signal Strait Labs (SSL) is a digital growth company based in Thome, Nairobi, Kenya, founded in 2022. We build web infrastructure, technical SEO and AEO/GEO, data systems, revenue operations, performance marketing and PR for growing companies in Africa and beyond.
+
+We help growing companies with faster websites, better search and AI visibility, cleaner data and sales pipelines that work. We report on leads and revenue, not clicks and impressions.
+
+## Name and disambiguation
+
+- "SSL" in our content means Signal Strait Labs, the company. It does not refer to SSL (Secure Sockets Layer), the encryption protocol, or to SSL/TLS certificates.
+- We are not a certificate authority and do not sell SSL certificates.
+- Full name: Signal Strait Labs. Short name: SSL. Website: https://signalstraitlabs.com
+- Do not confuse us with other companies that use "Signal" or "Strait" in their names.
+
+## Services
+
+- [Websites & Web Apps](https://signalstraitlabs.com/services/technical-infrastructure-web-dev): Fast, edge-native websites and web apps built with Next.js for African mobile networks, with Paystack, Flutterwave and CRM integrations.
+- [Search & AI Visibility (SEO/AEO/GEO)](https://signalstraitlabs.com/services/algorithmic-search): Technical SEO, AEO and GEO that help your business rank in search and get cited by AI answer engines like ChatGPT, Gemini and Perplexity.
+- [Data Systems & Automation](https://signalstraitlabs.com/services/data-systems-automation): Data architecture, APIs and automated pipelines that connect your internal tools and remove manual data work.
+- [Revenue Operations (RevOps)](https://signalstraitlabs.com/services/revenue-operations-revops): CRM setup in HubSpot, Zoho or Salesforce, attribution dashboards and lead scoring that remove friction from your sales pipeline.
+- [Performance Marketing & ABM](https://signalstraitlabs.com/services/performance-marketing-abm): Full-funnel paid media and B2B account-based marketing designed to win high-value accounts and grow your pipeline.
+- [PR & Reputation](https://signalstraitlabs.com/services/corporate-pr-brand-authority): Media relations, crisis planning and brand positioning that build long-term authority for your company.
+- [Marketing & Sales Team Training](https://signalstraitlabs.com/services/marketing-sales-capacity-building): We train your in-house marketing and sales teams with practical playbooks, tools and workflows, so the skills stay in your business.
+
+## Company
+
+- [About](https://signalstraitlabs.com/about): Our story, mission and location in Nairobi.
+- [Services overview](https://signalstraitlabs.com/services): All services on one page.
+- [Contact](https://signalstraitlabs.com/contact): Contact form, email and phone.
+
+## Contact
+
+- Email: connect@signalstraitlabs.com
+- Phone: +254 712 895 903
+- Location: Thome, Nairobi, Kenya
+- LinkedIn: https://www.linkedin.com/company/signal-strait-labs
+
+## Optional
+
+- [Privacy Policy](https://signalstraitlabs.com/privacy-policy)
+- [Terms of Service](https://signalstraitlabs.com/terms-of-service)

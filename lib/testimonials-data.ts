@@ -1,4 +1,6 @@
 // NOTE: These are placeholder testimonials pending real client feedback.
+// The Testimonials section stays hidden while any name, role or company is
+// still a bracketed placeholder. Replace with real, approved quotes to show it.
 // They represent the core value propositions (technical depth, pipeline engineering, growth systems).
 
 export interface Testimonial {
@@ -20,7 +22,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'Their approach to infrastructure isn’t just about "development" — it’s about engineering systems that directly drive revenue and acquisition efficiency.',
+      'Their approach to infrastructure isn’t just about "development". It’s about engineering systems that directly drive revenue and acquisition efficiency.',
     name: '[Client Name]',
     role: '[Role]',
     company: '[Enterprise Client]',

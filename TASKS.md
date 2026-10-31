@@ -1,0 +1,204 @@
+# TASKS
+
+Unfinished MVP tasks, in order. Work from the top, one task at a time, on a branch named `task/<id>`.
+Tasks marked **[needs Eric]** need a login, a dashboard, DNS, an API key or a purchase. Skip them and move to the next task unless Eric says that part is done.
+
+Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Post-MVP phases G1 to G5 are left out.
+
+## Open fixes
+
+- [x] **copy1** Rewrite site copy in plain language: remove AI-style, inflated and jargon-heavy wording, including the hero hook.
+  - Done when: hero, section headings, service names, about page, CTA, footer and metadata read plainly with no em dashes, and a scan of the rendered pages finds no inflated phrases.
+  - Result: new hero ("Fast websites, better search, more sales."), plain section headings, "why us" points, process steps (Audit, Plan, Build, Improve), CTA, About page, footer tagline and header button ("Get in Touch"). Renamed four services (slugs unchanged). Updated home title/description and llms.txt. Left the "Growth Engineering" line under the logo for Eric to decide.
+- [x] **design2** Make service cards stand out, fix the hidden glass effect and hover, and bring inner pages up to the home page's look.
+  - Done when: glass cards actually blur what is behind them, hover lifts the card, and services, service, about, contact, legal and 404 pages use photo headers and glass cards.
+  - Result: found two bugs that hid the glass everywhere. (1) The CSS minifier dropped the standard `backdrop-filter` and kept only `-webkit-backdrop-filter`, which Chrome and Firefox ignore, so there was no blur outside Safari. (2) The scroll-reveal wrapper's opacity animation blocked the blur and its `transform` overrode the hover lift. Both fixed (reveal now sits on the card and uses `translate`). Service cards: solid gradient icon chips, bold dark titles, darker text, stronger edge and shadow, colour orbs behind them, and on hover a lift, gold ring, gold icon, blue title and an accent line. New `PageHero` photo header on Services, all service pages (each with its own photo), About, Contact, Privacy and Terms; glass 404. Legal "Last updated" is now a fixed date (update `LAST_UPDATED` when the text changes).
+  - Seven more free Unsplash photos for the service pages (credits in `assets/photos/CREDITS.md`), all under 100KB as WebP.
+  - Accessibility 100 on all pages. Performance could not be measured reliably: the machine was under heavy load (load average 11 to 14) and the same page scored anywhere from 52 to 92. Re-run Lighthouse when the machine is idle or on the live site.
+- [x] **design1** Premium, modern glassmorphism look with high-quality images.
+  - Done when: hero and key sections use high-quality imagery and a consistent, polished glass style; Lighthouse stays at Performance 90+, Accessibility 100 on mobile.
+  - Result: three free Unsplash photos (Nairobi skyline at night for the hero, a team meeting for About, a soft blue/amber blur for dark bands), compressed to WebP (17 to 81KB). New glass system: frosted light and dark glass with gradient edges on soft colour meshes, hero chips, a glass "We report on" panel overlapping the hero, a dark photo band for "Why work with us", glass process steps, a glass CTA over the blur photo, an About header with a frosted caption over the photo. Fixed `AnimateOnScroll` so sections fade in on scroll. Cookie banner is now in the server HTML (faster first paint).
+  - Lighthouse mobile: Accessibility, Best Practices and SEO 100 on all pages. Performance: contact 96, privacy 95, services 92, about 92, home 87 to 91 depending on the run. With real (applied) throttling the hero LCP is 2.1s; the simulated 3.1s comes from Lighthouse modelling the photo as a late download.
+  - Eric: the About photo is stock, not your team. Replace it with a real team photo when you can (see `assets/photos/CREDITS.md`).
+- [x] **fix1** The rate limiter on `/api/leads` still lets through more than 5 requests in 10 minutes. Check that the Upstash client is created inside the POST handler and that secrets are read through the OpenNext Cloudflare context (`getCloudflareContext().env`), not `process.env` at module scope.
+  - Done when: no Upstash client or secret is read at module scope, secrets come from `getCloudflareContext().env` (with `process.env` only as a `next dev` fallback), and the code path clearly returns 429 on the 6th request in 10 minutes from one IP.
+- [x] **fix2** Check that no temporary diagnostic logging is left in `app/api/leads/route.ts`.
+  - Done when: the route has no leftover debug `console.log` calls, and only intended warnings and errors remain.
+  - Result: nothing left to remove. The `DEBUG: Rate limiting with IP` log was already removed in `b1edd0e`. The remaining `console.log('Received Lead Submission: ...')` is the intended placeholder until email delivery (t074). It logs name, email and company, so remove it or cut it down in t074.
+- [x] **fix3** Set the site's base URL and canonical to `https://signalstraitlabs.com`.
+  - Done when: `metadataBase`, canonical URLs, JSON-LD URLs and any sitemap or robots references all use `https://signalstraitlabs.com`.
+
+## P5: MVP Functionality & Integrations
+
+- [x] **t074** Integrate Resend (@resend/node) for transactional email delivery from the API route. **[needs Eric]**
+  - Done when: the leads route sends email through Resend using a key read per request from the Cloudflare context, and the build passes.
+  - Result: code done. Uses the Resend HTTP API with `fetch` (`lib/email.ts`), no SDK. Each lead is emailed as plain text to connect@signalstraitlabs.com, with reply-to set to the visitor.
+  - Eric: verify signalstraitlabs.com in Resend (it sends from noreply@signalstraitlabs.com), then add `RESEND_API_KEY` as a Worker secret. Until then no email is sent and the route logs a warning. Not tested against the real API yet; see t118.
+- [x] **t075** Build HTML confirmation email template sent to the user after successful form submission.
+  - Done when: a confirmation email template exists and is sent to the submitter's address after a valid submission.
+- [x] **t076** Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead.
+  - Done when: each valid lead triggers a notification email to connect@signalstraitlabs.com containing all form fields.
+- [x] **t077** Add success/error toast notification UI on the contact form (no page reload).
+  - Done when: submitting the form shows a success or error toast without reloading the page, on both `/` and `/contact`.
+- [x] **t078** Integrate Cloudflare Web Analytics: add lightweight script to app/layout.tsx. **[needs Eric]**
+  - Done when: the Cloudflare Web Analytics script loads on every page using the site token from the dashboard.
+  - Result: code done (`components/CloudflareAnalytics.tsx`). Eric: create a Web Analytics site in Cloudflare for signalstraitlabs.com and set `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` in the build environment. Or, once the domain is proxied by Cloudflare, turn on automatic setup instead and leave the variable unset.
+- [x] **t080** "Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page. **[needs Eric]**
+  - Done when: a "Book a Discovery Call" button links to a working scheduling page.
+  - Result: code done. The hero button is now "Book a Discovery Call" (`components/BookCallButton.tsx`) and "Explore Services" now links to /services (both were dead buttons). Eric: create a Cal.com or Calendly event and set `NEXT_PUBLIC_BOOKING_URL` in the build environment. Until then the button goes to /contact.
+- [x] **t081** Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic.
+  - Done when: a banner appears on first visit, remembers accept or decline, and non-essential scripts only load after accept.
+  - Result: the only non-essential item is the Google Maps embed on /about; it now waits for consent (or a one-time "Show map"). Cloudflare Web Analytics is cookieless so it is not gated. Added a Cookies paragraph with a "Change your cookie choice" button to the privacy policy, and fixed the footer legal links, which all pointed to "#". The policy text is a plain draft; Eric should review it.
+
+## P6: MVP SEO · AEO · GEO Essentials
+
+- [x] **t082** Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL).
+  - Done when: `app/layout.tsx` exports metadata with a title template, a base description and `metadataBase`.
+  - Result: already in place (metadataBase set to signalstraitlabs.com in fix3). No code change.
+- [x] **t083** Add generateMetadata() to every page: unique title under 60 chars and description under 155 chars.
+  - Done when: every page has its own title under 60 characters and description under 155 characters.
+  - Result: removed the doubled "| Signal Strait Labs" from page titles, shortened the home title and description, gave the 404 page its own metadata, and added a short `metaDescription` to each service in `lib/services-data.ts` (on-page service copy is unchanged). Static pages use `export const metadata`, which does the same job as `generateMetadata()`.
+- [x] **t084** Add canonical URL declarations to all pages to prevent duplicate content issues.
+  - Done when: every page's HTML has a `<link rel="canonical">` pointing to its own URL.
+- [x] **t085** Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange).
+  - Done when: valid ProfessionalService JSON-LD with all listed fields is in the page output.
+  - Result: moved to `lib/structured-data.ts`, rendered by `components/JsonLd.tsx`. Added logo, serviceType and priceRange (`$$`), and the offer list now matches the 7 real services. Eric: confirm the Facebook URL. The old JSON-LD used `facebook.com/profile.php?id=61589782545004`, the footer uses `facebook.com/signalstraitlabs/`; I used the footer one.
+- [x] **t086** Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles).
+  - Done when: valid Organization JSON-LD with founding date, Nairobi HQ, contact details and social profiles is in the page output.
+  - Result: added on the home page. Social profiles list only LinkedIn and Facebook; add the others to `socialProfiles` in `lib/structured-data.ts` once those accounts exist.
+- [x] **t087** Create WebPage JSON-LD for the homepage.
+  - Done when: the homepage outputs valid WebPage JSON-LD.
+- [x] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.
+  - Done when: each service page outputs FAQPage JSON-LD built from its FAQ data in `lib/services-data.ts`.
+- [x] **t093** Create public/llms.txt: structured markdown file with company overview, services, and contact for LLM crawlers.
+  - Done when: `/llms.txt` is served and lists the company overview, all services and contact details.
+  - Note: this is a static file. If a service is added or renamed in `lib/services-data.ts`, update `public/llms.txt` too.
+- [x] **t094** llms.txt: Include entity disambiguation section (SSL = Signal Strait Labs, not SSL the protocol).
+  - Done when: `llms.txt` has a section stating SSL means Signal Strait Labs, not the SSL protocol.
+- [x] **t095** Create app/sitemap.ts: dynamic generator that covers all static + dynamic routes.
+  - Done when: `/sitemap.xml` lists every static page and every service detail page.
+- [x] **t096** Create public/robots.txt: allow major search bots, selectively manage aggressive AI crawlers.
+  - Done when: `/robots.txt` allows major search bots, sets rules for AI crawlers, and links to the sitemap.
+- [x] **t097** Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url).
+  - Done when: every page outputs all five OpenGraph tags.
+- [x] **t098** Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image).
+  - Done when: every page outputs all four Twitter Card tags.
+  - Result: removed `twitter:creator` (`@signalstraitlabs`) because the X account does not exist yet. Add `site` and `creator` to `baseTwitter` in `lib/metadata.ts` after t135.
+- [x] **t100** Audit that every page has at least one internal link to another page (crawlability requirement).
+  - Done when: every page has at least one internal link in its main content, not only in the header and footer.
+  - Result: added content links on About, Contact, Privacy and Terms. Also changed the Contact page's inner `<main>` to a `<div>`.
+  - Found: because of the root `app/loading.tsx`, every page is streamed. The static HTML has the loading skeleton inside `<main>` and the real content in a hidden block after the footer, moved in by JavaScript. Crawlers that don't run JavaScript (most AI crawlers) still get the text, but out of place. Consider removing `app/loading.tsx` (all pages are static, so it rarely shows); see t114.
+
+## P7: MVP Assets & Content
+
+- [ ] **t101** Source or commission hero imagery: abstract/tech/data aesthetic, avoid generic stock photography. **[needs Eric]**
+  - Done when: approved hero imagery is in `public/` and used in the hero.
+- [x] **t102** Create or source SVG icons for all 6 service categories (consistent style and weight).
+  - Done when: all 6 services have an SVG icon with matching style and stroke weight.
+  - Result: already done. All 7 services use Lucide icons (same style and stroke weight), rendered as inline SVG. No code change.
+- [x] **t103** Run all images through WebP compression pipeline: target under 100KB per image.
+  - Done when: every raster image in `public/` is WebP and under 100KB (except icons that must stay PNG or ICO).
+  - Result: the header was loading the 460KB 1536x1024 `logo.png` on every page to show it at 28px. It now uses `logo-mark.webp` (just the gold S mark, 6KB). Added `logo.webp` (800px, 56KB). `logo.png` is now a 600px PNG (31KB), kept as PNG for JSON-LD and social previews. The full-size original is kept in `assets/logo-source.png` (not served).
+- [x] **t104** Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority.
+  - Done when: no plain `<img>` tags remain, and every image has width, height, alt and correct priority.
+  - Result: there were no plain `<img>` tags. Replaced the deprecated `priority` prop (Next 16) with `loading="eager"` on the header logo. When a hero image is added (t101), give it `preload`.
+- [x] **t105** Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview.
+  - Done when: a 1200×630 PNG social card in brand colors exists and is set as the default `og:image`.
+  - Result: `public/og-image.png` (51KB), built by `scripts/make-social-card.mjs` from the logo. Light canvas with the full logo, navy band with gold rule and tagline. The tagline uses Noto Sans because the brand fonts are not installed locally; the logo carries the brand lettering. Eric: check you like the tagline "Growth engineering for Africa and beyond".
+- [x] **t107** Final copywriting pass across all MVP pages: tone authoritative, direct, precise (not salesy or vague).
+  - Done when: every MVP page has been reviewed and the copy is plain, direct and free of em dashes.
+  - Result: removed all em dashes from site copy (one is left inside the privacy policy placeholder, see t128). Rewrote the 7 service card descriptions and the Contact page description in plain language. Hid the Testimonials section: all three quotes are invented placeholders credited to "[Client Name]", which visitors could see. It shows again automatically once every entry has a real name, role and company in `lib/testimonials-data.ts`.
+  - Eric to decide (brand voice, left as is): header button "Get an ABM Attack Plan", hero "Force a Clear Market Signal Through Digital Chaos.", CTA banner "Ready to Force Your Signal Through the Chaos?".
+- [x] **t108** Add descriptive alt text to every image across all pages (both accessibility and SEO requirement).
+  - Done when: every image has meaningful alt text, or empty alt if it is purely decorative.
+  - Result: the header logo mark is now `alt=""` because the link already shows "Signal Strait Labs" as text. All images have alt; the map iframe has a title. The social card has alt text in its metadata.
+
+## P8: Performance, QA & Accessibility
+
+- [x] **t109** Run npx tsc --noEmit: resolve all TypeScript errors before any build.
+  - Done when: `npx tsc --noEmit` exits with no errors.
+- [x] **t110** Run ESLint: fix all warnings, especially accessibility-related lint rules.
+  - Done when: `npm run lint` reports zero errors and zero warnings.
+- [x] **t111** Run npm run build locally: resolve all compilation errors and warnings before deploying.
+  - Done when: `npm run build` and `npm run build:worker` finish with no errors or warnings.
+- [x] **t112** Analyze JS bundle size with @next/bundle-analyzer: identify and remove unnecessary imports.
+  - Done when: a bundle report has been reviewed and unneeded imports are removed.
+  - Result: `@next/bundle-analyzer` is webpack-only; this project uses Turbopack (use `npx next experimental-analyze` for the interactive view). Reviewed the client chunks directly. The contact form imported all of `lib/services-data.ts`, which shipped every service's copy and FAQs to the browser; it now receives title/slug options as a prop. Client JS went from 217KB to 203KB gzipped. The remaining large chunks are React and the Next.js runtime. `validator` and the Upstash clients are server-only.
+- [x] **t113** Run Lighthouse audit (mobile simulation): targets Performance 90+, Accessibility 95+, SEO 100.
+  - Done when: a mobile Lighthouse run on the main pages scores Performance 90+, Accessibility 95+ and SEO 100.
+  - Result (local production server, Lighthouse 13.6 mobile): Performance 95 to 99, Accessibility 100, Best Practices 100, SEO 100 on home, about, contact, services, a service page, privacy and terms. Started at home Performance 66, Accessibility 90 to 92, SEO 92.
+  - Fixes: removed `app/loading.tsx` (home LCP 3.2s to 1.0s); hero drift animation now uses transform instead of repainting background-position (home blocking time 1570ms to about 200ms); mobile menu is `inert` when closed; light-surface overlines use a new `ssl-gold-deep` token; step numbers, footer small print and the service page "Start a Project" button now pass contrast; About team headings h4 to h3; cookie banner link text is descriptive.
+  - Note: re-run on the live site after deploy. Cloudflare's edge and network will change the numbers.
+- [x] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.
+  - Done when: mobile Lighthouse reports LCP under 2.5s on the homepage.
+  - Result: home LCP 1.0s (was 3.2s), done in t113 by removing `app/loading.tsx`. Fonts are preloaded by `next/font`. The only third-party script (Cloudflare analytics) loads `afterInteractive`. There is no hero image yet; when one is added (t101), give it `preload`.
+- [x] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
+  - Done when: Lighthouse reports CLS under 0.1 on every main page.
+  - Result: CLS 0 on all seven pages tested in t113. Images have explicit width and height; fonts use `next/font` (size-adjusted fallbacks).
+- [x] **t116** INP < 200ms: audit and fix any heavy event handlers on interactive elements.
+  - Done when: no interaction (menu, form, banner) takes over 200ms in a performance trace.
+  - Result: measured with Event Timing in headless Chrome at 4x CPU slowdown: cookie Accept 56ms, mobile menu 136ms, FAQ accordion 168ms (closest to the limit), service dropdown 88ms, typing in the form 96ms. No code change. Check real-user INP in Cloudflare Web Analytics after launch.
+- [ ] **t117** Test all pages on iOS Safari + Android Chrome at 375px viewport width.
+  - Done when: every page has been checked on both browsers at 375px with no layout breaks.
+  - Progress (not ticked, needs real devices): checked every page in Chrome mobile emulation at 375px and 320px. Fixed: the closed mobile menu was moved off-screen with translate-x-full, which doubled the page width on phones so visitors could scroll sideways into empty space. It now uses clip-path. Also removed an empty dark band at the top of /contact. No other overflow found.
+  - Eric: check on a real iPhone (Safari) and Android phone (Chrome). In particular the open mobile menu: confirm the page behind it is properly blurred (headless Chrome doesn't render the blur), and the cookie banner, contact form and service dropdown.
+- [ ] **t118** Test all forms end-to-end: submission, email delivery, toast notifications, and error states. **[needs Eric]**
+  - Done when: a real submission delivers both emails, shows the success toast, and error cases show the error toast.
+- [ ] **t119** Cross-browser test: Chrome, Firefox, Safari, Edge, all at desktop and mobile widths.
+  - Done when: every page works in all four browsers at desktop and mobile widths.
+  - Progress (not ticked, Safari still needed): checked in Chrome and Firefox 158 at desktop and phone widths. Edge uses the same engine as Chrome. Fixed two site-wide bugs found here:
+    - The brand fonts were never applied. `next/font` variables were on `<body>`, but Tailwind's `--font-display`/`--font-body` live on `:root`, so they were undefined and every page used the system font. Moved the variables to `<html>`. Headings are now Sora and body text Plus Jakarta Sans. This is a visible change; check you like it.
+    - The hero "Explore Services" button was dark grey on the dark hero for anyone not using OS dark mode. Removed the `dark:` variants from `components/ui/Button.tsx` (the site has no dark mode) and gave that button light text.
+  - Eric: check in Safari on a Mac or iPhone.
+- [x] **t120** Full keyboard navigation test: every interactive element reachable and operable without a mouse.
+  - Done when: every link, button, menu and form field can be reached and used by keyboard with a visible focus state.
+  - Result: tabbed through 7 pages in headless Chrome, checking every focus stop shows a visible change. Fixed:
+    - Service cards had a `<button>` inside the card `<a>` (invalid, two tab stops per card). "Learn More" is now a styled span.
+    - The service and budget dropdowns were custom buttons with no ARIA or arrow-key support. Replaced with native `<select>` (same look when closed; the open list is the browser's own). Removed `components/ui/CustomSelect.tsx`.
+    - Form labels were not linked to their fields. Added `htmlFor`/`id`, `name` and `autoComplete`.
+    - FAQ accordion now has `aria-expanded`/`aria-controls`; closed answers are `inert`.
+    - Escape closes the mobile menu and returns focus to the menu button.
+    - Button focus ring was dark-on-dark; now blue with a white offset. Dark form fields get a solid gold border on focus.
+    - Inner `<main>` on About, Services, service pages, Privacy and Terms changed to `<div>`. `/contact` now has an `<h1>`.
+- [x] **t121** Color contrast audit: all body text meets WCAG AA minimum 4.5:1 ratio.
+  - Done when: all body text on light and dark surfaces measures at least 4.5:1.
+  - Result: Lighthouse/axe contrast check passes on all 13 pages (home, about, contact, services, all 7 service pages, privacy, terms); accessibility 100 on each. Contrast fixes were made in t113 (deep-gold token, footer, step numbers, buttons) and t119 (hero outline button). Also fixed a heading-order slip on /contact.
+
+## P9: MVP Launch
+
+Note: the tracker says Cloudflare Pages, but the site now runs as a Cloudflare Worker (see CLAUDE.md). Read these tasks with that in mind.
+
+- [ ] **t122** Verify custom domain signalstraitlabs.com is correctly connected to Cloudflare Pages in the dashboard. **[needs Eric]**
+  - Done when: signalstraitlabs.com serves the live site.
+- [ ] **t123** Confirm DNS A/CNAME records are set and fully propagated. **[needs Eric]**
+  - Done when: DNS lookups for signalstraitlabs.com and www resolve to Cloudflare.
+- [ ] **t124** Confirm HTTPS certificate is active and set to auto-renew. **[needs Eric]**
+  - Done when: the site loads over HTTPS with a valid certificate and auto-renew is on in the dashboard.
+- [ ] **t125** Configure Cloudflare security headers: X-Frame-Options, X-Content-Type-Options, HSTS, CSP. **[needs Eric]**
+  - Done when: live responses include all four headers and the site still works with the CSP in place.
+  - Progress (not ticked, needs a live check): added in `next.config.ts` `headers()`: X-Frame-Options DENY, X-Content-Type-Options nosniff, HSTS (2 years, includeSubDomains, no preload), CSP (production only), Referrer-Policy and Permissions-Policy. Tested on the local production server: all headers present on every page, no CSP violations, map and analytics hosts allowed. Not tested through `wrangler dev`.
+  - Eric: after deploy, run `curl -sI https://signalstraitlabs.com/ | grep -iE 'x-frame|x-content|strict-transport|content-security'` and open the site with the browser console open to check for "Refused to load" errors. Static files (JS, CSS, images) are served directly by Cloudflare and won't carry these headers; that's fine, but you can add them with a Cloudflare Transform Rule if you want them everywhere.
+- [ ] **t126** Add all production environment variables (RESEND_API_KEY, etc.) to Cloudflare Pages dashboard. **[needs Eric]**
+  - Done when: every required env var and secret is set on the production Worker.
+- [ ] **t127** Set deployment branch rules: main → production, dev/staging → preview URLs. **[needs Eric]**
+  - Done when: the production branch deploys to production and other branches deploy to preview URLs.
+- [ ] **t128** Final content QA: proofread every single MVP page for typos, broken links, and missing images.
+  - Done when: every MVP page has been proofread and has no typos, broken links or missing images.
+  - Known issue for t129: `components/ui/AnimateOnScroll.tsx` spreads `{...props}` after its own `style`, so any caller passing `style={{ animationDelay }}` loses the whole scroll animation. Most staggered sections therefore don't animate at all. Fixing it changes how pages look, so check visually.
+  - Progress (not ticked, needs Eric's content): crawled all 13 pages. Fixed broken links:
+    - Header and footer used bare `#services`/`#about`/`#insights`/`#contact` links that only worked (partly) on the home page. They now go to real pages; footer Solutions lists all 7 service pages.
+    - Removed "Insights" (404, no page until G1) from header and footer, and "Careers / Hiring" (pointed to `#`).
+    - Instagram, X, YouTube and TikTok footer icons linked to the generic sites. They are now greyed-out, non-clickable icons until the accounts exist.
+    - No broken images. Spell check found no typos.
+  - Eric: fill in the data retention period in the privacy policy (currently `[X months/years ...]`), and replace or remove the four "Pending bio" team cards on /about. If you are hiring, add a Careers page and link it in the footer.
+- [x] **t129** Final design QA: visual check at 1440px desktop and 375px mobile for every page.
+  - Done when: every page has been checked at 1440px and 375px with no visual issues.
+  - Result: full-page screenshots of home, about, contact, services, a service page, privacy, terms and 404 at 1440px and 375px (light mode, after the font and layout fixes in t113 to t128). No layout breaks or overflow. Left for Eric: the `AnimateOnScroll` bug noted under t107/t128 (staggered sections don't animate); fixing it changes how pages move, so it needs your eye.
+- [ ] **t130** Submit sitemap to Google Search Console (signalstraitlabs.com/sitemap.xml). **[needs Eric]**
+  - Done when: Search Console shows the sitemap as submitted and read.
+- [ ] **t131** Submit sitemap to Bing Webmaster Tools. **[needs Eric]**
+  - Done when: Bing Webmaster Tools shows the sitemap as submitted.
+- [ ] **t132** Set up and fully complete Google Business Profile (currently missing from brand brief). **[needs Eric]**
+  - Done when: a verified Google Business Profile exists with all fields filled in.
+- [ ] **t138** MVP Milestone: confirm all core pages, lead capture, essential SEO, and Core Web Vitals are live, then mark ready for soft launch.
+  - Done when: every task above is ticked and the live site passes a final check of pages, lead capture, SEO and Core Web Vitals.

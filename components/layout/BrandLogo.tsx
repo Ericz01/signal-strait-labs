@@ -9,12 +9,12 @@ export function BrandLogo({
 }) {
   return (
     <Image
-      src="/logo.png"
+      src="/logo.webp"
       alt="Signal Strait Labs"
       width={240}
-      height={72}
+      height={147}
       className={`${className} object-contain object-left`}
-      priority={priority}
+      loading={priority ? 'eager' : 'lazy'}
       sizes="(max-width: 768px) 200px, 260px"
     />
   );

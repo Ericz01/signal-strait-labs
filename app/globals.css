@@ -5,6 +5,8 @@
   --color-ssl-light-bg: #fbfbfd;
   --color-ssl-blue: #1a59cc;
   --color-ssl-gold: #C5A059;
+  /* Deep gold for small gold text on light surfaces (4.8:1 on #fbfbfd, WCAG AA). */
+  --color-ssl-gold-deep: #8a6a2b;
   --color-ssl-white: #ffffff;
 
   /* Apple-inspired Breakpoints */
@@ -60,12 +62,14 @@
     }
   }
 
+  /* Transform-based so it runs on the compositor (no repaint every frame).
+     Used on a layer twice the width of its container. */
   @keyframes background-drift {
     0%, 100% {
-      background-position: 0% 50%;
+      transform: translate3d(0, 0, 0);
     }
     50% {
-      background-position: 100% 50%;
+      transform: translate3d(-50%, 0, 0);
     }
   }
   @keyframes shimmer {
@@ -112,60 +116,189 @@
     background: linear-gradient(135deg, #01081b 0%, #051336 50%, #1c1a14 85%, #423721 100%);
   }
 
-/* High-end light glassmorphism for card layouts */
-.glass-card-light {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(1, 8, 27, 0.06);
-  box-shadow:
-    0 4px 30px rgba(1, 8, 27, 0.02),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+/* ---------------------------------------------------------------------------
+   Glass system
+   Real frosted glass needs something behind it to blur, so light sections use
+   .mesh-light (soft blue/gold colour washes) and dark sections use a photo or
+   the dark mesh. Every glass surface gets an inner top highlight and a thin
+   gradient edge (.glass-edge) for a polished, lit-from-above look.
+   --------------------------------------------------------------------------- */
+
+/* In the components layer so Tailwind utilities (absolute, etc.) can override. */
+@layer components {
+  /* Light section background: soft colour washes for light glass to frost. */
+  .mesh-light {
+    background-color: #fbfbfd;
+    background-image:
+      radial-gradient(42rem 28rem at 6% 0%, rgba(26, 89, 204, 0.16), transparent 62%),
+      radial-gradient(38rem 26rem at 96% 18%, rgba(197, 160, 89, 0.22), transparent 62%),
+      radial-gradient(46rem 30rem at 50% 115%, rgba(26, 89, 204, 0.12), transparent 62%);
+  }
+
+  /* Dark section background (no photo): deep blue with gold and blue glows. */
+  .mesh-dark {
+    background-color: #01081b;
+    background-image:
+      radial-gradient(40rem 26rem at 10% 0%, rgba(26, 89, 204, 0.32), transparent 65%),
+      radial-gradient(36rem 24rem at 92% 100%, rgba(197, 160, 89, 0.22), transparent 65%);
+  }
+
+  /* Thin gradient border (gold top-left to blue bottom-right). */
+  .glass-edge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(241, 220, 167, 0.6), rgba(255, 255, 255, 0.08) 38%, rgba(255, 255, 255, 0.04) 62%, rgba(26, 89, 204, 0.45));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Light frosted glass, for cards on .mesh-light. */
+  .glass-card-light {
+    position: relative;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.46));
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(1, 8, 27, 0.06),
+      0 2px 4px rgba(1, 8, 27, 0.04),
+      0 18px 40px -18px rgba(1, 8, 27, 0.28);
+  }
+
+  /* Dark frosted glass: anchor cards, banners, the contact form. */
+  .glass-card-dark {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(150deg, rgba(14, 30, 72, 0.9), rgba(1, 8, 27, 0.95));
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      0 24px 60px -24px rgba(1, 8, 27, 0.6);
+  }
+  .glass-card-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(241, 220, 167, 0.5), rgba(255, 255, 255, 0.06) 40%, rgba(26, 89, 204, 0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Near-opaque light panel for long text (legal pages). Same edge and shadow
+     as light glass, but no live blur: blurring a very tall panel is costly on
+     phones, and long text reads better on a solid surface. */
+  .panel-light {
+    position: relative;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(1, 8, 27, 0.06),
+      0 18px 40px -18px rgba(1, 8, 27, 0.28);
+  }
+
+  /* Optional hover lift for interactive glass cards. */
+  .glass-hover {
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.35s ease;
+  }
+  .glass-hover:hover {
+    transform: translateY(-6px);
+    background-color: rgba(255, 255, 255, 0.35);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 0 0 1px rgba(197, 160, 89, 0.45),
+      0 4px 8px rgba(1, 8, 27, 0.05),
+      0 32px 56px -22px rgba(1, 8, 27, 0.35),
+      0 0 48px -12px rgba(26, 89, 204, 0.25);
+  }
+  .glass-card-dark.glass-hover:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 32px 64px -24px rgba(1, 8, 27, 0.75),
+      0 0 40px -10px rgba(197, 160, 89, 0.25);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glass-hover,
+    .glass-hover:hover {
+      transform: none;
+    }
+  }
+
+  /* Small translucent pill/chip for use over photos and dark sections. No live
+     blur: on small elements over a dark photo it looks the same and is much
+     cheaper to paint on phones. */
+  .glass-chip {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  /* Translucent sticky nav / footer bar */
+  .glass-nav-light {
+    background: rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
 }
 
-/* Translucent sticky nav / footer bar */
-.glass-nav-light {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Cookie banner is server-rendered; hide it before paint once a choice exists. */
+html[data-consent] .cookie-banner {
+  display: none;
 }
 
-/* Premium dark glassmorphism — anchor cards, banners, forms */
-.glass-card-dark {
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(135deg, #01081b 0%, #0a1636 100%);
-  border: 1px solid rgba(197, 160, 89, 0.15);
-  box-shadow: 0 10px 30px rgba(1, 8, 27, 0.15);
-  transition:
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease;
-  will-change: transform;
-  transform: translateZ(0);
+/* Scroll reveal. Only runs where scroll-driven animations are supported, and
+   never with reduced motion, so content is always visible otherwise. */
+/* Uses the individual `translate`/`scale` properties so hover `transform`
+   effects still work while the animation is in effect. Put the reveal on the
+   glass element itself (AnimateOnScroll asChild): an animated-opacity wrapper
+   becomes a "backdrop root" and stops backdrop-filter seeing the page behind. */
+@keyframes reveal-slide-up {
+  from { opacity: 0; translate: 0 32px; }
+  to { opacity: 1; translate: 0 0; }
 }
-
-.glass-card-dark:hover {
-  z-index: 10;
-  transform: translateY(-6px) scale(1.01) translateZ(0);
-  border-color: rgba(197, 160, 89, 0.4);
-  box-shadow:
-    0 30px 60px rgba(1, 8, 27, 0.35),
-    0 0 30px rgba(197, 160, 89, 0.08);
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-.glass-card-dark-static:hover {
-  z-index: 1;
-  transform: translateZ(0);
-  border-color: rgba(197, 160, 89, 0.15);
-  box-shadow: 0 10px 30px rgba(1, 8, 27, 0.15);
+@keyframes reveal-scale {
+  from { opacity: 0; scale: 0.95; }
+  to { opacity: 1; scale: 1; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+      animation-fill-mode: both;
+      animation-timing-function: ease-out;
+    }
+    .reveal-slide-up { animation-name: reveal-slide-up; }
+    .reveal-fade { animation-name: reveal-fade; }
+    .reveal-scale { animation-name: reveal-scale; }
+  }
 }
 
 /* Sticky header — dark glass without hover lift */
 .glass-nav-dark {
-  background: linear-gradient(135deg, rgba(1, 8, 27, 0.96) 0%, rgba(6, 21, 59, 0.92) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(1, 8, 27, 0.78) 0%, rgba(6, 21, 59, 0.7) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Deep footer anchor block */
@@ -185,10 +318,12 @@
   color: rgba(203, 213, 225, 0.55);
 }
 
+/* Solid gold border + glow so the focused field is clear to keyboard users
+   (gold on Abyss Blue is about 8:1). */
 .glass-input-dark:focus {
-  border-color: rgba(197, 160, 89, 0.55);
+  border-color: #C5A059;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.35);
 }
 
 .glass-input-dark option {

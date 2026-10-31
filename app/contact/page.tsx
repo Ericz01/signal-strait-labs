@@ -1,15 +1,36 @@
 import { ContactSection } from '@/components/ContactSection';
-import type { Metadata } from 'next';
+import { getServiceOptions } from '@/lib/services-data';
+import { pageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/PageHero';
+import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Contact | Signal Strait Labs',
-  description: 'Connect with Signal Strait Labs to analyze your current tech stack bottlenecks or request a targeted market attack infrastructure plan.',
-};
+export const metadata = pageMetadata({
+  title: 'Contact',
+  description: 'Contact Signal Strait Labs about your website, search visibility, data or sales pipeline. Send a message, email us or call our Nairobi team.',
+  path: '/contact',
+});
 
 export default function ContactPage() {
   return (
-    <main className="pt-24">
-      <ContactSection />
-    </main>
+    <div>
+      <PageHero
+        title="Contact Us"
+        description="Tell us what you are working on and we will get back to you shortly."
+        breadcrumbs={[{ label: 'Contact' }]}
+        image={{ base: '/images/hero-nairobi-night', smallWidth: 720, largeWidth: 1920 }}
+      />
+      <ContactSection services={getServiceOptions()} compact />
+      <p className="mesh-light px-6 pb-20 text-center text-sm text-slate-700">
+        Want to know more first? See{' '}
+        <Link href="/services" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">
+          our services
+        </Link>{' '}
+        or read{' '}
+        <Link href="/about" className="font-semibold text-ssl-blue underline-offset-4 hover:underline">
+          about us
+        </Link>
+        .
+      </p>
+    </div>
   );
 }

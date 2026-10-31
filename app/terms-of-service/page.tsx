@@ -1,24 +1,32 @@
-export const metadata = {
-  title: 'Terms of Service | Signal Strait Labs',
+import { pageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/PageHero';
+import { GlassOrbs } from '@/components/GlassOrbs';
+
+// Update this whenever the text below changes.
+const LAST_UPDATED = '31 October 2026';
+import Link from 'next/link';
+
+export const metadata = pageMetadata({
+  title: 'Terms of Service',
   description: 'Terms of service for Signal Strait Labs. Learn about the rules governing our services and website usage.',
-};
+  path: '/terms-of-service',
+});
 
 export default function TermsOfServicePage() {
-  const date = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
-    <main className="bg-ssl-light-bg py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <h1 className="text-fluid-h1 font-display font-bold text-ssl-bg mb-8">
-          Terms of Service
-        </h1>
-        <p className="text-slate-600 mb-12 italic">Last updated: {date}</p>
+    <>
+      <PageHero
+        title="Terms of Service"
+        description="The terms for using this website and working with us."
+        breadcrumbs={[{ label: 'Terms of Service' }]}
+        image={{ base: '/images/blur-blue-amber', smallWidth: 1200, largeWidth: 1200 }}
+      />
+      <div className="mesh-light relative isolate px-4 pb-24 sm:px-6">
+        <GlassOrbs />
+        <article className="panel-light glass-edge relative z-10 mx-auto -mt-16 max-w-3xl rounded-3xl p-7 sm:p-10 md:p-12">
+          <p className="mb-10 text-sm text-slate-500">Last updated: {LAST_UPDATED}</p>
 
-        <div className="prose prose-slate prose-lg max-w-none text-slate-600 space-y-8">
+          <div className="space-y-8 leading-relaxed text-slate-700 [&_p+p]:mt-4">
           <p>
             These terms govern your use of the Signal Strait Labs website and any services you engage us for. By using this website or working with us, you agree to these terms.
           </p>
@@ -26,7 +34,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">1. Who We Are</h2>
             <p>
-              Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a digital transformation and growth engineering company based in Nairobi, Kenya, founded in 2022.
+              Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a digital growth company based in Nairobi, Kenya, founded in 2022.
             </p>
           </section>
 
@@ -47,7 +55,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">4. Contact Form and Inquiries</h2>
             <p>
-              Submitting the contact form does not create a business relationship or obligation on either side. It simply lets us know you&apos;re interested so we can follow up.
+              Submitting the <Link href="/contact" className="font-semibold text-ssl-blue hover:underline">contact form</Link> does not create a business relationship or obligation on either side. It simply lets us know you&apos;re interested so we can follow up.
             </p>
           </section>
 
@@ -105,8 +113,9 @@ export default function TermsOfServicePage() {
               Phone: +254 712 895 903
             </p>
           </section>
-        </div>
+          </div>
+        </article>
       </div>
-    </main>
+    </>
   );
 }

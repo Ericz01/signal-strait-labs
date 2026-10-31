@@ -1,0 +1,17 @@
+# Signal Strait Labs - https://signalstraitlabs.com
+#
+# We want to be found by search engines and cited by AI answer engines,
+# so major search and AI crawlers are allowed. Only crawlers known for
+# aggressive, high-volume scraping are blocked.
+
+# Aggressive scraper
+User-agent: Bytespider
+Disallow: /
+
+# Everyone else, including Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User,
+# GPTBot, PerplexityBot, ClaudeBot, Claude-SearchBot and Google-Extended
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://signalstraitlabs.com/sitemap.xml

@@ -4,16 +4,26 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent } from '@/components/ui/Card';
 import { testimonials } from '@/lib/testimonials-data';
 
+// Placeholder entries use bracketed names like "[Client Name]".
+const isPlaceholder = (value: string) => /^\[.*\]$/.test(value.trim());
+
 export default function Testimonials() {
+  // Never show invented quotes as real client feedback. The section stays
+  // hidden until every entry has a real name, role and company.
+  const ready =
+    testimonials.length > 0 &&
+    testimonials.every((t) => !isPlaceholder(t.name) && !isPlaceholder(t.role) && !isPlaceholder(t.company));
+  if (!ready) return null;
+
   return (
-    <section className="bg-ssl-light-bg px-4 sm:px-6 py-12 md:py-20" id="testimonials">
+    <section className="mesh-light px-4 sm:px-6 py-16 md:py-24" id="testimonials">
       <div className="mx-auto max-w-7xl">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
             align="center"
-            overline="WHAT PARTNERS SAY"
-            title="Evidence of Market Command"
-            description="How high-growth enterprises are leveraging SSL to engineer their digital infrastructure."
+            overline="CLIENT FEEDBACK"
+            title="What Clients Say"
+            description="Feedback from companies we have worked with."
             variant="light"
             className="mb-12 md:mb-16"
           />
@@ -28,7 +38,7 @@ export default function Testimonials() {
                 animationDelay: `${index * 0.15}s`,
               }}
             >
-              <Card className="h-full flex flex-col p-6 bg-white border border-slate-100 hover:border-ssl-gold/30">
+              <Card tone="light" className="h-full flex flex-col p-6">
                 <CardContent className="p-0 flex flex-col h-full">
                   <p className="text-slate-600 leading-relaxed mb-8 flex-grow italic">
                     &ldquo;{testimonial.quote}&rdquo;

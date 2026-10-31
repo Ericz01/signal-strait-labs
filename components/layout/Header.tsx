@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type NavLink = {
   readonly href: string;
@@ -11,7 +11,7 @@ type NavLink = {
 
 const NAV_LINKS: readonly NavLink[] = [
   { href: "/services", label: "Services" },
-  { href: "/insights", label: "Insights" },
+  // Add { href: "/insights", label: "Insights" } once the blog exists (G1).
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -52,6 +52,7 @@ const SCROLL_COMPRESS_THRESHOLD = 80;
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +73,19 @@ export function Header() {
     return () => {
       document.body.style.overflow = "";
     };
+  }, [mobileOpen]);
+
+  // Escape closes the mobile menu and puts focus back on the menu button.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
@@ -95,12 +109,12 @@ export function Header() {
           >
             <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] shadow-inner transition-all duration-500 group-hover:border-ssl-gold/40 group-hover:bg-ssl-gold/5 group-hover:shadow-ssl-gold/10">
               <Image
-                src="/logo.png"
-                alt="Signal Strait Labs"
-                width={28}
+                src="/logo-mark.webp"
+                alt=""
+                width={20}
                 height={28}
                 className="w-auto object-contain transition-all duration-700 ease-out group-hover:rotate-[15deg] group-hover:scale-110"
-                priority
+                loading="eager"
               />
             </div>
             <div className="flex flex-col">
@@ -123,12 +137,12 @@ export function Header() {
           {/* Action Center */}
           <div className="flex items-center gap-4">
             <a
-              href="#contact"
+              href="/contact"
               className="group relative hidden overflow-hidden rounded-lg bg-gradient-to-br from-[#8a6f3e] to-[#c5a059] p-[1px] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(197,160,89,0.3)] active:scale-[0.98] lg:block"
             >
               <div className="relative flex items-center justify-center rounded-[7px] bg-[#01081b] px-5 py-2.5 transition-colors group-hover:bg-transparent">
                 <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-ssl-gold transition-colors duration-300 group-hover:text-[#01081b]">
-                  Get an ABM Attack Plan
+                  Get in Touch
                 </span>
               </div>
             </a>
@@ -136,6 +150,7 @@ export function Header() {
             {/* Mobile Menu Toggle */}
                         <button
               type="button"
+              ref={menuButtonRef}
               onClick={toggleMobile}
               className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white transition-all hover:border-ssl-gold/40 hover:bg-ssl-gold/5 focus-visible:ring-2 focus-visible:ring-[#c5a059] focus-visible:ring-offset-2 focus-visible:ring-offset-[#01081b] focus-visible:outline-none md:hidden"
               aria-expanded={mobileOpen}
@@ -168,11 +183,13 @@ export function Header() {
             <div
               id="ssl-mobile-menu"
               className={`fixed inset-0 z-40 flex h-screen w-screen flex-col bg-[#01081b]/95 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-500 ease-in-out md:hidden ${
+                // clip-path (not translate) so the closed menu doesn't widen the page on phones
                 mobileOpen
-                  ? "translate-x-0 opacity-100 pointer-events-auto"
-                  : "translate-x-full opacity-0 pointer-events-none"
+                  ? "opacity-100 pointer-events-auto [clip-path:inset(0_0_0_0)]"
+                  : "opacity-0 pointer-events-none [clip-path:inset(0_0_0_100%)]"
               }`}
               aria-hidden={!mobileOpen}
+              inert={!mobileOpen}
             >
               <nav className="flex flex-1 flex-col justify-center p-8 sm:p-12">
                 <div className="flex flex-col space-y-2">
@@ -198,11 +215,11 @@ export function Header() {
                   ))}
                 </div>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={closeMobile}
                   className="mt-10 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#8a6f3e] to-[#c5a059] py-5 text-base font-bold uppercase tracking-widest text-[#01081b] shadow-xl shadow-ssl-gold/20 transition-transform active:scale-95"
                 >
-                  Get an ABM Attack Plan
+                  Get in Touch
                 </a>
               </nav>
             </div>

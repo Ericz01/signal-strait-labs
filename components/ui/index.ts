@@ -6,3 +6,4 @@ export * from './Badge';
 export * from './AnimateOnScroll';
 export * from './Divider';
 export * from './IconBox';
+export * from './Toast';

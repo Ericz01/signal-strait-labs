@@ -1,11 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useId, useState } from 'react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
-import { CustomSelect } from '@/components/ui/CustomSelect';
-import { services } from '@/lib/services-data';
+import { GlassOrbs } from '@/components/GlassOrbs';
+import { Toast, type ToastVariant } from '@/components/ui/Toast';
 
-export function ContactSection() {
+export type ServiceOption = { title: string; slug: string };
+
+// `services` is passed in by the (server) page so the full services data,
+// with all its page copy and FAQs, is not shipped to the browser.
+export function ContactSection({
+  services,
+  compact = false,
+}: {
+  services: ServiceOption[];
+  /** On /contact the page hero already has the title and intro, so skip them here. */
+  compact?: boolean;
+}) {
+  // On /contact the hero has the <h1>, so this section's headings are h2s.
+  // On the home page "Get in Touch" is the h2 and the form title an h3.
+  const FormHeading = compact ? 'h2' : 'h3';
+  const fid = useId();
   const [service, setService] = useState('');
   const [budget, setBudget] = useState('');
   const [formData, setFormData] = useState({
@@ -16,12 +31,13 @@ export function ContactSection() {
     website: '',
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [toast, setToast] = useState<{ variant: ToastVariant; title: string; message?: string } | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    setErrorMessage('');
+    setToast(null);
 
     try {
       const response = await fetch('/api/leads', {
@@ -37,17 +53,31 @@ export function ContactSection() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to submit form');
+        // 400 responses carry per-field `errors`; others carry `message`.
+        const fieldErrors =
+          data.errors && typeof data.errors === 'object'
+            ? Object.values(data.errors as Record<string, string>).join(' ')
+            : '';
+        throw new Error(fieldErrors || data.message || 'Your message could not be sent. Please try again.');
       }
 
       setStatus('success');
+      setToast({ variant: 'success', title: 'Message sent', message: 'Thanks. We will get back to you shortly.' });
       setFormData({ name: '', email: '', company: '', message: '', website: '' });
       setService('');
       setBudget('');
     } catch (err) {
-      console.error(err);
       setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : 'Something went wrong');
+      setToast({
+        variant: 'error',
+        title: 'Message not sent',
+        message:
+          err instanceof TypeError
+            ? 'Check your connection and try again.'
+            : err instanceof Error
+              ? err.message
+              : 'Something went wrong. Please try again.',
+      });
     }
   };
 
@@ -70,18 +100,23 @@ export function ContactSection() {
   ];
 
   return (
-    <section className="bg-ssl-light-bg border-t border-slate-200/60 px-6 py-20" id="contact">
-      <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-12 pb-4 pt-2 md:grid-cols-2">
-        <AnimateOnScroll variant="slide-up">
-          <div id="about">
-            <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">
-              Get in Touch
-            </h2>
-            <p className="mb-8 text-sm leading-relaxed text-slate-700">
-              Our team is ready to discuss your requirements. Send us a message and we&apos;ll be in touch shortly.
-            </p>
+    <section className="mesh-light relative isolate px-4 py-20 sm:px-6 md:py-28" id="contact">
+      <GlassOrbs />
+      <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2 lg:gap-12">
+        <div>
+          <div>
+            {compact ? (
+              <h2 className="mb-5 text-xl font-bold text-ssl-bg">Contact details</h2>
+            ) : (
+              <>
+                <h2 className="mb-6 text-3xl font-bold tracking-tight text-ssl-bg md:text-4xl">Get in Touch</h2>
+                <p className="mb-8 text-sm leading-relaxed text-slate-700">
+                  Tell us what you are working on and we will get back to you shortly.
+                </p>
+              </>
+            )}
             
-            <div className="space-y-6 text-sm text-slate-700">
+            <div className="glass-card-light glass-edge space-y-5 rounded-2xl p-7 text-sm text-slate-700">
               <div className="flex items-start gap-3">
                 <span className="font-bold text-ssl-bg w-20">Address:</span>
                 <span>Thome, Nairobi - Kenya</span>
@@ -107,20 +142,20 @@ export function ContactSection() {
                   className="flex items-center gap-1.5 hover:text-ssl-blue transition-colors"
                 >
                   LinkedIn
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4 fill-current">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
                 </a>
               </div>
             </div>
           </div>
-        </AnimateOnScroll>
+        </div>
 
-        <AnimateOnScroll variant="scale" style={{ animationDelay: '0.2s' }}>
-          <div className="glass-card-dark relative z-10 rounded-2xl p-8">
-            <h3 className="mb-6 text-lg font-bold text-white">
+        <AnimateOnScroll asChild variant="scale">
+          <div className="glass-card-dark relative z-10 rounded-3xl p-8 md:p-9">
+            <FormHeading className="mb-6 text-lg font-bold text-white">
               {status === 'success' ? 'Message Sent!' : 'Send Us a Message'}
-            </h3>
+            </FormHeading>
             
             {status === 'success' ? (
               <div className="space-y-4">
@@ -145,12 +180,15 @@ export function ContactSection() {
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                 />
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-name`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Name
                 </label>
                 <input
                   type="text"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-name`}
+                  name="name"
+                  autoComplete="name"
                   placeholder="Your name"
                   required
                   value={formData.name}
@@ -158,12 +196,15 @@ export function ContactSection() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-email`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Email
                 </label>
                 <input
                   type="email"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-email`}
+                  name="email"
+                  autoComplete="email"
                   placeholder="name@company.com"
                   required
                   value={formData.email}
@@ -171,36 +212,71 @@ export function ContactSection() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-company`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Company
                 </label>
                 <input
                   type="text"
                   className="glass-input-dark w-full rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-company`}
+                  name="company"
+                  autoComplete="organization"
                   placeholder="Your company name"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-service`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Which service are you interested in?
                 </label>
-                <CustomSelect options={serviceOptions} value={service} onChange={setService} placeholder="General inquiry" />
+                <div className="relative">
+                  <select
+                    id={`${fid}-service`}
+                    name="serviceInterest"
+                    value={service}
+                    onChange={(e) => setService(e.target.value)}
+                    className="glass-input-dark w-full appearance-none rounded-lg px-4 py-3 pr-10 text-sm"
+                  >
+                    {serviceOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  <svg aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </div>
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-budget`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Budget range
                 </label>
-                <CustomSelect options={budgetSelectOptions} value={budget} onChange={setBudget} placeholder="Select a range" />
+                <div className="relative">
+                  <select
+                    id={`${fid}-budget`}
+                    name="budgetRange"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    className="glass-input-dark w-full appearance-none rounded-lg px-4 py-3 pr-10 text-sm"
+                  >
+                    {budgetSelectOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                  <svg aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </div>
               </div>
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <label htmlFor={`${fid}-message`} className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-400">
                   Message
                 </label>
                 <textarea
                   rows={3}
                   className="glass-input-dark w-full resize-none rounded-lg px-4 py-3 text-sm"
+                  id={`${fid}-message`}
+                  name="message"
                   placeholder="Tell us what you need"
                   required
                   value={formData.message}
@@ -215,13 +291,15 @@ export function ContactSection() {
                 >
                   {status === 'submitting' ? 'Sending...' : 'Send Message'}
                 </button>
-                {errorMessage && <p className="text-red-400 text-xs mt-2">{errorMessage}</p>}
             </form>
             )}
 
           </div>
         </AnimateOnScroll>
       </div>
+      {toast && (
+        <Toast variant={toast.variant} title={toast.title} message={toast.message} onClose={closeToast} />
+      )}
     </section>
   );
 }

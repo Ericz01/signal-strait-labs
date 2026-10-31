@@ -62,7 +62,7 @@ public/
 
 ## 3. Typography System
 
-Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as CSS variables on `<body>`.
+Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as CSS variables on `<html>`. They must be on `<html>`, not `<body>`: the `@theme` tokens live on `:root` and can only resolve variables defined there.
 
 | Role | Google Font | CSS Variable | Tailwind Token | Usage |
 | --- | --- | --- | --- | --- |
@@ -75,7 +75,7 @@ Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as C
 const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
 const plusJakartaSans = Plus_Jakarta_Sans({ variable: "--font-plus-jakarta", subsets: ["latin"] });
 
-<body className={`${sora.variable} ${plusJakartaSans.variable} antialiased`}>
+<html lang="en" className={`${sora.variable} ${plusJakartaSans.variable}`}>
 ```
 
 ### Theme mapping (`app/globals.css`)
@@ -116,6 +116,27 @@ The design system pairs a **luminous light canvas** with **premium dark anchor b
 | --- | --- | --- | --- |
 | **Light canvas** | `text-ssl-bg` | `text-slate-600` / `text-slate-700` | `.text-gold-gradient` |
 | **Dark anchors** | `text-white` | `text-slate-300` / `text-slate-400` | `text-ssl-gold`, `.text-brand-gradient` |
+
+**Glass system (design1, in `@layer components` in `app/globals.css`):**
+
+| Class | Use |
+| --- | --- |
+| `.mesh-light` | Light section background with soft blue/gold washes. Light glass needs this behind it to look frosted. |
+| `.mesh-dark` | Dark section background (no photo) with blue/gold glows. Used on the footer. |
+| `.glass-card-light` + `.glass-edge` | Light frosted card with a thin gold-to-blue gradient edge. |
+| `.glass-card-dark` | Dark frosted card with gradient edge built in. Nearly opaque so it stays navy on light sections. |
+| `.glass-hover` | Lift and glow on hover for cards that are links. |
+| `.glass-chip` | Small translucent pill over photos/dark areas (no live blur, for phone performance). |
+| `.reveal .reveal-<variant>` | Scroll reveal via `AnimateOnScroll`; only runs with scroll-driven animation support and no reduced-motion preference. |
+
+- Use `<Card tone="light|dark" interactive>` and `<IconBox tone="light|dark">` instead of overriding their colours.
+- **Never wrap a glass card in an animated element.** An ancestor with an opacity animation becomes a "backdrop root" and the card's blur stops seeing the page behind it. Use `<AnimateOnScroll asChild>` so the reveal sits on the glass element itself. Reveal keyframes use the `translate`/`scale` properties so hover `transform` effects still work.
+- In CSS, always write `-webkit-backdrop-filter` **before** `backdrop-filter`. The minifier keeps only the last of the pair, and Chrome/Firefox ignore the `-webkit-` one.
+- Light sections that hold glass cards need `relative isolate` and `<GlassOrbs />` behind them, or the blur has nothing to show.
+- Inner pages start with `<PageHero>` (dark photo band, breadcrumb, `<h1>`), followed by a `mesh-light` body that overlaps it with `-mt-16`. Long text uses `.panel-light` (no live blur).
+- Service cards: `components/ServiceCard.tsx` (used on home, /services and related services).
+- Photos: use `components/ResponsivePhoto.tsx` (art-directed `<picture>`, small file for phones, media-matched preloads when `priority`). `next/image` can't build a srcset because `images.unoptimized` is on. Sources and credits are in `assets/photos/`.
+- Keep live `backdrop-filter` to a few large surfaces per screen (header, panels, cards); it is expensive to paint on phones.
 
 Apply `.glass-card-dark` to focal cards, banners, and forms. Use `.glass-nav-dark` + `border-ssl-gold/20` on header; `.footer-dark` on footer. Hover lift on `.glass-card-dark` is intentional — do not apply to full-width nav bars.
 

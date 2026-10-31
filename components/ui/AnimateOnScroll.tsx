@@ -1,76 +1,28 @@
-
-'use client';
-
 import React, { forwardRef, HTMLAttributes } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 
 interface AnimateOnScrollProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  variant?: 'fade' | 'slide-up' | 'scale' | 'fade-gold';
-  rangeStart?: string;
-  rangeEnd?: string;
+  variant?: 'fade' | 'slide-up' | 'scale';
+  /**
+   * Put the reveal on the child element instead of a wrapper div. Use this
+   * when the child is a glass card: an animated wrapper stops the card's
+   * backdrop blur from seeing the page behind it.
+   */
+  asChild?: boolean;
 }
 
+// Scroll reveal using CSS scroll-driven animations (`.reveal` in globals.css).
+// Browsers without support, and visitors who prefer reduced motion, simply see
+// the content with no animation.
 const AnimateOnScroll = forwardRef<HTMLDivElement, AnimateOnScrollProps>(
-  (
-    {
-      children,
-      className,
-      variant = 'slide-up',
-      rangeStart = 'entry 0%',
-      rangeEnd = 'cover 35%',
-      ...props
-    },
-    ref
-  ) => {
-    const animationKeyframes = {
-      fade: `
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `,
-      'slide-up': `
-        @keyframes slide-up-in {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `,
-      scale: `
-        @keyframes scale-in {
-          from { opacity: 0; transform: scale(0.92); }
-          to { opacity: 1; transform: scale(1); }
-        }
-      `,
-      'fade-gold': `
-        @keyframes fade-gold-in {
-          from { opacity: 0; transform: translateY(20px); filter: brightness(0.5) sepia(1) hue-rotate(-50deg); }
-          to { opacity: 1; transform: translateY(0); filter: brightness(1) sepia(0) hue-rotate(0deg); }
-        }
-      `,
-    };
-
-    const animationName = `${variant}-in`;
-
+  ({ children, className, variant = 'slide-up', asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'div';
     return (
-      <div
-        ref={ref}
-        className={cn(className)}
-        style={{
-          animationTimeline: 'view()',
-          animationRange: `${rangeStart} ${rangeEnd}`,
-          animationFillMode: 'both',
-          animationName: animationName,
-          animationDuration: '1s', // Default duration, can be overridden if needed
-          animationTimingFunction: 'ease-out', // Default timing, can be overridden
-        }}
-        {...props}
-      >
-        <style jsx global>{`
-          ${animationKeyframes[variant]}
-        `}</style>
+      <Comp ref={ref} className={cn('reveal', `reveal-${variant}`, className)} {...props}>
         {children}
-      </div>
+      </Comp>
     );
   }
 );

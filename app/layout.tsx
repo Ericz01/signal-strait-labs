@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer, Header } from "@/components/layout";
+import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
+import { CookieConsent } from "@/components/CookieConsent";
+import { CONSENT_BOOT_SCRIPT } from "@/lib/consent-boot";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site-config";
+import { baseOpenGraph, baseTwitter } from "@/lib/metadata";
 import "./globals.css";
 
 const sora = Sora({
@@ -13,17 +18,15 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://signal-strait-labs.pages.dev";
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Signal Strait Labs (SSL) | Enterprise Digital Transformation, Growth Engineering & AEO/GEO — Africa",
+    default: HOME_TITLE,
     template: "%s | Signal Strait Labs",
   },
-  description:
-    "Signal Strait Labs (SSL) engineers enterprise digital transformation and growth systems for African and global organizations—custom web infrastructure, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipeline engineering from Nairobi, Kenya.",
+  description: HOME_DESCRIPTION,
   keywords: [
     "enterprise digital transformation",
     "growth engineering",
@@ -51,24 +54,17 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title:
-      "Signal Strait Labs (SSL) | Enterprise Digital Transformation & AEO/GEO — Africa",
-    description:
-      "Nairobi-based growth engineering lab: digital infrastructure, custom web dev, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipelines for enterprises scaling across Africa.",
-    url: siteUrl,
-    siteName: "Signal Strait Labs",
-    locale: "en_KE",
+    ...baseOpenGraph,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: "/",
     alternateLocale: ["en_US", "en_GB"],
-    type: "website",
     countryName: "Kenya",
   },
   twitter: {
-    card: "summary_large_image",
-    title:
-      "Signal Strait Labs | Enterprise Digital Transformation & AEO/GEO",
-    description:
-      "Growth engineering, AEO/GEO, and RevOps pipeline systems for enterprises in Africa and beyond. HQ: Thome, Nairobi, Kenya.",
-    creator: "@signalstraitlabs",
+    ...baseTwitter,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
   robots: {
     index: true,
@@ -89,9 +85,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // Font variables go on <html> so Tailwind's :root tokens (--font-display,
+    // --font-body) can resolve them. On <body> they were undefined at :root and
+    // every page fell back to the system font.
+    <html lang="en" className={`${sora.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT_SCRIPT }} />
+      </head>
       <body
-        className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}
+        className="bg-ssl-light-bg text-ssl-bg antialiased"
         suppressHydrationWarning={true}
       >
         <div className="flex min-h-screen flex-col luxury-bg-gradient selection:bg-ssl-blue/20">
@@ -99,6 +101,8 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
         </div>
+        <CookieConsent />
+        <CloudflareAnalytics />
       </body>
     </html>
   );

@@ -1,42 +1,54 @@
-export const metadata = {
-  title: 'Privacy Policy | Signal Strait Labs',
+import { CookieSettingsButton } from '@/components/CookieConsent';
+import { pageMetadata } from '@/lib/metadata';
+import { PageHero } from '@/components/PageHero';
+import { GlassOrbs } from '@/components/GlassOrbs';
+
+// Update this whenever the text below changes.
+const LAST_UPDATED = '31 October 2026';
+import Link from 'next/link';
+
+export const metadata = pageMetadata({
+  title: 'Privacy Policy',
   description: 'Privacy policy for Signal Strait Labs. Learn about how we handle your data.',
-};
+  path: '/privacy-policy',
+});
 
 export default function PrivacyPolicyPage() {
-  const date = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
-    <main className="bg-ssl-light-bg py-24 sm:py-32">
-      <div className="mx-auto max-w-3xl px-4 sm:px-6">
-        <h1 className="text-fluid-h1 font-display font-bold text-ssl-bg mb-8">
-          Privacy Policy
-        </h1>
-        <p className="text-slate-600 mb-12 italic">Last updated: {date}</p>
+    <>
+      <PageHero
+        title="Privacy Policy"
+        description="How we collect, use and protect your information."
+        breadcrumbs={[{ label: 'Privacy Policy' }]}
+        image={{ base: '/images/blur-blue-amber', smallWidth: 1200, largeWidth: 1200 }}
+      />
+      <div className="mesh-light relative isolate px-4 pb-24 sm:px-6">
+        <GlassOrbs />
+        <article className="panel-light glass-edge relative z-10 mx-auto -mt-16 max-w-3xl rounded-3xl p-7 sm:p-10 md:p-12">
+          <p className="mb-10 text-sm text-slate-500">Last updated: {LAST_UPDATED}</p>
 
-        <div className="prose prose-slate prose-lg max-w-none text-slate-600 space-y-8">
+          <div className="space-y-8 leading-relaxed text-slate-700 [&_p+p]:mt-4">
           <p>
-            Signal Strait Labs ("we", "us", "our") respects your privacy. This policy explains what information we collect, how we use it, and what rights you have over it.
+            Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) respects your privacy. This policy explains what information we collect, how we use it, and what rights you have over it.
           </p>
 
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">1. Who We Are</h2>
             <p>
-              Signal Strait Labs is a digital transformation and growth engineering company based in Nairobi, Kenya. If you have questions about this policy or your data, contact us at connect@signalstraitlabs.com.
+              Signal Strait Labs is a digital growth company based in Nairobi, Kenya. If you have questions about this policy or your data, contact us at connect@signalstraitlabs.com.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">2. Information We Collect</h2>
             <p>
-              When you use our contact form, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don't fill in every field, that's fine, only name, email, and message are required.
+              When you use our <Link href="/contact" className="font-semibold text-ssl-blue hover:underline">contact form</Link>, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don&apos;t fill in every field, that&apos;s fine, only name, email, and message are required.
             </p>
             <p>
               We also use privacy-focused analytics (Cloudflare Web Analytics) to understand how visitors use our site. This does not use cookies or track you individually across other websites.
+            </p>
+            <p id="cookies" className="scroll-mt-28">
+              <strong>Cookies.</strong> Our site does not set tracking or advertising cookies. We save your cookie choice in your browser so we don&apos;t ask again. If you accept, we load embedded content such as the Google Maps map on our About page, and Google may set its own cookies. If you decline, the map stays off unless you choose to show it. <CookieSettingsButton />
             </p>
           </section>
           <section>
@@ -56,7 +68,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">5. International Data Transfers</h2>
             <p>
-              Because we work with clients and use services based outside Kenya, your information may be processed in other countries, including the United States and the European Union. Where this happens, we rely on the service providers' own data protection safeguards.
+              Because we work with clients and use services based outside Kenya, your information may be processed in other countries, including the United States and the European Union. Where this happens, we rely on the service providers&apos; own data protection safeguards.
             </p>
           </section>
 
@@ -70,7 +82,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">7. Your Rights</h2>
             <p>
-              Depending on where you're located, you may have the right to:
+              Depending on where you&apos;re located, you may have the right to:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>Ask what personal information we hold about you</li>
@@ -80,7 +92,7 @@ export default function PrivacyPolicyPage() {
               <li>Ask for a copy of your information in a portable format</li>
             </ul>
             <p>
-              If you're in the European Union, these rights come from the GDPR. If you're in South Africa, these rights come from POPIA, and you can also lodge a complaint with the Information Regulator. If you're in Kenya, these rights are protected under the Data Protection Act, 2019, and you can contact the Office of the Data Protection Commissioner.
+              If you&apos;re in the European Union, these rights come from the GDPR. If you&apos;re in South Africa, these rights come from POPIA, and you can also lodge a complaint with the Information Regulator. If you&apos;re in Kenya, these rights are protected under the Data Protection Act, 2019, and you can contact the Office of the Data Protection Commissioner.
             </p>
             <p>
               To exercise any of these rights, email us at connect@signalstraitlabs.com.
@@ -95,7 +107,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">9. Children's Privacy</h2>
+            <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">9. Children&apos;s Privacy</h2>
             <p>
               Our services are intended for businesses and professionals, not children. We do not knowingly collect information from anyone under 18.
             </p>
@@ -104,7 +116,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">10. Changes to This Policy</h2>
             <p>
-              We may update this policy from time to time. If we make significant changes, we'll update the date at the top of this page.
+              We may update this policy from time to time. If we make significant changes, we&apos;ll update the date at the top of this page.
             </p>
           </section>
 
@@ -117,9 +129,9 @@ export default function PrivacyPolicyPage() {
               Phone: +254 712 895 903
             </p>
           </section>
-        </div>
+          </div>
+        </article>
       </div>
-    </main>
+    </>
   );
 }
-

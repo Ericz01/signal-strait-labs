@@ -3,17 +3,22 @@ import { cn } from '@/lib/utils';
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  /** 'light' frosted glass for light sections, 'dark' for dark sections. */
+  tone?: "light" | "dark";
+  /** Lift and glow on hover (for cards that are links). */
+  interactive?: boolean;
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>((
-  { className, ...props },
+  { className, tone = "light", interactive = false, ...props },
   ref
 ) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-ssl-gold/15 bg-ssl-bg transition-all duration-300 ease-out",
-      "hover:border-ssl-gold/40 hover:shadow-lg hover:shadow-ssl-gold/5 hover:scale-[1.015] hover:-translate-y-0.5 overflow-hidden",
+      "rounded-2xl overflow-hidden",
+      tone === "light" ? "glass-card-light glass-edge" : "glass-card-dark",
+      interactive && "glass-hover",
       className
     )}
     {...props}
