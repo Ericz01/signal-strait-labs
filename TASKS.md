@@ -92,8 +92,10 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t105** Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview.
   - Done when: a 1200×630 PNG social card in brand colors exists and is set as the default `og:image`.
   - Result: `public/og-image.png` (51KB), built by `scripts/make-social-card.mjs` from the logo. Light canvas with the full logo, navy band with gold rule and tagline. The tagline uses Noto Sans because the brand fonts are not installed locally; the logo carries the brand lettering. Eric: check you like the tagline "Growth engineering for Africa and beyond".
-- [ ] **t107** Final copywriting pass across all MVP pages: tone authoritative, direct, precise (not salesy or vague).
+- [x] **t107** Final copywriting pass across all MVP pages: tone authoritative, direct, precise (not salesy or vague).
   - Done when: every MVP page has been reviewed and the copy is plain, direct and free of em dashes.
+  - Result: removed all em dashes from site copy (one is left inside the privacy policy placeholder, see t128). Rewrote the 7 service card descriptions and the Contact page description in plain language. Hid the Testimonials section: all three quotes are invented placeholders credited to "[Client Name]", which visitors could see. It shows again automatically once every entry has a real name, role and company in `lib/testimonials-data.ts`.
+  - Eric to decide (brand voice, left as is): header button "Get an ABM Attack Plan", hero "Force a Clear Market Signal Through Digital Chaos.", CTA banner "Ready to Force Your Signal Through the Chaos?".
 - [ ] **t108** Add descriptive alt text to every image across all pages (both accessibility and SEO requirement).
   - Done when: every image has meaningful alt text, or empty alt if it is purely decorative.
 

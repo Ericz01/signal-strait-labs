@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'Contact',
-  description: 'Connect with Signal Strait Labs to analyze your current tech stack bottlenecks or request a targeted market attack infrastructure plan.',
+  description: 'Contact Signal Strait Labs about your website, search visibility, data or sales pipeline. Send a message, email us or call our Nairobi team.',
   path: '/contact',
 });
 

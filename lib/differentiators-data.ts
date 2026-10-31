@@ -9,7 +9,7 @@ export interface Differentiator {
 export const differentiators: Differentiator[] = [
   {
     title: "Truth Metrics",
-    description: "We replace vanity metrics like clicks and impressions with pipeline value, conversion velocity, and revenue — the numbers that actually move your business forward.",
+    description: "We replace vanity metrics like clicks and impressions with pipeline value, conversion velocity and revenue: the numbers that actually move your business forward.",
     icon: BarChart2Icon,
   },
   {
@@ -19,7 +19,7 @@ export const differentiators: Differentiator[] = [
   },
   {
     title: "Full-Stack Execution",
-    description: "From market strategy to shipped code, one team owns the entire system — no handoffs, no diluted vision, no lost context along the way.",
+    description: "From market strategy to shipped code, one team owns the entire system. No handoffs, no diluted vision, no lost context along the way.",
     icon: LayersIcon,
   },
 ];

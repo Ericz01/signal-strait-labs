@@ -8,7 +8,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '01',
     title: 'Signal Diagnostic',
-    description: 'We audit your current stack, funnel, and data flows to identify exactly where signal is being lost — no assumptions, only measured findings.',
+    description: 'We audit your current stack, funnel, and data flows to identify exactly where signal is being lost. No assumptions, only measured findings.',
   },
   {
     number: '02',
@@ -18,7 +18,7 @@ export const processSteps: ProcessStep[] = [
   {
     number: '03',
     title: 'Engineering Sprint',
-    description: 'We build and ship — production-grade code, integrated systems, and campaigns launched in focused, accountable sprints.',
+    description: 'We build and ship production-grade code, integrated systems and campaigns in focused, accountable sprints.',
   },
   {
     number: '04',

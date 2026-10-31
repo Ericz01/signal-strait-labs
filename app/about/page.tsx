@@ -53,7 +53,7 @@ export default function AboutPage() {
             <div className="glass-card-light rounded-2xl p-8 md:p-12">
               <h3 className="mb-4 text-xl font-bold text-ssl-bg">Nairobi, 2022</h3>
               <p className="text-slate-600 leading-relaxed">
-                Based in Thome, Nairobi, we operate at the intersection of local insight and international quality. Our location is more than just a home—it&apos;s the front line for the next generation of digital transformation. We work with clients who understand that the future of business is built on code that is as resilient as it is fast.
+                Based in Thome, Nairobi, we operate at the intersection of local insight and international quality. Nairobi is more than our home. It is where the next wave of digital transformation is happening. We work with clients who understand that the future of business is built on code that is as resilient as it is fast.
               </p>
             </div>
           </AnimateOnScroll>

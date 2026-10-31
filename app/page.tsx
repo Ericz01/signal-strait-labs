@@ -17,7 +17,7 @@ export default function Home() {
 
       <Hero />
 
-      {/* THE TRUTH METRICS STRIP — dark anchor banner */}
+      {/* THE TRUTH METRICS STRIP: dark anchor banner */}
       <section className="bg-ssl-light-bg px-6 py-12" id="metrics">
         <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
