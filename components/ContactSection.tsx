@@ -107,7 +107,7 @@ export function ContactSection({
               Get in Touch
             </Heading>
             <p className="mb-8 text-sm leading-relaxed text-slate-700">
-              Our team is ready to discuss your requirements. Send us a message and we&apos;ll be in touch shortly.
+              Tell us what you are working on and we will get back to you shortly.
             </p>
             
             <div className="space-y-6 text-sm text-slate-700">

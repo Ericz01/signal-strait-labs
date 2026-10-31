@@ -7,6 +7,11 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 
 ## Open fixes
 
+- [x] **copy1** Rewrite site copy in plain language: remove AI-style, inflated and jargon-heavy wording, including the hero hook.
+  - Done when: hero, section headings, service names, about page, CTA, footer and metadata read plainly with no em dashes, and a scan of the rendered pages finds no inflated phrases.
+  - Result: new hero ("Fast websites, better search, more sales."), plain section headings, "why us" points, process steps (Audit, Plan, Build, Improve), CTA, About page, footer tagline and header button ("Get in Touch"). Renamed four services (slugs unchanged). Updated home title/description and llms.txt. Left the "Growth Engineering" line under the logo for Eric to decide.
+- [ ] **design1** Premium, modern glassmorphism look with high-quality images.
+  - Done when: hero and key sections use high-quality imagery and a consistent, polished glass style; Lighthouse stays at Performance 90+, Accessibility 100 on mobile.
 - [x] **fix1** The rate limiter on `/api/leads` still lets through more than 5 requests in 10 minutes. Check that the Upstash client is created inside the POST handler and that secrets are read through the OpenNext Cloudflare context (`getCloudflareContext().env`), not `process.env` at module scope.
   - Done when: no Upstash client or secret is read at module scope, secrets come from `getCloudflareContext().env` (with `process.env` only as a `next dev` fallback), and the code path clearly returns 429 on the 6th request in 10 minutes from one IP.
 - [x] **fix2** Check that no temporary diagnostic logging is left in `app/api/leads/route.ts`.

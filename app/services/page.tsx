@@ -22,7 +22,7 @@ export default function ServicesPage() {
           <SectionHeading
             align="center"
             title="Our Services"
-            description="Enterprise-grade growth engineering, technical infrastructure, and data architecture built to win in the modern digital landscape."
+            description="Pick one service or combine several. Each one is aimed at more leads and less manual work for your team."
             variant="light"
             className="mb-16"
           />

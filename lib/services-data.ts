@@ -28,7 +28,7 @@ export function getServiceOptions() {
 export const services: Service[] = [
   {
     slug: 'technical-infrastructure-web-dev',
-    title: 'Technical Infrastructure & Web Dev',
+    title: 'Websites & Web Apps',
     description: 'We build fast, serverless websites and web apps (Next.js, Tailwind) that load quickly on African mobile networks, with Paystack, Flutterwave and CRM integrations.',
     metaDescription: 'Fast, edge-native websites and web apps built with Next.js for African mobile networks, with Paystack, Flutterwave and CRM integrations.',
     problem: 'Many companies serving African markets run websites built for fast Western networks. Pages load slowly on mobile data, checkout breaks with local payment methods, and every new market means another costly fix.',
@@ -45,7 +45,7 @@ export const services: Service[] = [
   },
   {
     slug: 'algorithmic-search',
-    title: 'Algorithmic Search (SEO/AEO/GEO)',
+    title: 'Search & AI Visibility (SEO/AEO/GEO)',
     description: 'Technical SEO plus answer and generative engine optimization (AEO/GEO), so your business ranks in search and gets cited by AI tools like ChatGPT, Gemini and Perplexity.',
     metaDescription: 'Technical SEO, AEO and GEO that help your business rank in search and get cited by AI answer engines like ChatGPT, Gemini and Perplexity.',
     problem: 'People don\'t only search on Google anymore. They ask ChatGPT and Perplexity directly and get an answer without ever visiting a website. Most companies still only optimize for the old kind of search.',
@@ -70,7 +70,7 @@ export const services: Service[] = [
     faqs: [
       { question: "What if our tools weren't built to connect with each other?", answer: "Most tools have an API or support a connector platform like Zapier or Make. We find the best route to connect them, even when it's not obvious." },
       { question: "Will this replace our current software?", answer: "No. We connect what you already use so it works together. We only recommend replacing a tool if it's genuinely holding you back." },
-      { question: "How much manual work can actually be automated?", answer: "It depends on your setup, but most businesses we work with cut a significant amount of repetitive data entry within the first month." }
+      { question: "How much manual work can actually be automated?", answer: "It depends on your setup. In most businesses a lot of repetitive data entry can be removed within the first month." }
     ],
     icon: BarChartIcon,
     href: '/services/data-systems-automation',
@@ -109,7 +109,7 @@ export const services: Service[] = [
   },
   {
     slug: 'corporate-pr-brand-authority',
-    title: 'Corporate PR & Brand Authority',
+    title: 'PR & Reputation',
     description: 'Media relations, crisis planning and clear brand positioning that build long-term authority for your company.',
     metaDescription: 'Media relations, crisis planning and brand positioning that build long-term authority for your company.',
     problem: 'New and growing companies often struggle to be taken seriously, especially competing against bigger, more established names, locally and internationally.',
@@ -125,7 +125,7 @@ export const services: Service[] = [
   },
   {
     slug: 'marketing-sales-capacity-building',
-    title: 'Marketing & Sales Capacity Building',
+    title: 'Marketing & Sales Team Training',
     description: 'We train your in-house marketing and sales teams with modern playbooks, tools and workflows, so the skills stay in your business.',
     metaDescription: 'We train your in-house marketing and sales teams with practical playbooks, tools and workflows, so the skills stay in your business.',
     problem: 'Hiring an agency for every campaign gets expensive, and once the contract ends, your team is back to square one with no new skills gained.',

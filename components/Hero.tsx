@@ -30,18 +30,18 @@ export default function Hero() {
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
         <AnimateOnScroll variant="slide-up">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl mb-6">
-            Force a Clear Market Signal Through <br />
+            Fast websites, better search, <br />
             <span className="bg-gradient-to-r from-white via-slate-200 to-amber-400 bg-clip-text text-transparent">
-              Digital Chaos.
+              more sales.
             </span>
           </h1>
         </AnimateOnScroll>
         <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.2s' }}>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto sm:text-xl leading-relaxed mt-6">
-            We partner with fast-scaling African and global organizations to treat
-            corporate growth as an interconnected, mathematical system. No vague
-            vanity metrics. Just raw pipeline value, conversion velocity, and
-            revenue.
+            Signal Strait Labs is a Nairobi team that builds websites, gets you
+            found on Google and in AI search, and sets up the data and sales
+            systems behind them. We measure our work in leads and revenue, not
+            clicks.
           </p>
         </AnimateOnScroll>
         <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.4s' }}>

@@ -10,10 +10,10 @@ export default function CTABanner() {
       <AnimateOnScroll variant="scale">
         <div className="glass-card-dark glass-card-dark-static mx-auto max-w-5xl rounded-3xl p-12 md:p-20 text-center">
           <h2 className="text-fluid-h2 font-extrabold tracking-tight text-white mb-6">
-            Ready to Force Your Signal Through the Chaos?
+            Ready to Talk About Your Project?
           </h2>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Stop reacting to the market. Start engineering your market position with enterprise-grade growth infrastructure.
+            Tell us what you want to improve and we will suggest where to start.
           </p>
           <Button 
             variant="primary" 

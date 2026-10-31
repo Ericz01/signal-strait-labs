@@ -30,7 +30,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">1. Who We Are</h2>
             <p>
-              Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a digital transformation and growth engineering company based in Nairobi, Kenya, founded in 2022.
+              Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a digital growth company based in Nairobi, Kenya, founded in 2022.
             </p>
           </section>
 

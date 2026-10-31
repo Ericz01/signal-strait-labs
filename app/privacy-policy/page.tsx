@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">1. Who We Are</h2>
             <p>
-              Signal Strait Labs is a digital transformation and growth engineering company based in Nairobi, Kenya. If you have questions about this policy or your data, contact us at connect@signalstraitlabs.com.
+              Signal Strait Labs is a digital growth company based in Nairobi, Kenya. If you have questions about this policy or your data, contact us at connect@signalstraitlabs.com.
             </p>
           </section>
 

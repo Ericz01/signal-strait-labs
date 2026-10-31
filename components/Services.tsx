@@ -16,9 +16,9 @@ export default function Services() {
         <SectionHeading
           align="center"
           title={
-            "Our Core Capabilities"
+            "What We Do"
           }
-          description="Engineered software systems and data strategies built to optimize customer acquisition and operational efficiency."
+          description="Seven services that work on their own or together, from your website to your sales pipeline."
           variant="light"
           className="mb-16 md:text-center"
         />

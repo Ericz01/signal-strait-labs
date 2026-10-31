@@ -18,7 +18,7 @@ export function Footer() {
             </Link>
             
             <p className="max-w-xs text-sm leading-relaxed text-slate-400/90">
-              Navigating complex market channels with precision demand generation and account-based intelligence.
+              Websites, search, data and sales systems for growing companies. Based in Nairobi, Kenya.
             </p>
 
             {/* Social Media Icon Matrix */}

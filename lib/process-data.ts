@@ -7,22 +7,22 @@ export interface ProcessStep {
 export const processSteps: ProcessStep[] = [
   {
     number: '01',
-    title: 'Signal Diagnostic',
-    description: 'We audit your current stack, funnel, and data flows to identify exactly where signal is being lost. No assumptions, only measured findings.',
+    title: 'Audit',
+    description: 'We review your website, marketing and data to find what is holding growth back. We go on evidence, not guesswork.',
   },
   {
     number: '02',
-    title: 'Systems Architecture',
-    description: 'We design the technical and growth architecture to fix it: infrastructure, automation, and acquisition systems mapped as one connected system, not isolated fixes.',
+    title: 'Plan',
+    description: 'We plan the fix as one connected piece of work covering your website, automation and marketing, instead of separate patches.',
   },
   {
     number: '03',
-    title: 'Engineering Sprint',
-    description: 'We build and ship production-grade code, integrated systems and campaigns in focused, accountable sprints.',
+    title: 'Build',
+    description: 'We build and launch in short, focused stages, with clear updates along the way.',
   },
   {
     number: '04',
-    title: 'Optimize & Scale',
-    description: 'We track pipeline value and conversion velocity post-launch, iterating the system continuously rather than declaring it finished.',
+    title: 'Improve',
+    description: 'After launch we track leads and revenue and keep improving what works.',
   },
 ];

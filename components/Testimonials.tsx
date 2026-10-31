@@ -21,9 +21,9 @@ export default function Testimonials() {
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
             align="center"
-            overline="WHAT PARTNERS SAY"
-            title="Evidence of Market Command"
-            description="How high-growth enterprises are leveraging SSL to engineer their digital infrastructure."
+            overline="CLIENT FEEDBACK"
+            title="What Clients Say"
+            description="Feedback from companies we have worked with."
             variant="light"
             className="mb-12 md:mb-16"
           />

@@ -18,16 +18,16 @@ export default function Home() {
 
       <Hero />
 
-      {/* THE TRUTH METRICS STRIP: dark anchor banner */}
+      {/* WHAT WE MEASURE STRIP: dark anchor banner */}
       <section className="bg-ssl-light-bg px-6 py-12" id="metrics">
         <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="p-4">
               <div className="mb-1 text-sm uppercase tracking-widest text-slate-300">
-                We Replace
+                We don&apos;t report on
               </div>
               <div className="text-xl font-bold text-slate-300 line-through decoration-red-400/70">
-                Vague Clicks & Impressions
+                Clicks and impressions
               </div>
             </div>
             <div className="hidden items-center justify-center p-4 md:flex">
@@ -35,10 +35,10 @@ export default function Home() {
             </div>
             <div className="p-4">
               <div className="mb-1 text-sm font-bold uppercase tracking-widest text-ssl-gold">
-                With Truth Metrics
+                We report on
               </div>
               <div className="text-2xl font-black tracking-tight text-white">
-                Pipeline Value • Conversion Velocity • Revenue
+                Leads, sales and revenue
               </div>
             </div>
           </div>

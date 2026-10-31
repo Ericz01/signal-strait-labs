@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export const metadata = pageMetadata({
   title: 'About Us',
-  description: 'Learn about Signal Strait Labs, founded in Nairobi in 2022. We are a growth engineering partner for high-performance digital infrastructure and strategy.',
+  description: 'Signal Strait Labs started in Nairobi in 2022. We help growing companies with websites, search visibility, data systems and sales pipelines.',
   path: '/about',
 });
 
@@ -17,8 +17,8 @@ export default function AboutPage() {
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
             overline="Our Story"
-            title="Engineered for Performance"
-            description="Founded in Nairobi in 2022, Signal Strait Labs was built to bridge the gap between high-end digital infrastructure and the unique requirements of rapidly growing enterprises."
+            title="About Signal Strait Labs"
+            description="We started in Nairobi in 2022 to give growing companies the kind of technical and marketing support that is usually only available to large firms."
             align="center"
             variant="light"
             className="mb-16"
@@ -28,18 +28,18 @@ export default function AboutPage() {
         <div className="space-y-12">
           <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.1s' }}>
             <div className="glass-card-light rounded-2xl p-8 md:p-12">
-              <h3 className="mb-4 text-xl font-bold text-ssl-bg">The Context</h3>
+              <h3 className="mb-4 text-xl font-bold text-ssl-bg">Why We Started</h3>
               <p className="text-slate-600 leading-relaxed">
-                In 2022, we observed a persistent disconnect: enterprises in emerging markets were often forced to choose between local agility and global-standard technical architecture. We started Signal Strait Labs to provide both. We combine the precision of modern Jamstack architecture with strategic growth engineering to ensure our partners operate at global speed.
+                We kept seeing the same problem. Growing companies in Kenya and across Africa had to choose between local agencies that knew the market and international firms with stronger technical skills. We started Signal Strait Labs to offer both in one team.
               </p>
             </div>
           </AnimateOnScroll>
 
           <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.2s' }}>
             <div className="glass-card-dark rounded-2xl p-8 md:p-12">
-              <h3 className="mb-4 text-xl font-bold text-white">Our Mission</h3>
+              <h3 className="mb-4 text-xl font-bold text-white">What We Do</h3>
               <p className="text-slate-300 leading-relaxed">
-                To transform organizational growth through clean, performant digital infrastructure. We exist to eliminate the friction between your technical stack and your revenue goals. We don&apos;t just build sites; we build institutional authority, automated data pipelines, and optimized search footprints that drive measurable business value.
+                We help companies grow by fixing the systems behind growth: fast websites, search visibility, clean data and a sales pipeline that works. We judge our work by the leads and revenue it brings in.
               </p>
               <p className="mt-4">
                 <Link href="/services" className="font-semibold text-ssl-gold underline-offset-4 hover:underline">
@@ -51,9 +51,9 @@ export default function AboutPage() {
 
           <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.3s' }}>
             <div className="glass-card-light rounded-2xl p-8 md:p-12">
-              <h3 className="mb-4 text-xl font-bold text-ssl-bg">Nairobi, 2022</h3>
+              <h3 className="mb-4 text-xl font-bold text-ssl-bg">Based in Nairobi</h3>
               <p className="text-slate-600 leading-relaxed">
-                Based in Thome, Nairobi, we operate at the intersection of local insight and international quality. Nairobi is more than our home. It is where the next wave of digital transformation is happening. We work with clients who understand that the future of business is built on code that is as resilient as it is fast.
+                Our office is in Thome, Nairobi. We work with clients in Kenya, across Africa and further afield, and we know what it takes to serve both local and international customers.
               </p>
             </div>
           </AnimateOnScroll>

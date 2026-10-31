@@ -10,9 +10,9 @@ export default function Process() {
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
             align="center"
-            overline="HOW WE ENGAGE"
-            title="The SSL Engagement System"
-            description="Our structured, data-first methodology designed to transform technical infrastructure into a high-performance growth engine."
+            overline="HOW WE WORK"
+            title="How a Project Runs"
+            description="Four steps, from finding the problem to improving the results."
             variant="light"
             className="mb-12 md:mb-16"
           />

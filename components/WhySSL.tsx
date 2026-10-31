@@ -10,9 +10,9 @@ export default function WhySSL() {
     <section className="mx-auto max-w-full px-4 sm:px-6 py-12 md:py-20 bg-ssl-light-bg" id="why-ssl">
       <AnimateOnScroll variant="slide-up">
         <SectionHeading
-          overline="WHY PARTNER WITH SSL"
-          title="Built Different, By Design"
-          description="We're not just another agency. Our unique blend of technical expertise, data-driven strategies, and end-to-end execution ensures your digital presence isn't just visible, but dominant."
+          overline="WHY WORK WITH US"
+          title="Marketing and Engineering in One Team"
+          description="The people who plan your strategy also build it, so nothing gets lost between agencies."
           align="center"
           variant="light"
           className="mb-16 md:text-center"

@@ -142,7 +142,7 @@ export function Header() {
             >
               <div className="relative flex items-center justify-center rounded-[7px] bg-[#01081b] px-5 py-2.5 transition-colors group-hover:bg-transparent">
                 <span className="relative z-10 text-xs font-bold uppercase tracking-widest text-ssl-gold transition-colors duration-300 group-hover:text-[#01081b]">
-                  Get an ABM Attack Plan
+                  Get in Touch
                 </span>
               </div>
             </a>
@@ -219,7 +219,7 @@ export function Header() {
                   onClick={closeMobile}
                   className="mt-10 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#8a6f3e] to-[#c5a059] py-5 text-base font-bold uppercase tracking-widest text-[#01081b] shadow-xl shadow-ssl-gold/20 transition-transform active:scale-95"
                 >
-                  Get an ABM Attack Plan
+                  Get in Touch
                 </a>
               </nav>
             </div>
