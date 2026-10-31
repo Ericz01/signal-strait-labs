@@ -89,8 +89,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t104** Wrap all images in next/image with explicit width, height, alt text, and appropriate loading priority.
   - Done when: no plain `<img>` tags remain, and every image has width, height, alt and correct priority.
   - Result: there were no plain `<img>` tags. Replaced the deprecated `priority` prop (Next 16) with `loading="eager"` on the header logo. When a hero image is added (t101), give it `preload`.
-- [ ] **t105** Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview.
+- [x] **t105** Create branded social card (1200×630px PNG) using SSL brand colors for OpenGraph preview.
   - Done when: a 1200×630 PNG social card in brand colors exists and is set as the default `og:image`.
+  - Result: `public/og-image.png` (51KB), built by `scripts/make-social-card.mjs` from the logo. Light canvas with the full logo, navy band with gold rule and tagline. The tagline uses Noto Sans because the brand fonts are not installed locally; the logo carries the brand lettering. Eric: check you like the tagline "Growth engineering for Africa and beyond".
 - [ ] **t107** Final copywriting pass across all MVP pages: tone authoritative, direct, precise (not salesy or vague).
   - Done when: every MVP page has been reviewed and the copy is plain, direct and free of em dashes.
 - [ ] **t108** Add descriptive alt text to every image across all pages (both accessibility and SEO requirement).

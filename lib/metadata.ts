@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { SITE_NAME } from '@/lib/site-config';
 
-// Default social preview image. Replace with the branded 1200x630 card (t105).
+// Default social preview image (1200x630). Rebuild with:
+// node scripts/make-social-card.mjs
 export const DEFAULT_OG_IMAGE = {
-  url: '/logo.png',
-  width: 600,
-  height: 367,
-  alt: 'Signal Strait Labs',
+  url: '/og-image.png',
+  width: 1200,
+  height: 630,
+  alt: 'Signal Strait Labs: growth engineering for Africa and beyond',
 };
 
 export const baseOpenGraph = {
