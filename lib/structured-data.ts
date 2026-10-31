@@ -1,5 +1,5 @@
 // JSON-LD structured data (schema.org). Rendered with <JsonLd />.
-import { services } from '@/lib/services-data';
+import { services, type Service } from '@/lib/services-data';
 import { CONTACT_EMAIL, CONTACT_PHONE, HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from '@/lib/site-config';
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
@@ -125,3 +125,18 @@ export const homeWebPageJsonLd = {
   about: { '@id': ORGANIZATION_ID },
   primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
 };
+
+// FAQPage for a service detail page, built from the FAQs shown on that page.
+export function serviceFaqJsonLd(service: Service) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${SITE_URL}/services/${service.slug}#faq`,
+    url: `${SITE_URL}/services/${service.slug}`,
+    mainEntity: service.faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  };
+}

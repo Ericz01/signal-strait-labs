@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { FAQAccordion } from '@/components/FAQAccordion';
 import Link from 'next/link';
+import { JsonLd } from '@/components/JsonLd';
+import { serviceFaqJsonLd } from '@/lib/structured-data';
 
 export async function generateStaticParams() {
   return services.map((service) => ({
@@ -36,6 +38,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <main className="bg-ssl-light-bg min-h-screen py-20">
+      <JsonLd data={serviceFaqJsonLd(service)} />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
           <div className="mb-12 flex flex-col items-center text-center">

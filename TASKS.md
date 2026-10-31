@@ -55,7 +55,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Result: added on the home page. Social profiles list only LinkedIn and Facebook; add the others to `socialProfiles` in `lib/structured-data.ts` once those accounts exist.
 - [x] **t087** Create WebPage JSON-LD for the homepage.
   - Done when: the homepage outputs valid WebPage JSON-LD.
-- [ ] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.
+- [x] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.
   - Done when: each service page outputs FAQPage JSON-LD built from its FAQ data in `lib/services-data.ts`.
 - [ ] **t093** Create public/llms.txt: structured markdown file with company overview, services, and contact for LLM crawlers.
   - Done when: `/llms.txt` is served and lists the company overview, all services and contact details.
@@ -115,6 +115,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: every page works in all four browsers at desktop and mobile widths.
 - [ ] **t120** Full keyboard navigation test: every interactive element reachable and operable without a mouse.
   - Done when: every link, button, menu and form field can be reached and used by keyboard with a visible focus state.
+  - Known issue (found in t088): service detail pages render their own `<main>` inside the layout's `<main>`. Change the inner one to a `<div>` or `<article>`.
 - [ ] **t121** Color contrast audit: all body text meets WCAG AA minimum 4.5:1 ratio.
   - Done when: all body text on light and dark surfaces measures at least 4.5:1.
 
