@@ -21,7 +21,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: the leads route sends email through Resend using a key read per request from the Cloudflare context, and the build passes.
   - Result: code done. Uses the Resend HTTP API with `fetch` (`lib/email.ts`), no SDK. Each lead is emailed as plain text to connect@signalstraitlabs.com, with reply-to set to the visitor.
   - Eric: verify signalstraitlabs.com in Resend (it sends from noreply@signalstraitlabs.com), then add `RESEND_API_KEY` as a Worker secret. Until then no email is sent and the route logs a warning. Not tested against the real API yet; see t118.
-- [ ] **t075** Build HTML confirmation email template sent to the user after successful form submission.
+- [x] **t075** Build HTML confirmation email template sent to the user after successful form submission.
   - Done when: a confirmation email template exists and is sent to the submitter's address after a valid submission.
 - [ ] **t076** Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead.
   - Done when: each valid lead triggers a notification email to connect@signalstraitlabs.com containing all form fields.

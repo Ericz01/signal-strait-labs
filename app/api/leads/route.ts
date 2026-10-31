@@ -4,6 +4,7 @@ import { Redis } from '@upstash/redis/cloudflare';
 import { Ratelimit } from '@upstash/ratelimit';
 import { getServerEnv } from '@/lib/server-env';
 import { sendEmail, LEADS_INBOX } from '@/lib/email';
+import { leadConfirmationEmail, VISITOR_REPLY_TO } from '@/lib/email-templates';
 
 // ---------------------------------------------------------------------------
 // Rate limiter setup
@@ -157,6 +158,23 @@ export async function POST(req: NextRequest) {
         },
         { status: 502 }
       );
+    }
+
+    // 5. Confirmation email to the visitor. Only sent once the lead has
+    // reached the team inbox. A failure here does not fail the request,
+    // because the lead itself was delivered.
+    if (result.status === 'sent') {
+      const confirmation = leadConfirmationEmail({ name });
+      const confirmationResult = await sendEmail({
+        to: email,
+        replyTo: VISITOR_REPLY_TO,
+        subject: confirmation.subject,
+        text: confirmation.text,
+        html: confirmation.html,
+      });
+      if (confirmationResult.status === 'failed') {
+        console.error('Confirmation email failed:', confirmationResult.error);
+      }
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
