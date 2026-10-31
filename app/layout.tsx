@@ -13,7 +13,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://signal-strait-labs.pages.dev";
+const siteUrl = "https://signalstraitlabs.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

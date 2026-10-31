@@ -12,7 +12,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **fix2** Check that no temporary diagnostic logging is left in `app/api/leads/route.ts`.
   - Done when: the route has no leftover debug `console.log` calls, and only intended warnings and errors remain.
   - Result: nothing left to remove. The `DEBUG: Rate limiting with IP` log was already removed in `b1edd0e`. The remaining `console.log('Received Lead Submission: ...')` is the intended placeholder until email delivery (t074). It logs name, email and company, so remove it or cut it down in t074.
-- [ ] **fix3** Set the site's base URL and canonical to `https://signalstraitlabs.com`.
+- [x] **fix3** Set the site's base URL and canonical to `https://signalstraitlabs.com`.
   - Done when: `metadataBase`, canonical URLs, JSON-LD URLs and any sitemap or robots references all use `https://signalstraitlabs.com`.
 
 ## P5: MVP Functionality & Integrations

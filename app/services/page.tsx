@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 export const metadata = {
   title: 'Our Services | Signal Strait Labs',
   description: 'Explore our core capabilities: from technical infrastructure and custom web development to algorithmic search, data systems, RevOps, and capacity building.',
+  alternates: { canonical: '/services' },
 };
 
 export default function ServicesPage() {

@@ -4,6 +4,7 @@ import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 export const metadata = {
   title: 'About Us | Signal Strait Labs',
   description: 'Learn about Signal Strait Labs, founded in Nairobi in 2022. We are a growth engineering partner for high-performance digital infrastructure and strategy.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {

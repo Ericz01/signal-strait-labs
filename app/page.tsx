@@ -9,10 +9,10 @@ import { ContactSection } from '@/components/ContactSection';
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": "https://signal-strait-labs.pages.dev/#organization",
+  "@id": "https://signalstraitlabs.com/#organization",
   name: "Signal Strait Labs",
   alternateName: "SSL",
-  url: "https://signal-strait-labs.pages.dev",
+  url: "https://signalstraitlabs.com",
   foundingDate: "2022",
   description:
     "Enterprise digital transformation and growth engineering partner specializing in digital infrastructure, custom web development, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipeline engineering.",

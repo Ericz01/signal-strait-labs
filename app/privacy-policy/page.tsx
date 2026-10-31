@@ -1,6 +1,7 @@
 export const metadata = {
   title: 'Privacy Policy | Signal Strait Labs',
   description: 'Privacy policy for Signal Strait Labs. Learn about how we handle your data.',
+  alternates: { canonical: '/privacy-policy' },
 };
 
 export default function PrivacyPolicyPage() {
