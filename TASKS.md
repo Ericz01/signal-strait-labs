@@ -163,6 +163,8 @@ Note: the tracker says Cloudflare Pages, but the site now runs as a Cloudflare W
   - Done when: the site loads over HTTPS with a valid certificate and auto-renew is on in the dashboard.
 - [ ] **t125** Configure Cloudflare security headers: X-Frame-Options, X-Content-Type-Options, HSTS, CSP. **[needs Eric]**
   - Done when: live responses include all four headers and the site still works with the CSP in place.
+  - Progress (not ticked, needs a live check): added in `next.config.ts` `headers()`: X-Frame-Options DENY, X-Content-Type-Options nosniff, HSTS (2 years, includeSubDomains, no preload), CSP (production only), Referrer-Policy and Permissions-Policy. Tested on the local production server: all headers present on every page, no CSP violations, map and analytics hosts allowed. Not tested through `wrangler dev`.
+  - Eric: after deploy, run `curl -sI https://signalstraitlabs.com/ | grep -iE 'x-frame|x-content|strict-transport|content-security'` and open the site with the browser console open to check for "Refused to load" errors. Static files (JS, CSS, images) are served directly by Cloudflare and won't carry these headers; that's fine, but you can add them with a Cloudflare Transform Rule if you want them everywhere.
 - [ ] **t126** Add all production environment variables (RESEND_API_KEY, etc.) to Cloudflare Pages dashboard. **[needs Eric]**
   - Done when: every required env var and secret is set on the production Worker.
 - [ ] **t127** Set deployment branch rules: main → production, dev/staging → preview URLs. **[needs Eric]**
