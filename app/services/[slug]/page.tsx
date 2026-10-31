@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { services } from '@/lib/services-data';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';

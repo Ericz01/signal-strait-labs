@@ -1,6 +1,6 @@
 import { services } from '@/lib/services-data';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { IconBox } from '@/components/ui/IconBox';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import Link from 'next/link';

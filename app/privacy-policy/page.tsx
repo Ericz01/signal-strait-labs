@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="prose prose-slate prose-lg max-w-none text-slate-600 space-y-8">
           <p>
-            Signal Strait Labs ("we", "us", "our") respects your privacy. This policy explains what information we collect, how we use it, and what rights you have over it.
+            Signal Strait Labs (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) respects your privacy. This policy explains what information we collect, how we use it, and what rights you have over it.
           </p>
 
           <section>
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">2. Information We Collect</h2>
             <p>
-              When you use our contact form, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don't fill in every field, that's fine, only name, email, and message are required.
+              When you use our contact form, we collect the information you provide: your name, email address, company name, service interest, message, and budget range. If you don&apos;t fill in every field, that&apos;s fine, only name, email, and message are required.
             </p>
             <p>
               We also use privacy-focused analytics (Cloudflare Web Analytics) to understand how visitors use our site. This does not use cookies or track you individually across other websites.
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">5. International Data Transfers</h2>
             <p>
-              Because we work with clients and use services based outside Kenya, your information may be processed in other countries, including the United States and the European Union. Where this happens, we rely on the service providers' own data protection safeguards.
+              Because we work with clients and use services based outside Kenya, your information may be processed in other countries, including the United States and the European Union. Where this happens, we rely on the service providers&apos; own data protection safeguards.
             </p>
           </section>
 
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">7. Your Rights</h2>
             <p>
-              Depending on where you're located, you may have the right to:
+              Depending on where you&apos;re located, you may have the right to:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>Ask what personal information we hold about you</li>
@@ -80,7 +80,7 @@ export default function PrivacyPolicyPage() {
               <li>Ask for a copy of your information in a portable format</li>
             </ul>
             <p>
-              If you're in the European Union, these rights come from the GDPR. If you're in South Africa, these rights come from POPIA, and you can also lodge a complaint with the Information Regulator. If you're in Kenya, these rights are protected under the Data Protection Act, 2019, and you can contact the Office of the Data Protection Commissioner.
+              If you&apos;re in the European Union, these rights come from the GDPR. If you&apos;re in South Africa, these rights come from POPIA, and you can also lodge a complaint with the Information Regulator. If you&apos;re in Kenya, these rights are protected under the Data Protection Act, 2019, and you can contact the Office of the Data Protection Commissioner.
             </p>
             <p>
               To exercise any of these rights, email us at connect@signalstraitlabs.com.
@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">9. Children's Privacy</h2>
+            <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">9. Children&apos;s Privacy</h2>
             <p>
               Our services are intended for businesses and professionals, not children. We do not knowingly collect information from anyone under 18.
             </p>
@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-display font-bold text-ssl-bg mb-4">10. Changes to This Policy</h2>
             <p>
-              We may update this policy from time to time. If we make significant changes, we'll update the date at the top of this page.
+              We may update this policy from time to time. If we make significant changes, we&apos;ll update the date at the top of this page.
             </p>
           </section>
 

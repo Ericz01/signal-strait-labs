@@ -1,26 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import validator from 'validator';
-import { Redis } from '@upstash/redis';
+import { Redis } from '@upstash/redis/cloudflare';
 import { Ratelimit } from '@upstash/ratelimit';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 // ---------------------------------------------------------------------------
 // Rate limiter setup
 // ---------------------------------------------------------------------------
-// IMPORTANT: Do NOT read the Upstash credentials or instantiate the client at
-// module scope. In the Cloudflare Workers runtime secrets are delivered
-// per-request through the runtime's `env` binding (OpenNext copies them onto
-// `process.env` while handling a request). At module-evaluation time (isolate
-// cold start) `process.env` may not yet be populated, which caused the
-// intermittent "Rate limiting disabled: Upstash credentials not configured"
-// warning and a silently disabled limiter on some isolates.
-//
-// Instead we resolve the client lazily, on first use *inside the request*, via
-// `getCloudflareContext().env` (the officially supported way to read bindings
-// and secrets in an OpenNext/Workers route handler), with a fallback to
-// `process.env` for `next dev` / non-Workers contexts.
-let cachedRatelimit: Ratelimit | null = null;
-
+// IMPORTANT: Do NOT read the Upstash credentials or create the client at
+// module scope. On Cloudflare Workers, secrets are delivered per request
+// through the runtime `env` binding, so they are read inside the POST handler
+// via `getCloudflareContext().env`, with a `process.env` fallback for
+// `next dev`. The client is built per request; the REST client is just a
+// fetch wrapper, so this is cheap, and nothing is cached across requests.
 type UpstashCredentials = {
   url?: string;
   token?: string;
@@ -29,7 +21,7 @@ type UpstashCredentials = {
 function readCloudflareEnvCredentials(): UpstashCredentials {
   try {
     // `getCloudflareContext()` is only available inside a Worker request context.
-    // Outside of one (e.g. `next dev` before a request, or SSG) it throws.
+    // Outside of one (e.g. `next dev`) it throws.
     const env = getCloudflareContext().env as unknown as Record<string, unknown>;
     return {
       url: typeof env.UPSTASH_REDIS_REST_URL === 'string' ? env.UPSTASH_REDIS_REST_URL : undefined,
@@ -63,6 +55,9 @@ function createRatelimit(): Ratelimit | null {
     return new Ratelimit({
       redis,
       limiter: Ratelimit.slidingWindow(5, '10 m'), // 5 requests per 10 minutes
+      // The in-memory cache only helps when one instance is reused across
+      // requests. This instance lives for a single request, so turn it off.
+      ephemeralCache: false,
     });
   } catch (err) {
     console.error('Rate limiting failed to initialize:', err);
@@ -70,26 +65,31 @@ function createRatelimit(): Ratelimit | null {
   }
 }
 
-function getRatelimit(): Ratelimit | null {
-  // Cache only successful initializations. Constructing the lightweight REST
-  // client is cheap, so retrying on a later request is preferable to caching a
-  // failed init for the lifetime of the isolate.
-  if (!cachedRatelimit) {
-    cachedRatelimit = createRatelimit();
-  }
-  return cachedRatelimit;
+function getClientIp(req: NextRequest): string {
+  const cfIp = req.headers.get('CF-Connecting-IP');
+  if (cfIp) return cfIp.trim();
+  // x-forwarded-for can be a list ("client, proxy1, proxy2"). Key on the first
+  // entry only, so one client always maps to one rate limit bucket.
+  const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+  return forwarded || '127.0.0.1';
 }
 
 export async function POST(req: NextRequest) {
   try {
     // 0. Rate Limiting Check
-    // Resolve the limiter lazily *inside* the request so the env binding is
-    // available.
-    const ip = req.headers.get('CF-Connecting-IP') || req.headers.get('x-forwarded-for') || '127.0.0.1';
+    // The limiter is created here, inside the request, so the env binding is
+    // available and no client is shared across requests or isolates.
+    const ip = getClientIp(req);
 
-    const ratelimit = getRatelimit();
+    const ratelimit = createRatelimit();
     if (ratelimit) {
-      const { success } = await ratelimit.limit(ip);
+      const { success, reason } = await ratelimit.limit(ip);
+
+      if (reason === 'timeout') {
+        // Upstash did not answer within the timeout (default 5s) and the
+        // library let the request through. Warn so this is visible in logs.
+        console.warn('Rate limit check timed out; request allowed.');
+      }
 
       if (!success) {
         return NextResponse.json(
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
     let body;
     try {
       body = await req.json();
-    } catch (_e) {
+    } catch {
       return NextResponse.json(
         { success: false, message: 'Invalid JSON request' },
         { status: 400 }

@@ -30,9 +30,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Pipeline: Upstash sliding-window rate limit (5 req / 10 min per `CF-Connecting-IP`) → JSON parse → `website` honeypot (silently returns success) → HTML-strip sanitization → `validator` checks → currently **only logs** the lead (no email delivery yet, despite `RESEND_API_KEY` in README).
 - Secrets on Workers must be read **per request** via `getCloudflareContext().env`, falling back to `process.env` for `next dev`. Never read them or construct clients at module scope — that caused the limiter to be silently disabled on cold isolates. If credentials are missing the limiter is skipped with a warning, not an error.
 - Env vars: `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `NEXT_PUBLIC_APP_URL`, `RESEND_API_KEY` (unused so far).
-- The limiter is cached per isolate only after a successful init; a failed init is retried on the next request.
+- The limiter (and its Redis client, imported from `@upstash/redis/cloudflare`) is created inside the POST handler on every request; nothing is cached at module scope. If Upstash times out (default 5s) the library lets the request through, and the route logs a warning.
 - `ContactSection` is rendered on both `/` and `/contact`, so changes to the form or payload shape affect both pages.
 
 ### Conflicting guidance
 
 `.cursorrules` describes an "ultra-premium dark" theme with `#01081b` as the page background, and README mentions Geist fonts. Both are outdated. `PROJECT_CONTEXT.md` (last verified 2026-07-07) describes deployment as Cloudflare Pages, but it is now a Worker (see above); its brand/contact details are still useful. `hero-diagnostic.md` is an old one-off report, not a spec. The dual-tone light-canvas system and Sora/Plus Jakarta Sans in AGENTS.md are what the code actually uses.
+
+### Task workflow (TASKS.md)
+
+- Work through `TASKS.md` from the top, one task at a time, on a new branch named `task/<id>`.
+- Run `npx tsc --noEmit`, `npm run lint` and `npm run build:worker`, and fix any failures.
+- Commit with a short message, tick the box, then stop and wait for Eric.
+- Never push, never deploy, never read `.env` files or touch secrets.
+- If something fails twice, stop and write what happened under the task.
+- Keep any site copy plain and simple. No em dashes.

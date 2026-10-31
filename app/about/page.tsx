@@ -35,7 +35,7 @@ export default function AboutPage() {
             <div className="glass-card-dark rounded-2xl p-8 md:p-12">
               <h3 className="mb-4 text-xl font-bold text-white">Our Mission</h3>
               <p className="text-slate-300 leading-relaxed">
-                To transform organizational growth through clean, performant digital infrastructure. We exist to eliminate the friction between your technical stack and your revenue goals. We don't just build sites; we build institutional authority, automated data pipelines, and optimized search footprints that drive measurable business value.
+                To transform organizational growth through clean, performant digital infrastructure. We exist to eliminate the friction between your technical stack and your revenue goals. We don&apos;t just build sites; we build institutional authority, automated data pipelines, and optimized search footprints that drive measurable business value.
               </p>
             </div>
           </AnimateOnScroll>
@@ -44,7 +44,7 @@ export default function AboutPage() {
             <div className="glass-card-light rounded-2xl p-8 md:p-12">
               <h3 className="mb-4 text-xl font-bold text-ssl-bg">Nairobi, 2022</h3>
               <p className="text-slate-600 leading-relaxed">
-                Based in Thome, Nairobi, we operate at the intersection of local insight and international quality. Our location is more than just a home—it's the front line for the next generation of digital transformation. We work with clients who understand that the future of business is built on code that is as resilient as it is fast.
+                Based in Thome, Nairobi, we operate at the intersection of local insight and international quality. Our location is more than just a home—it&apos;s the front line for the next generation of digital transformation. We work with clients who understand that the future of business is built on code that is as resilient as it is fast.
               </p>
             </div>
           </AnimateOnScroll>
