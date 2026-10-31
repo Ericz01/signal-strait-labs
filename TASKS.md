@@ -68,8 +68,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: `/robots.txt` allows major search bots, sets rules for AI crawlers, and links to the sitemap.
 - [x] **t097** Add OpenGraph metadata to all pages (og:title, og:description, og:image, og:type, og:url).
   - Done when: every page outputs all five OpenGraph tags.
-- [ ] **t098** Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image).
+- [x] **t098** Add Twitter/X Card metadata (twitter:card, twitter:title, twitter:description, twitter:image).
   - Done when: every page outputs all four Twitter Card tags.
+  - Result: removed `twitter:creator` (`@signalstraitlabs`) because the X account does not exist yet. Add `site` and `creator` to `baseTwitter` in `lib/metadata.ts` after t135.
 - [ ] **t100** Audit that every page has at least one internal link to another page (crawlability requirement).
   - Done when: every page has at least one internal link in its main content, not only in the header and footer.
 

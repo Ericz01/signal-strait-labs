@@ -16,6 +16,12 @@ export const baseOpenGraph = {
   images: [DEFAULT_OG_IMAGE],
 };
 
+// Add `site`/`creator` (e.g. "@signalstraitlabs") once the X account exists.
+export const baseTwitter = {
+  card: 'summary_large_image' as const,
+  images: [DEFAULT_OG_IMAGE.url],
+};
+
 type PageMetadataInput = {
   /** Page title without the brand; the layout template adds " | Signal Strait Labs". */
   title: string;
@@ -24,7 +30,7 @@ type PageMetadataInput = {
   path: string;
 };
 
-// Title, description, canonical and OpenGraph for a page, all pointing at
+// Title, description, canonical, OpenGraph and Twitter card for a page, all pointing at
 // the page's own URL.
 export function pageMetadata({ title, description, path }: PageMetadataInput): Metadata {
   return {
@@ -36,6 +42,11 @@ export function pageMetadata({ title, description, path }: PageMetadataInput): M
       title: `${title} | ${SITE_NAME}`,
       description,
       url: path,
+    },
+    twitter: {
+      ...baseTwitter,
+      title: `${title} | ${SITE_NAME}`,
+      description,
     },
   };
 }

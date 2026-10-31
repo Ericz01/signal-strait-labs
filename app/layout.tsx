@@ -4,7 +4,7 @@ import { Footer, Header } from "@/components/layout";
 import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site-config";
-import { baseOpenGraph } from "@/lib/metadata";
+import { baseOpenGraph, baseTwitter } from "@/lib/metadata";
 import "./globals.css";
 
 const sora = Sora({
@@ -61,12 +61,9 @@ export const metadata: Metadata = {
     countryName: "Kenya",
   },
   twitter: {
-    card: "summary_large_image",
-    title:
-      "Signal Strait Labs | Enterprise Digital Transformation & AEO/GEO",
-    description:
-      "Growth engineering, AEO/GEO, and RevOps pipeline systems for enterprises in Africa and beyond. HQ: Thome, Nairobi, Kenya.",
-    creator: "@signalstraitlabs",
+    ...baseTwitter,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
   robots: {
     index: true,
