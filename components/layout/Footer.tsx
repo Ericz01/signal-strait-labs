@@ -3,7 +3,7 @@ import { services } from "@/lib/services-data";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/[0.06] bg-[#01081b] text-slate-400">
+    <footer className="mesh-dark relative z-10 border-t border-white/[0.06] text-slate-400">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16">
         {/* Responsive Grid Setup - Pre-configured for columns 2, 3, and 4 later */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">

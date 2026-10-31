@@ -6,7 +6,7 @@ import { useSyncExternalStore } from 'react';
 // not chosen yet. Only essential storage is used until they accept.
 export type ConsentChoice = 'accepted' | 'declined' | 'unset';
 
-const STORAGE_KEY = 'ssl-cookie-consent';
+export const STORAGE_KEY = 'ssl-cookie-consent';
 const CHANGE_EVENT = 'ssl-cookie-consent-change';
 
 function read(): ConsentChoice {
@@ -25,6 +25,10 @@ export function setConsent(choice: ConsentChoice) {
   } catch {
     // Storage blocked: the choice lasts for this page view only.
   }
+  // Keep <html data-consent> in sync: CSS uses it to hide the banner before
+  // React hydrates (see lib/consent-boot.ts).
+  if (choice === 'unset') document.documentElement.removeAttribute('data-consent');
+  else document.documentElement.setAttribute('data-consent', choice);
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
@@ -37,8 +41,9 @@ function subscribe(onChange: () => void) {
   };
 }
 
-// Returns null during server render and hydration, so nothing consent-based
-// renders until the stored choice is known.
-export function useCookieConsent(): ConsentChoice | null {
-  return useSyncExternalStore<ConsentChoice | null>(subscribe, read, () => null);
+// Server render and hydration use 'unset', so the banner is in the initial HTML
+// and paints immediately for first-time visitors. Returning visitors never see
+// it: CONSENT_BOOT_SCRIPT (lib/consent-boot.ts) hides it with CSS before the first paint.
+export function useCookieConsent(): ConsentChoice {
+  return useSyncExternalStore<ConsentChoice>(subscribe, read, () => 'unset');
 }

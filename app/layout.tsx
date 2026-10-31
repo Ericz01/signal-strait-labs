@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer, Header } from "@/components/layout";
 import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
+import { CONSENT_BOOT_SCRIPT } from "@/lib/consent-boot";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site-config";
 import { baseOpenGraph, baseTwitter } from "@/lib/metadata";
 import "./globals.css";
@@ -88,6 +89,9 @@ export default function RootLayout({
     // --font-body) can resolve them. On <body> they were undefined at :root and
     // every page fell back to the system font.
     <html lang="en" className={`${sora.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT_SCRIPT }} />
+      </head>
       <body
         className="bg-ssl-light-bg text-ssl-bg antialiased"
         suppressHydrationWarning={true}

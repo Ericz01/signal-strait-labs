@@ -16,7 +16,7 @@ export default function Testimonials() {
   if (!ready) return null;
 
   return (
-    <section className="bg-ssl-light-bg px-4 sm:px-6 py-12 md:py-20" id="testimonials">
+    <section className="mesh-light px-4 sm:px-6 py-16 md:py-24" id="testimonials">
       <div className="mx-auto max-w-7xl">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
@@ -38,7 +38,7 @@ export default function Testimonials() {
                 animationDelay: `${index * 0.15}s`,
               }}
             >
-              <Card className="h-full flex flex-col p-6 bg-white border border-slate-100 hover:border-ssl-gold/30">
+              <Card tone="light" className="h-full flex flex-col p-6">
                 <CardContent className="p-0 flex flex-col h-full">
                   <p className="text-slate-600 leading-relaxed mb-8 flex-grow italic">
                     &ldquo;{testimonial.quote}&rdquo;

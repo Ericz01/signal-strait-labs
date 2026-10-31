@@ -117,6 +117,22 @@ The design system pairs a **luminous light canvas** with **premium dark anchor b
 | **Light canvas** | `text-ssl-bg` | `text-slate-600` / `text-slate-700` | `.text-gold-gradient` |
 | **Dark anchors** | `text-white` | `text-slate-300` / `text-slate-400` | `text-ssl-gold`, `.text-brand-gradient` |
 
+**Glass system (design1, in `@layer components` in `app/globals.css`):**
+
+| Class | Use |
+| --- | --- |
+| `.mesh-light` | Light section background with soft blue/gold washes. Light glass needs this behind it to look frosted. |
+| `.mesh-dark` | Dark section background (no photo) with blue/gold glows. Used on the footer. |
+| `.glass-card-light` + `.glass-edge` | Light frosted card with a thin gold-to-blue gradient edge. |
+| `.glass-card-dark` | Dark frosted card with gradient edge built in. Nearly opaque so it stays navy on light sections. |
+| `.glass-hover` | Lift and glow on hover for cards that are links. |
+| `.glass-chip` | Small translucent pill over photos/dark areas (no live blur, for phone performance). |
+| `.reveal .reveal-<variant>` | Scroll reveal via `AnimateOnScroll`; only runs with scroll-driven animation support and no reduced-motion preference. |
+
+- Use `<Card tone="light|dark" interactive>` and `<IconBox tone="light|dark">` instead of overriding their colours.
+- Photos: use `components/ResponsivePhoto.tsx` (art-directed `<picture>`, small file for phones, media-matched preloads when `priority`). `next/image` can't build a srcset because `images.unoptimized` is on. Sources and credits are in `assets/photos/`.
+- Keep live `backdrop-filter` to a few large surfaces per screen (header, panels, cards); it is expensive to paint on phones.
+
 Apply `.glass-card-dark` to focal cards, banners, and forms. Use `.glass-nav-dark` + `border-ssl-gold/20` on header; `.footer-dark` on footer. Hover lift on `.glass-card-dark` is intentional — do not apply to full-width nav bars.
 
 ### Brand colors

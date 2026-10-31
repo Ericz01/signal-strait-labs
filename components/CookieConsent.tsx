@@ -13,7 +13,7 @@ export function CookieConsent() {
     <div
       role="region"
       aria-label="Cookie consent"
-      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl rounded-2xl border border-ssl-gold/30 bg-ssl-bg/95 p-5 shadow-2xl backdrop-blur-xl sm:p-6"
+      className="cookie-banner fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl rounded-2xl border border-ssl-gold/30 bg-ssl-bg/95 p-5 shadow-2xl backdrop-blur-xl sm:p-6"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm leading-relaxed text-slate-300">

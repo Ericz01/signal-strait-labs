@@ -1,31 +1,32 @@
-'use client';
-
-import React from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
+// Only used on the home page, where #contact is the form section below.
 export default function CTABanner() {
   return (
-    <section className="px-4 sm:px-6 py-12 md:py-20 bg-ssl-light-bg">
+    <section className="mesh-light px-4 py-16 sm:px-6 md:py-24">
       <AnimateOnScroll variant="scale">
-        <div className="glass-card-dark glass-card-dark-static mx-auto max-w-5xl rounded-3xl p-12 md:p-20 text-center">
-          <h2 className="text-fluid-h2 font-extrabold tracking-tight text-white mb-6">
-            Ready to Talk About Your Project?
-          </h2>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Tell us what you want to improve and we will suggest where to start.
-          </p>
-          <Button 
-            variant="primary" 
-            size="lg" 
-            onClick={() => {
-              const element = document.getElementById('contact');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="text-lg px-10 py-6"
-          >
-            Start a Project
-          </Button>
+        <div className="relative isolate mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-ssl-bg shadow-2xl shadow-ssl-bg/30">
+          <Image
+            src="/images/blur-blue-amber-1200.webp"
+            alt=""
+            fill
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="-z-20 object-cover"
+          />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ssl-bg/40" />
+          <div className="glass-card-dark m-3 rounded-[1.6rem] px-6 py-14 text-center sm:m-4 md:px-16 md:py-20">
+            <h2 className="mb-5 text-fluid-h2 font-extrabold tracking-tight text-white">
+              Ready to Talk About Your Project?
+            </h2>
+            <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
+              Tell us what you want to improve and we will suggest where to start.
+            </p>
+            <Button asChild variant="primary" size="lg" className="px-10 text-base shadow-lg shadow-ssl-gold/25">
+              <a href="#contact">Start a Project</a>
+            </Button>
+          </div>
         </div>
       </AnimateOnScroll>
     </section>

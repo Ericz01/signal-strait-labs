@@ -16,7 +16,7 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
   return (
     <div className="space-y-4">
       {items.map((item, index) => (
-        <div key={index} className="glass-card-light overflow-hidden rounded-xl border">
+        <div key={index} className="glass-card-light glass-edge overflow-hidden rounded-2xl">
           <button
             type="button"
             id={`${baseId}-q${index}`}

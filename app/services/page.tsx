@@ -5,7 +5,6 @@ import { IconBox } from '@/components/ui/IconBox';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
@@ -16,11 +15,12 @@ export const metadata = pageMetadata({
 
 export default function ServicesPage() {
   return (
-    <div className="bg-ssl-light-bg min-h-screen py-20">
+    <div className="mesh-light min-h-screen py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
           <SectionHeading
             align="center"
+            overline="WHAT WE DO"
             title="Our Services"
             description="Pick one service or combine several. Each one is aimed at more leads and less manual work for your team."
             variant="light"
@@ -38,23 +38,20 @@ export default function ServicesPage() {
                 animationDelay: `${index * 0.05}s`,
               }}
             >
-              <Card className="h-full flex flex-col p-6">
-                <Link href={service.href} className="flex flex-col h-full group">
+              <Card tone="light" interactive className="flex h-full w-full flex-col">
+                <Link href={service.href} className="group flex h-full flex-col p-7">
                   <IconBox
                     icon={service.icon}
                     title={service.title}
                     description={service.description}
-                    variant="default"
-                    className="flex-grow mb-6 [&>div]:bg-ssl-blue/5 [&>div]:text-ssl-blue [&>div]:border-ssl-blue/20"
+                    tone="light"
+                    className="mb-6 h-auto justify-start"
                   />
-                  <div className="mt-auto pt-4">
-                    {/* Styled like a button but rendered as a span: the whole card is already the link. */}
-                    <Button asChild variant="outline" size="sm" className="w-full text-ssl-gold border-ssl-gold/40 hover:bg-ssl-gold/10 hover:text-ssl-gold">
-                      <span>
-                        Learn More <ArrowRightIcon aria-hidden="true" className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </Button>
-                  </div>
+                  {/* The whole card is the link; this is just a visual cue. */}
+                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-ssl-blue">
+                    Learn more
+                    <ArrowRightIcon aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
                 </Link>
               </Card>
             </AnimateOnScroll>

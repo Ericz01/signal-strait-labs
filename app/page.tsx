@@ -18,9 +18,10 @@ export default function Home() {
 
       <Hero />
 
-      {/* WHAT WE MEASURE STRIP: dark anchor banner */}
-      <section className="bg-ssl-light-bg px-6 py-12" id="metrics">
-        <div className="glass-card-dark glass-card-dark-static mx-auto max-w-7xl rounded-2xl px-6 py-12 md:px-12">
+      {/* WHAT WE MEASURE: dark glass panel */}
+      {/* Overlaps the bottom of the hero so the glass frosts the photo behind it. */}
+      <section className="relative z-10 -mt-24 px-4 sm:px-6" id="metrics">
+        <div className="glass-card-dark mx-auto max-w-6xl rounded-3xl px-6 py-8 md:px-12 md:py-10">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             <div className="p-4">
               <div className="mb-1 text-sm uppercase tracking-widest text-slate-300">
@@ -37,7 +38,7 @@ export default function Home() {
               <div className="mb-1 text-sm font-bold uppercase tracking-widest text-ssl-gold">
                 We report on
               </div>
-              <div className="text-2xl font-black tracking-tight text-white">
+              <div className="text-xl font-black tracking-tight text-white sm:text-2xl">
                 Leads, sales and revenue
               </div>
             </div>

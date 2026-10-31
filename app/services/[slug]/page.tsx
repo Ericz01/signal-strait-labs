@@ -38,12 +38,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const Icon = service.icon;
 
   return (
-    <div className="bg-ssl-light-bg min-h-screen py-20">
+    <div className="mesh-light min-h-screen py-20 md:py-28">
       <JsonLd data={serviceFaqJsonLd(service)} />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <AnimateOnScroll variant="slide-up">
           <div className="mb-12 flex flex-col items-center text-center">
-            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-ssl-blue/10 text-ssl-blue">
+            <div className="glass-card-light glass-edge mb-6 flex h-16 w-16 items-center justify-center rounded-2xl text-ssl-blue">
               <Icon className="h-8 w-8" />
             </div>
             <h1 className="mb-4 text-4xl font-bold tracking-tight text-ssl-bg md:text-5xl">{service.title}</h1>
@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <AnimateOnScroll key={section.label} variant="slide-up" style={{ animationDelay: `${idx * 0.1}s` }}>
               <section>
                 <h2 className="mb-4 text-2xl font-bold text-ssl-bg">{section.label}</h2>
-                <div className="glass-card-light rounded-xl p-8">
+                <div className="glass-card-light glass-edge rounded-2xl p-8">
                   <p className="text-slate-600 leading-relaxed">{section.content}</p>
                 </div>
               </section>
@@ -81,7 +81,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {relatedServices.map((related) => (
                 <Link key={related.slug} href={`/services/${related.slug}`}>
-                  <Card className="flex h-full flex-col p-6 hover:border-ssl-blue/40">
+                  <Card tone="dark" interactive className="flex h-full flex-col p-6">
                     <h3 className="font-semibold text-white">{related.title}</h3>
                   </Card>
                 </Link>

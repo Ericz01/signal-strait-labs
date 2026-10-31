@@ -1,58 +1,52 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import Image from 'next/image';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { IconBox } from '@/components/ui/IconBox';
+import { Card } from '@/components/ui/Card';
 import { differentiators } from '@/lib/differentiators-data';
 
 export default function WhySSL() {
   return (
-    <section className="mx-auto max-w-full px-4 sm:px-6 py-12 md:py-20 bg-ssl-light-bg" id="why-ssl">
-      <AnimateOnScroll variant="slide-up">
-        <SectionHeading
-          overline="WHY WORK WITH US"
-          title="Marketing and Engineering in One Team"
-          description="The people who plan your strategy also build it, so nothing gets lost between agencies."
-          align="center"
-          variant="light"
-          className="mb-16 md:text-center"
-        />
-      </AnimateOnScroll>
+    <section className="relative isolate overflow-hidden bg-ssl-bg px-4 py-20 sm:px-6 md:py-28" id="why-ssl">
+      {/* Soft blue/amber blur (Unsplash, Studio Pizza), darkened for contrast */}
+      <Image
+        src="/images/blur-blue-amber-1200.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="-z-20 object-cover opacity-70"
+      />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-ssl-bg/80 via-ssl-bg/60 to-ssl-bg/85" />
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-        {differentiators.map((differentiator, index) => (
-          <AnimateOnScroll
-            key={differentiator.title}
-            variant="slide-up"
-            style={{
-              animationDelay: `${index * 0.15}s`,
-              animationDuration: '0.8s',
-            }}
-          >
-            <IconBox
-              icon={differentiator.icon}
-              title={differentiator.title}
-              description={differentiator.description}
-              className={
-                cn(
-                  "[--icon-bg:theme(colors.slate.100)]",
-                  "[--icon-border:theme(colors.slate.200)]",
-                  "[--icon-text:theme(colors.ssl-blue)]",
-                  "[--title-text:theme(colors.ssl-bg)]",
-                  "[--description-text:theme(colors.slate.700)]",
-                  "[&>div]:!bg-[var(--icon-bg)]",
-                  "[&>div]:!border-[var(--icon-border)]",
-                  "[&>div]:!text-[var(--icon-text)]",
-                  "[&>h3]:!text-[var(--title-text)]",
-                  "[&>p]:!text-[var(--description-text)]",
-                  "hover:[&>div]:!bg-[var(--icon-text)]",
-                  "hover:[&>div]:!text-white",
-                  "h-full flex flex-col justify-between p-6 rounded-lg bg-white shadow-sm border border-slate-100 transform transition-all duration-300 hover:shadow-md hover:-translate-y-1"
-                )
-              }
-            />
-          </AnimateOnScroll>
-        ))}
+      <div className="mx-auto max-w-7xl">
+        <AnimateOnScroll variant="slide-up">
+          <SectionHeading
+            overline="WHY WORK WITH US"
+            title="Marketing and Engineering in One Team"
+            description="The people who plan your strategy also build it, so nothing gets lost between agencies."
+            align="center"
+            variant="dark"
+            className="mb-14 md:text-center"
+          />
+        </AnimateOnScroll>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+          {differentiators.map((differentiator) => (
+            <AnimateOnScroll key={differentiator.title} variant="slide-up">
+              <Card tone="dark" className="group h-full p-7">
+                <IconBox
+                  icon={differentiator.icon}
+                  title={differentiator.title}
+                  description={differentiator.description}
+                  variant="gold"
+                  tone="dark"
+                  className="h-auto justify-start"
+                />
+              </Card>
+            </AnimateOnScroll>
+          ))}
+        </div>
       </div>
     </section>
   );
