@@ -172,7 +172,12 @@ Note: the tracker says Cloudflare Pages, but the site now runs as a Cloudflare W
 - [ ] **t128** Final content QA: proofread every single MVP page for typos, broken links, and missing images.
   - Done when: every MVP page has been proofread and has no typos, broken links or missing images.
   - Known issue for t129: `components/ui/AnimateOnScroll.tsx` spreads `{...props}` after its own `style`, so any caller passing `style={{ animationDelay }}` loses the whole scroll animation. Most staggered sections therefore don't animate at all. Fixing it changes how pages look, so check visually.
-  - Known issues: the privacy policy still has a `[X months/years ...]` placeholder for data retention. About page team cards say "Pending bio".
+  - Progress (not ticked, needs Eric's content): crawled all 13 pages. Fixed broken links:
+    - Header and footer used bare `#services`/`#about`/`#insights`/`#contact` links that only worked (partly) on the home page. They now go to real pages; footer Solutions lists all 7 service pages.
+    - Removed "Insights" (404, no page until G1) from header and footer, and "Careers / Hiring" (pointed to `#`).
+    - Instagram, X, YouTube and TikTok footer icons linked to the generic sites. They are now greyed-out, non-clickable icons until the accounts exist.
+    - No broken images. Spell check found no typos.
+  - Eric: fill in the data retention period in the privacy policy (currently `[X months/years ...]`), and replace or remove the four "Pending bio" team cards on /about. If you are hiring, add a Careers page and link it in the footer.
 - [ ] **t129** Final design QA: visual check at 1440px desktop and 375px mobile for every page.
   - Done when: every page has been checked at 1440px and 375px with no visual issues.
 - [ ] **t130** Submit sitemap to Google Search Console (signalstraitlabs.com/sitemap.xml). **[needs Eric]**

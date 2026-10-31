@@ -11,7 +11,7 @@ type NavLink = {
 
 const NAV_LINKS: readonly NavLink[] = [
   { href: "/services", label: "Services" },
-  { href: "/insights", label: "Insights" },
+  // Add { href: "/insights", label: "Insights" } once the blog exists (G1).
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -137,7 +137,7 @@ export function Header() {
           {/* Action Center */}
           <div className="flex items-center gap-4">
             <a
-              href="#contact"
+              href="/contact"
               className="group relative hidden overflow-hidden rounded-lg bg-gradient-to-br from-[#8a6f3e] to-[#c5a059] p-[1px] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(197,160,89,0.3)] active:scale-[0.98] lg:block"
             >
               <div className="relative flex items-center justify-center rounded-[7px] bg-[#01081b] px-5 py-2.5 transition-colors group-hover:bg-transparent">
@@ -215,7 +215,7 @@ export function Header() {
                   ))}
                 </div>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={closeMobile}
                   className="mt-10 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#8a6f3e] to-[#c5a059] py-5 text-base font-bold uppercase tracking-widest text-[#01081b] shadow-xl shadow-ssl-gold/20 transition-transform active:scale-95"
                 >
