@@ -119,8 +119,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t114** LCP < 2.5s on mobile: optimize hero image, preload critical fonts, defer non-critical scripts.
   - Done when: mobile Lighthouse reports LCP under 2.5s on the homepage.
   - Result: home LCP 1.0s (was 3.2s), done in t113 by removing `app/loading.tsx`. Fonts are preloaded by `next/font`. The only third-party script (Cloudflare analytics) loads `afterInteractive`. There is no hero image yet; when one is added (t101), give it `preload`.
-- [ ] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
+- [x] **t115** CLS < 0.1: add explicit width/height to all images, reserve space for async-loaded fonts.
   - Done when: Lighthouse reports CLS under 0.1 on every main page.
+  - Result: CLS 0 on all seven pages tested in t113. Images have explicit width and height; fonts use `next/font` (size-adjusted fallbacks).
 - [ ] **t116** INP < 200ms: audit and fix any heavy event handlers on interactive elements.
   - Done when: no interaction (menu, form, banner) takes over 200ms in a performance trace.
 - [ ] **t117** Test all pages on iOS Safari + Android Chrome at 375px viewport width.
