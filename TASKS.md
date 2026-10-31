@@ -106,7 +106,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: `npx tsc --noEmit` exits with no errors.
 - [x] **t110** Run ESLint: fix all warnings, especially accessibility-related lint rules.
   - Done when: `npm run lint` reports zero errors and zero warnings.
-- [ ] **t111** Run npm run build locally: resolve all compilation errors and warnings before deploying.
+- [x] **t111** Run npm run build locally: resolve all compilation errors and warnings before deploying.
   - Done when: `npm run build` and `npm run build:worker` finish with no errors or warnings.
 - [ ] **t112** Analyze JS bundle size with @next/bundle-analyzer: identify and remove unnecessary imports.
   - Done when: a bundle report has been reviewed and unneeded imports are removed.
