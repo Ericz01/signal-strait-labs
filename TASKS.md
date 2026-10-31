@@ -25,7 +25,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: a confirmation email template exists and is sent to the submitter's address after a valid submission.
 - [x] **t076** Build HTML internal notification email sent to connect@signalstraitlabs.com on each new lead.
   - Done when: each valid lead triggers a notification email to connect@signalstraitlabs.com containing all form fields.
-- [ ] **t077** Add success/error toast notification UI on the contact form (no page reload).
+- [x] **t077** Add success/error toast notification UI on the contact form (no page reload).
   - Done when: submitting the form shows a success or error toast without reloading the page, on both `/` and `/contact`.
 - [ ] **t078** Integrate Cloudflare Web Analytics: add lightweight script to app/layout.tsx. **[needs Eric]**
   - Done when: the Cloudflare Web Analytics script loads on every page using the site token from the dashboard.

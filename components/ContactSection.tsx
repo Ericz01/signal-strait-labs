@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 import { CustomSelect } from '@/components/ui/CustomSelect';
+import { Toast, type ToastVariant } from '@/components/ui/Toast';
 import { services } from '@/lib/services-data';
 
 export function ContactSection() {
@@ -16,12 +17,13 @@ export function ContactSection() {
     website: '',
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [toast, setToast] = useState<{ variant: ToastVariant; title: string; message?: string } | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    setErrorMessage('');
+    setToast(null);
 
     try {
       const response = await fetch('/api/leads', {
@@ -37,17 +39,31 @@ export function ContactSection() {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to submit form');
+        // 400 responses carry per-field `errors`; others carry `message`.
+        const fieldErrors =
+          data.errors && typeof data.errors === 'object'
+            ? Object.values(data.errors as Record<string, string>).join(' ')
+            : '';
+        throw new Error(fieldErrors || data.message || 'Your message could not be sent. Please try again.');
       }
 
       setStatus('success');
+      setToast({ variant: 'success', title: 'Message sent', message: 'Thanks. We will get back to you shortly.' });
       setFormData({ name: '', email: '', company: '', message: '', website: '' });
       setService('');
       setBudget('');
     } catch (err) {
-      console.error(err);
       setStatus('error');
-      setErrorMessage(err instanceof Error ? err.message : 'Something went wrong');
+      setToast({
+        variant: 'error',
+        title: 'Message not sent',
+        message:
+          err instanceof TypeError
+            ? 'Check your connection and try again.'
+            : err instanceof Error
+              ? err.message
+              : 'Something went wrong. Please try again.',
+      });
     }
   };
 
@@ -215,13 +231,15 @@ export function ContactSection() {
                 >
                   {status === 'submitting' ? 'Sending...' : 'Send Message'}
                 </button>
-                {errorMessage && <p className="text-red-400 text-xs mt-2">{errorMessage}</p>}
             </form>
             )}
 
           </div>
         </AnimateOnScroll>
       </div>
+      {toast && (
+        <Toast variant={toast.variant} title={toast.title} message={toast.message} onClose={closeToast} />
+      )}
     </section>
   );
 }
