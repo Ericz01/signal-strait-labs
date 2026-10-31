@@ -47,8 +47,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Result: removed the doubled "| Signal Strait Labs" from page titles, shortened the home title and description, gave the 404 page its own metadata, and added a short `metaDescription` to each service in `lib/services-data.ts` (on-page service copy is unchanged). Static pages use `export const metadata`, which does the same job as `generateMetadata()`.
 - [x] **t084** Add canonical URL declarations to all pages to prevent duplicate content issues.
   - Done when: every page's HTML has a `<link rel="canonical">` pointing to its own URL.
-- [ ] **t085** Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange).
+- [x] **t085** Create ProfessionalService JSON-LD schema (name, logo, url, address, serviceType, areaServed, priceRange).
   - Done when: valid ProfessionalService JSON-LD with all listed fields is in the page output.
+  - Result: moved to `lib/structured-data.ts`, rendered by `components/JsonLd.tsx`. Added logo, serviceType and priceRange (`$$`), and the offer list now matches the 7 real services. Eric: confirm the Facebook URL. The old JSON-LD used `facebook.com/profile.php?id=61589782545004`, the footer uses `facebook.com/signalstraitlabs/`; I used the footer one.
 - [ ] **t086** Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles).
   - Done when: valid Organization JSON-LD with founding date, Nairobi HQ, contact details and social profiles is in the page output.
 - [ ] **t087** Create WebPage JSON-LD for the homepage.

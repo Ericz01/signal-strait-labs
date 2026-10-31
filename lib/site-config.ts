@@ -1,5 +1,10 @@
 // Public, non-secret site settings.
 
+export const SITE_URL = 'https://signalstraitlabs.com';
+export const SITE_NAME = 'Signal Strait Labs';
+export const CONTACT_EMAIL = 'connect@signalstraitlabs.com';
+export const CONTACT_PHONE = '+254712895903';
+
 // Scheduling page for discovery calls (Cal.com or Calendly). Set
 // NEXT_PUBLIC_BOOKING_URL at build time. Until then, the CTA goes to the
 // contact page.

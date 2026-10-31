@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer, Header } from "@/components/layout";
 import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
+import { SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const sora = Sora({
@@ -15,7 +16,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://signalstraitlabs.com";
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

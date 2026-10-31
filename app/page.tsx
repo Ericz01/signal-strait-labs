@@ -5,71 +5,13 @@ import Testimonials from '@/components/Testimonials';
 import WhySSL from '@/components/WhySSL';
 import CTABanner from '@/components/CTABanner';
 import { ContactSection } from '@/components/ContactSection';
-
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://signalstraitlabs.com/#organization",
-  name: "Signal Strait Labs",
-  alternateName: "SSL",
-  url: "https://signalstraitlabs.com",
-  foundingDate: "2022",
-  description:
-    "Enterprise digital transformation and growth engineering partner specializing in digital infrastructure, custom web development, technical SEO, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), data architecture, and RevOps pipeline engineering.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Thome",
-    addressLocality: "Nairobi",
-    addressRegion: "Nairobi County",
-    addressCountry: "KE",
-  },
-  telephone: "+254712895903",
-  email: "connect@signalstraitlabs.com",
-  areaServed: [
-    { "@type": "Country", name: "Kenya" },
-    { "@type": "Continent", name: "Africa" },
-  ],
-  sameAs: [
-    "https://linkedin.com/company/signal-strait-labs",
-    "https://web.facebook.com/profile.php?id=61589782545004",
-  ],
-  knowsAbout: [
-    "Digital Infrastructure",
-    "Custom Web Development",
-    "Technical SEO",
-    "Answer Engine Optimization",
-    "Generative Engine Optimization",
-    "Data Architecture",
-    "RevOps Pipeline Engineering",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Core Capabilities",
-    itemListElement: [
-      "Digital Infrastructure",
-      "Custom Web Dev",
-      "Technical SEO",
-      "Answer Engine Optimization (AEO)",
-      "Generative Engine Optimization (GEO)",
-      "Data Architecture",
-      "RevOps Pipeline Engineering",
-    ].map((name, index) => ({
-      "@type": "Offer",
-      position: index + 1,
-      itemOffered: { "@type": "Service", name },
-    })),
-  },
-} as const;
+import { JsonLd } from '@/components/JsonLd';
+import { professionalServiceJsonLd } from '@/lib/structured-data';
 
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationJsonLd),
-        }}
-      />
+      <JsonLd data={professionalServiceJsonLd} />
 
       <Hero />
 
