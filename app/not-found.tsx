@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Page not found",
+  // A 404 has no canonical URL; do not inherit the home page one.
+  alternates: { canonical: null },
   description:
     "The page you are looking for does not exist. Go to the Signal Strait Labs home page or browse our services.",
 };
