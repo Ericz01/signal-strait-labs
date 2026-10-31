@@ -1,3 +1,5 @@
+import { CookieSettingsButton } from '@/components/CookieConsent';
+
 export const metadata = {
   title: 'Privacy Policy | Signal Strait Labs',
   description: 'Privacy policy for Signal Strait Labs. Learn about how we handle your data.',
@@ -38,6 +40,9 @@ export default function PrivacyPolicyPage() {
             </p>
             <p>
               We also use privacy-focused analytics (Cloudflare Web Analytics) to understand how visitors use our site. This does not use cookies or track you individually across other websites.
+            </p>
+            <p id="cookies" className="scroll-mt-28">
+              <strong>Cookies.</strong> Our site does not set tracking or advertising cookies. We save your cookie choice in your browser so we don&apos;t ask again. If you accept, we load embedded content such as the Google Maps map on our About page, and Google may set its own cookies. If you decline, the map stays off unless you choose to show it. <CookieSettingsButton />
             </p>
           </section>
           <section>

@@ -33,8 +33,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t080** "Book a Discovery Call" CTA button linking to a Calendly or Cal.com scheduling page. **[needs Eric]**
   - Done when: a "Book a Discovery Call" button links to a working scheduling page.
   - Result: code done. The hero button is now "Book a Discovery Call" (`components/BookCallButton.tsx`) and "Explore Services" now links to /services (both were dead buttons). Eric: create a Cal.com or Calendly event and set `NEXT_PUBLIC_BOOKING_URL` in the build environment. Until then the button goes to /contact.
-- [ ] **t081** Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic.
+- [x] **t081** Add cookie consent banner (required for GDPR/POPIA compliance) with accept/decline logic.
   - Done when: a banner appears on first visit, remembers accept or decline, and non-essential scripts only load after accept.
+  - Result: the only non-essential item is the Google Maps embed on /about; it now waits for consent (or a one-time "Show map"). Cloudflare Web Analytics is cookieless so it is not gated. Added a Cookies paragraph with a "Change your cookie choice" button to the privacy policy, and fixed the footer legal links, which all pointed to "#". The policy text is a plain draft; Eric should review it.
 
 ## P6: MVP SEO · AEO · GEO Essentials
 

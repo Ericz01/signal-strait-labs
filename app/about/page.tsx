@@ -1,5 +1,6 @@
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
+import { ConsentMap } from '@/components/ConsentMap';
 
 export const metadata = {
   title: 'About Us | Signal Strait Labs',
@@ -106,16 +107,10 @@ export default function AboutPage() {
           <AnimateOnScroll variant="slide-up">
             <div className="glass-card-light overflow-hidden rounded-2xl p-4 md:p-6">
               <div className="mb-6 h-96 w-full overflow-hidden rounded-xl">
-                <iframe
+                <ConsentMap
                   src="https://www.google.com/maps?q=QVQG%2BJ8R+Nairobi&output=embed"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  linkHref="https://www.google.com/maps?q=QVQG%2BJ8R+Nairobi"
                   title="Signal Strait Labs office location"
-                  className="grayscale hover:grayscale-0 transition-all duration-700"
                 />
               </div>
               <div className="flex flex-col gap-4 text-center">

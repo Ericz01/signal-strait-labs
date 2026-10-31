@@ -191,19 +191,19 @@ export function Footer() {
             </h3>
             <nav className="mt-4 flex flex-col gap-3">
               <Link
-                href="#"
+                href="/privacy-policy"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="#"
+                href="/terms-of-service"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Terms of Service
               </Link>
               <Link
-                href="#"
+                href="/privacy-policy#cookies"
                 className="text-sm text-slate-400 transition-colors duration-200 hover:text-[#c5a059]"
               >
                 Cookie Policy
