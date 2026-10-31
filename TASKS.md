@@ -62,7 +62,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Note: this is a static file. If a service is added or renamed in `lib/services-data.ts`, update `public/llms.txt` too.
 - [x] **t094** llms.txt: Include entity disambiguation section (SSL = Signal Strait Labs, not SSL the protocol).
   - Done when: `llms.txt` has a section stating SSL means Signal Strait Labs, not the SSL protocol.
-- [ ] **t095** Create app/sitemap.ts: dynamic generator that covers all static + dynamic routes.
+- [x] **t095** Create app/sitemap.ts: dynamic generator that covers all static + dynamic routes.
   - Done when: `/sitemap.xml` lists every static page and every service detail page.
 - [ ] **t096** Create public/robots.txt: allow major search bots, selectively manage aggressive AI crawlers.
   - Done when: `/robots.txt` allows major search bots, sets rules for AI crawlers, and links to the sitemap.
