@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import validator from 'validator';
 import { Redis } from '@upstash/redis/cloudflare';
 import { Ratelimit } from '@upstash/ratelimit';
-import { getCloudflareContext } from '@opennextjs/cloudflare';
+import { getServerEnv } from '@/lib/server-env';
+import { sendEmail, LEADS_INBOX } from '@/lib/email';
 
 // ---------------------------------------------------------------------------
 // Rate limiter setup
@@ -10,39 +11,14 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 // IMPORTANT: Do NOT read the Upstash credentials or create the client at
 // module scope. On Cloudflare Workers, secrets are delivered per request
 // through the runtime `env` binding, so they are read inside the POST handler
-// via `getCloudflareContext().env`, with a `process.env` fallback for
-// `next dev`. The client is built per request; the REST client is just a
-// fetch wrapper, so this is cheap, and nothing is cached across requests.
-type UpstashCredentials = {
-  url?: string;
-  token?: string;
-};
-
-function readCloudflareEnvCredentials(): UpstashCredentials {
-  try {
-    // `getCloudflareContext()` is only available inside a Worker request context.
-    // Outside of one (e.g. `next dev`) it throws.
-    const env = getCloudflareContext().env as unknown as Record<string, unknown>;
-    return {
-      url: typeof env.UPSTASH_REDIS_REST_URL === 'string' ? env.UPSTASH_REDIS_REST_URL : undefined,
-      token: typeof env.UPSTASH_REDIS_REST_TOKEN === 'string' ? env.UPSTASH_REDIS_REST_TOKEN : undefined,
-    };
-  } catch {
-    // Not running inside a Cloudflare Workers request context.
-    return {};
-  }
-}
-
-function getUpstashCredentials(): UpstashCredentials {
-  const fromContext = readCloudflareEnvCredentials();
-  return {
-    url: fromContext.url ?? process.env.UPSTASH_REDIS_REST_URL,
-    token: fromContext.token ?? process.env.UPSTASH_REDIS_REST_TOKEN,
-  };
-}
-
+// via `getServerEnv()` (`getCloudflareContext().env`, with a `process.env`
+// fallback for `next dev`). The client is built per request; the REST client
+// is just a fetch wrapper, so this is cheap, and nothing is cached across
+// requests.
 function createRatelimit(): Ratelimit | null {
-  const { url, token } = getUpstashCredentials();
+  // Secrets are read here, per request, via the Cloudflare context.
+  const url = getServerEnv('UPSTASH_REDIS_REST_URL');
+  const token = getServerEnv('UPSTASH_REDIS_REST_TOKEN');
 
   // Only initialize if credentials are present and the URL looks valid.
   if (!url?.startsWith('https://') || !token) {
@@ -150,15 +126,38 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, errors }, { status: 400 });
     }
 
-    // 4. Log sanitized/validated data
-    console.log('Received Lead Submission:', {
-      name,
-      email,
-      company,
-      serviceInterest,
-      budgetRange,
-      message: message.substring(0, 50) + '...',
+    // 4. Deliver the lead by email (Resend)
+    const result = await sendEmail({
+      to: LEADS_INBOX,
+      replyTo: email,
+      subject: `New lead: ${name}${company ? ` (${company})` : ''}`,
+      text: [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Company: ${company || '-'}`,
+        `Service interest: ${serviceInterest || '-'}`,
+        `Budget range: ${budgetRange || '-'}`,
+        '',
+        'Message:',
+        message,
+      ].join('\n'),
     });
+
+    if (result.status === 'not-configured') {
+      // Local dev without RESEND_API_KEY: nothing is sent. Log a short
+      // summary so the submission is still visible, without the message body.
+      console.warn('Email not sent: RESEND_API_KEY not configured.', { name, email, company });
+    } else if (result.status === 'failed') {
+      // Do not log the lead's details here; the error is enough to debug.
+      console.error('Lead email failed:', result.error);
+      return NextResponse.json(
+        {
+          success: false,
+          message: `We could not send your message. Please try again or email us at ${LEADS_INBOX}.`,
+        },
+        { status: 502 }
+      );
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {

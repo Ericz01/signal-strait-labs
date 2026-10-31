@@ -92,7 +92,7 @@ Local secrets go in `.env.local`, which is git-ignored via `.env*` and must neve
 | --- | --- | --- |
 | `UPSTASH_REDIS_REST_URL` | `app/api/leads/route.ts` rate limiter | Optional locally. If missing or not `https://`, rate limiting is disabled with a warning. |
 | `UPSTASH_REDIS_REST_TOKEN` | `app/api/leads/route.ts` rate limiter | Optional locally (see above) |
-| `RESEND_API_KEY` | — | Reserved for email delivery of leads; not yet referenced in code |
+| `RESEND_API_KEY` | `lib/email.ts` (lead emails via Resend) | Optional locally. If missing, no email is sent and the route logs a warning. Sends from `noreply@signalstraitlabs.com`, so that domain must be verified in Resend. |
 | `NEXT_PUBLIC_APP_URL` | — | Not currently referenced; the canonical URL is hard-coded in `app/layout.tsx` |
 
 ```bash
@@ -111,7 +111,7 @@ On Cloudflare, the leads route reads secrets **per request** via `getCloudflareC
 3. Silently accepts and discards submissions that fill the `website` honeypot field
 4. Strips HTML and trims all fields
 5. Validates name (≤100 chars), email, and message (≤2000 chars)
-6. Logs the sanitized lead. Email delivery is not implemented yet.
+6. Emails the lead to connect@signalstraitlabs.com through Resend (`lib/email.ts`). If sending fails, it returns 502 so the visitor sees an error.
 
 ## Deployment
 
