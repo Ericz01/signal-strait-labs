@@ -39,8 +39,9 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 
 ## P6: MVP SEO · AEO · GEO Essentials
 
-- [ ] **t082** Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL).
+- [x] **t082** Set up global default metadata export in app/layout.tsx (title template, base description, canonical base URL).
   - Done when: `app/layout.tsx` exports metadata with a title template, a base description and `metadataBase`.
+  - Result: already in place (metadataBase set to signalstraitlabs.com in fix3). No code change.
 - [ ] **t083** Add generateMetadata() to every page: unique title under 60 chars and description under 155 chars.
   - Done when: every page has its own title under 60 characters and description under 155 characters.
 - [ ] **t084** Add canonical URL declarations to all pages to prevent duplicate content issues.
