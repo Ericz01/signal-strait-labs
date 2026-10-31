@@ -62,7 +62,7 @@ public/
 
 ## 3. Typography System
 
-Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as CSS variables on `<body>`.
+Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as CSS variables on `<html>`. They must be on `<html>`, not `<body>`: the `@theme` tokens live on `:root` and can only resolve variables defined there.
 
 | Role | Google Font | CSS Variable | Tailwind Token | Usage |
 | --- | --- | --- | --- | --- |
@@ -75,7 +75,7 @@ Fonts are loaded in **`app/layout.tsx`** via `next/font/google` and exposed as C
 const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
 const plusJakartaSans = Plus_Jakarta_Sans({ variable: "--font-plus-jakarta", subsets: ["latin"] });
 
-<body className={`${sora.variable} ${plusJakartaSans.variable} antialiased`}>
+<html lang="en" className={`${sora.variable} ${plusJakartaSans.variable}`}>
 ```
 
 ### Theme mapping (`app/globals.css`)

@@ -84,9 +84,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // Font variables go on <html> so Tailwind's :root tokens (--font-display,
+    // --font-body) can resolve them. On <body> they were undefined at :root and
+    // every page fell back to the system font.
+    <html lang="en" className={`${sora.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
       <body
-        className={`${sora.variable} ${plusJakartaSans.variable} bg-ssl-light-bg text-ssl-bg antialiased`}
+        className="bg-ssl-light-bg text-ssl-bg antialiased"
         suppressHydrationWarning={true}
       >
         <div className="flex min-h-screen flex-col luxury-bg-gradient selection:bg-ssl-blue/20">

@@ -133,6 +133,10 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Done when: a real submission delivers both emails, shows the success toast, and error cases show the error toast.
 - [ ] **t119** Cross-browser test: Chrome, Firefox, Safari, Edge, all at desktop and mobile widths.
   - Done when: every page works in all four browsers at desktop and mobile widths.
+  - Progress (not ticked, Safari still needed): checked in Chrome and Firefox 158 at desktop and phone widths. Edge uses the same engine as Chrome. Fixed two site-wide bugs found here:
+    - The brand fonts were never applied. `next/font` variables were on `<body>`, but Tailwind's `--font-display`/`--font-body` live on `:root`, so they were undefined and every page used the system font. Moved the variables to `<html>`. Headings are now Sora and body text Plus Jakarta Sans. This is a visible change; check you like it.
+    - The hero "Explore Services" button was dark grey on the dark hero for anyone not using OS dark mode. Removed the `dark:` variants from `components/ui/Button.tsx` (the site has no dark mode) and gave that button light text.
+  - Eric: check in Safari on a Mac or iPhone.
 - [ ] **t120** Full keyboard navigation test: every interactive element reachable and operable without a mouse.
   - Done when: every link, button, menu and form field can be reached and used by keyboard with a visible focus state.
   - Known issue (found in t088): service detail pages render their own `<main>` inside the layout's `<main>`. Change the inner one to a `<div>` or `<article>`.

@@ -47,7 +47,12 @@ export default function Hero() {
         <AnimateOnScroll variant="slide-up" style={{ animationDelay: '0.4s' }}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
             <BookCallButton />
-            <Button asChild variant="outline" size="lg">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:bg-white/10"
+            >
               <Link href="/services">Explore Services</Link>
             </Button>
           </div>
