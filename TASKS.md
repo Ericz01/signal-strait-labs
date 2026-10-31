@@ -53,7 +53,7 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
 - [x] **t086** Create Organization JSON-LD schema (founding date 2022, headquarters Nairobi, contact, all social profiles).
   - Done when: valid Organization JSON-LD with founding date, Nairobi HQ, contact details and social profiles is in the page output.
   - Result: added on the home page. Social profiles list only LinkedIn and Facebook; add the others to `socialProfiles` in `lib/structured-data.ts` once those accounts exist.
-- [ ] **t087** Create WebPage JSON-LD for the homepage.
+- [x] **t087** Create WebPage JSON-LD for the homepage.
   - Done when: the homepage outputs valid WebPage JSON-LD.
 - [ ] **t088** Create FAQPage JSON-LD schema for each service page, pulling from the FAQ sections already written.
   - Done when: each service page outputs FAQPage JSON-LD built from its FAQ data in `lib/services-data.ts`.

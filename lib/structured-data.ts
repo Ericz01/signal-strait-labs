@@ -1,9 +1,10 @@
 // JSON-LD structured data (schema.org). Rendered with <JsonLd />.
 import { services } from '@/lib/services-data';
-import { CONTACT_EMAIL, CONTACT_PHONE, SITE_NAME, SITE_URL } from '@/lib/site-config';
+import { CONTACT_EMAIL, CONTACT_PHONE, HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from '@/lib/site-config';
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 // Live social profiles only. Add Instagram, X, YouTube and TikTok once the
 // accounts exist (see TASKS.md, G5).
@@ -103,4 +104,24 @@ export const organizationJsonLd = {
     },
   ],
   sameAs: socialProfiles,
+};
+
+export const homeWebPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  inLanguage: 'en',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': WEBSITE_ID,
+    url: SITE_URL,
+    name: SITE_NAME,
+    inLanguage: 'en',
+    publisher: { '@id': ORGANIZATION_ID },
+  },
+  about: { '@id': ORGANIZATION_ID },
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
 };

@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer, Header } from "@/components/layout";
 import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
-import { SITE_URL } from "@/lib/site-config";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const sora = Sora({
@@ -21,11 +21,10 @@ const siteUrl = SITE_URL;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Signal Strait Labs | Growth Engineering & AEO/GEO in Africa",
+    default: HOME_TITLE,
     template: "%s | Signal Strait Labs",
   },
-  description:
-    "Signal Strait Labs is a Nairobi growth engineering lab building web infrastructure, technical SEO, AEO/GEO, data systems and RevOps for growing companies.",
+  description: HOME_DESCRIPTION,
   keywords: [
     "enterprise digital transformation",
     "growth engineering",
