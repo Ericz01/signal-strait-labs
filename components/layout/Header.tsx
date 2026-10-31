@@ -168,9 +168,10 @@ export function Header() {
             <div
               id="ssl-mobile-menu"
               className={`fixed inset-0 z-40 flex h-screen w-screen flex-col bg-[#01081b]/95 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-500 ease-in-out md:hidden ${
+                // clip-path (not translate) so the closed menu doesn't widen the page on phones
                 mobileOpen
-                  ? "translate-x-0 opacity-100 pointer-events-auto"
-                  : "translate-x-full opacity-0 pointer-events-none"
+                  ? "opacity-100 pointer-events-auto [clip-path:inset(0_0_0_0)]"
+                  : "opacity-0 pointer-events-none [clip-path:inset(0_0_0_100%)]"
               }`}
               aria-hidden={!mobileOpen}
               inert={!mobileOpen}

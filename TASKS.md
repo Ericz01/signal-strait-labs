@@ -127,6 +127,8 @@ Source: the PHASES array in `public/ssl-tracker.html` (MVP phases P5 to P9). Pos
   - Result: measured with Event Timing in headless Chrome at 4x CPU slowdown: cookie Accept 56ms, mobile menu 136ms, FAQ accordion 168ms (closest to the limit), service dropdown 88ms, typing in the form 96ms. No code change. Check real-user INP in Cloudflare Web Analytics after launch.
 - [ ] **t117** Test all pages on iOS Safari + Android Chrome at 375px viewport width.
   - Done when: every page has been checked on both browsers at 375px with no layout breaks.
+  - Progress (not ticked, needs real devices): checked every page in Chrome mobile emulation at 375px and 320px. Fixed: the closed mobile menu was moved off-screen with translate-x-full, which doubled the page width on phones so visitors could scroll sideways into empty space. It now uses clip-path. Also removed an empty dark band at the top of /contact. No other overflow found.
+  - Eric: check on a real iPhone (Safari) and Android phone (Chrome). In particular the open mobile menu: confirm the page behind it is properly blurred (headless Chrome doesn't render the blur), and the cookie banner, contact form and service dropdown.
 - [ ] **t118** Test all forms end-to-end: submission, email delivery, toast notifications, and error states. **[needs Eric]**
   - Done when: a real submission delivers both emails, shows the success toast, and error cases show the error toast.
 - [ ] **t119** Cross-browser test: Chrome, Firefox, Safari, Edge, all at desktop and mobile widths.

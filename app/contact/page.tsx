@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="pt-24">
+    <div>
       <ContactSection services={getServiceOptions()} />
       <p className="bg-ssl-light-bg px-6 pb-20 text-center text-sm text-slate-600">
         Want to know more first? See{' '}
