@@ -8,6 +8,7 @@ const staticRoutes: Array<{ path: string; priority: number; changeFrequency: 'we
   { path: '/services', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'yearly' },
+  { path: '/eric', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/privacy-policy', priority: 0.2, changeFrequency: 'yearly' },
   { path: '/terms-of-service', priority: 0.2, changeFrequency: 'yearly' },
 ];
