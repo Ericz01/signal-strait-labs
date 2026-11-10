@@ -5,11 +5,13 @@
   "/api/leads/route": "/api/leads",
   "/apple-icon.png/route": "/apple-icon.png",
   "/contact/page": "/contact",
+  "/eric/page": "/eric",
   "/favicon.ico/route": "/favicon.ico",
   "/icon.svg/route": "/icon.svg",
   "/page": "/",
   "/privacy-policy/page": "/privacy-policy",
   "/services/[slug]/page": "/services/[slug]",
   "/services/page": "/services",
+  "/sitemap.xml/route": "/sitemap.xml",
   "/terms-of-service/page": "/terms-of-service"
 }
